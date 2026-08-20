@@ -1,0 +1,44 @@
+# Detachable-skill manifest — канон формата: 0-detachable-skill-packaging.
+# Папку можно скопировать целиком: scripts/ + tests/ + examples/ работают автономно.
+# detachable: partial — сам SKILL.md ссылается на инфраструктуру ~/.claude
+# (memory/incidents/ для §2.1 precedent scan, bin/log-incident.sh для §11,
+# standards/no-fabricated-evidence.md, соседние скиллы /check /debug /anti-bias).
+# Скрипты от этих ссылок НЕ зависят и запускаются на голом python3.
+schema_version: 1
+name: falsify
+detachable: partial
+runtime: "python3.9+"
+deps:
+  external: []                      # core: stdlib only — максимальная переносимость
+  optional:
+    - name: PyYAML
+      for: "falsify_render.py: YAML-вход. Без пакета скрипт принимает JSON (fallback в _load)."
+    - name: pandas
+      for: "commutator_check.py: прогон коммутаторов по данным. Режим --emit-checklist работает без него."
+    - name: pyarrow
+      for: "commutator_check.py: чтение parquet-датасетов через pandas."
+  workspace: []                     # workspace-модулей нет
+requires_skills: []                 # handoff в /check /debug /anti-bias — рекомендации, не hard deps
+requires_credentials: []
+entrypoints:
+  - path: scripts/falsify_render.py
+    kind: cli
+    invoke: "python3 ~/.claude/skills/falsify/scripts/falsify_render.py examples/emitter_input_example.yaml"
+    emits: "§1 Expectations table · §3 Gap table · §3.1 Gap count · §9 Next-Action Digest · §10 Verdict + FALSIFY_FINAL"
+  - path: scripts/commutator_check.py
+    kind: cli
+    invoke: "python3 ~/.claude/skills/falsify/scripts/commutator_check.py --emit-checklist --anchor userID --keys client_id,phone_hash"
+    emits: "чеклист/прогон 7 семейств коммутаторов склейки (B/F/P/C/T/R/X) для §2.5"
+tests:
+  path: tests/
+  run: "python3 -m pytest ~/.claude/skills/falsify/tests/ -q"
+  fallback_run: "python3 ~/.claude/skills/falsify/tests/test_falsify_render.py"
+  smoke:
+    - "python3 ~/.claude/skills/falsify/scripts/falsify_render.py --self-test"
+    - "python3 ~/.claude/skills/falsify/scripts/commutator_check.py --self-test"
+fixtures:
+  - examples/emitter_input_example.yaml    # вход эмиттера (PARTIAL-ветка)
+  - examples/golden_basic.md               # эталон вывода — regression seed формата
+  - examples/commutator_example.json
+  - examples/commutator_example.csv
+canonical_source: SKILL.md

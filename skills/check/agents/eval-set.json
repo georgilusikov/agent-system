@@ -1,0 +1,15 @@
+[
+  {"query": "проверь результат", "should_trigger": true, "note": "direct Russian trigger"},
+  {"query": "verify this", "should_trigger": true, "note": "English verify"},
+  {"query": "validate my work", "should_trigger": true, "note": "validation request"},
+  {"query": "quality check", "should_trigger": true, "note": "quality check — note: also bouncer trigger; check takes non-Gemini path"},
+  {"query": "я написал код, проверь", "should_trigger": true, "note": "post-coding check"},
+  {"query": "всё ли правильно", "should_trigger": true, "note": "correctness question"},
+  {"query": "убедись что всё работает", "should_trigger": true, "note": "verification intent"},
+  {"query": "сделал задачу, убедись", "should_trigger": true, "note": "task completion verification"},
+  {"query": "тест написан, проверь работает ли", "should_trigger": true, "note": "test verification"},
+  {"query": "напиши ещё код", "should_trigger": false, "note": "coding request, not check"},
+  {"query": "задеплой", "should_trigger": false, "note": "deploy, not check"},
+  {"query": "почему падает", "should_trigger": false, "note": "debugging — /why territory"},
+  {"query": "добавь фичу", "should_trigger": false, "note": "feature request"}
+]

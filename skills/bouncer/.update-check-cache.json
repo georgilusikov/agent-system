@@ -1,0 +1,11 @@
+{
+  "checked_at": 1786186525,
+  "gemini": {
+    "installed": "0.54.4",
+    "latest": "0.54.4"
+  },
+  "codex": {
+    "installed": "0.147.0",
+    "latest": "0.147.0"
+  }
+}

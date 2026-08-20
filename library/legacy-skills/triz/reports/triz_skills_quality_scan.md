@@ -1,0 +1,39 @@
+| Skill | Пропуски | Плейсхолдеры | Наблюдение |
+|-------|-----------|--------------|------------|
+| `akts` | — | — | — |
+| `antisystem` | — | — | — |
+| `arip` | — | — | — |
+| `ariz` | — | — | — |
+| `avf` | — | — | — |
+| `benchmarking` | — | — | — |
+| `causal_analysis` | — | — | — |
+| `contradictions` | — | \[\] | — |
+| `diversion_analysis` | — | \[\] | — |
+| `dynamization` | — | — | — |
+| `effects` | — | — | — |
+| `flow_analysis` | — | — | — |
+| `forty_principles` | — | — | — |
+| `fos` | — | — | — |
+| `functional_analysis` | — | \[\] | — |
+| `goldfish` | — | — | — |
+| `ikr` | — | — | — |
+| `inversion` | — | — | — |
+| `limits_strategy` | — | — | — |
+| `master_triz_orchestrator` | examples/, validators/, validators/gate_check.md | — | — |
+| `mmch` | — | — | — |
+| `oas_transfer` | — | — | — |
+| `oz_ov` | — | — | — |
+| `reports` | SKILL.md, core_instructions.md, examples/, validators/, validators/gate_check.md | — | — |
+| `resource_analysis` | — | — | — |
+| `reverse_fos` | — | — | — |
+| `robinson` | — | — | — |
+| `rtv` | — | — | — |
+| `rvs` | — | — | — |
+| `s_curve` | — | \[\] | — |
+| `standards` | — | — | — |
+| `structural_analysis` | — | — | — |
+| `system_operator` | — | \[\] | — |
+| `trimming` | — | \?\?\? | — |
+| `value_analysis` | — | — | — |
+| `vepoli` | — | — | — |
+| `zrts` | — | — | — |

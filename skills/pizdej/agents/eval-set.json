@@ -1,0 +1,15 @@
+[
+  {"query": "что я упустил", "should_trigger": true, "note": "explicit self-check trigger"},
+  {"query": "пиздёж", "should_trigger": true, "note": "direct keyword"},
+  {"query": "critical review", "should_trigger": true, "note": "English trigger"},
+  {"query": "проверь себя", "should_trigger": true, "note": "self-check request"},
+  {"query": "всё ли ты учёл", "should_trigger": true, "note": "completeness challenge"},
+  {"query": "challenge", "should_trigger": true, "note": "challenge keyword"},
+  {"query": "самокритика", "should_trigger": true, "note": "self-criticism keyword"},
+  {"query": "ты ничего не забыл?", "should_trigger": true, "note": "completeness check"},
+  {"query": "что пошло не так", "should_trigger": true, "note": "failure analysis"},
+  {"query": "где ты облажался", "should_trigger": true, "note": "mistake identification"},
+  {"query": "добавь фичу", "should_trigger": false, "note": "task request, not self-reflection"},
+  {"query": "напиши тест", "should_trigger": false, "note": "implementation request"},
+  {"query": "отлично, продолжаем", "should_trigger": false, "note": "positive acknowledgment, no challenge needed"}
+]

@@ -1,0 +1,21 @@
+version: project.task_result.v1
+task_id: example-task
+status: pass_or_fail_or_partial_or_blocked
+completed_at: "YYYY-MM-DDTHH:MM:SSZ"
+worker: cursor_agent
+
+summary: "One concise sentence."
+changed_files: []
+tests:
+  - command: "exact command"
+    result: pass_or_fail_or_not_run
+    evidence: "short output or artifact path"
+verified_findings: []
+attempted_falsification:
+  - claim: "claim checked"
+    falsification_attempt: "how it could have been wrong"
+    verdict: supported_or_downgraded_or_removed
+artifacts: []
+residual_blockers: []
+state_updates_recommended: []
+next_action: accept_or_retry_or_block_or_launch_next_task

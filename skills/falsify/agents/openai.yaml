@@ -1,0 +1,4 @@
+interface:
+  display_name: "Falsify"
+  short_description: "Disprove claims against local evidence."
+  default_prompt: "Use $falsify read-only on this claim and return verdict PASS/PARTIAL/FAIL."

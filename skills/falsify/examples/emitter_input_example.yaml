@@ -1,0 +1,102 @@
+# Вход механического эмиттера таблиц /falsify.
+#   python3 ~/.claude/skills/falsify/scripts/falsify_render.py \
+#       ~/.claude/skills/falsify/examples/emitter_input_example.yaml
+#
+# Кейс той же формы, что и examples/golden_basic.md (учебный CLI-скрипт «готов
+# к раздаче»): PARTIAL-ветка — часть ожиданий met, один high-gap с планом closure.
+# Вывод скрипта вставляется в отчёт ДОСЛОВНО; §0/§2/§4-§8/§10.5 агент пишет сам.
+
+hypothesis: >-
+  Скрипт wordcount.py готов к раздаче участникам курса — запускается одной
+  командой, без внешних зависимостей, на любом их файле
+
+expectations:
+  - id: "E01 — запуск одной командой"
+    claim: "`python3 wordcount.py sample.txt` печатает счётчик и завершается кодом 0"
+    where: "Bash: stdout + `echo $?`"
+    expected: "words: 128, exit 0"
+    actual: "words: 128, exit 0 (прогон в этой сессии)"
+    verdict: confirmed
+    next_action_if_unmet: "Починить точку входа main(argv), повторить прогон"
+    effort: 0
+    actor: agent
+
+  - id: "E02 — нет внешних зависимостей"
+    claim: "В файле нет импортов вне stdlib"
+    where: "grep -n \"^import\\|^from\" wordcount.py"
+    expected: "только stdlib"
+    actual: "1:import sys, 2:from pathlib import Path — оба stdlib"
+    verdict: confirmed
+    next_action_if_unmet: "Заменить внешний импорт на stdlib-аналог"
+    effort: 0
+    actor: agent
+
+  - id: "E03 — пустой файл не роняет"
+    claim: "На файле в 0 байт печатает 0, а не traceback"
+    where: "Bash: `: > empty.txt && python3 wordcount.py empty.txt`"
+    expected: "words: 0, exit 0"
+    actual: "words: 0, exit 0"
+    verdict: confirmed
+    next_action_if_unmet: "Добавить guard clause на пустой вход + тест"
+    effort: 0
+    actor: agent
+
+  - id: "E04 — отсутствующий файл даёт понятную ошибку"
+    claim: "Печатает одну строку с путём, exit code 2, без traceback"
+    where: "Bash: `python3 wordcount.py nope.txt; echo $?`"
+    expected: "одна строка «нет файла: nope.txt», exit 2"
+    actual: "Traceback … FileNotFoundError: [Errno 2] … 'nope.txt', exit 1"
+    verdict: falsified
+    next_action_if_unmet: "Обернуть чтение в except FileNotFoundError → сообщение + exit 2"
+    effort: 0
+    actor: agent
+    gap_type: execution
+    waste: defect
+    severity: high
+    root_cause: "чтение файла не обёрнуто; ошибочный путь не считался нормальным входом"
+    fix: "try/except FileNotFoundError → print в stderr, return 2"
+
+  - id: "E05 — тесты покрывают чужие входы"
+    claim: "Есть автотест на негативные входы (нет файла, каталог, не-UTF-8)"
+    where: "ls tests/ + прогон pytest"
+    expected: "3 негативных кейса зелёные"
+    actual: ""
+    next_action_if_unmet: "Добавить --self-test с тремя негативными входами"
+    effort: 0
+    actor: agent
+    gap_type: feedback
+    waste: over-processing
+    severity: med
+    root_cause: "автор проверял на своём файле, класс «чужой вход» не наблюдаем"
+    fix: "--self-test: пустой файл, отсутствующий файл, каталог вместо файла"
+
+gaps:
+  - e_ref: E04
+    id: "G01 — traceback на отсутствующем файле"
+    status: open
+  - e_ref: E05
+    id: "G02 — негативные входы не покрыты тестами"
+    status: open
+
+next_actions:
+  - id: "P01 — обернуть чтение в except и вернуть код два"
+    closes: [G01]
+    effort: 0
+    actor: agent
+    why_first: "снимает high-severity, разблокирует раздачу"
+  - id: "P02 — добавить self-test на три негативных входа"
+    closes: [G02]
+    effort: 0
+    actor: agent
+    why_first: "закрывает feedback-gap, без него G01 вернётся"
+  - id: "P03 — пересобрать раздаточный архив курса"
+    closes: []
+    effort: 20
+    actor: owner
+    why_first: "участники получают исправленную версию"
+
+confidence_before: 70
+confidence_after: 88
+confidence_reason: >-
+  4 живых прогона с показанным stdout и exit code; остаток неопределённости —
+  не проверен вход «каталог вместо файла» и не-UTF-8 файл участника

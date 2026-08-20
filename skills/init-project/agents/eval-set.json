@@ -1,0 +1,15 @@
+[
+  {"query": "init project", "should_trigger": true, "note": "direct English trigger"},
+  {"query": "создай claude md", "should_trigger": true, "note": "direct Russian trigger"},
+  {"query": "настрой проект", "should_trigger": true, "note": "project setup in Russian"},
+  {"query": "project setup", "should_trigger": true, "note": "English project setup"},
+  {"query": "инициализируй проект", "should_trigger": true, "note": "initialize project"},
+  {"query": "/init-project", "should_trigger": true, "note": "slash command trigger"},
+  {"query": "нужен CLAUDE.md для проекта", "should_trigger": true, "note": "explicit CLAUDE.md request"},
+  {"query": "опиши проект для агента", "should_trigger": true, "note": "describe project for agent"},
+  {"query": "напиши код", "should_trigger": false, "note": "coding request, not setup"},
+  {"query": "задеплой на сервер", "should_trigger": false, "note": "deploy, not init"},
+  {"query": "проверь результат", "should_trigger": false, "note": "verification — check skill territory"},
+  {"query": "сделай ретро", "should_trigger": false, "note": "retro — retro skill territory"},
+  {"query": "обнови CLAUDE.md добавь правило", "should_trigger": false, "note": "updating existing rule, not init"}
+]

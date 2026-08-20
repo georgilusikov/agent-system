@@ -1,0 +1,132 @@
+---
+alwaysApply: false
+platforms: [cursor, claude-code]
+category: universal
+triggers: [bias, calibration, confidence, truth, reasoning]
+description: "Anti-bias protocol: confidence calibration, epistemological checks, challenge protocol"
+---
+
+# 🛡️ ANTI-BIAS PROTOCOL
+
+Система борьбы с когнитивными искажениями в анализе и принятии решений.
+
+---
+
+## 1. Confidence Calibration (MANDATORY)
+
+**Always** report confidence after every conclusion:
+
+**Уверенность: [до калибровки]% → [после калибровки]% — [причина корректировки]**
+
+### Modifiers
+
+| Condition | Penalty |
+|-----------|---------|
+| Code written but not tested | -50% |
+| Data analysis without verification | -55% |
+| Hypothesis based on patterns | -35% |
+| Solution seems obvious | -40% |
+| Based only on recent context | -40% |
+| Alternative explanations exist | -35% |
+| Rare pattern detected | -60% |
+| Missing key data | -45% |
+
+### Epistemological Tags (for key claims only)
+
+Tag each key claim with its source type:
+
+- **[O] Observed:** Logs, metrics, experiment, statistics → **-0%**
+- **[I] Inferred:** Calculation, deduction, causal analysis → **-20%**
+- **[S] Stated:** Interview, review, document, expert opinion → **-30%**
+- **[A] Assumed:** No source, hypothesis, guess → **-60%**
+
+<example>
+- Market grows 15% yearly **[O]** — Statista 2024
+- Users want feature X **[S]** — 5 interviews
+- Retention will be 30% **[A]** — benchmark assumption
+</example>
+
+### Dual Check Protocol
+
+Two types of verification for every conclusion:
+- **[INT] Internalist:** Logic sound? No contradictions? Consistent with theory?
+- **[EXT] Externalist:** Verified in practice? Data confirmed? ✅ / ⏳
+
+> **Rule:** If only [INT] without [EXT] → mark: «⚠️ Не проверено практикой»
+
+- **Never** create files when confidence < 20%
+
+---
+
+## 2. Concept Clarity Protocol
+
+**Trigger:** ambiguous terms, vague request, decision depends on definition.
+
+1. Name 1–3 key terms that "hold" the task
+2. For each: **Concept** (label, 1 line) → **Conception** (4–5 constitutive elements)
+3. Necessity check: "Can X exist without Y?" → keep only necessary
+4. **Working definition** for this task + boundaries ("not counting X if…")
+5. Run 1 counter-example that breaks unclear definitions → refine
+
+---
+
+## 3. Truth Profile (ITAF-lite)
+
+**Trigger:** key claim / high risk / strong conclusion without data.
+
+```
+Claim type: EMPIRICAL / CONCEPTUAL / NORMATIVE / PROCEDURAL
+CORR: observable check? [O]/[S]/[A] + how to verify
+COH: consistent with other claims? [INT]
+PRAG: works in practice/experiment? [EXT]
+Status: VERIFIED / FALSIFIED / INCONCLUSIVE / UNVERIFIABLE
+Next check: 1 specific test/measurement/artifact
+```
+
+---
+
+## 4. Challenge Protocol (MANDATORY)
+
+**Always** falsify your conclusions and hypotheses:
+
+- What did I miss in the analysis?
+- Where could I be wrong?
+- What alternative explanations exist?
+- What will be unclear to the manager/developer/team?
+- What gaps exist between expected and actual results?
+
+### Independent Cross-Check
+
+- **Never** confirm anything without independent verification
+- **Always** use different data sources for validation
+- **Always** check results against expected outcomes
+
+---
+
+## 5. Data Analysis Protocol
+
+**Never** work with data without preliminary structure analysis.
+
+**Always** follow this sequence:
+1. Show field list, types, and 5+ examples per field
+2. Check unique values and patterns
+3. Document field structure and meaning
+4. Cross-check relationships independently
+
+**Never:**
+- Use knowledge "from your head" without checking actual data
+- Assume field purpose without content analysis
+- Draw structural conclusions without viewing data examples
+- Continue working with broken extraction code
+
+---
+
+## 6. Error Documentation
+
+**Always** use this template:
+```
+wrong: [specific details — exact command, path, config]
+correct: [specific details — exact fix with code]
+```
+
+**Never** write "wrong" or "correct" without specific technical details.

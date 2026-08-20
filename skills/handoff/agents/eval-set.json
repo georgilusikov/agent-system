@@ -1,0 +1,22 @@
+[
+  {"query": "/handoff", "should_trigger": true, "note": "direct slash command"},
+  {"query": "хэндоф", "should_trigger": true, "note": "owner's most frequent wording — free text, not a tool call"},
+  {"query": "хендоф пора", "should_trigger": true, "note": "common owner misspelling"},
+  {"query": "запиши в хэндоф", "should_trigger": true, "note": "explicit write request"},
+  {"query": "сохрани контекст сессии", "should_trigger": true, "note": "session save request"},
+  {"query": "перед /clear сохрани всё", "should_trigger": true, "note": "pre-clear save"},
+  {"query": "другой агент должен продолжить", "should_trigger": true, "note": "explicit agent handoff"},
+  {"query": "продолжим в следующий раз", "should_trigger": true, "note": "implicit continuation intent"},
+  {"query": "заканчиваем работу", "should_trigger": true, "note": "session end signal"},
+  {"query": "подведи итоги сессии", "should_trigger": true, "note": "session wrap-up"},
+  {"query": "запиши что мы сделали", "should_trigger": true, "note": "session documentation"},
+  {"query": "продолжи с прошлой сессии", "should_trigger": true, "note": "resume mode — read side"},
+  {"query": "что было в прошлой сессии", "should_trigger": true, "note": "resume mode — read latest handoff"},
+  {"query": "что мы сделали за сессию", "should_trigger": false, "note": "summary question in chat, no document expected"},
+  {"query": "закоммить изменения", "should_trigger": false, "note": "commit — different skill"},
+  {"query": "покажи текущие задачи", "should_trigger": false, "note": "status check, not handoff"},
+  {"query": "push to github", "should_trigger": false, "note": "push action, not context handoff"},
+  {"query": "напиши бриф кодексу на эту задачу", "should_trigger": false, "note": "external executor brief — /delegate"},
+  {"query": "что я упустил в этой работе", "should_trigger": false, "note": "post-hoc reflection — /pizdej"},
+  {"query": "собери контракт цели перед волнами", "should_trigger": false, "note": "goal contract — /goal-plan"}
+]

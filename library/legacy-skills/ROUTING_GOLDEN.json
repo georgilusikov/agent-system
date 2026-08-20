@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "required_routes": [
+    "debug",
+    "check",
+    "leverage",
+    "anti-bias",
+    "go",
+    "tdd",
+    "delegate",
+    "dispatching-parallel-agents",
+    "agent-orchestrator-standard",
+    "cost-aware-delegation",
+    "nmt",
+    "measure"
+  ],
+  "conflict_pairs": [
+    ["debug", "check"],
+    ["debug", "leverage"],
+    ["debug", "anti-bias"],
+    ["go", "debug"],
+    ["go", "check"],
+    ["go", "tdd"],
+    ["tdd", "check"],
+    ["delegate", "dispatching-parallel-agents"],
+    ["delegate", "agent-orchestrator-standard"],
+    ["nmt", "go"],
+    ["nmt", "leverage"],
+    ["measure", "check"],
+    ["measure", "debug"]
+  ],
+  "cases": [
+    {"id": "debug_check_01", "prompt": "Разберись, почему падает импорт после обновления; готового результата ещё нет.", "expected": "debug", "conflicts": ["check", "go"], "canary": true},
+    {"id": "debug_flaky_02", "prompt": "Flaky тест то проходит, то падает; найди причину.", "expected": "debug", "conflicts": ["check"]},
+    {"id": "debug_leverage_03", "prompt": "Сервис внезапно замедлился; найди root cause, а не системный рычаг.", "expected": "debug", "conflicts": ["leverage"]},
+    {"id": "debug_bias_04", "prompt": "Есть traceback и три гипотезы; проверь причины, не делай общий bias-review.", "expected": "debug", "conflicts": ["anti-bias"]},
+    {"id": "debug_measure_05", "prompt": "Почему оба варианта eval читают один файл? Сначала найди баг, не считай эффект.", "expected": "debug", "conflicts": ["measure"]},
+    {"id": "debug_rca_06", "prompt": "Сделай RCA ошибки 500 после второго запроса; код пока не меняй.", "expected": "debug", "conflicts": ["go"]},
+
+    {"id": "check_debug_07", "prompt": "Фикс уже готов; проверь результат против Expected State, не ищи новую причину.", "expected": "check", "conflicts": ["debug"], "canary": true},
+    {"id": "check_go_08", "prompt": "Код уже написан; только проверь positive, negative и edge cases.", "expected": "check", "conflicts": ["go"]},
+    {"id": "check_tdd_09", "prompt": "Реализация закончена; проверь существующие тесты, новый TDD-цикл не начинай.", "expected": "check", "conflicts": ["tdd"]},
+    {"id": "check_measure_10", "prompt": "Сверь готовый отчёт с требованиями; сравнение вариантов уже завершено.", "expected": "check", "conflicts": ["measure"]},
+
+    {"id": "leverage_debug_11", "prompt": "Система работает без конкретного бага, но медленно; найди бутылочное горлышко throughput.", "expected": "leverage", "conflicts": ["debug"], "canary": true},
+    {"id": "leverage_nmt_12", "prompt": "Какой один системный constraint ограничивает выпуск продукта? Не сегментируй рынок.", "expected": "leverage", "conflicts": ["nmt"]},
+    {"id": "leverage_blind_13", "prompt": "Что мы упускаем в работающем процессе и где самый дешёвый рычаг?", "expected": "leverage", "conflicts": ["debug"]},
+    {"id": "leverage_flow_14", "prompt": "Найди узел пайплайна, улучшение которого увеличит общий поток.", "expected": "leverage", "conflicts": ["go"]},
+
+    {"id": "bias_debug_15", "prompt": "Выбираю между двумя объяснениями; проверь, не подтасовал ли я вывод, без RCA.", "expected": "anti-bias", "conflicts": ["debug"], "canary": true},
+    {"id": "bias_alternatives_16", "prompt": "Какие альтернативы я не рассмотрел в этом решении?", "expected": "anti-bias", "conflicts": ["go"]},
+    {"id": "bias_confirmation_17", "prompt": "Проверь conclusion на confirmation bias, не верифицируй готовый артефакт.", "expected": "anti-bias", "conflicts": ["check"]},
+    {"id": "bias_choice_18", "prompt": "Есть две правдоподобные стратегии; помоги выбрать без когнитивных искажений.", "expected": "anti-bias", "conflicts": ["leverage"]},
+
+    {"id": "go_debug_19", "prompt": "/go: не знаю, это feature, bugfix или refactor; сначала выбери workflow.", "expected": "go", "conflicts": ["debug"]},
+    {"id": "go_check_20", "prompt": "/go: с чего начать задачу, где ещё нет готового результата?", "expected": "go", "conflicts": ["check"]},
+    {"id": "go_tdd_21", "prompt": "Не знаю, это feature, bugfix или refactor; сначала выбери подходящий workflow, TDD явно не задан.", "expected": "go", "conflicts": ["tdd"], "canary": true},
+    {"id": "go_nmt_22", "prompt": "/go: реализуй выбранную продуктовую фичу; продуктовая стратегия уже решена.", "expected": "go", "conflicts": ["nmt"]},
+
+    {"id": "tdd_go_23", "prompt": "Реализуй это по TDD: сначала падающий тест.", "expected": "tdd", "conflicts": ["go"]},
+    {"id": "tdd_check_24", "prompt": "Напиши тест до кода и пройди red-green-refactor; это не финальная проверка.", "expected": "tdd", "conflicts": ["check"]},
+    {"id": "tdd_regression_25", "prompt": "/tdd: заведи падающий regression test на баг, затем исправь.", "expected": "tdd", "conflicts": ["debug"]},
+    {"id": "tdd_behavior_26", "prompt": "Поведение меняется; реализуй с explicit test-first циклом.", "expected": "tdd", "conflicts": ["go"]},
+
+    {"id": "delegate_dispatch_27", "prompt": "Делегируй эту одну задачу одному субагенту и прими результат.", "expected": "delegate", "conflicts": ["dispatching-parallel-agents"], "canary": true},
+    {"id": "delegate_orchestrator_28", "prompt": "Напиши бриф одному исполнителю; worktree lanes и мониторинг не нужны.", "expected": "delegate", "conflicts": ["agent-orchestrator-standard"]},
+    {"id": "delegate_brief_29", "prompt": "Поручи одному Codex-исполнителю bounded audit и затем проверь evidence.", "expected": "delegate", "conflicts": ["cost-aware-delegation"]},
+    {"id": "delegation_cost_30", "prompt": "Выбери самый дешёвый подходящий канал и capability tier до делегирования.", "expected": "cost-aware-delegation", "conflicts": ["delegate"]},
+    {"id": "dispatch_delegate_31", "prompt": "Запусти две независимые задачи параллельно разным агентам.", "expected": "dispatching-parallel-agents", "conflicts": ["delegate"]},
+    {"id": "orchestrator_delegate_32", "prompt": "Создай worktree lanes, следи за несколькими воркерами и интегрируй.", "expected": "agent-orchestrator-standard", "conflicts": ["delegate"]},
+
+    {"id": "nmt_go_33", "prompt": "Через Next Move Theory помоги выбрать продуктовую стратегию; пока не реализуй.", "expected": "nmt", "conflicts": ["go"], "canary": true},
+    {"id": "nmt_leverage_34", "prompt": "Исследуй рынок и сегменты по AJTBD, а не общий bottleneck системы.", "expected": "nmt", "conflicts": ["leverage"]},
+    {"id": "nmt_interviews_35", "prompt": "Разбери customer interviews на Core Jobs и success criteria по NMT.", "expected": "nmt", "conflicts": ["debug"]},
+    {"id": "nmt_diagnose_36", "prompt": "Retention продукта упал; диагностируй upstream Segment+Job через NMT.", "expected": "nmt", "conflicts": ["debug"]},
+    {"id": "nmt_prd_37", "prompt": "Сделай PRD из уже выбранного AJTBD-сегмента и его Core Jobs.", "expected": "nmt", "conflicts": ["go"]},
+    {"id": "nmt_value_38", "prompt": "Сформулируй value proposition для выбранного NMT-сегмента.", "expected": "nmt", "conflicts": ["leverage"]},
+
+    {"id": "measure_check_39", "prompt": "Сравни два варианта и получи число, которому можно доверять; это не финальная проверка готового результата.", "expected": "measure", "conflicts": ["check"], "canary": true},
+    {"id": "measure_debug_40", "prompt": "Спроектируй benchmark с no-change повтором и isolation gate; известного бага пока нет.", "expected": "measure", "conflicts": ["debug"]},
+    {"id": "measure_judge_41", "prompt": "Откалибруй LLM-judge перед сравнением двух систем.", "expected": "measure", "conflicts": ["check"]},
+    {"id": "measure_power_42", "prompt": "Посчитай MDE и power для A/B, но сначала проверь дизайн замера.", "expected": "measure", "conflicts": ["check"]},
+    {"id": "measure_leakage_43", "prompt": "Проверь независимость вариантов и leakage, затем оцени разницу и variance.", "expected": "measure", "conflicts": ["debug"]},
+    {"id": "measure_stop_44", "prompt": "Заранее зафиксируй stop rule, blinding и machine-readable receipt эксперимента.", "expected": "measure", "conflicts": ["go"]}
+  ]
+}

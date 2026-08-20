@@ -1,0 +1,55 @@
+---
+alwaysApply: true
+platforms: [cursor, claude-code, antigravity]
+category: universal
+triggers: [code, edit, implement, fix, refactor, build]
+description: "Auto-validation and assumption tracking for all code changes. ADDED: 2026-03-02"
+---
+
+# 🔒 CORE-VALIDATION: Auto-Validation & Assumption Tracking
+
+## 1. Validation Commands (Auto-trigger after code changes)
+
+**ОБЯЗАТЕЛЬНО** после ЛЮБОГО изменения кода:
+
+1. Если в проекте есть `package.json` → запусти `npm test` или `npm run build`
+2. Если в проекте есть `pyproject.toml` / `setup.py` → запусти `python -m pytest`
+3. Если в проекте есть `Cargo.toml` → запусти `cargo check`
+4. Если в проекте есть `tsconfig.json` → запусти `tsc --noEmit`
+
+**Правило:** Не говори «готово» пока validation не прошла. Если тесты упали — исправь и запусти снова.
+
+---
+
+## 2. [ASSUMPTION] Tags (Mandatory for architectural decisions)
+
+**ОБЯЗАТЕЛЬНО** при принятии архитектурного или дизайн-решения:
+
+- Явно пометь: `[ASSUMPTION: причина]`
+- Примеры:
+  - `[ASSUMPTION: используем REST вместо GraphQL — проще для MVP]`
+  - `[ASSUMPTION: один файл стилей — проект маленький]`
+  - `[ASSUMPTION: SQLite достаточно — <1000 users]`
+
+**Правило:** Если принимаешь решение молча (без [ASSUMPTION]) — это ошибка. Спроси пользователя или пометь явно.
+
+---
+
+## 3. Self-Critique Before "Done" (Auto-trigger)
+
+**ОБЯЗАТЕЛЬНО** перед тем как сказать «готово» / «done» / завершить задачу:
+
+1. Перечисли **3 вещи, в которых ты НЕ уверен**
+2. Перечисли все **[ASSUMPTION]** которые сделал
+3. Если есть тесты — покажи результат
+4. Если есть build — покажи результат
+
+---
+
+## 4. Error-Driven Learning (Auto-trigger on failure)
+
+**ОБЯЗАТЕЛЬНО** при обнаружении ошибки:
+
+1. Автоматически применяй `_agent_shared/rules/core-reflect.mdc`
+2. Предложи обновление правила, которое предотвратит ошибку в будущем
+3. Запиши ошибку в `_agent_shared/error_feedback/errors_YYYY-MM.md`

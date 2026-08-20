@@ -1,0 +1,13 @@
+{
+  "dataset": "examples/commutator_example.csv",
+  "anchor": "user_id",
+  "checks": {
+    "bijectivity": [
+      {
+        "key": "client_id",
+        "max_fanout": 1,
+        "max_violation_rate": 0.02
+      }
+    ]
+  }
+}

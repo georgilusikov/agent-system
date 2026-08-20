@@ -1,0 +1,43 @@
+---
+alwaysApply: false
+platforms: [cursor, claude-code]
+category: universal
+triggers: [next, plan, action-plan, sequence]
+description: "Sequential action planning protocol (auto → check → clean)"
+---
+
+# 🔄 CORE NEXT PROTOCOL
+
+**Purpose:** Sequential execution of core protocols in the right order.
+
+## Step 0: Context Check (MANDATORY START)
+- Break down tasks into sub-tasks
+- Write current state to chat: что сделано, что осталось, какие файлы затронуты
+
+## Step 1: Execute (`core-auto.mdc`)
+- Прочитай и примени `_agent_shared/rules/core-auto.mdc`
+- Выполни задачу автономно
+- **Exit condition:** задача выполнена ИЛИ обнаружена ошибка
+
+## Step 2: Verify (`core-check.mdc`)
+- Прочитай и примени `_agent_shared/rules/core-check.mdc`
+- Test cases: позитивные, негативные, edge cases
+- Gap analysis: expected vs actual
+- **Exit condition:** все проверки пройдены ИЛИ найдены баги → вернись к Step 1
+
+## Step 3: Clean Up (`core-clean.mdc`)
+- Прочитай и примени `_agent_shared/rules/core-clean.mdc`
+- File audit, linter errors, навести порядок
+- **Exit condition:** workspace чистый
+
+## Step 4: Plan Next Actions
+- Обнови `{projectname}.todo.md`
+- Запиши: что сделано, что осталось, следующий шаг
+- Если есть ещё задачи → вернись к Step 1
+
+## Rules
+- Не пропускай шаги. Каждый шаг завершай полностью.
+- Если ошибка на Step 2 → вернись к Step 1 (fix), не к Step 3.
+- Max 3 полных цикла без вмешательства пользователя.
+
+> Применяй `_agent_shared/rules/core-principles.mdc`

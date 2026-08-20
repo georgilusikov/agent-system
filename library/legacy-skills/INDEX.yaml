@@ -1,0 +1,2076 @@
+# INDEX.yaml - Master catalog of external reference skills
+# Total: 980 skills categorized for easy discovery and integration
+#
+# WARNING — frozen external reference, NOT the local canonical skills registry.
+#   - This file is an external reference catalog.
+#   - It is NOT the local canonical skills registry.
+#   - Local canon is `_agent_shared/SKILLS_INDEX.md` + `_agent_shared/skills/REGISTRY.md`.
+#   - Local canon counts live only in `_agent_shared/SKILL_INVENTORY.json`.
+#   - Do NOT use this file for local canon counts (it lists 980 external skills).
+#   - `last_updated: 2025-01-27` is the original snapshot date and is not refreshed
+#     on purpose; see `frozen_since` and `refresh_status` in metadata.
+
+version: "1.0.0"
+last_updated: "2025-01-27"
+
+metadata:
+  total_skills: 980
+  categories: 20
+  primary_language: "Russian"
+  skill_base_path: "${SKILLS_STUDY_LIBRARY:-~/reference/skills_study_library}"
+  repo_local_fallback: "/Users/georgijlusikov/Documents/курсор/_skills_study_library"
+  status: "external_reference"
+  canonical_for_local_workspace: false
+  frozen_since: "2026-04-28"
+  refresh_status: "not_refreshed"
+  local_canon_pointer:
+    skills_index: "_agent_shared/SKILLS_INDEX.md"
+    skills_registry: "_agent_shared/skills/REGISTRY.md"
+    skill_inventory: "_agent_shared/SKILL_INVENTORY.json"
+
+categories:
+  # Category 1: Product & Business Management
+  product_business:
+    name: "Product & Business Management"
+    description: "Skills for product management, business strategy, and stakeholder management"
+    tags: [product, business, strategy, management]
+    subcategories:
+      product_management:
+        name: "Product Management"
+        skills:
+          - product-manager-toolkit
+          - product-strategist
+          - agile-product-owner
+          - ai-product
+          - ai-wrapper-product
+          - feature-design-assistant
+
+      business_strategy:
+        name: "Business Strategy"
+        skills:
+          - business-case-development
+          - competitive-landscape
+          - competitor-analysis
+          - ceo-advisor
+          - cto-advisor
+          - competitor-alternatives
+          - free-tool-strategy
+
+      stakeholder_management:
+        name: "Stakeholder Management"
+        skills:
+          - stakeholder-communication
+          - difficult-workplace-conversations
+          - daily-meeting-update
+
+      marketing_growth:
+        name: "Marketing & Growth"
+        skills:
+          - marketing-strategy-pmm
+          - marketing-demand-acquisition
+          - marketing-ideas
+          - marketing-psychology
+          - executing-marketing-campaigns
+          - market-research-reports
+          - market-sizing-analysis
+          - pricing-strategy
+          - launch-strategy
+
+      conversion_optimization:
+        name: "Conversion Optimization"
+        skills:
+          - form-cro
+          - page-cro
+          - popup-cro
+          - paywall-upgrade-cro
+          - signup-flow-cro
+          - paid-ads
+          - referral-program
+
+      startup_operations:
+        name: "Startup & Operations"
+        skills:
+          - startup-financial-modeling
+          - startup-metrics-framework
+          - micro-saas-launcher
+
+  # Category 2: Design & UX
+  design_ux:
+    name: "Design & UX"
+    description: "UI/UX design, design systems, accessibility, and user research"
+    tags: [design, ux, ui, accessibility]
+    subcategories:
+      design_systems:
+        name: "Design Systems"
+        skills:
+          - design-system-creation
+          - design-system-patterns
+          - design-system-starter
+          - ui-design-system
+          - core-components
+          - tailwind-design-system
+
+      ux_research:
+        name: "UX Research"
+        skills:
+          - ux-researcher-designer
+          - user-research-analysis
+          - accessibility-compliance
+          - accessibility-testing
+          - Accessibility Auditor
+          - wcag-audit-patterns
+          - screen-reader-testing
+
+      visual_design:
+        name: "Visual Design"
+        skills:
+          - visual-design-foundations
+          - canvas-design
+          - color-accessibility
+          - wireframe-prototyping
+          - interaction-design
+          - brand-guidelines
+
+      design_handoff:
+        name: "Design Handoff"
+        skills:
+          - design-handoff
+          - backend-to-frontend-handoff-docs
+
+      responsive_design:
+        name: "Responsive Design"
+        skills:
+          - responsive-design
+          - responsive-web-design
+          - mobile-first-design
+          - scroll-experience
+
+      mobile_design:
+        name: "Mobile Design"
+        skills:
+          - mobile-design
+          - mobile-android-design
+          - mobile-ios-design
+          - mobile-app-debugging
+
+      ux_writing:
+        name: "UX Writing"
+        skills:
+          - copywriting
+          - copy-editing
+
+  # Category 3: Architecture
+  architecture:
+    name: "Software Architecture"
+    description: "System design, patterns, and architectural decisions"
+    tags: [architecture, design-patterns, system-design]
+    subcategories:
+      architecture_patterns:
+        name: "Architecture Patterns"
+        skills:
+          - architecture
+          - architecture-patterns
+          - software-architecture
+          - microservices-architecture
+          - microservices-patterns
+          - event-sourcing
+          - cqrs-implementation
+          - saga-orchestration
+          - serverless-architecture
+          - multi-cloud-architecture
+
+      architecture_documentation:
+        name: "Architecture Documentation"
+        skills:
+          - architecture-decision-records
+          - architecture-diagrams
+          - c4-architecture
+          - technical-specification
+
+      design_patterns:
+        name: "Design Patterns"
+        skills:
+          - design-patterns-implementation
+          - backend-patterns
+          - frontend-patterns
+          - api-patterns
+          - concurrency-patterns
+          - reactive-programming
+          - circuit-breaker-pattern
+
+      senior_architecture:
+        name: "Senior Architecture"
+        skills:
+          - senior-architect
+          - ai-agents-architect
+
+  # Category 4: Frontend Development
+  frontend_dev:
+    name: "Frontend Development"
+    description: "Modern frontend frameworks, JavaScript/TypeScript, and UI development"
+    tags: [frontend, javascript, typescript, react, vue, angular]
+    subcategories:
+      react_ecosystem:
+        name: "React Ecosystem"
+        skills:
+          - react-best-practices
+          - react-component-architecture
+          - react-dev
+          - react-modernization
+          - react-patterns
+          - react-state-management
+          - react-ui-patterns
+          - react-useeffect
+
+      nextjs_development:
+        name: "Next.js Development"
+        skills:
+          - nextjs-app-router-patterns
+          - nextjs-best-practices
+          - nextjs-supabase-auth
+          - vercel-react-best-practices
+          - vercel-composition-patterns
+
+      angular_development:
+        name: "Angular Development"
+        skills:
+          - angular-migration
+          - angular-module-design
+
+      vue_development:
+        name: "Vue Development"
+        skills:
+          - vue-application-structure
+
+      javascript_typescript:
+        name: "JavaScript & TypeScript"
+        skills:
+          - javascript-mastery
+          - javascript-testing-patterns
+          - modern-javascript-patterns
+          - typescript-advanced-types
+          - typescript-expert
+          - esm
+
+      frontend_practices:
+        name: "Frontend Best Practices"
+        skills:
+          - frontend-dev-guidelines
+          - frontend-design
+          - frontend-accessibility
+          - frontend-routing
+          - frontend-state-management
+          - frontend-testing
+          - frontend-to-backend-requirements
+          - web-performance-optimization
+          - web-performance-audit
+          - bundle-size-optimization
+
+      css_styling:
+        name: "CSS & Styling"
+        skills:
+          - css-architecture
+          - tailwind-patterns
+          - mui
+
+      web_components:
+        name: "Web Components"
+        skills:
+          - web-component-design
+
+      server_side_rendering:
+        name: "Server-Side Rendering"
+        skills:
+          - server-side-rendering
+
+      progressive_web_app:
+        name: "Progressive Web App"
+        skills:
+          - progressive-web-app
+
+      3d_web:
+        name: "3D Web"
+        skills:
+          - 3d-web-experience
+
+  # Category 5: Backend Development
+  backend_dev:
+    name: "Backend Development"
+    description: "Server-side development, APIs, and business logic"
+    tags: [backend, api, server-side, business-logic]
+    subcategories:
+      backend_patterns:
+        name: "Backend Patterns"
+        skills:
+          - backend-dev-guidelines
+          - backend-patterns
+          - dotnet-backend-patterns
+          - nodejs-backend-patterns
+          - nodejs-best-practices
+          - nodejs-express-server
+          - go-concurrency-patterns
+
+      api_development:
+        name: "API Development"
+        skills:
+          - rest-api-design
+          - graphql-implementation
+          - graphql
+          - api-design-principles
+          - api-filtering-sorting
+          - api-pagination
+          - api-response-optimization
+          - api-error-handling
+          - grpc-service-development
+
+      framework_specific:
+        name: "Framework Specific"
+        skills:
+          - django-application
+          - fastapi-development
+          - fastapi-templates
+          - flask-api-development
+          - nestjs-expert
+          - spring-boot-application
+          - ruby-rails-application
+
+      async_processing:
+        name: "Async Processing"
+        skills:
+          - background-job-processing
+          - batch-processing-jobs
+          - bullmq-specialist
+
+      senior_backend:
+        name: "Senior Backend"
+        skills:
+          - senior-backend
+          - senior-fullstack
+
+  # Category 6: DevOps & Infrastructure
+  devops_infra:
+    name: "DevOps & Infrastructure"
+    description: "CI/CD, containerization, orchestration, and infrastructure management"
+    tags: [devops, infrastructure, cicd, containers, kubernetes]
+    subcategories:
+      containerization:
+        name: "Containerization"
+        skills:
+          - docker-containerization
+          - docker-expert
+          - container-debugging
+          - container-registry-management
+
+      kubernetes:
+        name: "Kubernetes"
+        skills:
+          - kubernetes-deployment
+          - k8s-manifest-generator
+          - k8s-security-policies
+          - helm-chart-scaffolding
+
+      cicd:
+        name: "CI/CD"
+        skills:
+          - cicd-pipeline-setup
+          - github-actions-workflow
+          - github-actions-templates
+          - github-workflow-automation
+          - gitlab-ci-patterns
+          - gitlab-cicd-pipeline
+          - jenkins-pipeline
+          - gitops-workflow
+
+      infrastructure_as_code:
+        name: "Infrastructure as Code"
+        skills:
+          - terraform-infrastructure
+          - terraform-module-library
+          - devops-iac-engineer
+          - configuration-management
+
+      deployment:
+        name: "Deployment"
+        skills:
+          - deployment-automation
+          - deployment-pipeline-design
+          - deployment-procedures
+          - deployment-documentation
+          - blue-green-deployment
+          - canary-deployment
+          - railway-deploy
+          - railway-deployment
+
+      monitoring_infra:
+        name: "Infrastructure Monitoring"
+        skills:
+          - infrastructure-monitoring
+          - prometheus-monitoring
+          - prometheus-configuration
+          - grafana-dashboard
+          - grafana-dashboards
+          - datadog-cli
+
+      senior_devops:
+        name: "Senior DevOps"
+        skills:
+          - senior-devops
+
+  # Category 7: AI & Machine Learning
+  ai_ml:
+    name: "AI & Machine Learning"
+    description: "Machine learning, deep learning, LLMs, and AI agents"
+    tags: [ai, ml, llm, deep-learning, agents]
+    subcategories:
+      llm_development:
+        name: "LLM Development"
+        skills:
+          - implementing-llms-litgpt
+          - training-llms-megatron
+          - serving-llms-vllm
+          - llm-app-patterns
+          - llm-evaluation
+          - llm-app-patterns
+          - long-context
+          - prompt-engineering
+          - prompt-engineering-patterns
+          - prompt-library
+          - prompt-engineer
+          - senior-prompt-engineer
+
+      ai_agents:
+        name: "AI Agents"
+        skills:
+          - autonomous-agents
+          - autonomous-agent-patterns
+          - agent-evaluation
+          - agent-manager-skill
+          - agent-memory-systems
+          - agent-memory-mcp
+          - agent-tool-builder
+          - multi-agent-brainstorming
+          - parallel-agents
+          - dispatching-parallel-agents
+          - computer-use-agents
+          - crewai-multi-agent
+          - crewai
+          - autogpt-agents
+          - voice-agents
+
+      ml_frameworks:
+        name: "ML Frameworks"
+        skills:
+          - transformers
+          - pytorch-lightning
+          - pytorch-fsdp
+          - huggingface-accelerate
+          - huggingface-tokenizers
+          - scikit-learn
+          - tensorflow
+          - keras
+
+      ml_training:
+        name: "ML Training"
+        skills:
+          - ML Model Training
+          - Model Hyperparameter Tuning
+          - fine-tuning-with-trl
+          - peft-fine-tuning
+          - grpo-rl-training
+          - simpo-training
+          - openrlhf-training
+          - knowledge-distillation
+          - moe-training
+          - model-merging
+          - model-pruning
+
+      ml_pipelines:
+        name: "ML Pipelines"
+        skills:
+          - ML Pipeline Automation
+          - ml-pipeline-workflow
+          - mlflow
+          - data-quality-frameworks
+
+      model_deployment:
+        name: "Model Deployment"
+        skills:
+          - Model Deployment
+          - Model Monitoring
+
+      computer_vision:
+        name: "Computer Vision"
+        skills:
+          - Computer Vision
+          - senior-computer-vision
+          - segment-anything-model
+          - clip
+          - blip-2-vision-language
+          - llava
+          - stable-diffusion-image-generation
+          - generate-image
+          - image-enhancer
+          - image-optimization
+
+      nlp:
+        name: "Natural Language Processing"
+        skills:
+          - Natural Language Processing
+          - sentence-transformers
+          - sentencepiece
+
+      quantization:
+        name: "Quantization & Optimization"
+        skills:
+          - awq-quantization
+          - gguf-quantization
+          - gptq
+          - hqq-quantization
+          - quantizing-models-bitsandbytes
+          - speculative-decoding
+          - optimizing-attention-flash
+
+      rag:
+        name: "RAG & Vector Search"
+        skills:
+          - rag-engineer
+          - rag-implementation
+          - embedding-strategies
+          - faiss
+          - qdrant-vector-search
+          - pinecone
+          - chroma
+          - hybrid-search-implementation
+          - similarity-search-patterns
+          - vector-index-tuning
+
+      ml_specialized:
+        name: "Specialized ML"
+        skills:
+          - Recommendation Engine
+          - Recommendation System
+          - Anomaly Detection
+          - Classification Modeling
+          - Clustering Analysis
+          - Regression Modeling
+          - Sentiment Analysis
+          - Time Series Analysis
+          - Causal Inference
+          - Dimensionality Reduction
+          - Survival Analysis
+          - Feature Engineering
+          - ML Model Explanation
+          - Neural Network Design
+
+      senior_ml:
+        name: "Senior ML"
+        skills:
+          - senior-ml-engineer
+          - senior-data-scientist
+
+      langchain:
+        name: "LangChain Ecosystem"
+        skills:
+          - langchain
+          - langchain-architecture
+          - langgraph
+          - langfuse
+          - langsmith-observability
+          - llamaindex
+          - dspy
+          - outlines
+          - instructor
+
+  # Category 8: Testing
+  testing:
+    name: "Testing"
+    description: "Testing strategies, frameworks, and quality assurance"
+    tags: [testing, qa, quality-assurance, automation]
+    subcategories:
+      testing_types:
+        name: "Testing Types"
+        skills:
+          - unit-testing-framework
+          - integration-testing
+          - e2e-testing-automation
+          - e2e-testing-patterns
+          - api-contract-testing
+          - performance-testing
+          - stress-testing
+          - mutation-testing
+          - visual-regression-testing
+          - frontend-testing
+          - webapp-testing
+
+      test_driven_development:
+        name: "Test-Driven Development"
+        skills:
+          - test-driven-development
+          - tdd-workflow
+          - testing-patterns
+
+      testing_frameworks:
+        name: "Testing Frameworks"
+        skills:
+          - playwright-skill
+          - javascript-testing-patterns
+          - python-testing-patterns
+          - bats-testing-patterns
+          - property-based-testing
+
+      test_automation:
+        name: "Test Automation"
+        skills:
+          - test-automation-framework
+          - continuous-testing
+          - test-data-generation
+          - test-fixing
+
+      quality_assurance:
+        name: "Quality Assurance"
+        skills:
+          - qa-test-planner
+          - senior-qa
+          - code-review-checklist
+          - lint-and-validate
+          - static-code-analysis
+
+  # Category 9: Security
+  security:
+    name: "Security"
+    description: "Application security, penetration testing, and compliance"
+    tags: [security, pentest, compliance, vulnerability]
+    subcategories:
+      penetration_testing:
+        name: "Penetration Testing"
+        skills:
+          - penetration-testing
+          - Ethical Hacking Methodology
+          - Pentest Checklist
+          - Pentest Commands
+          - Red Team Tools and Methodology
+          - red-team-tactics
+          - AWS Penetration Testing
+          - Cloud Penetration Testing
+          - WordPress Penetration Testing
+          - SMTP Penetration Testing
+          - SSH Penetration Testing
+          - SQLMap Database Penetration Testing
+          - Shodan Reconnaissance and Pentesting
+          - Metasploit Framework
+          - Burp Suite Web Application Testing
+          - attack-tree-construction
+
+      vulnerability_testing:
+        name: "Vulnerability Testing"
+        skills:
+          - API Fuzzing for Bug Bounty
+          - SQL Injection Testing
+          - sql-injection-prevention
+          - XSS Prevention Testing
+          - xss-prevention
+          - Cross-Site Scripting and HTML Injection Testing
+          - HTML Injection Testing
+          - File Path Traversal Testing
+          - IDOR Vulnerability Testing
+          - Broken Authentication Testing
+          - csrf-protection
+          - Top 100 Web Vulnerabilities Reference
+          - vulnerability-scanner
+          - vulnerability-scanning
+
+      security_hardening:
+        name: "Security Hardening"
+        skills:
+          - security-testing
+          - security-review
+          - security-audit-logging
+          - security-compliance
+          - security-compliance-audit
+          - security-documentation
+          - security-requirement-extraction
+          - security-headers-configuration
+          - api-security-best-practices
+          - api-security-hardening
+          - sast-configuration
+          - Security Scanning Tools
+
+      authentication_authorization:
+        name: "Authentication & Authorization"
+        skills:
+          - auth-implementation-patterns
+          - api-authentication
+          - access-control-rbac
+          - oauth-implementation
+          - clerk-auth
+          - session-management
+          - mtls-configuration
+
+      data_security:
+        name: "Data Security"
+        skills:
+          - data-encryption
+          - secrets-management
+          - secrets-rotation
+          - gdpr-data-handling
+          - Data Privacy Compliance
+
+      network_security:
+        name: "Network Security"
+        skills:
+          - network-security-groups
+          - hybrid-cloud-networking
+          - zero-trust-architecture
+          - Active Directory Attacks
+          - Linux Privilege Escalation
+          - Windows Privilege Escalation
+          - Privilege Escalation Methods
+          - protocol-reverse-engineering
+          - Wireshark Network Traffic Analysis
+          - Network 101
+
+      compliance:
+        name: "Compliance"
+        skills:
+          - pci-compliance
+          - gdpr-dsgvo-expert
+          - information-security-manager-iso27001
+          - isms-audit-expert
+          - qms-audit-expert
+          - quality-manager-qms-iso13485
+          - quality-manager-qmr
+          - mdr-745-specialist
+          - fda-consultant-specialist
+
+      security_operations:
+        name: "Security Operations"
+        skills:
+          - senior-security
+          - senior-secops
+          - incident-response-plan
+          - threat-mitigation-mapping
+          - risk-assessment
+          - risk-management-specialist
+          - memory-forensics
+          - binary-analysis-patterns
+          - anti-reversing-techniques
+
+      blockchain_security:
+        name: "Blockchain Security"
+        skills:
+          - solidity-security
+          - web3-testing
+          - nft-standards
+          - defi-protocol-templates
+
+  # Category 10: Data & Analytics
+  data_analytics:
+    name: "Data & Analytics"
+    description: "Data engineering, analytics, visualization, and business intelligence"
+    tags: [data, analytics, visualization, bi]
+    subcategories:
+      data_engineering:
+        name: "Data Engineering"
+        skills:
+          - senior-data-engineer
+          - Data Cleaning Pipeline
+          - data-migration-scripts
+          - data-replication-setup
+          - etl-patterns
+          - data-storytelling
+
+      data_analysis:
+        name: "Data Analysis"
+        skills:
+          - Exploratory Data Analysis
+          - exploratory-data-analysis
+          - statistical-analysis
+          - Statistical Hypothesis Testing
+          - Correlation Analysis
+          - Cohort Analysis
+          - Funnel Analysis
+          - Excel Analysis
+
+      data_visualization:
+        name: "Data Visualization"
+        skills:
+          - Data Visualization
+          - matplotlib
+          - plotly
+          - seaborn
+          - d3-viz
+          - kpi-dashboard-design
+
+      analytics_tracking:
+        name: "Analytics & Tracking"
+        skills:
+          - analytics-tracking
+          - google-analytics
+          - segment-cdp
+          - AB Test Analysis
+          - ab-test-setup
+
+      bi_tools:
+        name: "Business Intelligence"
+        skills:
+          - clickhouse-io
+          - dbt-transformation-patterns
+
+      big_data:
+        name: "Big Data"
+        skills:
+          - spark-optimization
+          - dask
+          - polars
+          - vaex
+
+  # Category 11: Documentation
+  documentation:
+    name: "Documentation"
+    description: "Technical documentation, API docs, and knowledge management"
+    tags: [documentation, writing, knowledge-management]
+    subcategories:
+      code_documentation:
+        name: "Code Documentation"
+        skills:
+          - code-documentation
+          - api-documentation-generator
+          - api-reference-documentation
+          - markdown-documentation
+          - database-schema-documentation
+
+      technical_writing:
+        name: "Technical Writing"
+        skills:
+          - writing-skills
+          - writing-clearly-and-concisely
+          - writing-plans
+          - plan-writing
+          - technical-specification
+          - code-generation-template
+
+      documentation_sites:
+        name: "Documentation Sites"
+        skills:
+          - documentation-site-setup
+          - documentation-templates
+          - user-guide-creation
+
+      readme_documentation:
+        name: "README Documentation"
+        skills:
+          - crafting-effective-readmes
+
+      changelog_management:
+        name: "Changelog Management"
+        skills:
+          - changelog-automation
+          - changelog-generator
+          - changelog-maintenance
+          - api-changelog-versioning
+
+      diagrams:
+        name: "Diagrams & Visual Docs"
+        skills:
+          - mermaid-diagrams
+          - mermaid-diagram-specialist
+          - draw-io
+          - architecture-diagrams
+          - scientific-schematics
+
+      scientific_writing:
+        name: "Scientific Writing"
+        skills:
+          - scientific-writing
+          - literature-review
+          - citation-management
+          - peer-review
+
+      presentation_documentation:
+        name: "Presentations"
+        skills:
+          - scientific-slides
+          - marp-slide
+          - latex-posters
+          - manim
+
+      quality_documentation:
+        name: "Quality Documentation"
+        skills:
+          - quality-documentation-manager
+
+  # Category 12: Project Management
+  project_management:
+    name: "Project Management"
+    description: "Agile methodologies, project planning, and team coordination"
+    tags: [project-management, agile, scrum, planning]
+    subcategories:
+      agile_methodologies:
+        name: "Agile Methodologies"
+        skills:
+          - agile-sprint-planning
+          - agile-product-owner
+          - retrospective-facilitation
+          - daily-meeting-update
+
+      project_planning:
+        name: "Project Planning"
+        skills:
+          - project-estimation
+          - create-plan
+          - planning-with-files
+          - technical-roadmap-planning
+          - release-planning
+          - executing-plans
+
+      requirements_management:
+        name: "Requirements Management"
+        skills:
+          - requirements-gathering
+          - requirements-clarity
+          - feature-design-assistant
+          - gap-analysis
+
+      workflow_management:
+        name: "Workflow Management"
+        skills:
+          - workflow-automation
+          - workflow-patterns
+          - workflow-orchestration-patterns
+          - process-mapping
+
+      continuous_improvement:
+        name: "Continuous Improvement"
+        skills:
+          - kaizen
+          - technical-debt-assessment
+          - feedback-mastery
+
+      team_management:
+        name: "Team Management"
+        skills:
+          - team-composition-analysis
+          - developer-growth-analysis
+          - developer-onboarding
+          - professional-communication
+
+  # Category 13: Cloud Platforms
+  cloud_platforms:
+    name: "Cloud Platforms"
+    description: "AWS, Azure, GCP, and multi-cloud strategies"
+    tags: [aws, azure, gcp, cloud, multi-cloud]
+    subcategories:
+      aws:
+        name: "AWS"
+        skills:
+          - aws-cloudfront-cdn
+          - aws-ec2-setup
+          - aws-lambda-functions
+          - aws-rds-database
+          - aws-s3-management
+          - aws-serverless
+
+      azure:
+        name: "Azure"
+        skills:
+          - azure-app-service
+          - azure-functions
+
+      gcp:
+        name: "Google Cloud Platform"
+        skills:
+          - gcp-cloud-functions
+          - gcp-cloud-run
+
+      multi_cloud:
+        name: "Multi-Cloud"
+        skills:
+          - multi-cloud-strategy
+          - multi-cloud-architecture
+          - skypilot-multi-cloud-orchestration
+          - hybrid-cloud-networking
+
+      serverless_platforms:
+        name: "Serverless Platforms"
+        skills:
+          - modal-serverless-gpu
+          - modal
+          - lambda-labs-gpu-cloud
+          - inngest
+          - railway-database
+          - railway-deploy
+          - railway-deployment
+          - railway-docs
+          - railway-domain
+          - railway-environment
+          - railway-metrics
+          - railway-new
+          - railway-projects
+          - railway-service
+          - railway-status
+          - railway-templates
+          - trigger-dev
+
+      deployment_platforms:
+        name: "Deployment Platforms"
+        skills:
+          - vercel-deployment
+          - vercel-react-native-skills
+
+      cloud_management:
+        name: "Cloud Management"
+        skills:
+          - cloud-cost-management
+          - cloud-migration-planning
+          - infrastructure-cost-optimization
+          - cloud-storage-optimization
+
+  # Category 14: Mobile Development
+  mobile_dev:
+    name: "Mobile Development"
+    description: "iOS, Android, React Native, and Flutter development"
+    tags: [mobile, ios, android, react-native, flutter]
+    subcategories:
+      ios_development:
+        name: "iOS Development"
+        skills:
+          - ios-swift-development
+          - mobile-ios-design
+
+      android_development:
+        name: "Android Development"
+        skills:
+          - android-kotlin-development
+          - mobile-android-design
+
+      react_native:
+        name: "React Native"
+        skills:
+          - react-native-app
+          - react-native-architecture
+          - react-native-design
+          - vercel-react-native-skills
+
+      flutter:
+        name: "Flutter"
+        skills:
+          - flutter-development
+
+      cross_platform:
+        name: "Cross-Platform"
+        skills:
+          - cross-platform-compatibility
+          - mobile-offline-support
+          - mobile-app-testing
+          - app-store-deployment
+          - app-store-optimization
+
+      avalonia:
+        name: "Avalonia"
+        skills:
+          - avalonia-zafiro-development
+          - avalonia-layout-zafiro
+          - avalonia-viewmodels-zafiro
+
+  # Category 15: Databases
+  database:
+    name: "Databases"
+    description: "Database design, optimization, and management"
+    tags: [database, sql, nosql, postgres, mongodb]
+    subcategories:
+      database_design:
+        name: "Database Design"
+        skills:
+          - database-design
+          - database-schema-design
+          - database-schema-designer
+          - nosql-database-design
+          - postgresql-table-design
+          - postgres-schema-design
+
+      database_optimization:
+        name: "Database Optimization"
+        skills:
+          - database-query-optimization
+          - sql-optimization-patterns
+          - sql-query-optimization
+          - database-indexing-strategy
+          - database-performance-debugging
+          - query-caching-strategies
+
+      database_operations:
+        name: "Database Operations"
+        skills:
+          - database-backup-restore
+          - database-migration
+          - database-migration-management
+          - database-sharding
+          - database-monitoring
+
+      specific_databases:
+        name: "Specific Databases"
+        skills:
+          - aws-rds-database
+          - neon-postgres
+          - supabase-postgres-best-practices
+          - prisma-expert
+          - nosql-expert
+
+      advanced_database:
+        name: "Advanced Database"
+        skills:
+          - stored-procedures
+          - transaction-management
+          - data-replication-setup
+
+  # Category 16: Monitoring & Logging
+  monitoring:
+    name: "Monitoring & Logging"
+    description: "Application monitoring, logging, and observability"
+    tags: [monitoring, logging, observability, metrics]
+    subcategories:
+      logging:
+        name: "Logging"
+        skills:
+          - application-logging
+          - logging-best-practices
+          - log-aggregation
+          - log-analysis
+          - loki-mode
+
+      monitoring:
+        name: "Monitoring"
+        skills:
+          - infrastructure-monitoring
+          - application-monitoring
+          - uptime-monitoring
+          - synthetic-monitoring
+          - prometheus-monitoring
+          - prometheus-configuration
+
+      observability:
+        name: "Observability"
+        skills:
+          - distributed-tracing
+          - correlation-tracing
+          - phoenix-observability
+          - langfuse
+          - langsmith-observability
+          - Model Monitoring
+          - mlflow
+          - weights-and-biases
+          - tensorboard
+
+      dashboards:
+        name: "Dashboards"
+        skills:
+          - grafana-dashboard
+          - grafana-dashboards
+          - kpi-dashboard-design
+
+      alerting:
+        name: "Alerting"
+        skills:
+          - alert-management
+          - slo-implementation
+          - health-check-endpoints
+
+      performance:
+        name: "Performance Monitoring"
+        skills:
+          - performance-profiling
+          - performance-regression-debugging
+          - cpu-profiling
+          - memory-leak-detection
+          - memory-optimization
+
+      error_tracking:
+        name: "Error Tracking"
+        skills:
+          - error-tracking
+          - debugging-strategies
+          - systematic-debugging
+          - intermittent-issue-debugging
+
+      incident_management:
+        name: "Incident Management"
+        skills:
+          - incident-response-plan
+          - runbook-creation
+          - incident-runbook-templates
+          - on-call-handoff-patterns
+          - postmortem-writing
+
+  # Category 17: Integrations & API
+  integration_api:
+    name: "Integrations & API"
+    description: "Third-party integrations, webhooks, and API development"
+    tags: [integration, api, webhook, third-party]
+    subcategories:
+      api_integration:
+        name: "API Integration"
+        skills:
+          - API Integration Specialist
+          - third-party-integration
+          - polyglot-integration
+          - api-gateway-configuration
+          - api-rate-limiting
+          - rate-limiting-implementation
+          - idempotency-handling
+
+      webhooks:
+        name: "Webhooks"
+        skills:
+          - webhook-development
+          - webhook-integration
+          - email-service-integration
+
+      payment_integration:
+        name: "Payment Integration"
+        skills:
+          - payment-gateway-integration
+          - stripe-integration
+          - paypal-integration
+          - plaid-fintech
+
+      specific_integrations:
+        name: "Specific Integrations"
+        skills:
+          - hubspot-integration
+          - salesforce-development
+          - shopify-apps
+          - shopify-development
+          - twilio-communications
+          - slack-bot-builder
+          - discord-bot-architect
+          - telegram-bot-builder
+          - telegram-mini-app
+          - email-systems
+          - email-sequence
+
+      automation_platforms:
+        name: "Automation Platforms"
+        skills:
+          - zapier-make-patterns
+          - zapier-workflows
+
+      authentication_integration:
+        name: "Authentication Integration"
+        skills:
+          - clerk-auth
+          - oauth-implementation
+          - mtls-configuration
+          - clerk-auth
+
+      data_integration:
+        name: "Data Integration"
+        skills:
+          - benchling-integration
+          - dnanexus-integration
+          - labarchive-integration
+          - latchbio-integration
+          - moodle-external-api-development
+          - omero-integration
+          - opentrons-integration
+          - protocolsio-integration
+
+      realtime:
+        name: "Realtime"
+        skills:
+          - real-time-features
+          - websocket-implementation
+
+      file_handling:
+        name: "File Handling"
+        skills:
+          - file-upload-handling
+          - file-uploads
+          - file-organizer
+          - invoice-organizer
+
+  # Category 18: Automation
+  automation:
+    name: "Automation"
+    description: "Task automation, scripting, and workflow automation"
+    tags: [automation, scripting, workflow, productivity]
+    subcategories:
+      workflow_automation:
+        name: "Workflow Automation"
+        skills:
+          - workflow-automation
+          - workflow-patterns
+          - workflow-orchestration-patterns
+          - task-execution-engine
+
+      scripting:
+        name: "Scripting"
+        skills:
+          - bash-linux
+          - bash-defensive-patterns
+          - powershell-windows
+          - Command Development
+
+      git_automation:
+        name: "Git Automation"
+        skills:
+          - git-advanced-workflows
+          - git-hooks-setup
+          - git-pushing
+          - git-workflow-strategy
+          - Git Commit Helper
+          - gh-address-comments
+          - gh-fix-ci
+          - pull-request-automation
+          - address-github-comments
+          - create-pr
+          - iterate-pr
+          - commit
+          - commit-work
+          - using-git-worktrees
+          - git-pushing
+
+      build_automation:
+        name: "Build Automation"
+        skills:
+          - bazel-build-optimization
+          - nx-workspace-patterns
+          - turborepo-caching
+          - artifact-management
+          - artifacts-builder
+          - web-artifacts-builder
+
+      deployment_automation:
+        name: "Deployment Automation"
+        skills:
+          - deployment-automation
+          - deployment-pipeline-design
+          - deployment-procedures
+          - blue-green-deployment
+          - canary-deployment
+
+      content_automation:
+        name: "Content Automation"
+        skills:
+          - content-creator
+          - content-research-writer
+          - copy-editing
+          - copywriting
+          - social-content
+
+      task_automation:
+        name: "Task Automation"
+        skills:
+          - command-creator
+          - personal-tool-builder
+          - app-builder
+          - file-organizer
+          - invoice-organizer
+
+      browser_automation:
+        name: "Browser Automation"
+        skills:
+          - browser-automation
+          - firecrawl-scraper
+          - exa-search
+
+      code_generation:
+        name: "Code Generation"
+        skills:
+          - code-generation-template
+
+  # Category 19: Communication
+  communication:
+    name: "Communication"
+    description: "Writing, presentations, and communication skills"
+    tags: [communication, writing, presentation, collaboration]
+    subcategories:
+      writing:
+        name: "Writing"
+        skills:
+          - writing-skills
+          - writing-clearly-and-concisely
+          - writing-plans
+          - plan-writing
+          - copywriting
+          - copy-editing
+          - scientific-writing
+          - Email Composer
+          - professional-communication
+
+      presentations:
+        name: "Presentations"
+        skills:
+          - scientific-slides
+          - marp-slide
+          - latex-posters
+          - manim
+
+      collaboration:
+        name: "Collaboration"
+        skills:
+          - doc-coauthoring
+          - meeting-insights-analyzer
+          - daily-meeting-update
+          - retrospective-facilitation
+          - stakeholder-communication
+          - difficult-workplace-conversations
+          - professional-communication
+
+      brainstorming:
+        name: "Brainstorming"
+        skills:
+          - brainstorming
+          - multi-agent-brainstorming
+          - scientific-brainstorming
+          - domain-name-brainstormer
+          - hypothesis-generation
+
+      research:
+        name: "Research"
+        skills:
+          - research-lookup
+          - literature-review
+          - content-research-writer
+          - lead-research-assistant
+          - research-engineer
+          - context7-auto-research
+          - tavily-web
+          - perplexity
+          - perplexity-search
+          - exa-search
+
+      meetings:
+        name: "Meetings"
+        skills:
+          - meeting-insights-analyzer
+          - notion-meeting-intelligence
+          - daily-meeting-update
+          - session-handoff
+
+      productivity:
+        name: "Productivity"
+        skills:
+          - concise-planning
+          - executing-plans
+          - create-plan
+          - planning-with-files
+          - kaizen
+
+  # Category 20: Scientific Research
+  scientific_research:
+    name: "Scientific Research"
+    description: "Bioinformatics, computational biology, and scientific computing"
+    tags: [bioinformatics, scientific, research, biology]
+    subcategories:
+      bioinformatics:
+        name: "Bioinformatics"
+        skills:
+          - biopython
+          - scikit-bio
+          - bioservices
+          - scanpy
+          - anndata
+          - scvi-tools
+          - pyhealth
+          - pydicom
+          - neuropixels-analysis
+          - pathml
+          - histolab
+
+      cheminformatics:
+        name: "Cheminformatics"
+        skills:
+          - rdkit
+          - medchem
+          - deepchem
+          - datamol
+          - molfeat
+
+      biological_databases:
+        name: "Biological Databases"
+        skills:
+          - uniprot-database
+          - pdb-database
+          - string-database
+          - gene-database
+          - ensembl-database
+          - kegg-database
+          - reactome-database
+          - drugbank-database
+          - chembl-database
+          - pubchem-database
+          - brenda-database
+          - hmdb-database
+          - cosmic-database
+          - metabolomics-workbench-database
+          - alphafold-database
+          - biorxiv-database
+          - clinicaltrials-database
+          - clinvar-database
+          - clinpgx-database
+          - ena-database
+          - fda-database
+          - gwas-database
+          - openalex-database
+          - opentargets-database
+          - pubmed-database
+          - uspto-database
+          - geo-database
+          - zinc-database
+
+      systems_biology:
+        name: "Systems Biology"
+        skills:
+          - cobrapy
+          - arboreto
+
+      medical_clinical:
+        name: "Medical & Clinical"
+        skills:
+          - clinical-decision-support
+          - clinical-reports
+          - treatment-plans
+          - fda-consultant-specialist
+          - mdr-745-specialist
+          - regulatory-affairs-head
+
+      neuroscience:
+        name: "Neuroscience"
+        skills:
+          - neuropixels-analysis
+          - neurokit2
+
+      imaging:
+        name: "Imaging"
+        skills:
+          - pathml
+          - histolab
+
+      scientific_visualization:
+        name: "Scientific Visualization"
+        skills:
+          - scientific-visualization
+          - matplotlib
+          - plotly
+          - seaborn
+          - d3-viz
+          - manim
+          - scientific-slides
+          - latex-posters
+
+      quantum_computing:
+        name: "Quantum Computing"
+        skills:
+          - qiskit
+          - pennylane
+          - cirq
+          - qutip
+
+      scientific_python:
+        name: "Scientific Python"
+        skills:
+          - numpy
+          - scipy
+          - sympy
+          - pandas
+          - polars
+          - networkx
+          - astropy
+
+      simulation:
+        name: "Simulation"
+        skills:
+          - simpy
+          - fluidsim
+
+      grants_research:
+        name: "Grants & Research"
+        skills:
+          - research-grants
+          - literature-review
+          - citation-management
+          - peer-review
+
+  # Category: Development Tools & Practices
+  development_tools:
+    name: "Development Tools & Practices"
+    description: "General development tools, practices, and workflows"
+    tags: [development, tools, workflows, best-practices]
+    subcategories:
+      code_review:
+        name: "Code Review"
+        skills:
+          - code-review
+          - code-review-analysis
+          - code-review-checklist
+          - code-review-excellence
+          - code-reviewer
+          - codex-review
+          - receiving-code-review
+          - requesting-code-review
+
+      clean_code:
+        name: "Clean Code"
+        skills:
+          - clean-code
+          - coding-standards
+          - naming-analyzer
+          - reducing-entropy
+          - deslop
+          - move-code-quality
+
+      debugging:
+        name: "Debugging"
+        skills:
+          - debugging-strategies
+          - systematic-debugging
+          - intermittent-issue-debugging
+          - Error Resolver
+          - troubleshooting-guide
+          - browser-debugging
+          - memory-leak-detection
+          - production-code-audit
+
+      git_workflows:
+        name: "Git Workflows"
+        skills:
+          - git-advanced-workflows
+          - git-hooks-setup
+          - git-workflow-strategy
+          - git-pushing
+          - using-git-worktrees
+          - git-pushing
+          - Git Commit Helper
+          - finishing-a-development-branch
+          - create-pr
+          - iterate-pr
+
+      performance:
+        name: "Performance"
+        skills:
+          - performance-profiling
+          - performance-regression-debugging
+          - cpu-profiling
+          - profiling-optimization
+          - python-performance-optimization
+          - memory-optimization
+          - code-metrics-analysis
+
+      error_handling:
+        name: "Error Handling"
+        skills:
+          - error-handling-patterns
+          - graceful-shutdown
+          - error-tracking
+
+      testing_practices:
+        name: "Testing Practices"
+        skills:
+          - testing-patterns
+          - test-driven-development
+          - tdd-workflow
+          - continuous-testing
+          - test-fixing
+
+      development_workflow:
+        name: "Development Workflow"
+        skills:
+          - context-driven-development
+          - feature-flag-system
+          - semantic-versioning
+          - release-planning
+          - deployment-automation
+
+      development_environment:
+        name: "Development Environment"
+        skills:
+          - environment-setup-guide
+          - developer-onboarding
+
+  # Category: Specialized Development
+  specialized_development:
+    name: "Specialized Development"
+    description: "Specialized development areas and niche technologies"
+    tags: [specialized, game-dev, browser-extension, plugins]
+    subcategories:
+      game_development:
+        name: "Game Development"
+        skills:
+          - game-development
+          - godot-gdscript-patterns
+          - unity-ecs-patterns
+          - algorithmic-art
+
+      browser_extensions:
+        name: "Browser Extensions"
+        skills:
+          - browser-extension-builder
+
+      plugin_development:
+        name: "Plugin Development"
+        skills:
+          - plugin-forge
+          - Plugin Structure
+          - Plugin Settings
+          - Hook Development
+          - Writing Hookify Rules
+
+      desktop_applications:
+        name: "Desktop Applications"
+        skills:
+          - electron-app
+
+      cli_tools:
+        name: "CLI Tools"
+        skills:
+          - Command Development
+          - command-creator
+
+  # Category: Media & Content
+  media_content:
+    name: "Media & Content"
+    description: "Media processing, content creation, and creative tools"
+    tags: [media, content, creative, pdf]
+    subcategories:
+      pdf_processing:
+        name: "PDF Processing"
+        skills:
+          - PDF Processing
+          - PDF Processing Pro
+          - pdf
+          - docx
+          - pptx
+          - xlsx
+          - markitdown
+          - web-to-markdown
+          - paper-2-web
+
+      image_processing:
+        name: "Image Processing"
+        skills:
+          - image-enhancer
+          - image-optimization
+          - generate-image
+
+      audio_processing:
+        name: "Audio Processing"
+        skills:
+          - audiocraft-audio-generation
+          - whisper
+
+      video_processing:
+        name: "Video Processing"
+        skills:
+          - video-downloader
+          - remotion
+          - remotion-best-practices
+
+      content_creation:
+        name: "Content Creation"
+        skills:
+          - content-creator
+          - content-research-writer
+          - meme-factory
+          - social-content
+          - email-sequence
+          - viral-generator-builder
+
+      templates:
+        name: "Templates"
+        skills:
+          - venue-templates
+          - employment-contract-templates
+
+  # Category: SEO & Marketing Tools
+  seo_marketing_tools:
+    name: "SEO & Marketing Tools"
+    description: "SEO optimization, analytics, and marketing automation"
+    tags: [seo, marketing, analytics, optimization]
+    subcategories:
+      seo:
+        name: "SEO"
+        skills:
+          - SEO Optimizer
+          - seo-audit
+          - seo-fundamentals
+          - programmatic-seo
+          - roier-seo
+          - schema-markup
+
+      analytics:
+        name: "Analytics"
+        skills:
+          - google-analytics
+          - analytics-tracking
+          - segment-cdp
+          - AB Test Analysis
+          - ab-test-setup
+
+      marketing_automation:
+        name: "Marketing Automation"
+        skills:
+          - executing-marketing-campaigns
+          - email-sequence
+          - paid-ads
+          - referral-program
+
+  # Category: Agent & AI Development
+  agent_ai_development:
+    name: "Agent & AI Development"
+    description: "AI agent development, MCP integration, and AI tooling"
+    tags: [agents, ai, mcp, tool-development]
+    subcategories:
+      agent_development:
+        name: "Agent Development"
+        skills:
+          - Agent Development
+          - agent-evaluation
+          - agent-manager-skill
+          - agent-tool-builder
+          - agent-md-refactor
+
+      mcp_integration:
+        name: "MCP Integration"
+        skills:
+          - MCP Integration
+          - mcp-builder
+          - get-available-resources
+
+      context_management:
+        name: "Context Management"
+        skills:
+          - context-window-management
+          - conversation-memory
+          - prompt-caching
+
+      skill_development:
+        name: "Skill Development"
+        skills:
+          - Skill Development
+          - skill-creation-guide
+          - skill-creator
+          - skill-developer
+          - skill-share
+          - skill-judge
+          - skill-installer
+          - template-skill
+
+      model_evaluation:
+        name: "Model Evaluation"
+        skills:
+          - evaluating-code-models
+          - evaluating-llms-harness
+          - llm-evaluation
+
+  # Category: Package & Dependency Management
+  package_management:
+    name: "Package & Dependency Management"
+    description: "Package managers, dependency updates, and version management"
+    tags: [package-management, dependencies, versioning]
+    subcategories:
+      package_managers:
+        name: "Package Managers"
+        skills:
+          - uv-package-manager
+          - python-packaging
+          - dependency-management
+          - dependency-tracking
+
+      dependency_updates:
+        name: "Dependency Updates"
+        skills:
+          - dependency-updater
+          - dependency-upgrade
+
+      version_management:
+        name: "Version Management"
+        skills:
+          - semantic-versioning
+          - api-versioning-strategy
+
+  # Category: Networking & Infrastructure
+  networking_infrastructure:
+    name: "Networking & Infrastructure"
+    description: "Networking, DNS, load balancing, and service mesh"
+    tags: [networking, infrastructure, dns, load-balancing]
+    subcategories:
+      networking:
+        name: "Networking"
+        skills:
+          - Network 101
+          - network-debugging
+          - network-security-groups
+          - dns-management
+
+      load_balancing:
+        name: "Load Balancing"
+        skills:
+          - load-balancer-setup
+
+      service_mesh:
+        name: "Service Mesh"
+        skills:
+          - service-mesh-implementation
+          - service-mesh-observability
+          - istio-traffic-management
+          - linkerd-patterns
+
+      server_management:
+        name: "Server Management"
+        skills:
+          - server-management
+          - capacity-planning
+          - autoscaling-configuration
+          - backup-disaster-recovery
+          - disaster-recovery-testing
+
+  # Category: Data Science & Research Tools
+  data_science_tools:
+    name: "Data Science & Research Tools"
+    description: "Data science libraries, research tools, and analysis frameworks"
+    tags: [data-science, research, analysis, frameworks]
+    subcategories:
+      python_data_science:
+        name: "Python Data Science"
+        skills:
+          - pandas
+          - numpy
+          - scipy
+          - polars
+          - vaex
+          - dask
+          - statsmodels
+
+      machine_learning:
+        name: "Machine Learning"
+        skills:
+          - scikit-learn
+          - scikit-bio
+          - scikit-survival
+          - pydeseq2
+          - pymc-bayesian-modeling
+          - pymoo
+
+      deep_learning:
+        name: "Deep Learning"
+        skills:
+          - pytorch-lightning
+          - pytorch-fsdp
+          - transformers
+          - nanogpt
+          - guidance
+
+      visualization:
+        name: "Visualization"
+        skills:
+          - matplotlib
+          - plotly
+          - seaborn
+          - d3-viz
+
+      quantum:
+        name: "Quantum Computing"
+        skills:
+          - qiskit
+          - pennylane
+          - cirq
+          - qutip
+
+      research_tools:
+        name: "Research Tools"
+        skills:
+          - research-engineer
+          - lead-research-assistant
+          - literature-review
+          - citation-management
+          - peer-review
+          - scientific-writing
+
+  # Category: Web Development Tools
+  web_development_tools:
+    name: "Web Development Tools"
+    description: "Web development frameworks, tools, and utilities"
+    tags: [web, frontend, backend, fullstack]
+    subcategories:
+      web_frameworks:
+        name: "Web Frameworks"
+        skills:
+          - nextjs-best-practices
+          - react-best-practices
+          - vue-application-structure
+          - angular-migration
+          - svelte-kit
+
+      build_tools:
+        name: "Build Tools"
+        skills:
+          - bun-development
+          - webpack
+          - vite
+          - turborepo-caching
+          - nx-workspace-patterns
+
+      state_management:
+        name: "State Management"
+        skills:
+          - react-state-management
+          - frontend-state-management
+
+      routing:
+        name: "Routing"
+        skills:
+          - frontend-routing
+          - nextjs-app-router-patterns
+
+      ui_components:
+        name: "UI Components"
+        skills:
+          - mui
+          - tailwind-design-system
+          - core-components
+          - ui-design-system
+
+  # Category: Development Operations
+  development_operations:
+    name: "Development Operations"
+    description: "Development workflows, processes, and operations"
+    tags: [devops, operations, workflows, automation]
+    subcategories:
+      issue_tracking:
+        name: "Issue Tracking"
+        skills:
+          - jira
+          - linear
+          - github-actions-templates
+
+      project_tracking:
+        name: "Project Tracking"
+        skills:
+          - project-estimation
+          - release-planning
+          - create-plan
+
+      code_quality:
+        name: "Code Quality"
+        skills:
+          - lint-and-validate
+          - static-code-analysis
+          - code-metrics-analysis
+          - move-code-quality
+
+      deployment:
+        name: "Deployment"
+        skills:
+          - deployment-automation
+          - deployment-pipeline-design
+          - railway-deploy
+          - railway-deployment
+          - vercel-deployment
+
+      monitoring:
+        name: "Monitoring"
+        skills:
+          - uptime-monitoring
+          - infrastructure-monitoring
+          - application-monitoring
+          - synthetic-monitoring

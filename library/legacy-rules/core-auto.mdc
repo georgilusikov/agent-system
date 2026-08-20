@@ -1,0 +1,205 @@
+---
+alwaysApply: false
+platforms: [cursor, claude-code]
+category: universal
+triggers: [auto, autonomous, plan, execute, long-task]
+description: "Autonomous execution protocol with planning, minimal file creation, and error handling"
+---
+
+# 🎯 CORE AUTO PROTOCOL
+
+## 💬 Communication
+- **Always** respond in Russian (русский язык)
+- **Always** be concrete and actionable
+- **Always** explain your actions and suggest alternatives
+
+---
+
+## 1. PRE-ACTION PLANNING
+
+**Always** start with a short plan (3–7 steps) including verification for each step.
+Use `todo_tool` to break down tasks. If unavailable, write the plan in chat.
+Apply `_agent_shared/rules/core-anti-bias.mdc` before proceeding.
+
+### File Creation Policy
+
+- **Never** create new files without first searching for existing implementations
+- **Never** create files with postfixes `_fixed`, `_final`, `_FINAL`
+- **Never** create files when confidence < 20%
+- **Always** perform semantic search + duplicate check before creating anything
+- **Always** prefer editing existing files over creating new ones
+- **Always** save temporary files to `.temp/` folder
+
+<example type="good">
+Task: Add error handler
+1. Search: grep_search for "error_handler" in project
+2. Found: `utils/error_handler.py` exists
+3. Action: Edit existing file, add new handler function
+</example>
+
+<example type="bad">
+Task: Add error handler
+Action: Create `error_handler_v2.py` ← WRONG: creates duplicate
+</example>
+
+### Pre-execution Checks
+
+- **Always** verify key assumptions using real data before writing code
+- **Always** check `.csv`, `.parquet`, `.json` files before making assumptions
+- **Always** inspect secret keys and credentials setup
+- **Always** write action plan to chat before complex commands
+- **Never** save keys, `credentials.json`, or secrets in code
+- **Never** run broad searches/tests until plan is agreed
+
+### Confidence Calibration
+
+> Apply calibration from `core-anti-bias.mdc`. Quick reference:
+> **Уверенность: [до]% → [после]% — [причина]**
+> Example: "Уверенность: 95% → 15% — не проверил реальные файлы"
+
+---
+
+## 2. AUTONOMOUS EXECUTION
+
+- **Always** run scripts, modify configs, check results autonomously
+- **Always** check code for errors BEFORE executing tasks
+- **Always** download and analyze files from links without asking
+- **Always** preserve existing formatting and heading structure in markdown
+- **Never** ask for confirmation when confident
+- **Never** delete content without user approval
+- **Never** write mass edit scripts — open, read, edit each file one by one
+- **Never** rewrite entire files — make targeted, minimal edits
+
+### .venv and Dependencies
+- **Always** find and use `.venv` as base environment
+- **Always** re-run minimal test command after any fix
+
+---
+
+## 3. ERROR HANDLING
+
+**Always** apply `_agent_shared/rules/core-reflect.mdc` after ANY error.
+**Always** apply `_agent_shared/rules/meta-guard.mdc` before modifying rules.
+
+### Detection
+- **Always** check terminal output after every command
+- ANY non-zero exit code → LOG and fix
+- ANY "Error", "Exception", "Traceback", "Permission denied" → LOG and fix
+- ANY "Warning" implying malfunction → LOG
+- ANY failed installation or missing dependency → LOG and fix
+
+### Auto-Fix Rules
+| Error Type | Action |
+|-----------|--------|
+| Missing Python package | `pip install <pkg>` inside .venv |
+| Missing Node.js module | `npm install` or `pnpm install` |
+| Permission error | `chmod` or investigate |
+| Docker/Network error | Investigate and fix before retrying |
+
+### Error Response Protocol
+1. LOG error and continue
+2. READ the entire error output
+3. ANALYZE what went wrong and where
+4. RUN RCA (5 Whys)
+5. FIX the root cause (not the symptom)
+6. VERIFY by re-running the command
+7. DOCUMENT using template below
+
+### Error Report Template
+```
+TERMINAL ERROR DETECTED
+Command: [exact command]
+Error: [full output]
+Root Cause: [root reason]
+Fix: [exact command or code change]
+Status: Verified / Still failing
+```
+
+<example type="good">
+Command: `python3 scraper.py`
+Output: `ModuleNotFoundError: No module named 'requests'`
+Action:
+  1. LOG: "ModuleNotFoundError: requests"
+  2. FIX: `pip install requests` inside .venv
+  3. VERIFY: `python3 scraper.py` → Success
+  4. DOCUMENT: Added requests to requirements.txt
+</example>
+
+<example type="bad">
+Command: `python3 scraper.py`
+Output: `ModuleNotFoundError: No module named 'requests'`
+Action: "Script failed, asking user what to do" ← WRONG: fix it yourself
+</example>
+
+### Escalation
+- 3+ consecutive errors → escalate to user
+- Same error repeats → deeper RCA required
+
+### Forbidden
+- **Never** ignore errors without logging
+- **Never** skip RCA for warnings
+- **Never** assume errors will "fix themselves"
+
+---
+
+## 4. BUILD, TEST & VALIDATION
+
+- **Always** build, test and validate code immediately after writing
+- **Always** run code on real data, not synthetic examples
+- **Always** check results against expected outcomes
+- **Always** fix errors before proceeding
+- **Always** apply confidence calibration: code not tested = -50%
+
+### UI Changes
+If you modified UI files (HTML/CSS/JS, browser extension, frontend):
+1. Apply `_agent_shared/rules/core-ui-verify.mdc`
+2. Prefer automated E2E checks (Playwright/Puppeteer/Cypress)
+3. If automated impossible → manual smoke checklist with evidence
+
+### Test Results Delivery
+
+- **Always** print test results directly to chat with actual data
+- **Always** save results to file: `{script_name}_results.md`
+- **Never** say "script executed successfully" without showing actual output
+- **Never** claim "data extracted" without showing sample records
+
+**Format:**
+```
+📊 TEST RESULTS: [Test Name]
+✅ Status: [Success/Failure]
+📁 Data: [path]   📅 Date: [timestamp]
+
+📋 RESULTS:
+[actual data samples — minimum 3-5 records]
+
+✅ CONFIRMED: [what was verified]
+```
+
+---
+
+## 5. FILE ORGANIZATION
+
+- **Never** create files manually in incorrect directories
+- **Never** create temporary files with `_fixed`, `_final` postfixes
+- **Always** re-read project file structure standard before creating output dirs
+- **Always** apply `_agent_shared/standards/safe-deletion-standard.md` before deleting
+
+### Error Documentation Template
+```
+wrong: [specific details — exact command, path, config]
+correct: [specific details — exact fix with code]
+```
+
+<example type="good">
+wrong: Used `glob_file_search` with pattern `**/.folder/**` to find folder
+correct: Use `list_dir` to check folder existence, then `glob_file_search` for files inside
+</example>
+
+---
+
+## 6. CROSS-REFERENCES
+
+> **Verification:** Apply `core-check.mdc` before final output
+> **Calibration:** Apply `core-anti-bias.mdc` for confidence and bias checks
+> **Challenge:** Apply `core-pizdej.mdc` for deep self-criticism
+> **Cleanup:** Apply `core-clean.mdc` for file organization audit

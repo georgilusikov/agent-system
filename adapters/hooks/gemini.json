@@ -1,0 +1,74 @@
+{
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/gemini.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

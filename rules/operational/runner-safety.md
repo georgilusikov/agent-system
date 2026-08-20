@@ -1,0 +1,1 @@
+Runner/dispatcher: always `if not path.exists(): skip` before reading a task from the filesystem. Backlog files move between statuses (pending→processing→completed/failed) concurrently — FileNotFoundError without the guard.

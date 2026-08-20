@@ -1,0 +1,40 @@
+---
+description: "Единый лог действий — записывай в memory/unified_log.md после значимых действий"
+alwaysApply: false
+---
+
+# Unified Log Protocol
+
+После каждого **значимого действия** добавляй запись в файл `memory/unified_log.md` текущего проекта.
+
+## Значимые действия
+- Создание / удаление файлов
+- Запуск и результат тестов
+- Деплой / запуск сервера
+- Approve / Reject решения
+- Ошибки и их исправления
+- Завершение workflow (crucible, preview, quest, feature)
+
+## Формат записи
+
+```markdown
+## [YYYY-MM-DD HH:MM] | AGENT_NAME | ACTION_TYPE
+- **output:** краткое описание результата
+- **status:** success / failed / skipped
+- **details:** дополнительная информация (опционально)
+```
+
+## Пример
+
+```markdown
+## [2026-03-02 10:30] | CRUCIBLE | tests_passed
+- **output:** All 13 tests passed in 0.04s
+- **status:** success
+- **details:** iteration 3/10, estimated ~2000 tokens used
+```
+
+## Правила
+- НЕ логируй каждое мелкое действие (чтение файла, просмотр и т.д.)
+- Логируй только то, что влияет на состояние проекта
+- Если файл `memory/unified_log.md` не существует — создай его
+- Записи добавляй В КОНЕЦ файла (append)

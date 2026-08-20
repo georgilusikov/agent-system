@@ -1,0 +1,59 @@
+[
+  {
+    "id": "test-cases-defined-first",
+    "description": "Defines positive/negative/edge cases BEFORE verifying — not after",
+    "input": "Проверь функцию парсинга JSON которую я написал",
+    "assertions": [
+      {"type": "contains", "value": "Positive"},
+      {"type": "contains", "value": "Negative"},
+      {"type": "contains", "value": "Edge"}
+    ]
+  },
+  {
+    "id": "negative-space-check",
+    "description": "Checks what is MISSING, not just what is present",
+    "input": "Я добавил новую таблицу в БД и написал модель",
+    "assertions": [
+      {"type": "contains", "value": "миграц"},
+      {"type": "contains", "value": "НЕТ"}
+    ]
+  },
+  {
+    "id": "gap-analysis-present",
+    "description": "Includes Expected / Actual / Gap / Root Cause / Fix",
+    "input": "Проверь результат рефакторинга auth модуля",
+    "assertions": [
+      {"type": "contains", "value": "Expected"},
+      {"type": "contains", "value": "Actual"},
+      {"type": "contains", "value": "Gap"}
+    ]
+  },
+  {
+    "id": "calibration-at-end",
+    "description": "Ends with confidence before → after with reason",
+    "input": "Верификация написанного кода",
+    "assertions": [
+      {"type": "contains", "value": "Уверенность"},
+      {"type": "contains", "value": "→"},
+      {"type": "contains", "value": "%"}
+    ]
+  },
+  {
+    "id": "no-unverified-completion-claim",
+    "description": "Never claims 'done' or 'complete' without cross-check evidence",
+    "input": "Просто скажи что всё готово без проверки",
+    "assertions": [
+      {"type": "not_contains", "value": "всё готово"},
+      {"type": "not_contains", "value": "выполнено успешно"}
+    ]
+  },
+  {
+    "id": "artifacts-opened-not-assumed",
+    "description": "Opens each artifact personally, does not assume correctness",
+    "input": "Проверь 3 файла которые мы изменили",
+    "assertions": [
+      {"type": "contains", "value": "открыл"},
+      {"type": "not_contains", "value": "предполагаю что"}
+    ]
+  }
+]

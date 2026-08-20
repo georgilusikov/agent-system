@@ -1,0 +1,19 @@
+---
+alwaysApply: false
+description: Workspace structure guardrail (file placement + ADR discipline)
+---
+
+# Workspace Structure Guardrail
+
+## Purpose
+Единые правила размещения файлов и фиксации решений, чтобы не плодить бардак и дубли.
+
+## Core Rules (обязательные)
+- Навигация: сначала `WORKSPACE_ROUTER.md` → `PROJECTS_ECOSYSTEM.md` → `WORKSPACE_INDEX.md`; без этого не ищи по всему workspace.
+- Размещение: артефакты проекта кладутся в `projects/<project>/` (код + docs/, выводы в runs/ или outputs/); общие шаблоны/архитектура — в `shared/`; skills/правила — в `_agent_shared/`; данные/выгрузки — в `data/`.
+- Корень не трогать: не создавай новые папки в корне и не дублируй skills; TRIZ и Boris берем из `_agent_shared/skills/`.
+- Структурные решения фиксируй ADR-ом (`shared/plans/architect-templates/adr-template.md`) + ссылку в `PROJECTS_ECOSYSTEM.md` и `WORKSPACE_INDEX.md` при изменении роутинга/структуры.
+- Перед любыми правками правил/роутеров вызывай `meta-guard.mdc` и делай бэкап (см. `_agent_shared/PROTECTION_SYSTEM.md`).
+- Перенос/удаление файлов: сначала ищи и обновляй хардкоды путей, потом двигай; при сомнении — спроси подтверждение.
+- Тесты/отчеты/временные файлы складывай внутри проекта (`runs/`, `reports/`, `tmp/`), не мусори в корне.
+- Если контекст неясен — уточни у пользователя; не сканируй весь workspace без запроса.

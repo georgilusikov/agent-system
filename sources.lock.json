@@ -1,0 +1,504 @@
+{
+  "version": 1,
+  "active_skills": [
+    {
+      "name": "how-to-write-skills",
+      "source": "/Users/georgijlusikov/.claude/skills/0-how-to-write-skills",
+      "sha256": "1511fd055c53c975956d981e534b01488a3c51a3edbc27597be3c5384f9f77c1"
+    },
+    {
+      "name": "critical-chain-design",
+      "source": "/Users/georgijlusikov/.claude/skills/1-critical-chain-design",
+      "sha256": "ec12445fe275af97e28e9d634c9a7ec9ba1e52ca9bca95d223d3984f024cbcd8"
+    },
+    {
+      "name": "hypothesis-eval-loop",
+      "source": "/Users/georgijlusikov/.claude/skills/2-hypothesis-eval-loop",
+      "sha256": "6c6de4df358f1361daa18d4687632e6fcc9bf7f51695eebbad1844187d3412ee"
+    },
+    {
+      "name": "agent-orchestrator-standard",
+      "source": "/Users/georgijlusikov/.codex/skills/agent-orchestrator-standard",
+      "sha256": "c48d9c5953a305abc7d11340f396c7f5acb880d98d36218199b153ed8c6a5e1f"
+    },
+    {
+      "name": "algorithmic-art",
+      "source": "/Users/georgijlusikov/.agents/skills/algorithmic-art",
+      "sha256": "e117cdd31169e5ca0dcae83dc9e5be8eba16a743f3542e5dd223e1510af6d0ed"
+    },
+    {
+      "name": "anti-bias",
+      "source": "/Users/georgijlusikov/.claude/skills/anti-bias",
+      "sha256": "01e74668ee83c27812367a34bc3f1da81c65a62119e532cd75a66565016835b5"
+    },
+    {
+      "name": "attentional-blindness-analyzer",
+      "source": "/Users/georgijlusikov/.claude/skills/attentional-blindness-analyzer",
+      "sha256": "e93b8a1b1ed4cdf171f7f3546f0335e121c1bd4a12281cefd3593fa8662ab7ef"
+    },
+    {
+      "name": "audit-fanout",
+      "source": "/Users/georgijlusikov/.claude/skills/audit-fanout",
+      "sha256": "4cbb4f56afbae8e194531325b42d83a410ac6d270fced05856fb9eaa9b5a66c3"
+    },
+    {
+      "name": "blueprinter",
+      "source": "/Users/georgijlusikov/.agents/skills/blueprinter",
+      "sha256": "0d7910b64c27a8dbd69a01f84d186f67587527f6609595ebfe169edcd1c4045d"
+    },
+    {
+      "name": "bottleneck-identifier",
+      "source": "/Users/georgijlusikov/.agents/skills/bottleneck-identifier",
+      "sha256": "fbf2f2f215cc21ba6d14f76d5ae8055a3146fe1af7bcf4879452ee1221c590db"
+    },
+    {
+      "name": "bouncer",
+      "source": "/Users/georgijlusikov/.claude/skills/bouncer",
+      "sha256": "60db7683ad61fa5eef0362969aaa9d6ce53d86c519208a1452b86eff81e347db"
+    },
+    {
+      "name": "canvas-design",
+      "source": "/Users/georgijlusikov/.agents/skills/canvas-design",
+      "sha256": "beca3273eeacd52086273d8e65aa12ef914bdf0f8aa1898e19e084490bda68d1"
+    },
+    {
+      "name": "caveman",
+      "source": "/Users/georgijlusikov/.codex/skills/caveman",
+      "sha256": "c8235e5e50fe0fe913fa9bdfc5c580d9369a6cafa132ad05bb73ffc5a9f95976"
+    },
+    {
+      "name": "check",
+      "source": "/Users/georgijlusikov/.claude/skills/check",
+      "sha256": "28be96fb161c03b2c3ec9b70f8aad4d12399b43a856305fb54a2cd35e7b9480f"
+    },
+    {
+      "name": "claude-skills",
+      "source": "/Users/georgijlusikov/.codex/skills/claude-skills",
+      "sha256": "bed24b777ff9b7e7c518667e4e3a3d756974976497804ed84cc0a9d5205d3aea"
+    },
+    {
+      "name": "code-review",
+      "source": "/Users/georgijlusikov/.codex/skills/code-review",
+      "sha256": "de7af74db4b63b33883acb255984b5846c8bcdd25f7ef30814ad9375bf6f6350"
+    },
+    {
+      "name": "codebase-design",
+      "source": "/Users/georgijlusikov/.codex/skills/codebase-design",
+      "sha256": "97971158b909e207ee1f670ecab2db88f562d347a92c288883aadbd83b8e91ca"
+    },
+    {
+      "name": "codex-advisor",
+      "source": "/Users/georgijlusikov/.claude/skills/codex-advisor",
+      "sha256": "23a046a7b2ddffaa250b685d793e66f7de21098574ba6f4955f27b035d742e82"
+    },
+    {
+      "name": "corridor-tester",
+      "source": "/Users/georgijlusikov/.claude/skills/corridor-tester",
+      "sha256": "5fbd37b9a22e42e64634b7bdb9c0bbd28dbfa8a540e32fcd788672cf08e95849"
+    },
+    {
+      "name": "cost-aware-delegation",
+      "source": "/Users/georgijlusikov/.codex/skills/cost-aware-delegation",
+      "sha256": "5ad5841d1679399707f20cd675d8fa19eb5c2ec0b7471a0466b7549c7e01bd24"
+    },
+    {
+      "name": "debug",
+      "source": "/Users/georgijlusikov/.claude/skills/debug",
+      "sha256": "50dcb19e5796ea00aedab5ff45f2506b64906a48e0ce3c38555ff8e40f6b1c26"
+    },
+    {
+      "name": "delegate",
+      "source": "/Users/georgijlusikov/.claude/skills/delegate",
+      "sha256": "04298f14733fc5d2b80473cf5409c6c453f10c6f0452b70e4313be54ec00e224"
+    },
+    {
+      "name": "design-communication-analyzer",
+      "source": "/Users/georgijlusikov/.claude/skills/design-communication-analyzer",
+      "sha256": "92edb34b9f77ab1b88fd9b7d042971aa0cbaaeb5c9195b7d903ab5bcc310129e"
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "source": "/Users/georgijlusikov/.agents/skills/dispatching-parallel-agents",
+      "sha256": "9198d5292608c0c274161b22158f2bbed5e8a77088b6394030a90f13aa6829cd"
+    },
+    {
+      "name": "doc-coauthoring",
+      "source": "/Users/georgijlusikov/.agents/skills/doc-coauthoring",
+      "sha256": "b964e4c3ffe13f66f76dd7919073e60c7aec622cd8a8363bb36323188100cf8e"
+    },
+    {
+      "name": "domain-modeling",
+      "source": "/Users/georgijlusikov/.codex/skills/domain-modeling",
+      "sha256": "b0a775a5211800bbf2aa82eeb1d0246bb61b53c14a0007cb72e484d07129201a"
+    },
+    {
+      "name": "executing-plans",
+      "source": "/Users/georgijlusikov/.agents/skills/executing-plans",
+      "sha256": "d3e5b64b97d4713e3a7f33625cae12ed9305898d85a1c6309f46765c39a9d789"
+    },
+    {
+      "name": "falsify",
+      "source": "/Users/georgijlusikov/.claude/skills/falsify",
+      "sha256": "12d7459132d4c5a4fdb7abf3f74dd371460449a630a987726c76bba3af6cdc28"
+    },
+    {
+      "name": "feynman",
+      "source": "/Users/georgijlusikov/.claude/skills/feynman",
+      "sha256": "c1d0158b1a8675d2c120e63c08d3940c76114fbb093e003d58b48a9c18a688ff"
+    },
+    {
+      "name": "find-skills",
+      "source": "/Users/georgijlusikov/.agents/skills/find-skills",
+      "sha256": "187b75742f6e33abe097a4bcc56b0181651a37171b6d9df5d596bf4a80449aaa"
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "source": "/Users/georgijlusikov/.agents/skills/finishing-a-development-branch",
+      "sha256": "aa2632ed96df59c36348bd8f8ec1ff0fb0c5cc68b60691834687bf4cedc6be3f"
+    },
+    {
+      "name": "frontend-design",
+      "source": "/Users/georgijlusikov/.agents/skills/frontend-design",
+      "sha256": "61cf22c100b976f66b7924c8fca0fe47f96ef4be5b7e1afc0e0b6b2e4a00c97c"
+    },
+    {
+      "name": "frontend-ui-dark-ts",
+      "source": "/Users/georgijlusikov/.agents/skills/frontend-ui-dark-ts",
+      "sha256": "9a89e24dfbd8669df0d3867aecf3b77c7de95f0e60b4d5e2cc0b00694832df1a"
+    },
+    {
+      "name": "get-linked-context",
+      "source": "/Users/georgijlusikov/.claude/skills/get-linked-context",
+      "sha256": "cef107d401afac7615f4e36c265097082be5dce544b8f4fb5095e6dc1b8bc1e0"
+    },
+    {
+      "name": "go",
+      "source": "/Users/georgijlusikov/.claude/skills/go",
+      "sha256": "863c848b90073af00aecd3d6c5d95ac5614e198f9151ce926f9a8c769fe9246c"
+    },
+    {
+      "name": "goal-king",
+      "source": "/Users/georgijlusikov/.claude/skills/goal-king",
+      "sha256": "4c9338190e66ff5812d30882ffe43c4dde87c40f4e044c754665c63bc3bd2c91"
+    },
+    {
+      "name": "goal-plan",
+      "source": "/Users/georgijlusikov/.claude/skills/goal-plan",
+      "sha256": "8d5bbbfcfbd3c4d821c49c290fb5f65a746370e58327f098fbd8e94bbdd4d613"
+    },
+    {
+      "name": "graphify",
+      "source": "/Users/georgijlusikov/.claude/skills/graphify",
+      "sha256": "564c960af09cba62fdb699c1323d1051c01c7ea9b6bc4e04b4a68b1a8c69475b"
+    },
+    {
+      "name": "grilling",
+      "source": "/Users/georgijlusikov/.codex/skills/grilling",
+      "sha256": "7d25b82be403fb9e7667714b207ab356948bdb59fd4fce393f831c483f0f8c99"
+    },
+    {
+      "name": "handoff",
+      "source": "/Users/georgijlusikov/.claude/skills/handoff",
+      "sha256": "e659bf4dca16a69b9af8960bba79cdb768961a79efa52e3eec0606edfc0bee2d"
+    },
+    {
+      "name": "implement",
+      "source": "/Users/georgijlusikov/.codex/skills/implement",
+      "sha256": "7b8d91fd0a07bfd9a182b90c4303b4aa4d5a37d2e2fd64b5959b709a61909a4d"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "source": "/Users/georgijlusikov/.codex/skills/improve-codebase-architecture",
+      "sha256": "cf1e36330c6ccd63861c5a44daac0b1411e4b3cd851d2000dbdd466b8bf61c72"
+    },
+    {
+      "name": "init-project",
+      "source": "/Users/georgijlusikov/.claude/skills/init-project",
+      "sha256": "06a4ea1efbe747bb7a2c1de3c531a3060d01c68a18d32b3e5a94f9dd8f2fc559"
+    },
+    {
+      "name": "interior-design-expert",
+      "source": "/Users/georgijlusikov/.agents/skills/interior-design-expert",
+      "sha256": "c25686f70cb63696772ea3259ff886825bdbad00bdfc1e0532bb13e151944234"
+    },
+    {
+      "name": "internal-comms",
+      "source": "/Users/georgijlusikov/.agents/skills/internal-comms",
+      "sha256": "9c014d46d2d5d8eccf198639bb4af4faaf65652ce2c0be36a394257f3775b744"
+    },
+    {
+      "name": "jobs-to-be-done",
+      "source": "/Users/georgijlusikov/.agents/skills/jobs-to-be-done",
+      "sha256": "3f9b72ef53477e35d7904ddac1c642d77b4ec6b7ac8992792689f51258aafeb0"
+    },
+    {
+      "name": "jtbd-scenarium-create",
+      "source": "/Users/georgijlusikov/.claude/skills/jtbd-scenarium-create",
+      "sha256": "50b411fd8061719ba3caec79dab8167a49ebc31b2fd086dcfd987628ce528ddf"
+    },
+    {
+      "name": "known-symptom-fixes",
+      "source": "/Users/georgijlusikov/.claude/skills/known-symptom-fixes",
+      "sha256": "43bb626e56d948cc793e597d3868d8f2dc8913bf9f59d4f4d1303f6f2a442fe5"
+    },
+    {
+      "name": "landing-page-optimizer",
+      "source": "/Users/georgijlusikov/.claude/skills/landing-page-optimizer",
+      "sha256": "8449fb7a149aa9ab18997d15b56ce2be132a5fa73122d6c16f4bcd6ec61f89c9"
+    },
+    {
+      "name": "leverage",
+      "source": "/Users/georgijlusikov/.claude/skills/leverage",
+      "sha256": "97af49c4134676c98788a181d43a6b05d0bbcb4aebb340652d9548ced35c2df1"
+    },
+    {
+      "name": "manage-nodeterm-canvas",
+      "source": "/Users/georgijlusikov/.claude/skills/manage-nodeterm-canvas",
+      "sha256": "3cf3b2daa66a2d2078ed3171f25c52026bdddc976c213404d951ae1af31bba73"
+    },
+    {
+      "name": "meta",
+      "source": "/Users/georgijlusikov/.claude/skills/meta",
+      "sha256": "0d259dc88dad557263bd92d15796f808eb9be4770b84806900c19665126634d7"
+    },
+    {
+      "name": "moai-domain-uiux",
+      "source": "/Users/georgijlusikov/.agents/skills/moai-domain-uiux",
+      "sha256": "32d21d15c1fac57b6d2ef9f0329b14f3f98a718c063c186c34d30e46193b89d8"
+    },
+    {
+      "name": "mood-board-builder",
+      "source": "/Users/georgijlusikov/.agents/skills/mood-board-builder",
+      "sha256": "69f0ddca149d2dd85b5c26187dedd226a6b6e98a1423fd40baa707e814a0b19b"
+    },
+    {
+      "name": "onboarding-optimizer",
+      "source": "/Users/georgijlusikov/.claude/skills/onboarding-optimizer",
+      "sha256": "51bd071ccbe7cd97b3656683a73d1475ca3cc85566ae04e74ec508597ec4e71b"
+    },
+    {
+      "name": "pdf",
+      "source": "/Users/georgijlusikov/.codex/skills/pdf",
+      "sha256": "df6a06106ebaf9357d13196aa7b1cc42c733607bf3787759de1c97cfc050555c"
+    },
+    {
+      "name": "performance-profiling",
+      "source": "/Users/georgijlusikov/.agents/skills/performance-profiling",
+      "sha256": "5014eb838c5823d66ab157c227dde719eaeb98e652cefa60731c17298d3c72d8"
+    },
+    {
+      "name": "pinokio",
+      "source": "/Users/georgijlusikov/.agents/skills/pinokio",
+      "sha256": "e637bee8b334b547fc96d05bd0b1e55ad788605e98b6fdc8bb08c54ffd0d51e0"
+    },
+    {
+      "name": "pizdej",
+      "source": "/Users/georgijlusikov/.claude/skills/pizdej",
+      "sha256": "53ec4e91364a10ac622b5256982e16994c26a42d99b7797f732e37a5e16afb00"
+    },
+    {
+      "name": "playwright",
+      "source": "/Users/georgijlusikov/.codex/skills/playwright",
+      "sha256": "b02d5ebdb9afc23a9f0673651ca73dc7050724ac70b77fa10eced71e7e3624d8"
+    },
+    {
+      "name": "ponytail",
+      "source": "/Users/georgijlusikov/.agents/skills/ponytail",
+      "sha256": "4503a9dba2dca5836469a104c90e0c32ae9cb8bb97d02806e6fa06d15ceed56a"
+    },
+    {
+      "name": "principles-review",
+      "source": "/Users/georgijlusikov/.claude/skills/principles-review",
+      "sha256": "95f01de99ea93df69ce5695256376722dbf4a13f7a955555c89b6fb557271d44"
+    },
+    {
+      "name": "prioritize",
+      "source": "/Users/georgijlusikov/.claude/skills/prioritize",
+      "sha256": "5d2ee211a0bbc1681ec58e88b3d04d29e379722b51933637c67ade10399470db"
+    },
+    {
+      "name": "prototype",
+      "source": "/Users/georgijlusikov/.codex/skills/prototype",
+      "sha256": "07eabebbfa43ffe86f1d7b407f17298df7fc491efd309f2499591a429d7b7b43"
+    },
+    {
+      "name": "receiving-code-review",
+      "source": "/Users/georgijlusikov/.agents/skills/receiving-code-review",
+      "sha256": "3f56080356c62e4f74a183d7371686babc661e41a952dc67a97c2c76fe8a9329"
+    },
+    {
+      "name": "requesting-code-review",
+      "source": "/Users/georgijlusikov/.agents/skills/requesting-code-review",
+      "sha256": "c9c9a81cdba20d04d29acdd6d456ab309e2db776e547b4008c459983e5fd7f83"
+    },
+    {
+      "name": "research",
+      "source": "/Users/georgijlusikov/.codex/skills/research",
+      "sha256": "b09b256b5f9f4de2d6223100855702919a7620829abd3a9fe32df71900b4c361"
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "source": "/Users/georgijlusikov/.codex/skills/resolving-merge-conflicts",
+      "sha256": "7966ef149c03f3ac2474736d1a52fd7ea0233bf4b77563c873ff348c532548de"
+    },
+    {
+      "name": "retro",
+      "source": "/Users/georgijlusikov/.codex/skills/retro",
+      "sha256": "a122f0102410f078e87f9eee4cf44438bdb52ac2cca027b4ec3601c14e07986a"
+    },
+    {
+      "name": "roadmap-planning",
+      "source": "/Users/georgijlusikov/.agents/skills/roadmap-planning",
+      "sha256": "368f48e7b6fa593acf53763611989a83fd0a2125b297579320105616d7bfcd92"
+    },
+    {
+      "name": "rules-and-hooks-maintenance",
+      "source": "/Users/georgijlusikov/.claude/skills/rules-and-hooks-maintenance",
+      "sha256": "33deb6c714e7044773a8cf592785126055734bc65ef6542dab527f1a4ec2b703"
+    },
+    {
+      "name": "security-best-practices",
+      "source": "/Users/georgijlusikov/.codex/skills/security-best-practices",
+      "sha256": "ad17291e5eaac3c987f6c81ff51c220991c09cd457b722b3ffb19348ecdef772"
+    },
+    {
+      "name": "sensory-writing-coach",
+      "source": "/Users/georgijlusikov/.claude/skills/sensory-writing-coach",
+      "sha256": "38807019c62d9665510b756f5713606c8763f43031892153f3c18f73020685cc"
+    },
+    {
+      "name": "subagent-driven-development",
+      "source": "/Users/georgijlusikov/.agents/skills/subagent-driven-development",
+      "sha256": "757034cd2210fcaa20f9aca84fe857ae33f4a4e73895207c15bc91dcdb0f2456"
+    },
+    {
+      "name": "sus",
+      "source": "/Users/georgijlusikov/.codex/skills/sus",
+      "sha256": "4d99052f62039f53baf03fc9ddbd2830afc93b51b7f4884772ca521d8dc660c7"
+    },
+    {
+      "name": "system-value-architect",
+      "source": "/Users/georgijlusikov/.claude/skills/system-value-architect",
+      "sha256": "a0e0a9a2c0ad7dcdc96b0a4bcbbd8847894e3b9ea7ff1d0e31dd3da44f04dc82"
+    },
+    {
+      "name": "systematic-debugging",
+      "source": "/Users/georgijlusikov/.agents/skills/systematic-debugging",
+      "sha256": "1858a982fd8037b11e297b74f28375301304e79c7cc2cafe1c54e594fef849d7"
+    },
+    {
+      "name": "teach",
+      "source": "/Users/georgijlusikov/.codex/skills/teach",
+      "sha256": "e46888aad6163a5721ec9fc33a0b5600aa09116a60330b5bf60596ff0d530b15"
+    },
+    {
+      "name": "test-driven-development",
+      "source": "/Users/georgijlusikov/.agents/skills/test-driven-development",
+      "sha256": "e766c4ad744462de644383d0720009d0ce0bce7be5c8acfc3cc9604573d37b0c"
+    },
+    {
+      "name": "theme-factory",
+      "source": "/Users/georgijlusikov/.agents/skills/theme-factory",
+      "sha256": "3b82674ec1e312e29a7abf1bdf8296842292a3088aa62932f57a690961c0e796"
+    },
+    {
+      "name": "theory-of-constraints",
+      "source": "/Users/georgijlusikov/.agents/skills/theory-of-constraints",
+      "sha256": "832ce4e0bf08a2fcecc584dea723e9132a491b4915da4f1694e6da085340a950"
+    },
+    {
+      "name": "thinking-theory-of-constraints",
+      "source": "/Users/georgijlusikov/.agents/skills/thinking-theory-of-constraints",
+      "sha256": "4c01f0bea923a5a8dc89a0e65d72b9bf4e4231fecfae33b7d6bbf6635e59157f"
+    },
+    {
+      "name": "to-spec",
+      "source": "/Users/georgijlusikov/.codex/skills/to-spec",
+      "sha256": "106347324ad97ded454a258c0675d931231584e181c232cd2c457661af0a7a88"
+    },
+    {
+      "name": "to-tickets",
+      "source": "/Users/georgijlusikov/.codex/skills/to-tickets",
+      "sha256": "38f869c3b854a0015d5c1af1a62991609c40a1aee4380ada70eccd0d3b7c3f86"
+    },
+    {
+      "name": "tool-scout",
+      "source": "/Users/georgijlusikov/.claude/skills/tool-scout",
+      "sha256": "bc02882a6e7f4272202ea911fcd1fabfd3048c44628212e0a1feb7cafc598d8f"
+    },
+    {
+      "name": "tremor-design-system",
+      "source": "/Users/georgijlusikov/.agents/skills/tremor-design-system",
+      "sha256": "57a9f6198359ee9dd016025890d9de3f86b47c2b45461a68b676f07ee04d100a"
+    },
+    {
+      "name": "triage",
+      "source": "/Users/georgijlusikov/.codex/skills/triage",
+      "sha256": "322aaaa8cbc36b66f49ff0357cc55e1679af2bb58602499e3c3cefb631822406"
+    },
+    {
+      "name": "triz",
+      "source": "/Users/georgijlusikov/.claude/skills/triz",
+      "sha256": "7e29cdc46af64db3a17dc6ee5b017c5512a49d12b8a216fa7d19397372cfd0c5"
+    },
+    {
+      "name": "truth-seeker",
+      "source": "/Users/georgijlusikov/.claude/skills/truth-seeker",
+      "sha256": "5335c974066a95fb0edbb0e3ff5c08e5b28dedc952521c2dedab923aaeaccdf2"
+    },
+    {
+      "name": "user-story-mapping",
+      "source": "/Users/georgijlusikov/.agents/skills/user-story-mapping",
+      "sha256": "4d32f16bf09a198efdabe0d02c78f2837eca9b5eac28e6502d3b6cd835c54004"
+    },
+    {
+      "name": "using-git-worktrees",
+      "source": "/Users/georgijlusikov/.agents/skills/using-git-worktrees",
+      "sha256": "6da57c8fd92d8490cbf24d086e29cda6e726104bef0f0cb8404df46eb9f69d97"
+    },
+    {
+      "name": "verification-before-completion",
+      "source": "/Users/georgijlusikov/.agents/skills/verification-before-completion",
+      "sha256": "9b446f0c7fe1cfb560b1d34439523b1a76d5f177290007b2c053a1c749a4a8ba"
+    },
+    {
+      "name": "visual-explainer",
+      "source": "/Users/georgijlusikov/.claude/skills/visual-explainer",
+      "sha256": "f81acfcea7207d8aa1349fe67897cd852ad11eddbbe18bd15ba73683891b239f"
+    },
+    {
+      "name": "wayfinder",
+      "source": "/Users/georgijlusikov/.codex/skills/wayfinder",
+      "sha256": "12dc60952744da9849c1ee6d1d67c3f487556aec799760df2cb2c93452f3a16e"
+    },
+    {
+      "name": "web-artifacts-builder",
+      "source": "/Users/georgijlusikov/.agents/skills/web-artifacts-builder",
+      "sha256": "b4884629fb810ecfccee407435773d4736d7285a0faa3ff551b5d1d3b3d97c0b"
+    },
+    {
+      "name": "webapp-testing",
+      "source": "/Users/georgijlusikov/.agents/skills/webapp-testing",
+      "sha256": "9c76ddf498f1c65c4e4c2225989a1bce517eaec0d51bb2e6caa5450a7acb83fc"
+    },
+    {
+      "name": "write-a-skill",
+      "source": "/Users/georgijlusikov/.codex/skills/write-a-skill",
+      "sha256": "140cd2ab73429016627afae091f57af485cd65253a995398d4cd5950b9bbd0d1"
+    },
+    {
+      "name": "writing-plans",
+      "source": "/Users/georgijlusikov/.claude/skills/writing-plans",
+      "sha256": "20e2afec168288f8b69dd22bb67623eaa775e80a06df309c2edc750247a9cf79"
+    }
+  ],
+  "external_skills": {
+    "fusion": "/Users/georgijlusikov/Projects/fusion"
+  },
+  "excluded_active": {
+    "skill-creator": "incomplete and overridden by native vendor skill creators",
+    "writing-skills": "depends on archived using-superpowers references; owner canon is how-to-write-skills"
+  },
+  "legacy_library": "/Users/georgijlusikov/Documents/курсор/_agent_shared",
+  "legacy_additions": "/Users/georgijlusikov/code/cursor-workspace/_agent_shared"
+}

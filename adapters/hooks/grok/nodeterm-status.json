@@ -1,0 +1,97 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/grok.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

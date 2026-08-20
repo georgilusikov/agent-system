@@ -1,0 +1,80 @@
+---
+alwaysApply: true
+category: universal
+platforms: [cursor, claude-code]
+description: Single entrypoint router (minimal alwaysApply). Routes to on-demand protocols.
+---
+
+# 🧭 CORE MASTER (Router)
+
+Цель: держать **минимальный** набор правил alwaysApply, а всё остальное подключать **по необходимости**.
+
+## 0) Навигация (не сканировать весь workspace)
+- Если непонятно “куда идти” — сначала открой `WORKSPACE_ROUTER.md`, затем `WORKSPACE_INDEX.md`.
+- Не делай широкие поиски/массовые тесты до выбора правильной области проекта.
+
+## 1) Выбрать режим (внутреннее решение)
+
+### 🟢 BASIC (без глубокого анализа)
+Используй, если задача локальная и прямолинейная (1 очевидный путь), например: мелкий фикс, форматирование, очевидный рефакторинг, ответы без выбора.
+
+### 🟡 REASONING (нужно обоснование/выбор)
+Активируй, если выполняется хотя бы одно:
+- есть ≥2 варианта решения и нужен выбор;
+- нужно объяснение “почему так”;
+- данные неполные/противоречивые;
+- нужен поиск причины/рисков;
+- нужно спроектировать новый подход/архитектуру.
+
+**Если REASONING:** перед финальным выводом прочитай и примени `_agent_shared/rules/core-anti-bias.mdc`.
+> ⚠️ **Не вызывай одновременно** `core-anti-bias` и `research-cognitive-biases` — они пересекаются. Для data/research задач используй `research-cognitive-biases`, для остальных — `core-anti-bias`.
+
+## 2) Роутинг протоколов (подключай on-demand)
+
+### Код/конфиги/скрипты
+Если ты меняешь код/конфиги/скрипты:
+1) Прочитай и примени `_agent_shared/rules/core-auto.mdc`.
+2) Перед финальным ответом — `_agent_shared/rules/core-check.mdc`.
+
+### UI/Frontend/Browser extension
+Если изменения затрагивают UI (HTML/CSS/JS UI, фронтенд, расширение):
+1) Прочитай и примени `_agent_shared/rules/core-ui-verify.mdc`.
+2) В финальном ответе обязательно дай **verification ledger** (команды + PASS/FAIL + артефакты).
+
+### Данные / аналитика / research
+Если работаешь с данными (CSV/Parquet/JSON/SQL/метрики/статистика):
+1) Прочитай и примени `_agent_shared/rules/research-protocol.mdc`.
+2) Прочитай и примени `_agent_shared/standards/research-data-standard.md`.
+3) Для anti-bias: используй `_agent_shared/rules/research-cognitive-biases.mdc` (НЕ `core-anti-bias`).
+
+### Ошибки/падения/исключения
+Если после команды/запуска есть ошибка/ненулевой exit code:
+1) Прочитай и примени `_agent_shared/rules/core-reflect.mdc`.
+2) Для RCA используй `_agent_shared/standards/root-cause-analysis-standard.md`.
+
+### Тяжёлые/долгие задачи (CPU/RAM)
+Если планируется тяжёлая обработка/долгий ран:
+- Прочитай и примени `_agent_shared/rules/resource_management.mdc`.
+
+### Зависание / потеря прогресса
+Если процесс завис, пользователь отменил выполнение, или потерян прогресс:
+- Прочитай и примени `_agent_shared/rules/anti-freeze.mdc`.
+
+### Изменение правил
+Если меняешь правила/стандарты:
+1) Прочитай и примени `_agent_shared/rules/meta-guard.mdc`.
+2) Прочитай и примени `_agent_shared/standards/rules-validation-standard.md`.
+
+## 3) Контекстное окно (Long Sessions)
+Если приближаешься к лимиту контекста:
+1. Сохрани прогресс в `context.md` и `todo.md`.
+2. Зафиксируй: что сделано, что осталось, какие файлы затронуты.
+3. **Never** останавливай задачу искусственно из-за лимита токенов.
+4. После compaction/reset — перечитай `context.md` и `todo.md`.
+
+## 4) Формат результата (Definition of Done)
+Если были изменения в коде/конфигах:
+- Что изменено (1–5 пунктов)
+- Что и как проверено (точные команды)
+- Результат проверок (PASS/FAIL)
+- Что осталось непроверенным и как проверить

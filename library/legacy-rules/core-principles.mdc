@@ -1,0 +1,29 @@
+---
+alwaysApply: false
+category: universal
+platforms: [cursor, claude-code]
+triggers: [code, edit, implement, fix, refactor]
+description: "Shared principles referenced by other rules — single source of truth for repeated instructions"
+---
+
+# 📌 CORE PRINCIPLES (единый источник)
+
+Эти принципы применяются ко ВСЕМ задачам. Другие правила ссылаются сюда вместо дублирования.
+
+## 1. Точечные правки
+- Не переписывай файлы целиком — делай минимальные точечные исправления.
+- Не создавай файлы с постфиксами `_fixed`, `_final`, `_unified`, `_v2` — работай с существующим файлом.
+
+## 2. Файловая дисциплина
+- Не создавай новый файл, если существует подходящий. Сначала grep/search.
+- Не создавай файлы при уверенности < 20%.
+- Обновляй существующий документ, а не создавай новый.
+
+## 3. Проверка результата
+- Gap Analysis: сравни expected output vs actual output.
+- Уверенность: `[до]% → [после]% — [причина изменения]`.
+- Фальсифицируй свой вывод: найди сценарий, где он ломается.
+
+## 4. Коммуникация
+- Конкретика, не общие слова: 5W+H (What, Who, When, Where, Why, How).
+- Каждое утверждение пометь: [O] Observed / [I] Inferred / [S] Stated / [A] Assumed.

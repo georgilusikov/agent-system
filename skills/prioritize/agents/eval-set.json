@@ -1,0 +1,15 @@
+[
+  {"query": "приоритизируй мой бэклог", "should_trigger": true, "note": "direct Russian trigger"},
+  {"query": "что делать первым", "should_trigger": true, "note": "priority question"},
+  {"query": "у меня 10 идей, какую брать", "should_trigger": true, "note": "idea selection"},
+  {"query": "ранжируй задачи", "should_trigger": true, "note": "ranking request"},
+  {"query": "isrice для этих фич", "should_trigger": true, "note": "explicit framework mention"},
+  {"query": "prioritize these features", "should_trigger": true, "note": "English trigger"},
+  {"query": "какая задача важнее", "should_trigger": true, "note": "comparison/priority question"},
+  {"query": "есть 5 проектов, куда вложить время", "should_trigger": true, "note": "resource allocation decision"},
+  {"query": "отсортируй по приоритету", "should_trigger": true, "note": "sorting by priority"},
+  {"query": "напиши тест", "should_trigger": false, "note": "implementation task, not prioritization"},
+  {"query": "почему тест падает", "should_trigger": false, "note": "debugging — /why territory"},
+  {"query": "сделай коммит", "should_trigger": false, "note": "commit — different skill"},
+  {"query": "проверь качество", "should_trigger": false, "note": "quality check — check/bouncer territory"}
+]

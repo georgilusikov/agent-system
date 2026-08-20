@@ -1,0 +1,86 @@
+[
+  {
+    "id": "required-sections-present",
+    "description": "Handoff file carries every mandatory section of the SKILL.md template",
+    "input": "Рефакторили auth модуль: заменили JWT на session tokens, половина тестов красные",
+    "assertions": [
+      {"type": "contains", "value": "## Goal"},
+      {"type": "contains", "value": "## Git state"},
+      {"type": "contains", "value": "## Done"},
+      {"type": "contains", "value": "## Not done"},
+      {"type": "contains", "value": "## What did NOT work"},
+      {"type": "contains", "value": "## Key decisions"},
+      {"type": "contains", "value": "## Blockers"},
+      {"type": "contains", "value": "## Next steps"},
+      {"type": "contains", "value": "## Suggested skills"}
+    ]
+  },
+  {
+    "id": "concrete-not-vague",
+    "description": "Names real paths and decisions instead of summarizing in the abstract",
+    "input": "Долгая сессия с изменениями в нескольких файлах",
+    "assertions": [
+      {"type": "not_contains", "value": "некоторые изменения"},
+      {"type": "not_contains", "value": "много работы"},
+      {"type": "not_contains", "value": "various files"},
+      {"type": "regex", "value": "[\\w.-]+/[\\w.-]+\\.\\w+"}
+    ]
+  },
+  {
+    "id": "git-state-captured",
+    "description": "Deterministic git snapshot is present: branch and short sha, not prose",
+    "input": "Сессия в worktree на ветке feature/gate, два незакоммиченных файла",
+    "assertions": [
+      {"type": "contains", "value": "Branch:"},
+      {"type": "regex", "value": "[0-9a-f]{7,40}"},
+      {"type": "regex", "value": "(Uncommitted|clean)"}
+    ]
+  },
+  {
+    "id": "failed-approaches-captured",
+    "description": "Dead ends are recorded so the next session does not retry them",
+    "input": "Пробовали чинить через monkeypatch — не сработало, ушли на фикстуру",
+    "assertions": [
+      {"type": "contains", "value": "## What did NOT work"},
+      {"type": "regex", "value": "(monkeypatch|не сработал|failed|did not work)"}
+    ]
+  },
+  {
+    "id": "chained-not-overwritten",
+    "description": "Second handoff on the same stream gets a new seq and links the previous one",
+    "input": "Второй хэндоф по той же задаче в тот же день",
+    "assertions": [
+      {"type": "regex", "value": "seq[2-9]"},
+      {"type": "contains", "value": "**Previous:**"}
+    ]
+  },
+  {
+    "id": "secrets-redacted",
+    "description": "Credentials seen during the session never reach the document",
+    "input": "Сессия, где в логах светился API-ключ sk-live-abc123 и пароль от стенда",
+    "assertions": [
+      {"type": "not_contains", "value": "sk-live-abc123"},
+      {"type": "not_contains", "value": "password:"}
+    ]
+  },
+  {
+    "id": "another-agent-can-start",
+    "description": "Context suffices for another agent to start within 30 seconds",
+    "input": "Сессия по добавлению фичи, прерванная на середине",
+    "assertions": [
+      {"type": "min_length", "value": 400},
+      {"type": "contains", "value": "## Next steps"},
+      {"type": "contains", "value": "## Verify current state"}
+    ]
+  },
+  {
+    "id": "resume-checks-drift",
+    "description": "Resume mode re-reads git state and reports drift instead of trusting the document",
+    "input": "resume — продолжи с прошлой сессии",
+    "assertions": [
+      {"type": "regex", "value": "(git rev-parse|git status)"},
+      {"type": "regex", "value": "(drift|дрейф|расхожд|изменил)"},
+      {"type": "not_contains", "value": "согласно хэндофу выполняю"}
+    ]
+  }
+]

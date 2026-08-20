@@ -1,0 +1,1782 @@
+
+
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+Hands-On
+Systematic
+Innovation
+for Business and Management
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IFR Press
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Copyright ©2004, 2007 by Darrell Mann
+All rights reserved.
+The author has asserted his moral right to be identified as
+the author of this work.
+Reproduction or translation of any part of this work beyond that
+permitted by Section 107 or 108 of the 1976 United States
+copyright Act without the permission of the copyright owner is
+unlawful.  Requests for permission or further information should
+be addressed to IFR Consultants Ltd, PO Box 93, Clevedon, BS21 7WD, UK.
+
+
+This publication is designed to provide accurate and authoritative
+information in regard to the subject matter covered.  It is sold with
+the understanding that the publisher is not engaged in rendering
+legal, accounting or other professional services.  If legal advice
+or other expert assistance is required, the services of a competent
+professional person should be sought.
+
+
+Library of Congress Cataloging-in-Publication Data
+Mann, Darrell L
+Hands-On Systematic Innovation for Business & Management
+ Darrell L Mann
+
+
+ISBN 1-898546 -73-8
+First Edition printed 2004.  Re-printed 2006.
+Second Edition printed 2007.  Re-printed 2009, 2011, 2014.
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+
+
+
+
+
+F²
+
+
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+Table of Contents
+
+Foreword .............................................................................................................................. 7
+Warning I ............................................................................................................................. 9
+Warning II .......................................................................................................................... 10
+Warning III ......................................................................................................................... 11
+Warning IV ......................................................................................................................... 12
+Foreword II ......................................................................................................................... 13
+Introduction ........................................................................................................................ 16
+Process Overview .............................................................................................................. 41
+Psychology ........................................................................................................................ 60
+System Operator/9-Windows ............................................................................................. 84
+Problem Definition – Problem Explorer ............................................................................ 105
+Problem Definition – Function and Attribute Analysis ...................................................... 122
+Problem Definition – S-Curve Analysis ............................................................................ 148
+Problem Definition – Ideality/Ideal Final Result ................................................................ 164
+Problem Definition – Perception Mapping ........................................................................ 184
+Mgrs ................................................................................................................................. 192
+Select Solve Tool ............................................................................................................. 209
+Problem Solving Tools - Conflict And Trade-Off Elimination/Inventive Principles ............ 223
+Problem Solving Tools Contradictions ............................................................................. 337
+Problem Solving Tools - Measurement Problems ............................................................ 353
+Problem Solving Tools - Linear and Non-Linear Trends of Evolution .............................. 368
+Problem Solving Tools Resources ................................................................................... 463
+Category .......................................................................................................................... 465
+Tangible ........................................................................................................................... 465
+Intangible ......................................................................................................................... 465
+Elementary ....................................................................................................................... 465
+Organisational .................................................................................................................. 465
+Functional ........................................................................................................................ 465
+Informational .................................................................................................................... 466
+Tangible ........................................................................................................................... 466
+Intangible ......................................................................................................................... 466
+Elementary ....................................................................................................................... 466
+Informational .................................................................................................................... 466
+Problem Solving Tools Knowledge .................................................................................. 484
+Problem Solving Tools Re-Focus/Re-Frame ................................................................... 500
+Problem Solving Tools Trimming ..................................................................................... 514
+Problem Solving Tools Ideality/Ideal Final Result ............................................................ 533
+
+
+--- PAGE BREAK ---
+
+
+
+Problem Solving: Psychological Inertia Tools .................................................................. 545
+Solving Tools Subversion Analysis .................................................................................. 564
+Solution Evaluation .......................................................................................................... 584
+Into The Future ................................................................................................................ 595
+Appendix 1 Company Innovation Scan ............................................................................ 613
+Appendix 2 Problem Explorer .......................................................................................... 618
+
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+
+Foreword
+The capacity to originate has become the most sought after talent of our time.  There is
+growing consensus that human creativity has replaced scale as the defining feature of the
+21st century corporation.  This shift raises new challenges and opportunities.  Recall how
+the Total Quality Management (TQM) movement built reliable and repeatable systems for
+ever greater productivity.  Today, we need the same kind of systematic capability for driving
+creativity.  Organizations that learn how to manage for creativity will have a crucial
+competitive advantage.  But unlike the transparent process of TQM, the thought processes
+involved in producing breakthrough innovations are hidden, and even mysterious -- not just
+to the awestruck admirers, but often to the innovators themselves.
+This lack of transparency has led to the common belief that creativity, whatever it is, is
+something special.  But is it? Is it really a rare gift of a select few (DaVinci, Mozart), or is it
+an egalitarian skill we all possess to some degree, like athletics, that can be improved with
+practice? These are critical business questions.  Their answers determine whether we as
+managers can substantially improve the creative process that drives Innovation.
+If game-changing ideas arise mainly through inspired, unpredictable flashes of a maverick
+genius, then the role of the manager is very limited.  Your job is reduced to cheerleader.
+Round up all the gifted people and then get out of their while they work their magic.  If, on
+the other hand, creativity turns out to be a trainable skill, then the manager’s role is
+significant.
+Nicknamed “The Fuzzy Front- End”, Industry has tended to treat creativity as more Alchemy
+than Chemistry – a seemingly magical process that has the power to turn lead into gold, a
+small idea into a gigantic discontinuity.  The alchemists were attempting to investigate nature
+before basic scientific tools and practices were available, relying instead on traditions, basic
+observations, and mysticism to fill in the gaps.  However, when new technology allowed
+scientists to see more deeply into the core of molecules, Alchemy began to fall apart.
+Thanks in no small part to the work of Darrell Mann, we are at this point in the study of
+creativity.
+In Hands-On Systematic Innovation, Darrell Mann provides compelling evidence that
+creativity can be a predictable and controllable process.  Despite the fact that many
+innovators quip their Big Idea “just seemed to pop into my head”, Mann shows us that such
+originality simply cannot be produced out of thin air.  This means that, paradoxically, even
+the most radical new concept must, by definition, be firmly rooted in “old knowledge”.
+With the benefit of hindsight, all “revolutionary” innovations can be described in terms of an
+evolutionary extension of some existing technology -- “somebody, some where, has already
+solved your problem.” This claim holds true for everything from the jet engine to the jet ski.
+
+
+--- PAGE BREAK ---
+
+
+
+In the following pages, Mann gives example after example that convincingly demonstrates
+the emergence and implementation of innovation is neither mysterious, random, nor
+haphazard.  The thesis for Hands-On Systematic Innovation is grounded in this insight.  It is
+jammed full with the knowledge and tools necessary to make the creative process genuinely
+systematic.
+February - 2007
+Craig B.  Wynett
+Chief Creative Officer
+The Procter & Gamble Company
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Warning I
+“The best models are as simple as possible.
+But no simpler.”
+Albert Einstein
+
+This is not a typical ‘management’ book.  It is a book built on ideas distilled from areas of
+human endeavour beyond the traditional management sciences.  Going beyond traditional
+boundaries means venturing outside zones of comfort.  It also means we need to think about
+whether the journey might be worth the effort.
+Time is a precious commodity for any manager.  Lack of time is one of the things that
+encourages us to stay within our own comfort zones.
+We think the ability to innovate systematically – to genuinely and reliably be able to generate
+successful innovations that will make a positive difference to the bottom-line of a company
+– is worth the time to dip a toe or two into the contents.  We have structured the book on
+this basis.
+Nevertheless, we assume that those time pressures and comfort zones may cause some to
+end their interest in the book right here.
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Warning II
+“Here be dragons.”
+Footnote on ancient maps.
+
+This book assumes that readers already recognise the importance of creativity and
+innovation.  It does not try to justify why anyone should be creative, nor why any organisation
+needs to be innovative.  If you don’t know why innovation is important then you don’t need
+this book.  Yet.
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Warning III
+‘We don’t see things as they are, we see
+them as we are’
+Anais Nin
+
+This book is a companion to the technical version of the systematic innovation story.  That
+book was configured for engineers, scientists and designers.  This one is configured for
+managers and leaders.
+Clearly, in our highly segmented and specialised world there is a need to separate the
+technical from the non-technical.  Clearly also, in the large majority of organisations, the
+separation between ‘technical’ and ‘business’ is almost complete.  This is unfortunate.  Very
+often we see that the best solution to a technical problem is a business one.  Similarly, very
+often the best solution to a business problem is a technical one.  In the real world, there is
+no separation between technical and business – they are simply two aspects of a unified
+whole.
+In the future, we hope that it will be possible to combine the two disciplines into one coherent
+whole.  For now, we have assumed that it is still necessary to separate the two sides.  This
+book consequently requires no knowledge of science, engineering, mathematics or anything
+that managers and business people might describe as ‘technical’.
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Warning IV
+“The average man would rather face death or torture than think.”
+Bertrand Russell
+
+This warning is only for those readers that know about TRIZ.  If you have never heard of
+TRIZ, you can skip to the next section.  Finding out that this book is built on some TRIZ
+ideas and that TRIZ was a product of the former Soviet Union and built on the study of
+technical patents can only look like, a big pair of negatives from a business standpoint, so
+best to ignore both.
+People familiar with TRIZ, of course, will have at least an inkling that it can be applied to
+business situations.  For those people, the health warning is that we have strayed –
+sometimes considerably – from the traditional versions of TRIZ.  It is very difficult to convince
+a busy, stressed manager that applying a simple one word Inventive Principle is the solution
+to his or her problem.  Business problems involve people.  People are fuzzy, inconsistent
+and often downright awkward.  In a word, people are complex.  The tools and methods we
+present here seek to take into account that complexity.  Every complex problem can be
+solved by a simple solution.  Just not very well.  Our aim here is to provide means of
+generating real and effective solutions; where we see TRIZ fails, we have developed new
+tools.
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Foreword II
+“When you have discovered the mountain, the first miracle that will appear is this.  A most
+vehement and very great wind, that will shake the mountain and shatter the rocks to pieces.
+You shall be encountered also by lions and demons and other terrible beasts, but fear not any
+of these things.  Be resolute and take heed that you return not, for… after all these things and
+near the daybreak there shall be a great calm, and you shall see the Day-Star arise and the
+dawning will appear, and you shall perceive a great treasure.  The chiefest thing in it, and the
+most perfect, is a certain exalted tincture with which the world… might be tinged and turned
+into most pure gold.”
+Eugenius Philalethes, Lumen de Lumine, 1651.
+
+or
+
+“are we nearly there yet?”
+Well known human evolution cartoon.
+
+Sometime in 1998, we sat down and wrote out a list of the books we would like to read on
+TRIZ.  Top of that list was a ‘good’ book to help apply TRIZ in technical applications.  Second
+was one on business and management applications.  While it is too early to say whether our
+previous book, ‘Hands-On Systematic Innovation’, qualifies for the ‘good’ description in the
+first case, it was decided that the growing interest in the second meant that it was necessary
+to proceed with trying to meet the need in any event.  And so ‘write book on business
+application of TRIZ’ was duly added to the collective job catalogue.  Friends, partners and
+all those around us no doubt groaned in anticipation of the late nights, and all around grumpy
+behaviour that would inevitably follow.
+The book that you see before you is the end result.  To our surprise, however, this time,
+although the late nights certainly came true, the grumpiness didn’t.  I’m not sure I have ever
+seen the process of writing ‘pleasurable’, but that is certainly the way it has felt for all but a
+tiny number of the chapters in this book (I’ll leave it to you to guess which ones!).  Part of
+the reason for this is that all the hard work trying to work out theme and structure has carried
+across almost directly from the first book.  The other part is the combined feeling that we
+are doing something that hasn’t been done before, and the knowledge – based on our ever
+expanding list of clients in the business and management sector – that what we’re describing
+actually works.
+With respect to this second point, although we have spent time working in industry and have
+been responsible for strategies, budgets and people the size and breadth of small towns,
+we have never considered ourselves to be ‘management consultants’.  In the same breath,
+we find the description both overwhelming and profoundly depressing.  Overwhelming,
+because during the course of distilling best practice for some of the Systematic Innovation
+principles described in the book, we have found ourselves in the company of some truly
+great thinkers, for whom the Wayne’s World originated exhortation ‘we’re not worthy’ springs
+
+
+--- PAGE BREAK ---
+
+
+
+instantly to mind.  Profoundly depressing because our own personal experiences with
+‘management consultants’ have often been frustrating and a to a significant extent a poor
+use of our time.  Put simply, it seems to us that a very large proportion of it is boundary-
+condition-ignoring, fashion-following, ‘here’s one I did earlier, no need to think, just do it’
+corporate dogma.  In any event, it all seemed to be saying things that were almost the
+opposite of what we know to be the important philosophical constructs of what we now refer
+to as Systematic Innovation.  Whether these turn out to be ‘right’ of course is a matter of
+some debate.  Our money is on the fact that they are (they work literally everywhere else –
+including that biggest system of all ‘nature’ – so why not here?).  You, as the reader –
+provided you got past the raft of health warnings that appeared before you even arrived at
+this Foreword – have a similar choice to make.
+With regard to theme and structure, things have changed little from the companion
+‘technical’ book.  The theme, in fact, is almost identical – starting from a focus on benefits
+rather than features, and going on to recognize that it’s not just the ‘what’ of Systematic
+Innovation but the ‘how’ and ‘why’ that are necessary to properly communicate the subject
+matter.  Related to this theme and the consequent need for the tools, methods and strategies
+being discussed to be applicable to any problem or opportunity situation we may care to
+throw at them, it is also worth noting that where the TRIZ philosophy which formed a
+significant part of the foundation contained holes (and although it is undoubtedly the most
+comprehensive creativity and innovation system in existence, it undoubtedly does contain
+holes at this point in time), we have sought to plug them with the best alternatives we could
+find.
+In terms of structure, a cursory glance at the chapter listing for this book and the previous
+technical book will show there to be almost no difference.  What that means in the context
+of this book, is that things are arranged in such a way that after four general introductory
+chapters describing the overall Systematic Innovation picture, the book is arranged such
+that there is a different chapter for each of the definition, selection, solution or evaluation
+tools and that things will be read on an ‘as required’ basis.
+The most significant variations in structure involve the shifting balance between overview
+and detailed process.  One of the golden rules of management texts (based on the analysis
+of several hundred during the process of distilling best practice) seems to be 75,000 words
+is about what is expected – too many more and ‘busy’ managers will never have the will to
+pick it up; too many less and it obviously can’t be serious.  The technical book was over
+150,000 words because that’s how much content we felt there needed to be to adequately
+communicate the message.  Here we have slightly more.  The best way to think about this
+potentially daunting number is that there is around 30,000 words (or half of a trans-Atlantic
+plane journey) worth of ‘reading matter’, and another 140,000 worth of how-to for when you
+get back to the office, and, if we’ve done anything like a half decent job, you want to get your
+hands dirty and actually use Systematic Innovation to make a difference.
+Darrell Mann
+Clevedon,
+April 2004.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Foreword to the Second Edition.
+The contents of parts of this book have been taught to over 1500 people since 2004.  This
+second edition emerges from some of the dialogues with those people on how things could
+be made clearer.  This new version also benefits from the output of our ongoing research
+programme and the analysis of as many of the management texts we have been able to
+access during the period between the publication of the first edition and the present day.
+Darrell Mann
+Bradford
+February 2007.
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+
+Introduction
+“Ours is not so much an age of vulgarity as of vulgarization; everything is tampered with
+or touched up, or adulterated or watered down, in an effort to make it palatable, in an
+effort to make it pay.”
+Louis Kronenberger
+
+And
+
+“Whether you believe you can, or whether you believe you can’t,
+you’re absolutely right.”
+Henry Ford
+
+There are approximately 1800 management texts published every year.  1800 and rising.
+Whichever way you look at it, that is a large number.  The choice of titles is almost as
+overwhelming as the variation in quality.  As a consequence, very often the decision to
+purchase a given book veers towards ‘random’.  But then what is the alternative? No-one –
+least of all a busy manager – has the time to look at even a fraction of what is available.
+This lack of time versus quantity of information conflict is the basic dilemma central to the
+theme of this book.  The subject matter of the book is systematic innovation.  The
+foundations of the methods we will describe go back to 1946, when someone sat down and
+thought wouldn’t it be great if we could analyse successful solutions from every area of
+human endeavour and distill the results into a form that would be useful to individuals
+irrespective of which area they were working.  What if, we thought to ourselves back in the
+mid 1990s when we started applying the systematic innovation techniques to business
+situations, what if we could distill all of the useful stuff from those 1800 management texts
+per year and present the results in a coherent and integrated manner.
+It is our belief that we have now done exactly that.  We realize that that might sound rather
+difficult to believe.  1800 books per year – not to mention all of the other sources of learned
+business knowledge – is a considerable number to have to analyse.  Plus, who on earth are
+we to determine what is ‘successful’ and what is not? In many respect we are in exactly the
+same position as the original 1946 researchers.  Except they were looking at patents rather
+than business texts.  When we look at patents, that 1800 number looks like an even more
+overwhelming 200,000 per year.  However, two important things happen when you start
+looking at mankind’s inventive capabilities.  The first thing you discover is that there is an
+awful lot of low quality stuff out there.  Typically, when we are looking at patents, we are
+able to reject over 90% almost immediately since they contribute nothing to the furtherance
+of human knowledge.  The second thing you discover is that there is an awful lot of re-
+inventing the wheel takes place.  Different industries and disciplines tend not to
+communicate with one another, and consequently, they all devote sometimes massive
+resources to solving what turn out to be problems that someone in a completely different
+field already solved.  In part this happens because we all have a tendency to think that our
+
+
+--- PAGE BREAK ---
+
+
+
+problems and situations are unique.  Well, of course, in many ways they are.  But in many
+other ways they absolutely are not.  After you have examined close to three million examples
+of successful innovation, you begin to see that there are some very definite patterns,
+strategies and techniques that emerge time and time again across disciplines that appear
+to be at completely different ends of a spectrum.  How could it possibly be, for example, that
+aircraft designers, teachers, computer scientists, chemical process engineers, and (to take
+a very broad extreme) termites are all working on the ‘same problems’? And – even more
+surprising – using the same inventive strategies to derive successful solutions.
+Yet this is what the systematic innovation research has uncovered.  The findings when we
+look at what managers, strategists and business leaders do when they are successful are
+remarkably similar to what those same aircraft designers, teachers, computer scientists,
+chemical engineers and even termites have done.  Likewise, the findings show us that a
+very high proportion of management texts and management solutions have little or nothing
+to contribute to the furtherance of knowledge.  There are an awful lot of bad management
+textbooks in the same way that there are an awful lot of bad patents.
+In effect what the systematic innovation research – now running at several thousand person
+years of effort – has done is to define a knowledge framework based on success.  According
+to us that framework is ‘universal’.  Recognising that such a statement can be quite
+inflammatory, especially to those of an academic persuasion, let us qualify it by saying that
+it has applied so far to everything that is currently known.  What is ‘currently known’ and
+what is ‘knowable, but not yet known’ are two different things.  Every day that we continue
+to extend the method – and currently the family of full-time researchers numbers over 30 –
+we are constantly testing the bounds of that framework.  Every day we try to disprove the
+framework.  Occasionally we find things that cause us to extend or modify it – not, as it
+happens, in the last two years of activity – but ‘occasionally’.  One day we might even
+succeed in showing that it is the wrong framework, but at this point in time we have failed in
+our attempts to do that.
+So, what you will find in this book is a description of this framework, and the tools that
+emerge from it to help us to solve problems and create opportunities in a systematically
+reproducible way.  The remainder of this chapter is divided into four main sections.  In the
+first of these sections we take a helicopter ride high over the whole systematic innovation
+terrain in order to present a ‘big picture’ overview.  The aim of this section is to provide a
+means of seeing the whole thing in the smallest space possible in order to act as a navigation
+aid later on.
+In the second section we examine what is meant by ‘success’ and ‘successful solutions’.
+Here the aim is to show what we mean when we say that there are an awful lot of bad
+management texts.  Specifically within this section we will examine a series of tests that we
+will routinely apply whenever we are considering whether a solution we find is one that has
+something to contribute to the advancement of the management discipline or not.
+In the third section we look at the important issue of context.  Context is the thing that
+transforms knowledge into wisdom.  Too many management texts fall into our ‘low quality’
+category because they recommend strategies that, although they applied in the context
+
+
+--- PAGE BREAK ---
+
+
+
+being used by the author, they may well not apply in yours.  In this section we will examine
+different innovation contexts in order to begin to make sense of the who, when and where
+parts of the story.
+Finally, in the fourth section we briefly explore some of the time implications of learning the
+systematic innovation tools.  The toolkit is the result of the biggest study of creativity and
+innovation ever conducted, and consequently to learn every part of the toolkit is going to
+take some months to achieve.  Very few managers have a ‘few hours’ never mind a ‘few
+months’ to devote to learning new things, hence we spend our time in this section examining
+what we can do to get the maximum innovation benefit from the minimum investment of
+time.
+In putting together the specification for this book, we set ourselves some interesting
+challenges.  We wanted a book that focused on benefits (i.e.  that it enabled the reader to
+successfully tackle any problem or opportunity situation they were working on), rather than
+being just another collection of features.  We also decided we wanted a book that could be
+read from start to finish, or could use as a quick-dip reference; and we wanted it to be both
+academically rigorous and at the same time not the crushingly dull experience most
+academic books tend to be.  In other words, we identified a number of contradictory
+requirements and decided we wanted to avoid compromising on any of them.  How
+successful we have been remains to be seen.
+In keeping with all of the above aims, the book has been structured and sequenced in such
+a way that anyone working on a problem (in the most general terms that word implies) could
+begin at the beginning of the book and be taken on a journey through only those chapters
+necessary to solve the problem.
+The main method of achieving this feat of navigation is the small figure appearing at the top
+right hand corner of each page of the book.  A larger version of that figure is shown in Figure
+1.1 below.
+
+Figure 1.1 Hands-On Systematic Innovation Navigation Aid
+
+
+--- PAGE BREAK ---
+
+
+
+Three of the four steps contained in the box at the center of the figure are like any generic
+problem definition and solving process; it being necessary to define what the problem is, to
+generate some solutions and to then evaluate those solutions.  We add in a fourth step –
+‘select tool’ because of the richness and breadth of the problem solving tools available to us
+through all of the tools, techniques and methods we have found it necessary to include.  We
+examine this four-step process in more detail in the next chapter, and follow this by a chapter
+on each of the elements of each box in turn.  As you will see there, some of the boxes –
+most notably the problem definition and generate solutions boxes – contain a host of other
+boxes.
+The aim of this section is to discuss the triangle drawn behind the four boxes (hence the
+reason the top right hand corner of this page emphasizes the triangle to indicate that this is
+what we’re talking about at this point in the book).  The triangle is there to denote the
+existence of an underlying philosophy behind the process being discussed in future
+chapters.
+If you’re already familiar with systematic innovation and its application in a business or
+management context, you may wish to delve straight into the other Chapters.  If you’re not,
+we recommend that you read this chapter and the following two – ‘process overview’ and
+‘psychology’ in order to obtain the maximum benefit from subsequent chapters.
+1) Systematic Innovation – Helicopter View
+As illustrated in Figure 1.2, systematic innovation can be thought of on three basic levels.
+At the first level it is a collection of tools.  These tools can be used individually, or they can
+be coupled together to form a comprehensive start-to-finish method.  The basic idea behind
+this method is that it will take us through a systematic procedure that will progressively help
+us to define what our situation is and what we should do to improve it, until we reach a point
+where we have a ‘best’ solution to the situation we have defined.  Beyond that, then, is a
+third level on which systematic innovation works.  We have labeled this third level
+‘philosophy’.  ‘Philosophy’ perhaps sounds like a very grand word.  What we mean when we
+use the term is that there are high level concepts and ideas that should influence how we
+utilize the method and tools.
+
+Figure 1.2: Hierarchical View of Systematic Innovation
+
+
+--- PAGE BREAK ---
+
+
+
+Our main emphasis for the remainder of this chapter is to focus on those philosophical
+elements.  Before doing that, however, it is worth setting the scene for them by reviewing
+some of the main findings of the systematic innovation research.  These are:-
+• that there are only a small number of fundamentally different types of problem
+• that someone, somewhere, therefore, has already solved a problem something like
+the one you wish to solve
+• that there are only a small number of possible strategies for generating inventive
+solutions
+• that system evolution trends are highly predictable
+• that the strongest solutions transform the unwanted or harmful elements of a system
+into useful resources.
+• that the strongest solutions also actively seek out and destroy the conflicts and
+trade-offs most design practices assume to be fundamental.
+In allowing us access to these findings, systematic innovation has incorporated the
+knowledge and experiences of the world’s finest inventive minds.  It effectively strips away
+all boundaries between different business disciplines.
+The tools can be used in a number of different ways.  The overall process enables users to
+systematically define and then solve any given problem or opportunity situation.  Some users
+will rigorously apply this process.  Others are happier extracting individual elements from
+the overall structure and using those.  This book has been configured in such a way as to
+allow users significant flexibility, offering both an over-riding structure and access to
+individual problem definition and solving tools.  An over-riding aim of the book has been to
+construct a problem definition and solving process that works for any situation users may
+care to throw at it – whether that be technical or business, simple or complex, highly
+constrained or clean-sheet, step change innovation or incremental improvement, or focused
+on products, processes or services.  In that sense, even though we focus here on business
+and management issues, it is worth noting that the basic philosophy, method and toolkit is
+conceptually almost identical to the companion technical version of the book.
+Systematic innovation is both simple and complex.  To learn and gather a working
+knowledge of the whole structure will probably take several months.  Some people are
+prepared to make this investment, and others are not.  Those that are not usually take great
+comfort from the fact that they will be able to learn and realise significant benefit from just a
+short exposure to individual elements of the overall structure.  In many instances these
+benefits are enough.  We’ve tried to design the book to suit every individual requirement.
+The basic idea here is that the process and tools should, as far as possible, adapt to your
+way of working and your requirements, rather than the other way around.  One thing that is
+clear, however, is that it is not a ‘creativity replacement’ kit.  It absolutely demands the users
+creative input in order to get the best out of it.  Best to think of the whole as a creativity turbo-
+charger.  A turbocharger is a great power booster, but is useless without the engine.
+
+
+--- PAGE BREAK ---
+
+
+
+Systematic innovation is different to most other creativity aids, and may appear a little
+unnatural at first.  Here are some of the high-level philosophical elements that we hope will
+to guide your overall perception and use of the method and tools:
+Firstly regarding the big idea that ‘someone, somewhere already solved your problem’ is the
+way by which problem solvers become able to access the good solutions obtained by the
+world’s finest creative business minds.  The basic process by which this occurs is illustrated
+in Figure 1.3 below.
+
+Figure 1.3: Systematic Innovation Abstraction Philosophy
+Essentially, the systematic innovation researchers have encapsulated the principles of good
+practice and set them into a generic problem-solving framework.  The task of problem
+definers and problem solvers using the large majority of the systematic innovation tools thus
+becomes one in which they have to map their specific problems and solutions to and from
+this generic framework.  The main tasks here are, first of all being able to abstract your
+situation in such a way that it begins to look like a situation that someone else has already
+generated solutions for, and then secondly, transforming the generalized solutions into
+things specifically relevant to your context.
+Seven Pillars
+Beyond the abstraction requirement, there are seven other philosophical pillars upon which
+the systematic innovation framework rests.  These pillars are illustrated in Figure 1.4.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Figure 1.4: Systematic Innovation Pillars
+Let us now look at each of these seven pillars in turn in order to examine the influence they
+should exert on the way in which we deploy the systematic innovation tools and processes.
+Thus, in no particular order, we have:-
+Ideality
+One of the first tests of a successful innovation uncovered by systematic innovation
+researchers was that they gave customers a more ideal solution than what had previously
+been available.  ‘Ideal’ in this sense is defined as the (perceived) benefits that the customer
+receives divided by the costs and harms that are also present.  The fact that successful
+innovations deliver more ideality implies that there is an overall direction of success.
+Hopefully this direction – give customers more of the things they want and less of the things
+they don’t – may be seen as a fairly obvious one.  While this direction is fairly obvious, what
+is less obvious, is that this evolution process takes place through a series of discontinuous
+evolutionary jumps.  We usually think of these jumps as steps from one way of doing things
+to another, or, more formally, jumping from one s-curve to another.  As we shall see in a
+later chapter, the s-curve characteristics that determine how all systems evolve are a central
+aspect of the innovation dynamic.  A key finding of the systematic researchers beyond this
+is that the steps denoting a shift from one s-curve to the next are predictable.  This fact
+emerges from the study of large numbers of business and technology system evolutions,
+and the analysis of what jumps take place as systems shift from one way of doing things to
+another.  The overall dynamic of evolution – with systems making discontinuous jumps from
+one s-curve to another all the time heading in a direction of increasing ideality is summarized
+in Figure 1.5 below:
+
+
+
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+Figure 1.5: Evolution Dynamics – Systems Jump From One S-Curve To Another In The Direction of
+Ideal Final Result Outcomes
+The figure actually takes the story a step further by suggesting that the evolutionary direction
+towards increasing ideality is driven by a destination – called ‘Ideal Final Result (IFR) –
+where the customer has received all of the benefits they require and none of the costs and
+harms.  In most senses the Ideal Final Result is a theoretical rather than a practical limit
+(although we shall see examples of systems that have achieved this goal in later chapters).
+Practical use of the idea demands also that we take into account the fact that different
+customers, as well as different parts of a value network may have very different
+interpretations of what ‘ideal’ means to them.  Nevertheless, there are certain common
+themes (e.g.  ‘free, perfect and now’ – Reference 1.1) that make the IFR a useful thing to
+think about when trying to determine a strategic direction.
+A rather more surprising aspect of the IFR idea has been that as systems get closer and
+closer to their Ideal Final Result destination, the number of possible solutions capable of
+delivering the desired outcome reduces.  Figure 1.6 illustrates this convergent evolution
+idea.  It is not clear whether it will ever be possible to definitively prove that evolution is
+convergent.
+
+Figure 1.6: Evolution Is A Convergent Process
+
+
+--- PAGE BREAK ---
+
+
+
+We used to spend inordinate amounts of time trying to convince audiences that it was so,
+before realizing that it saved a lot of pain and argument by simply stating that a) ever system
+we have so far examined has followed such a characteristic, and – more importantly – b) if
+you merely think of the image as a ‘useful image’ it will have served enough of a purpose.
+Used as a problem definition aid, the ideality part of the toolkit encourages problem solvers
+to break out of the traditional ‘start from the current situation’ type of thinking, and start
+instead from what is described as the Ideal Final Result (IFR).  Generally speaking IFR-
+focused solutions incorporate the concept of systems solving problems ‘by themselves’.  The
+key word is ‘self’; things that achieve functions by themselves – self-regulating, self-
+organising, self-correcting, etc – all represent, when incorporated in a true systematic
+innovation fashion, very powerful and resource-efficient solutions.
+Contradictions
+Taking the Figure 1.5 image of evolution taking place through a sequence of discontinuous
+shifts a step further, the systematic innovation researchers further identified the fact that
+what causes the flattened profile at the top of an s-curve is the emergence of a conflict or
+contradiction.  The s-curve flattens at the top, not because we stop trying to improve a
+system, but because something comes along and stops us.  One of the most important
+findings, then, of the research has been that the world’s strongest solutions have emerged
+from situations in which a problem solver has successfully sought to avoid the conventional
+trade-offs that everyone else has taken for granted.  Having uncovered a number of
+strategies whereby problems solvers have successfully eliminated compromises and trade-
+offs, systematic innovation offers tools through which problem solvers can tap into and use
+the strategies employed by such people.  The most commonly applied tool in this regard is
+a business conflict/trade-off elimination Matrix – a 31x31 matrix containing the four or five
+most likely strategies for solving design problems involving the most common business
+trade-off and conflict situation types.  Probably the most important philosophical aspect of
+the contradiction part of systematic innovation is that, given there are ways of ‘eliminating’
+contradictions’, managers and business leaders should actively look for them.  Instead of
+being seen as a threat, systematic innovation tells us that every unresolved trade-off and
+compromise we can find is an opportunity.  This is a subtle but often profound shift in thinking
+for many managers.
+Functionality
+Although the functionality aspects of systematic innovation owe a significant debt to the
+pioneering work on Value Analysis, the method of defining and using functionality data is
+markedly different; sufficient at the very least to merit discussion as a distinct paradigm shift
+in thinking relative to traditional occidental thought processes.  Three aspects are worthy of
+particular note:-
+1. The idea that a system possesses a Main Useful Function (MUF) and that any part
+of the system which does not contribute towards the achievement of this function
+is ultimately harmful.  In a banking insitution, for example, the MUF is to manage
+the flow of money; everything else in the system – like personnel, sales or
+
+
+--- PAGE BREAK ---
+
+
+
+marketing departments are there solely because we don’t yet know how to achieve
+the MUF without the support of the ancillary components.  (Systems may of course
+perform several additional useful functions according to the requirements of the
+customer.)
+2. In traditional function mapping, the emphasis is very much on the establishment of
+positive functional relationships between components.  Systematic innovation
+places considerable emphasis on plotting both the positive and the negative
+relationships contained in a system, and, more importantly, on using the function
+analysis as a means of identifying the conflicts, contradictions, in-effective,
+excessive, harmful and missing relationships in and around a system.  Function
+and attribute analysis thus becomes a very powerful problem definition and
+‘complexity management’ tool.
+3) Functionality is the common thread by which it becomes possible to share
+knowledge between widely differing business sectors.  A matrix management
+structure is a specific solution to the generic function ‘organise people’, just as a
+training department is a specific solution to the generic function ‘disseminate
+knowledge’.  By classifying and arranging knowledge by function, it becomes
+possible for organisations to examine how other businesses in very different
+disciplines have achieved the same basic ‘organise’ function.  ‘Solutions change,
+functions stay the same’ is a message forming a central thread in the systematic
+innovation methodology: People want a hole not a drill; benefits not features.
+Resources
+The Resources pillar of systematic innovation relates to the unprecedented emphasis
+placed on the maximisation of use of everything contained within a system.  In systematic
+innovation terms, a resource is anything in the system which is not being used to its
+maximum potential.  The method demands an aggressive and seemingly relentless pursuit
+of things in (and around) a system which are not being used to their absolute maximum
+potential.  Discovery of such resources then reveals opportunities through which the design
+of a system may be improved.  In addition to this relentless pursuit of resources, systematic
+innovation demands that the search for resources also take due account of negative as well
+as the traditionally positive resources in a system.  Thus the competitors, subcontractors
+and forces we typically attempt to fight when we are designing and running systems, are
+actually resources.  Systematic innovation, as we shall later see contains a number of
+strategies to help us to perform this ‘turning lemons into lemonade’ switch in the way we
+think about things that we currently think of as harmful in a system.
+Space, Time And Interface
+Psychological research clearly shows that the human brain is not designed to be creative.
+It undoubtedly can be creative, but that is not one of its main functions.  Its main function is
+to develop and store patterns so that we know how to react in a given situation.  Hence, we
+don’t have to think when we get dressed in the morning, or when we drive to work, because
+we have performed both actions so many times that we have a pre-stored ‘program’.  Only
+
+
+--- PAGE BREAK ---
+
+
+
+when something out of the ordinary happens do we have to jump out of these patterns.  One
+such time when the patterns don’t help is when we are trying to be creative.  This is one of
+the reasons for the cliché expression ‘thinking out of the box’.  And it is undoubtedly not an
+easy thing to do.  In particular, our brain very quickly makes assumptions about what a
+problem is.  Very often we only discover later on that we have been solving the wrong thing.
+An important finding of the systematic innovation research has been that the strongest
+problem solvers have found ways of overcoming this type of assumption-making
+phenomenon.  The effect is known as ‘psychological inertia’ or ‘paradigm paralysis’, and the
+tools for overcoming the effect involve techniques for forcing problem solvers to shift their
+perspective on situations.  As suggested in the title of this section, there are three
+dimensions to these perspective-shifting techniques.  Experienced systematic innovation
+users are continuously changing their perspective on problems – zooming in to look at the
+fine details, zooming out to see the bigger picture, thinking about how the situation is
+affected by changing time – whether that be nano-seconds or decades – in both the past
+and future – and also thinking about how different parts of systems interface and relate to
+one another.  This is not a natural process for most people – our brains aren’t wired that
+way – and so we introduce and discuss tools to help in the process of thinking in time, space
+and interface as we work our way through the book.
+Recursion
+Related in some ways to the space-time-interface viewing perspective pillar, the concept of
+recursion relates to the phenomenon of self-similarity in systems.  Specifically, recursion
+encapsulates the idea that many systems repeat as we switch our focus from the macro
+scale to the micro-scale and vice versa.  By ‘repeat’, we mean that features that are present
+at one scale, will also exist at other scales.  We will see recursion in action at several points
+during our exploration of systematic innovation.  Two specific instances are worth
+mentioning here as a way of explaining the implications of recursions.
+The first relates to the cybernetics work of Stafford Beer (Reference 1.2).  Stafford Beer’s
+Viable System Model emerged from the study of organisation structures and resulted in two
+very important conceptual findings.  The first involved the identification of five essential
+elements that a system had to contain if it were to be ‘viable’.  The second involved the idea
+of recursiveness – and the discovery that the five-element viability test still applied at
+different hierarchical levels of consideration of a system organisation structure.  There are,
+in other words, certain elements that will determine the viability of a section, a department,
+a division, a company, a corporation, and so on.
+The second involves the recognition that as systems evolve through successive disruptive
+shifts from one system (s-curve) to another, the complexity of the respective systems
+recursively passes through a characteristic increasing-decreasing profile – Figure 1.7.  This
+particular recursive effect allows us to utilise the parts of the systematic innovation toolkit
+most relevant to a given phase in the complexity cycle.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Figure 1.7: Recursion In System Complexity Evolution
+Emergence
+To reduce the entire scientific and mathematical base of complexity theory to a single
+philosophical foundation is probably a little unfair given the breadth and depth of work being
+devoted to the subject.  Nevertheless, there is at least some justification for suggesting that
+the whole field emerged as a result of a very simple idea; that enormously complex systems
+emerge from what may be extremely simple base rules and principles.  The interaction of
+individually simple elements, in other words, can produce some highly unexpected
+outcomes.
+Businesses and organisations are fundamentally complex systems.  Take two people and
+you have the makings of a system acting on the edge of chaos.  Although we shall not see
+complexity theory discussed explicitly anywhere except in the trends of evolution part of the
+systematic innovation discussion, its presence is everywhere.  The great implication of
+emergent systems on organisation design is that the success or failure of that system will
+ultimately depend on the ‘DNA’ that makes up that organisation.  In the organisational
+context, ‘DNA’ consists of things like the mission and vision statements, value systems –
+both formal and informal – and the beliefs of the individuals present.  Many business
+problems occur due to conflicts between what managers wish the system to deliver and
+what the corporate-DNA says it is capable of delivering.  A key idea that emerges from this
+in the context of innovation is that it is much easier to achieve success if the innovation
+comes from the DNA rather than despite it.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Figure 1.8: Seven Pillars Summary
+2) Defining ‘Success’
+One of the important assumptions made at the beginning of the chapter was that the
+systematic innovation research was somehow able to discern what defined a ‘successful’
+innovation.  In this section we examine some of the main criteria used to distinguish success
+from failure.
+An obvious test of success is financial.  A successful innovation, by definition, must offer
+paying customers a value proposition that they will pay sufficient for that it not only pays all
+of the direct and indirect costs of providing it, but also allows the provider to obtain a profit.
+Financial success, however, is a very poor means of determining success in any sense that
+allows us to transfer any useful knowledge to others wishing to create a success of their
+own.  Financial reward is merely the manifestation of success.  It has nothing to do with the
+mechanics of what has actually made something successful.
+Nevertheless, during the early stages of the systematic innovation research it was important
+to correlate financial performance to the underlying mechanisms of success.  One of the
+main objectives of the research has been to identify the mechanics of success in such a
+way that we can usefully use them to transfer that success to other applications.  The way
+that this has happened is that the researchers have systematically studied known financially
+successful innovations with the aim of identifying any common factors that they may
+possess.
+Any financially successful innovation inevitably becomes clouded in ego, mythology, the
+whims of the media, and in a significant number of cases, plain luck.  It is absolutely in the
+interests of anyone involved in an innovation to present that innovation in the best possible
+light.  Consequently, any analysis of a financially successful innovation can only obtain, at
+best, a partial perspective on what actually enabled the success to take place.  Analyse
+enough cases, however, and gradually consistent patterns begin to emerge.
+
+
+--- PAGE BREAK ---
+
+
+
+It is these patterns that we now use as a means of determining whether an innovation can
+be classified as successful or not.  We believe that these patterns offer a series of tests that
+are much more reliable as an indicator of success than mere finance.
+Many innovations that can be classified as ‘successful’ under the terms of these tests, we
+now see, have ‘failed’ in a business context.  This doesn’t necessarily mean that we have
+eliminated them from our analysis.  In the same way that financially successful innovations
+become the subject of myth-building, so those involved in innovations that failed have it in
+their interests to cover what has happened in a cloud of smoke and mirrors.  Trying to blow
+these clouds away, we see that in a great number of such cases, there were many elements
+of the innovation that were indeed ‘successful’.  In many cases innovators get almost
+everything right.  ‘Almost’, however is not good enough to deliver financial success.  But just
+because an innovator failed to get the timing right, or failed to market to the right audience,
+does not mean that we should ignore all of the good things that happened.
+That, then, is the way that the research has been conducted.  Almost every attempted
+innovation has something to commend it.  Our job has been to find those ‘somethings’ and
+to put them together into a package that allows us to distill out a series of success factors
+that are generically applicable.
+The following is what we have so far come up with.  Perhaps not surprisingly, the list
+connects strongly to the philosophical pillars detailed in the previous section.
+i) Essential Elements
+Successful innovation emerges from the interaction of five essential elements.  These are
+illustrated in Figure 1.9.
+
+Figure 1.9: Essential Elements Of A Successful Innovation
+In more detail, the five elements comprise the following:-
+a) An Idea.  The most obvious part of the list; without the idea, there will be no
+innovation.  The figure includes the word ‘protectable’ in parentheses.  There have
+certainly been successful innovations that have not had any kind of copyright or
+patent protection, but they are few and far between.  Even fewer are the cases of
+
+
+--- PAGE BREAK ---
+
+
+
+unprotected ideas that allow a company to sustain their presence.  Unprotected
+ideas are easy to copy.  The only sustainably successful innovations where there
+is no formal protection are either narrow niches or (more likely) situations where
+one or more of the means, manifestation or co-ordination are so good that they
+preclude the successful entry of a competitor.
+b) A Customer.  The next most obvious element of the five is the customer.  Without
+a customer demand for the innovation – whether that demand be a stated need or
+one that is ‘hidden’ – there will be no success.  We will talk a lot more about
+identifying customer needs in future chapters.  The large majority of organizations
+are very bad at anticipating the future needs of their customers (and non-
+customers).  Likewise, the vast majority of customers are very bad at being able to
+describe what their future needs and desires are.  Systematic innovation will allow
+us to do a much better job of anticipating those spoken and unspoken needs.
+c) A Manifestation.  Whether it is a product or a service, there has to be a
+manifestation of the idea.  The manifestation may be physical or virtual.
+d) A Means.  Very many innovations fail because the idea is not produce-able in an
+economic manner.  The problem may be lack of ability to manufacture or deliver,
+or it may simply not be possible to produce at a sufficiently low cost.
+e) Co-ordination.  If the other four elements are not managed and co-ordinated then
+again the innovation will fail.  The co-ordination part of the story is largely about
+timing, and making sure all of the other elements are in the right place at the right
+time.
+The next series of tests all relate primarily to the ‘Idea’ element, and what makes an idea
+into one capable of delivering a successful innovation:
+ii) Function
+Successful innovations recognize that customers buy functions.  People don’t buy a watch
+they buy the ability to tell the time.  Either that or they are buying a statement about their
+wealth or fashion consciousness.  Functions, in other words, can be tangible or intangible.
+In both cases, function is king.
+iii) Ideality
+As already discussed, successful innovations travel in the direction of increasing (customer)
+ideality.  (Perceived) benefits divided by the sum of cost and harm.  One test of a successful
+innovation, therefore, is that at least one customer segment receives a more ideal solution
+than the one they already have.  Broadly speaking, the more segments that perceive your
+innovation as ‘more ideal’, the more successful it will be.
+iv) Resources
+A slightly more subtle test of a successful innovation is that the problem identifies and makes
+use of a resource that no-one has previously recognized as a resource.  This is particularly
+so, if the ‘resource’ is seen or has previously been viewed as a negative thing.  Turning
+lemons into lemonade breeds innovation success.
+
+
+--- PAGE BREAK ---
+
+
+
+v) Contradiction
+Probably the single most important test of a successful innovation.  Success happens when
+conflicts, trade-offs and contradictions are ‘eliminated’ (Reference 1.3).  While it is not
+always the case that a contradiction is completely eliminated, what is important is that it is
+challenged to such an extent that a step-change jump in the direction of the Ideal Final
+Result takes place.
+vi) Trend Jumps
+The final test of successful innovation involves the discontinuous trend jumps uncovered
+during the research.  A product or service that makes such at least one advance along one
+of the trends is likely to be a successful one.
+3) Context
+A commonly asked question is ‘when should I use systematic innovation?’ It is easier to
+answer this question by examining situations in which it is not going to be helpful.  There
+are two such situations:-
+a) if we are simply looking to replicate something that we have already done before.
+This ‘here’s one I did earlier’ situation, frankly does not need a systematic
+innovation methodology to help achieve it.
+b) if we are looking to ‘optimize’ a system.  Systematic innovation contains virtually
+no mathematics and so if we are trying to answer questions like ‘what is the
+optimum batch size?’ or ‘what is the best interest rate?’ or ‘what bonuses should
+everyone get this year?’ then systematic innovation is not going to help.
+Both of these situations are rare in our view.  Or rather they ought to be.  In the first case, it
+is our belief that there is no such thing in reality as an ‘identical’ situation in a management
+context.  Anything that involves people has to recognize that every one of us is different,
+and that everyone is different at different times.  ‘You can never step in the same river twice’
+as the old adage goes.  Systematic innovation can play a significant part in identifying and
+doing something about the differences between last time and this.
+In the case of optimization problems, systematic innovation adopts a somewhat different
+view.  ‘Optimum’ is a dangerous word in systematic innovation because it implies the
+presence of trade-offs and compromises.  Any manager that has faced the onerous task of
+allocating staff bonuses will know that there is no way to satisfy everyone.  This is a
+characteristic common to all ‘optimum’ or ‘best’ calculations since what is best for one
+situation is anything but for another.  Whenever a systematic innovation user sees the word
+‘optimum’, they immediately visualize the existence of a conflict or a contradiction.  As we
+saw earlier, eliminating contradictions will always be preferred to finding an optimum
+average.
+Of the remaining situations where we believe systematic innovation is the most beneficial,
+it is worth discussing two here.  Both relate to s-curves again (we will see many more
+instances too as we progress through the book).  Figure 1.10 illustrates a very common
+situation in many businesses.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Figure 1.10: The Over-riding Importance Of Evolutionary S-Curves
+In the figure we see the setting of a target that lies beyond the fundamental capability of the
+system expected to deliver it.  All systems will eventually find themselves in this situation
+irrespective of what parameter we are interested in improving.  The more competitive the
+industry, the quicker it will tend to happen.  When we find ourselves in this position then all
+of the normal things we would do to improve will no longer work.  We could optimize and
+optimize the system from now until the end of time and still fail to bridge the gap between
+capability and target.  ‘Fundamental Limit’, unfortunately, means exactly that.
+When we find ourselves in this position, we are basically faced with two choices; change the
+target or change the system.  One of the two is undoubtedly easier to achieve than the other.
+Changing the target, however, tends not to offer a recipe for long term business success –
+unless we can convince our competitors to change the target too.  That, then, leaves the
+option of changing the system.  This is undoubtedly the more difficult of the two options.
+This also happens to be an area where systematic innovation excels.  As suggested in
+Figure 1.11, systematic innovation offers three mechanisms for enabling us to identify the
+relevant system change that will permit the target to be achieved.  Each of the three is
+covered in detail in separate chapters later in the book.  For the moment it remains sufficient
+to say that we will be able to identify the required jumps in a systematically reproducible
+manner.  Moreover - and an important final word on this topic – what the method will also
+tell us is which part of a system it is that needs to be changed.  When a system hits a
+fundamental limit, in other words, it is usually one element within that system that has hit its
+limit.  Hence we don’t have to completely scrap our current way of doing things in order to
+‘change the system’ – merely find the limiting element and change that.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Figure 1.11: Systematic Innovation Tools Bridging The Gap Between Limit And Target
+The second major application scenario for systematic innovation occurs when there is
+currently no system.  Here the method can help us to conceive what systems should look
+like when we are starting from a clean sheet of paper.  When we are using the methods in
+this role we will be guided by the Ideal Final Result concept.  Figure 1.12 reproduces a
+version of the conical evolution image from Figure 1.6.  The figure is here modified to outline
+the main evolution directions available to us in any innovation situation.
+The first (and most commonly applied) direction involves starting from today’s system and
+using the relevant tools to change to become more ideal.  The second involves the ‘use
+another means’ idea from Figure 1.11.  This is another strategy that allows us to change to
+another s-curve by shifting to a solution that exists somewhere and which we can import
+into our situation.  The third direction is the one more attuned to the blank piece of paper
+start point.  This is the direction that tells us to forget about today’s system, and to think
+instead about the Ideal Final Result.
+
+Figure 1.12: Three Main Innovation Directions
+All three routes are relevant.  Which one we will choose will depend on our context.  If we
+are bound to starting from what we already have, then we are most likely to choose route 1;
+
+
+--- PAGE BREAK ---
+
+
+
+if we have the ability to look outside and start again using proven capabilities from
+elsewhere, then we are more likely to explore route 2.  Finally, if we have the freedom to
+completely start again, or are looking to get into a new market, then route 3 is the most
+appropriate direction.
+The overall process should ultimately act as our guide.  Chapter 10 in particular is designed
+to help identify which tools are most appropriate in which contexts.  In the meantime, the
+Figure 1.12 image is, we think, a useful one to keep in mind when thinking at the big-picture,
+helicopter-view level.
+4) Time Implications
+Systematic innovation is not and never has been designed as a recipe to be followed blindly.
+It requires you to think about what is happening, and it requires you to do some work.  We
+are reminded here of the Toyota lean production system and the following quote from the
+Head of Toyota Consulting “The Toyota production system has been studied by the West
+over the past 20 years.  Many books and videos are available.  The book, 'The Machine that
+Changed the World', provides all you need to know to implement the Toyota production
+system.  Yet everywhere I go in the west I see no evidence of its implementation.  What do
+we see that you do not see?” And a comment by Konosuke Matsushita, Founder of
+Matsushita Electric Industrial Co., Ltd & PHP Institute from 1979: "We are going to win and
+the industrial West is going to lose out; there is not much you can do about it because the
+root of your failure is in yourselves.  Your firms are built on the Taylor model.  Even worse,
+so are your heads.  With your bosses doing the thinking while the workers wield the
+screwdrivers, you're convinced deep down that this is the right way to run a business.  For
+you the essence of management is getting the ideas out of the heads of the bosses and into
+the hands of labour.  We are beyond the Taylor Model.  Business we know, is now so
+complex and difficult, the survival of firms so hazardous in an environment increasingly
+unpredictable, competitive and fraught with danger, that their continued existence depends
+on the day-to-day mobilisation of every ounce of intelligence."
+In other words, sure, you can follow a recipe, but don’t forget there are some underlying
+‘why’s’ behind it, and that it is a good idea to think about them.  In another old adage, a
+surgeon can be trained to remove an appendix in about an hour, but it takes several years
+to work out what to do when something not in the basic recipe happens.  Same thing here,
+albeit, if you don’t start getting some immediate benefit, we have failed in our main goal.
+If that hasn’t put you off, we need to talk a little bit more about the underlying ‘why’s’ of
+systematic innovation in its business context:
+The essence of its philosophy is distillation of large quantities of knowledge and experience
+into a small, manageable entity.  It might take users a considerable amount of time to
+appreciate the significance of the seven philosophical pillars of systematic innovation, but
+they can at least be remembered in a few minutes.
+At the other end of the hierarchy pyramid, the toolkit contains a series of tools that, to varying
+degrees can be learned and applied also in a relatively short space of time.  There is a deal
+
+
+--- PAGE BREAK ---
+
+
+
+of variation, but as an average, a half-day of learning and doing is usually enough to give a
+newcomer the will, confidence and ability to use a given tool.
+In between toolkit and philosophy, the learning curve for the complete systematic innovation
+method and processes (with or without software ‘support’) is probably measurable in weeks.
+‘Weeks’ unfortunately is then at the heart of a big problem for the large majority of
+newcomers.  A week is a serious investment of time for anyone in these busy times; there
+is simply too much else needing to be done, and not enough time to do it.  Does this mean
+we should give up? Or does it mean that it might be better to think about alternative ways of
+doing things? The latter would appear to make the most senses.
+Different User Profiles
+Figure 1.13 illustrates a graph compiled from the experiences of watching several hundred
+students, strategists and managers go through at least two-days worth of systematic
+innovation ‘training’.  (Two days is a typical figure since most managers tend to think a one-
+day event will be too trivial, and they are too busy to be away for any longer than two.  It is
+however a very short period of time in relation to the total amount of content – which is
+equivalent to an MBA in many respects.)
+The first category of user types is the ‘not for me’ variety.  This is the individual who, for
+whatever reason (with bad teaching and instinctive aversion because people have been
+instructed to attend by their boss being probably the top two reasons), decides they do not
+like systematic innovation or do not want to commit the time necessary to learn it.
+The second category involves those who discover a part of systematic innovation that they
+like and chose to adopt it into their way of doing things.  This ‘part’ might be a tool like the
+Business Conflict Matrix or the Trends of Evolution, or it might simply be one or two of the
+Inventive Principles.  At the end of their initial exposure to the toolkit, this category of user
+has achieved some success using the particular tool or element of, is ‘satisfied’ by that
+success, and shows no desire to expand their knowledge further.  In some small way,
+however, this category of user has been changed by their experience.
+
+Figure 1.13: Typical Systematic Innovation User Profiles
+
+
+--- PAGE BREAK ---
+
+
+
+The third category of user might be seen as the pragmatist.  They usually start as users of
+the second category, but find that there are certain types of problem – or more usually a
+specific problem – that the tool they know has failed to solve.  They therefore look at other
+elements of the toolkit until they find something that does solve the problem.  The success
+with the new tool then prompts the incorporation of that tool into that persons ‘way of doing
+things’.  (The importance of ‘success’ in determining whether someone picks up a part of
+systematic innovation or not cannot be under-estimated.)
+The fourth category of user profile is what is commonly described amongst long-time
+systematic innovation users as ‘having the virus’ or ‘being infected’.  This type of user
+typically reads all of the books, papers and articles they can find on the subject, and it
+changes the way that they do things.
+The Folly of ‘I Am Right; You Are Wrong’ (Reference 1.4)
+Everyone has their own way of doing things.  Some of these ways are demonstrably more
+effective than others, but nevertheless those embedded ways are present and they are
+constraints that will dictate how much and which parts of systematic innovation people will
+be attracted to and which they will reject.  So which are the most important parts of
+systematic innovation? The simple answer to the question is that it depends.  It depends on
+the circumstances of the problem or opportunity under consideration, it depends on the user,
+and it depends on how the tools are presented to them.
+To take a cooking analogy; there are definitely right and wrong ways of using the various
+tools contained in the kitchen.  There is a right and a wrong way of holding a whisk, in the
+same way that once we have picked the whisk up by the handle instead of the blades, there
+is then a considerable degree of flexibility in how we can use the tool to achieve the desired
+function; we can stir clockwise or anti-clockwise, with or without a vertical component of
+motion, we can stop and start, we can change speed, we can change direction, we can do
+pretty much anything so long as the whisk is in the product and moving it.
+At a higher level, we can then use a recipe to help us sequence ingredients and the things
+we do to them in order to eventually get me to a finished product.  If we are trying to make
+soup, we could probably find several hundred recipes to help us do it.  Some will say put the
+stock in first, and some will say don’t.  Assuming that the different authors are all trying to
+help me make soup that is edible, we can probably safely assume that each of them has
+created a recipe that will work.  Some recipes will produce better (to us!) soup than others,
+but they will all provide us an output that looks and functions like soup.
+The point is to find something that fits your way of doing things (whether it be one individual
+principle or a complete problem solving method/recipe).  As far as this book is concerned,
+one of the major underlying aims has been to present things in a way that enables this pick-
+and-choose flexibility to happen.
+Self-Adapting Systems
+A large proportion of users will only ever know and use one or two tools from the toolkit.
+Chapter 18 later in the book suggests the importance of ‘self’ in the drive towards increased
+
+
+--- PAGE BREAK ---
+
+
+
+ideality; self-regulating, self-organising, etc, and any system that works out ‘for itself’ what
+is right are all good solution directions.  If systematic innovation is about encouraging people
+to think, perhaps a useful goal would be to offer them a structure that allows them to – as
+much as is feasibly practical – mix and match tools (both within and beyond the current
+bounds of the method) to suit their particular individual circumstances.  In other words, that
+they are able to adapt what tools and methods they use, how and when they use them to
+suit themSELVEs.
+If we choose to ignore a recipe that is our decision.  If we’re making soup it doesn't matter-
+we may get a thin soup or a thick one or even a stew, but it will be edible.  If we’re making
+bread, and stray too far from the recipe, we will end up with something that isn't bread, and
+might not even be edible, or we might end up with something exciting and new.  The former
+is usually more likely than the latter however, so in future, we might be well advised to follow
+some form of structure.  We also know that we each have our own tastes and that if we take
+a bit of this recipe and add a bit of that and then add this bit of our own, then we will end up
+with our ideal bread.  ‘Our’ being the important word.
+If we ask ourselves the question is it better for us to adapt to systematic innovation or for it
+to adapt to us, for the most part, many of us (especially those working in a time-constrained
+environment) would choose the latter.  This again represents an important underlying theme
+of the book and its layout.
+Overview of Other Chapters
+Beyond the first three chapters, this book has been designed as a working reference rather
+than a start-to-finish read.  The first three chapters represent the part describing the big
+picture in more detail than has been relevant in this helicopter-level view; the following
+chapters are then divided so that each describes and shows you how to use each of the
+different parts of the toolkit.  The different tools, then, are:-
+Chapter 4 – System Operator (9-Windows) – detailing a specific tool to assist in the process
+of thinking in terms of space, time and relationship.  This chapter forms a bridge between
+the overview chapters and the other specific tools – the 9-Windows representing a tool in
+their own right, but the underlying concepts are used extensively in every other aspect of
+systematic innovation.
+Chapter 5 – Problem Definition (Problem/Opportunity Explorer) – the first of five chapters
+describing problem definition tools.  This first one is the most general in nature; setting the
+scene for defining where we are trying to get to, what is stopping us, and what resources
+we have available to help us get there.
+Chapter 6 – Problem Definition (Function/Attribute Analysis) – detailing the process of
+managing problem complexity by modelling the positive and negative functional
+relationships between the different components, people or other elements of a system.
+Chapter 7 – Problem Definition (S-Curve Analysis) – the evolutionary s-curve concept plays
+an important role in systematic innovation.  This chapter details that role and how it impacts
+on the overall problem definition process.
+
+
+--- PAGE BREAK ---
+
+
+
+Chapter 8 – Problem Definition (Ideal Final Result) – closely allied to the ideality concept, is
+a tool called ‘Ideal Final Result’.  The Ideal Final Result tool actually has two forms.  In
+Chapter 8 it is discussed in the context of its role as a problem definition aid.  The main idea
+of the tool is that it encourages users to define a somewhat different situation to the one
+they might otherwise.
+Chapter 9 – Problem Definition (Perception Mapping) – the Perception Mapping tool has
+been designed specifically for problem settings involving people.  Every one of us sees the
+world around us through different eyes.  This results in perceptions of reality that may be
+different from one another.  This tool allows us to manage the inevitable complexity that
+arises when we try to make sense of the different views and perceptions that different people
+possess.
+Chapter 10 – Select Tool – as stated earlier, the systematic innovation toolkit is very richly
+populated with solution generation tools.  Chapter 10 acts as the transition between problem
+definition and problem solving; offering users a road map that directs them to the most
+appropriate solving tool for any given problem or opportunity situation.
+Chapter 11 – Problem Solving Tools (Conflict & Trade-Off Elimination/Inventive Principles)
+– a chapter where we detail the mechanics whereby the successful trade-off eliminating
+business solutions of others can be legitimately transferred to our situations.  Of specific
+interest in this chapter are trade-offs in which, as we try and improve one aspect of a system,
+some other aspect gets worse or prevents us.  The chapter also includes a reference
+detailing the 40 currently known strategies for eliminating trade-off solutions.
+Chapter 12 – Problem Solving Tools (Contradiction Elimination) – related to the previous
+chapter, but this time focusing on problem situations which contain a contradiction – for
+example, where we want something to be ‘present and absent’ or ‘big and small’,
+‘independent and attached’, etc – and detailing strategies for its elimination.
+Chapter 13 – Problem Solving Tools (Measurement Standards) – measurement problems
+form a specific class within the systematic innovation toolkit.  In this chapter we examine the
+best practices of other managers and problems solvers when they have successfully solved
+measurement problems.
+Chapter 14 – Problem Solving Tools (Linear and Non-Linear Trends of Evolution) – detailing
+a host of linear trend directions and over 30 discontinuous trends of business evolution and
+how they apply in both strategic and problem solving situations.  This chapter also introduces
+the concept of evolutionary potential – defined as the distance that a system is able to evolve
+from its current state to known evolutionary limits.
+Chapter 15 – Problem Solving Tools (Resources) – detailing strategies for identifying and
+utilising system resources, and putting them to best use.  The chapter shows how most
+organisations not only make poor use of most of their resources, but often don’t recognise
+their existence.
+Chapter 16 – Problem Solving Tools (Knowledge) – in which we discuss the importance of
+context in the search for existing knowledge from other areas, and detail strategies for
+effective knowledge searching.
+
+
+--- PAGE BREAK ---
+
+
+
+Chapter 17 – Problem Solving Tools (Re-Focus/Re-Frame) – The Re-Focus/Re-Frame
+(RF2) tool is primarily designed and used as a back-up if other tools within the systematic
+innovation portfolio are not producing adequate results.
+Chapter 18 – Problem Solving Tools (Trimming) – detailing a simple a tool that can help in
+reducing the complexity of systems.  Closely related to business process re-engineering in
+many senses, the ‘trimming’ tool is accompanied by a set of rules that determine when it is
+and isn’t possible to remove elements from a system.
+Chapter 19 – Problem Solving Tools (Ideal Final Result) – detailing the problem solving side
+of the Ideal Final Result tool.
+Chapter 20 – Problem Solving Tools (Psychological Inertia Tools) – another set of ‘back-up’
+tools that are intended to help users ‘think out of the box’ in those situations where this is
+required and other tools are not providing the necessary shifts.
+Chapter 21 – Problem Solving Tools (Subversion Analysis) – detailing one of the more
+specialised systematic innovation tools – this one being used in situations where we are
+trying to improve the robustness of a business model, strategy, organisation structure or
+other system elements.
+Chapter 22 – Solution Evaluation – shifting from problem solving to solution evaluation, this
+chapter details strategies for making legitimate apples-versus-oranges comparisons
+between different solutions in order to identify the one that best meets the problem boundary
+conditions.
+Chapter 23 – Into The Future – a short summary chapter examining where systematic
+innovation itself may be expected to evolve in the future in its business and management
+contexts.
+Each chapter is divided into a number of different sections.  Each chapter possesses a
+similar structure; firstly combining descriptions of the tool under consideration and a series
+of case study examples of the tool in action.  Then, where relevant, subsequent sections
+describe possible alternative means of actually using the tool; a summary containing ‘what
+do I do’ hints, and then finally, a reference section in which the tool content is shown in
+detail.  The latter two parts are there primarily for the use of practitioners.  Readers who are
+simply interested in obtaining a snapshot overview of a given tool, may like to read just the
+first parts of each chapter.
+What Do I Do?
+The book has been designed as something that can be read from start to finish, and also be
+dipped into as a working reference.  The general hope is that you will find a way if using the
+book to fit whatever style of working you personally prefer; there is a complete process we
+have called ‘systematic innovation’ for those that want it, or you may prefer to just
+concentrate on one or two individual tools.  Either way, the main aim is to get the reader to
+a point of delivering tangible success in the shortest possible space of time.
+
+
+--- PAGE BREAK ---
+
+
+
+If you are new to systematic innovation, we recommend you read the next two chapters to
+get a broader feel for what the bigger picture looks like and how it matches to the ways in
+which our brains function.
+Whatever happens, you should keep in mind the seven pillars of the method –
+CONTRADICTIONS,
+IDEALITY,
+FUNCTIONALITY,
+RESOURCES,
+RECURSION,
+EMERGENCE and SPACE/TIME/INTERFACE – in everything you do with TRIZ.
+References
+1) Rodin, R., ‘Free, Perfect And Now’, Simon & Schuster; 1999.
+2) Beer, S.  ‘The Brain Of The Firm: The Managerial Cybernetics of Organization’, The
+Professional library, Allen Lane, The Penguin Press, London, 1972.
+3) Mann, D.L., ‘Design For Wow’, TRIZ Journal, October 2002.
+4) De Bono, E., ‘I Am Right; You Are Wrong’, Penguin Books, 1991.
+
+
+
+
+
+--- PAGE BREAK ---
+
+
+
+Process Overview
+“It is best to do things systematically, since we are only human,
+and disorder is our worst enemy.”
+Hesiod
+
+Being the output of the biggest piece of creativity research ever conducted, it may not be
+surprising to learn that obtaining a working knowledge of all of the parts of the toolkit, and
+knowing which tool in which situation will require a significant commitment of time and effort.
+The idea behind the structure of this book is that it will help navigate us through a large part
+of the complexity of the overall method.  The specific aim of this chapter is to outline what
+that structure is and therefore to help us to see the bigger picture from an overall process
+perspective.
+Recognising that one of the main functions of the book is to help the reader to solve
+problems and deliver tangible benefit, and that not everyone is going to want to go through
+the rigours of learning the overall process, a final section of the chapter presents a pair of
+useful ‘short-cuts’.  We have included this section as we have found that people obtaining a
+quick-hit, success from the method are much more likely to want to go on and learn about
+other parts of the toolkit.  Those readers may wish to jump to the end of this chapter now.
+For those interested in investing a few minutes to explore the full process and to see what
+they might be missing by going directly to the short-cuts, the next section is where to begin:
+A Complete Process
+If it is what we want, systematic innovation offers us a complete start to finish process, which
+– as shown in Figure 2.1 –will take us from whatever vague start point we might be at,
+through a series of steps that will first help us to define what the right thing to be focusing
+on is, and then help us to identify the best solution to that situation.  While it might be said
+(often with good cause) that 99% of the problem comes in the implementation, we hope that
+the 1% we are covering is of value.  In any event, the other 99% will be full of other issues
+and problems to solve – all of which will benefit from the use of this process.
+
+Figure 2.1: Systematic Innovation Process Overview
+
+
+--- PAGE BREAK ---
+
+
+
+The start point for the process has been that we should literally be able to begin from any
+place.  We have included inside that wide-ranging ambition the desire to look at business,
+political, social science, architecture, software and even what might be loosely termed ‘the
+arts’ in this start point.  While the focus throughout this book will be the application of
+systematic innovation in business and management centred situations (check out the other
+books in the series for examples of other application areas), it is worth noting that it is more
+or less exactly the same process that we can apply to any of these other problem types.
+Hence the steps the process will take you through will be largely the same as those that
+someone solving a technical problem will also go through.  We hope that this common
+approach will help to break down some of the barriers that still exist between different
+disciplines.  At the very least, we hope to plant the suggestion that by studying success from
+literally all forms of human endeavour and distilling them into a unified whole, we have
+devised a problem solving structure that is ‘universal’ (the research goes on, of course, and
+so we are always actively exploring the possibility of extending and revising the structure –
+that being said, it has remained stable now for the last two years).
+Any problem situation start points we could possibly imagine have to be amenable to
+treatment if the process is to be of generic use.  We have tried to validate the process on as
+many situations as possible, and always present the challenge to problem solvers to try and
+come up with a scenario the process cannot handle.  The sorts of start points we see
+emerging on a regular basis, and which the process has been validated against include the
+following sorts of ‘perceived need for something to happen’ start point:
+• How do I improve sales?
+• How do I reduce my costs?
+• What might the new markets for product X be?
+• What is the best way to re-invigorate sales of service Y?
+• What is the best strategy for exploiting solution Z?
+• Where should we be going next?
+• What are the things that might come along in the future and threaten my business?
+When are they going to arrive?
+• How do I reduce waste?
+• How do I improve efficiency by B%?
+• How do I improve morale?
+• How do I prevent change programmes from losing momentum?
+• How do I encourage employees to remain in the organisation? What is the best way
+to do my succession planning?
+• How do I get better buy-in to improvement initiatives?
+And so on ad infinitum.  Note in particular that the process has been designed to cope with
+the things we normally view as ‘problems’ (‘challenges’, or whatever politically correct
+terminology happens to be fashionable at the moment), but also the other side of the coin,
+the ‘opportunities’ – those situations where we think we have a solution, but we don’t know
+what to do with it, or how to exploit it.  In this latter case, we need to re-cast our thinking a
+
+
+--- PAGE BREAK ---
+
+
+
+little (we will do this in the next section of the chapter), but for now all we need to know is
+that the same generic process will apply to both scenarios.
+Some, of course, will argue against both the need for a truly generic process, and whether,
+even if such a thing is possible, whether it is ethically or morally right to ‘inflict’ a rigorous
+structure to something (creativity) that is often fundamentally about doing things differently.
+We have some sympathy with this view – and the systematic innovation method itself, as
+discussed in the last chapter, makes great play on the need for ‘self-organizing’/’self-
+adapting’ systems.  On the other hand, there are two reasons which have prompted us to
+include and detail a generic process:-
+1) some people like the structure it provides, and
+2) whether we like a structure or not, the framework provided by a systematic process
+makes it far easier to communicate our problem or opportunity situation to others
+in a recognizable and reproducible form.
+Like many other problem/opportunity definition/solution (from now on, we’ll stick to the
+abbreviation ‘problem solving’) processes, the one used in this book contains three basic
+steps; things start with a part of the process called ‘define’, then there is a step called
+‘generate solutions’, and finally, a step called ‘evaluate solutions’.  One of the most
+challenging aspects of the overall method is that it is far richer than any other process we’ve
+ever seen in terms of the options available during the ‘generate solutions’ part of the
+process.  We usually describe this part of the process when it appears in other methods as
+the ‘insert miracle here’ part, because if you check out these processes (we don’t need to
+name them), they all rely very heavily on brainstorming as the means of generating
+solutions.  This is not to denigrate brainstorming (we will use many of the underlying
+principles in the systematic creativity process), merely to say that systematic innovation
+provides a substantially higher level of generative richness.  So much so in fact that the
+process we describe here includes a fourth step into the three basic ‘define’, ‘solve’,
+‘evaluate’ ones you will find everywhere.  That fourth step sits between ‘define’ and ‘solve’
+and is called ‘select’.  The basic idea behind the ‘select’ part of the process is that, having
+defined a problem situation, and seeing the broad array of possible systematic innovation
+solution generation tools, how do we know which ones are the ones we should use to tackle
+the problem? This is an area that seems to confound many newcomers to the method.  We
+hope that Chapter 10 describes a tool selection process that will lift the fog.
+To continue describing the overall process then, we now have a four step process – ‘Define’,
+‘Select’, ‘Solve’ and ‘Evaluate’ as illustrated in Figure 2.2.
+
+
+--- PAGE BREAK ---
+
+
+
+
+Figure 2.2: Four Basic Steps of the Systematic Innovation Process
+Let us now zoom in a little to examine each of these steps in a little more detail:
+DEFINE
+It is often said that 90% of a problem is defining what the problem actually is.  Systematic
+innovation concurs with this view.  It also goes further.  It recognises that the average human
+brain is much happier in ‘solve’ mode than it is in ‘define’ mode.  A very typical scenario
+seems to involve the obligatory 10 minutes thinking about the problem, followed by an hour
+or so of the enjoyable creative ‘solving’ part, followed by a race to implement the solution to
+see how good we were at solving it.  The usual outcome of this race is we discover that if
+we’d just spent a few more minutes thinking about exactly what problem it was that we
+should have been looking at, we would have saved ourselves an awful lot of time and energy
+racing to the right answer to the wrong problem.  Systematic innovation tries to encourage
+us to stay in ‘define’ mode for as long as possible.  It does this in ways that are both explicit
+and subtle.  Taken as a whole, the ‘define’ part of the overall four-step process itself involves
+five groups of activities.  Three of these five – the ‘problem explorer’, some kind of function
+and attribute analysis, and some kind of s-curve analysis - are as close to ‘fundamental’ to
+defining a problem situation adequately as makes any difference.  The recommended
+‘define’ process will always encourage problem solvers to go through these three activities.
+We would also highly recommend that a fourth ‘define’ activity – involving the consideration
+of ideality – is also carried out.  We don’t include this fourth step in the ‘fundamental’
+category, because, frankly, the social and business constraints present in a given situation
+may dis-allow its use.  We will discuss the potential implications of this in Chapter 8.  As far
+as this overview is concerned, the overall process of defining a problem situation should
+involve the three compulsory plus one highly recommended activity.  There is then a fifth
+definition tool, ‘perception mapping’.  This tool acts in a rather more specialised role and
+hence falls into the category ‘use if appropriate’.  Appropriate in this context means ‘does
+the situation under evaluation involve ‘people issues’? The perception mapping tool exists
+to help us to unravel the inevitable complexities present when different people perceive
+situations in different ways.  The Perception Mapping tool and the specifics of when and
+where we will use it are detailed in Chapter 9.  Meanwhile, the complete problem definition
+
+
+--- PAGE BREAK ---
+
+
+
+part of the process now contains three essential, one highly-recommended and one context
+specific parts.  Figure 2.3 reflects how these five groups of activities will be displayed in the
+book.
+
+Figure 2.3: Five Basic Steps of the DEFINE part of the Systematic Innovation Process
+Each of the groups is discussed in its own chapter.  For ease of reference, the navigator
+icon at the top right hand corner of each page in the book lets you flick through to view the
+chapter relevant to the part of the process you are involved in at any point in time.
+Staying in overview mode for the moment, however, it is worth recording a few comments
+here about how these four groups of ‘define’ activities should be approached:
+First, it is worth noting that although there are three compulsory define activities, it doesn’t
+matter what order we tackle them.  The default chapter sequence that we recommend is:
+5) Problem/Opportunity Explorer
+6) Function and Attribute Analysis
+7) S-Curve Analysis
+8) Ideality/Ideal Final Result, and
+9) Perception Mapping
+If you prefer a different way of doing things, then great.  A cursory examination of past
+studies that we have conducted would show that we actually change the sequence in which
+we do things quite considerably according to the type of problem, the mood we are in, and
+the dynamics of the different members if we are working in a team.
+Second on the list of important things to note is that it is highly possible that when we exit
+any of the five activities, we leave with nothing.  This is particularly common, for example, if
+we are in that very fortunate position of having a blank sheet of paper start to a problem –
+‘think of a new marketing campaign that will make lots of money’ to take an extreme
+example.  It is not possible to conduct a function analysis of a system that doesn’t exist yet,
+and so the answer when we ask the function analysis questions is ‘we don’t know yet’.  The
+
+
+--- PAGE BREAK ---
+
+
+
+main point in each of the five groups, though, is that although the answer we come out with
+might be a blank, it is vitally important that we at least enter and ask the question.
+Each of the five groups of define activities has a distinct purpose:
+• The Problem/Opportunity Explorer – is the foundation of the problem definition
+activity.  It is the part of the process that gets us to record things like where we are
+now, where we are trying to get to, how will we know when we’ve got there, what
+resources have we got available to us, and, perhaps most significant for any ‘real’
+problem, what constraints have we got to work within.  This is the part of the process
+where we define the boundaries of the problem/opportunity setting.
+• Function & Attribute Analysis (FAA) – is where we will gain our appreciation of
+the functionality of an existing system.  It is where we will delve into the details of a
+system in order to examine and record what is supposed to be happening within and
+around it, and also what is happening that we don’t want to happen.  FAA is the
+place where we will usually find ourselves doing the majority of the problem definition
+detail.  If we do this task correctly, we will often find that the problem suddenly
+becomes ‘obvious’; this is particularly so in the business and management contexts.
+If systematic innovation is about ‘managing complexity’, function analysis is where
+an awful lot of that management happens.
+• S-Curve Analysis – is where we conduct some kind of assessment of the relative
+maturity of the different parts of an existing system.  This part of the define process
+is vital as it forces us to obtain a better understanding of the evolutionary mechanics
+that dictate so much of the how, why, when and where’s of problem solving.  It will
+also play a significant role in helping us to determine how we should proceed after
+the define stage is completed.  This part of the define process is often the most
+qualitative in nature.  Fortunately, as we will see in Chapter 7, such qualitative output
+is in most cases sufficient to allow us to proceed to subsequent stages with
+confidence.
+• Ideal Final Result – the fourth activity in the ‘define’ process involves an analysis
+of where we are, and where we’re trying to get to in the context of ‘where could we
+be ultimately’.  It is an extremely powerful tool for helping us to think ‘out of the box’.
+As stated above, the process will always recommend that this activity be carried out
+– you can be pretty sure your current and future competitors are going to be doing
+it even if you’re not – if only to obtain a gauge of how far along the line of evolution
+you and your problem currently are.  On a more profound level, the thinking
+provoked by this activity can often lead to the definition of a much better problem
+than the one you started with.  It is also an extremely good way to help identify
+conflicts and contradictions.
+• Perception Mapping – as already hinted, this tool exists to help us to make sense
+of situations in which different people are involved.  We all see the world through
+our own unique perspectives, and very often these perspectives are different from
+those of the people around us.  This may mean that we are right and they are wrong;
+
+
+--- PAGE BREAK ---
+
+
+
+or they may be right; or neither of us may be right; or we both may be right.  The
+Perception Mapping tool is a way of helping us to map and understand the issues
+that often arise in these kinds of situations – even, in fact, those ones where people
+are not necessarily telling the truth, or are not willing to divulge the truth.
+Appendix 2 at the back of the book provides a series of blank sheets to help structure your
+thinking as you progress through these five problem definition steps.  Please feel free to
+photo-copy and use them on any problem or opportunity situation you are involved in.  For
+anyone preferring to use an electronic version, you will find a free downloadable version at
+the www.systematic-innovation.com website.
+SELECT
+Having completed the ‘Define’ part of the systematic innovation process, we progress to the
+second major stage, ‘Select’.  This is where the method guides us through a series of steps
+aimed at helping us to identify what sort of problem situation we have, and what the most
+appropriate tools to help us solve it are.  The ‘select’ process is described in detail in Chapter
+10.  While we are still sitting in our helicopter looking down at an overview of the whole
+process, it is worth recording here that this part of the process has been designed in such a
+way that we recognise that not everyone reading the book will be equally skilled in all
+aspects of all of the different tools.  As discussed in the previous overview chapter,
+systematic innovation contains, and we have deliberately configured, an amount of overlap
+between the different tools in the kit.  This means that, except for very specialised cases,
+the Select process will give us more than one recommendation on possible routes to
+generate solutions to a given problem.  In actual fact, for the majority of cases, we will be
+able to access a menu of three or four possible routes.  This menu is ranked, to reflect the
+fact that some tools will take you to ‘good’ answers more directly than others.  The general
+idea is that as your working armoury of tools expands (assuming you want that to happen!),
+you will increasingly find yourself heading straight to the tool recommended at the top of the
+menu.  We believe also that this ‘Select’ navigation tool is a useful addition to what can look
+like an overwhelming level of complexity when trying to transition from defined problem to
+best solve tool.
+SOLVE
+Given the richness of the systematic innovation solve tool-kit, the number of possibilities
+once a problem enters the third ‘Solve’ or ‘generate solutions’ stage is extensive.  For the
+purposes of this book, we have provided eleven basic clusters of solve tools.  These are
+shown in the navigation icon reproduced in Figure 2.4 below.
+The general idea is that the ‘Select’ process tells us exactly which of the chapters – one for
+each of the eleven tool clusters – we should be heading towards for any given problem.
+Thus Chapters 11 to 21 inclusive describe the different tools as follows:
+Chapter 11 – Conflict & Trade-Off Elimination/Inventive Principles
+Chapter 12 – Contradiction Elimination
+Chapter 13 – Measurement Standards
+Chapter 14 – Linear and Non-Linear Trends of Evolution
+
+
+--- PAGE BREAK ---
+
+
+
+Chapter 15 – Resources
+Chapter 16 – Knowledge
+Chapter 17 – Re-Focus/Re-Frame
+Chapter 18 – Trimming
+Chapter 19 – Ideal Final Result
+Chapter 20 – Psychological Inertia Tools
+Chapter 21 – Subversion Analysis
+
+Figure 2.4: Eleven Basic Tools of the SOLVE part of the Systematic Innovation Process
+Generally speaking, the ‘Select’ tool will manage the process of navigating between and
+around the different tools, while the above chapters concentrate on the detailed mechanics
+of the specific tool in question.  A couple of general points about navigation are worth making
+here from this overview perspective, however:
+1) The process is always trying to offer the user ‘back-up’ possibilities in case things
+should go wrong.  The first of these involves the possibility that we may go through
+all of the various definition steps of the process and still not know which tools to
+use to help us generate solutions.  In this case, the Re-Focus/Re-Frame tool
+(Chapter 17) comes in to play.  This is a tool designed for specifically this kind of
+‘don’t know what to do’ situation.  It is designed to take the user back to the
+beginning of the problem definition process and work them through a series of
+questions asked from a slightly different perspective – hence the ‘re-frame’ aspect
+of the title – trying to help guide things towards an ‘aha, now I know what to do’
+moment.
+2) It is, of course, also possible that we emerge from the ‘Define’ part of the process
+with what turns out to be a wrong or fundamentally unsolvable problem definition.
+In this regard it is worth noting that while many experienced systematic innovation
+users will tell you there is no such thing as an ‘unsolvable’ problem, they will also
+tell you that there are very definitely constraints that can make the problem
+unsolvable.  We believe this is a useful output from the solve part of the process –
+‘knowing’ that your problem plus your constraints means you will fundamentally not
+be able to generate a viable solution offers good justification to go around and re-
+
+
+--- PAGE BREAK ---
+
+
+
+challenge the constraints.  We also believe that – and have tried to structure the
+solve tools in such a way that – they become self-correcting.  In other words, if your
+constraints have taken you into a cul-de-sac, or if it turns out you have defined a
+problem situation incorrectly, the tools will first try and tell you, and then second,
+try and tell you which directions to travel in order to rectify the situation.  You will
+experience this most commonly in solution triggers that suggest you try and solve
+a problem at a higher or lower hierarchical level (the most common kind of required
+re-direction), or that you should re-challenge a given constraint.  This ‘self-
+correcting’ nature will initially require a little faith on your part – the tendency is
+often to fight the direction being suggested – but experience tells us that the
+benefits of following the re-directions being offered are there to be taken.
+3) By way of offering a final back-stop, it is worth noting as a final point that, on the
+rare occasions when we have been through all of the tools recommended as
+relevant to a problem and not generated any solutions, there is a specific set of
+tools (the Psychological Inertia tools – Chapter 20) that can help us to work out
+why we aren’t generating solutions, and what to do about it.  (They feature amongst
+the eleven solve tool clusters because they are also commonly used in precisely
+the ‘solve’ role.)
+EVALUATE
+The last of the four major parts of the overall systematic innovation process is ‘Evaluate’.
+This is the part of the process where we identify the ‘best’ solution from the ones generated
+during the preceding ‘solve’ part.  The ‘evaluate’ process is described in detail in Chapter
+22.  The real essence of it involves the mechanics of transforming the uncertainties
+commonly involved in making ‘apples versus oranges’ comparisons between different
+solutions.
+And so there is the overall process.  Except not quite.  At several points in the book you will
+see the four-stage process being drawn as a repeating loop – Figure 2.5.
+
+Figure 2.5: The Cyclic Nature of the Systematic Innovation Process
+This is an extremely important point in the context of ensuring we really achieve the ‘best’
+solution to a given problem.  Again the point stems from one of the cruel tricks our brains
+often play on us.  The trick in this case is similar to the one where our brain is over-eager to
+
+
+--- PAGE BREAK ---
+
+
+
+jump from problem definition mode to problem solution mode, except in this case, having
+generated a solution we like, our brain is over-eager to jump into what we might call
+‘satisfied’ mode.  In other words, we come up with a solution we like and our brain switches
+out of creative mode, out of critical mode and into a mode that says ‘ look what a great job
+we did’.  We will see several examples of this in action in case studies throughout the book
+– solutions where the problem solver came up with a good idea, which they sought to exploit
+without stepping back to wonder whether they could make it better.
+We include the looping process image as a way of reminding ourselves of the dangers of
+this ‘satisfied mode’ thinking.  The general message we should draw from it is that we should
+always look to go around the loop at least once more after we have derived a good solution.
+Innovation Chains
+The ‘going around the loop again’ idea should provide us with a very useful image of what
+systematic innovation is trying to do in terms of helping us to evolve a system in the direction
+of increasing ideality.  We will discuss this ‘chain’ idea further in Chapter 11 in the context
+of how the contradiction elimination process in particular will produce the chaining effect.
+Overall Summary Of The Process
+Figure 2.6 takes the four basic stages of the overall process in a way that details the various
+routes and fallback options available.  This is a picture that you will also find reproduced on
+the back of the book.  As such, it is intended to act as a quick reference navigation aid.
+
+Figure 2.6: Overall Systematic Innovation Process Map
+Convergent and Divergent Thinking
+A further point to mention at this stage in the description of the overall process is the
+connection with ‘convergent’ and ‘divergent’ thinking.  The convergent and divergent ideas

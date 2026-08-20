@@ -1,0 +1,21 @@
+[
+  {
+    "generation": 1,
+    "best_fitness": 47.361111111111114,
+    "avg_fitness": 19.125,
+    "best_id": "v0_0_napoleon_1731",
+    "best_mutators": [
+      "napoleon_ux"
+    ]
+  },
+  {
+    "generation": 2,
+    "best_fitness": 55.63888888888889,
+    "avg_fitness": 32.395833333333336,
+    "best_id": "cross_v0_0_napoleon_1731_v0_1_elena_3720_4973",
+    "best_mutators": [
+      "elena_triz",
+      "napoleon_ux"
+    ]
+  }
+]

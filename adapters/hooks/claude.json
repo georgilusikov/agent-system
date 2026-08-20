@@ -1,0 +1,204 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/georgijlusikov/.claude/hooks/rtk-rewrite.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dippy"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/georgijlusikov/.claude/hooks/git_worktree_completeness_gate.py",
+            "timeout": 40
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/georgijlusikov/.claude/hooks/untracked_critical_files_gate.py",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/georgijlusikov/.claude/hooks/worktree_isolation_gate.py",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/georgijlusikov/.claude/hooks/banned_doc_names_gate.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/context-budget-guard.sh",
+            "timeout": 1
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/georgijlusikov/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "command -v bd >/dev/null 2>&1 && bd prime --hook-json || true",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/georgijlusikov/.claude/hooks/session_start_handoff.py",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/gemini-audit.sh",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/stop-python-checks.sh",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/incident-parking.sh",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/georgijlusikov/.claude/hooks/precompact_handoff.py",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -r '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh' ]; then sh '/Users/georgijlusikov/.nodeterm/agent-hooks/claude.sh'; else cat >/dev/null 2>&1 || :; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,9 @@
-
-# Beads / Dolt files (added by bd init)
-.dolt/
+.DS_Store
+__pycache__/
+*.pyc
+*.log
+*.sqlite*
 *.db
-.beads-credential-key
-.beads/proxieddb/
+.pytest_cache/
+.generated/
+migration/rollback-local.json

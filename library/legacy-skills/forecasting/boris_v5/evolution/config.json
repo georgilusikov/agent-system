@@ -1,0 +1,135 @@
+{
+  "version": "0.1.0",
+  "description": "Эволюционная оптимизация промптов Boris через мутации и отбор",
+
+  "population": {
+    "size": 6,
+    "generations": 10,
+    "elite_count": 2,
+    "mutation_rate": 0.7
+  },
+
+  "mutators": {
+    "elena_triz": {
+      "path": "_agent_shared/skills/triz/",
+      "focus": "Добавить ТРИЗ-инструменты: противоречия, IKR, ресурсы, trimming",
+      "weight": 0.25
+    },
+    "xerox_competitive": {
+      "path": "projects/xerox/",
+      "focus": "Добавить конкурентный анализ: benchmarking, feature matrix, pricing",
+      "weight": 0.20
+    },
+    "boris_business": {
+      "path": "_agent_shared/skills/forecasting/boris_v5/",
+      "focus": "Усилить бизнес-логику: Go/No-Go, риски, WTP, unit economics",
+      "weight": 0.25
+    },
+    "vanechka_jtbd": {
+      "path": "projects/VANECHKA3000/",
+      "focus": "Добавить JTBD глубину: 4 Forces, switching cost, jobs hierarchy",
+      "weight": 0.15
+    },
+    "napoleon_ux": {
+      "path": "projects/napoleon/docs/workflows/execution_pilot.md",
+      "focus": "Улучшить UX анализа: clarity, actionability, structure",
+      "weight": 0.15
+    }
+  },
+
+  "benchmark": {
+    "source": "projects/xerox/outputs/analysis/",
+    "test_cases": [
+      {
+        "id": "crosspost_saas",
+        "input": "Оценить идею: SaaS для кросспостинга контента в социальные сети. Контекст: Рынок $5B+, конкуренты (Blotato $29-499/mo, Repurpose $35-180/mo, OpusClip $0-29/mo). Основные фичи: multi-platform posting, AI captions, scheduling, video reframe. Главные боли: API блокировки, pricing complexity.",
+        "expected_sections": [
+          "System Map с 6+ надсистемами",
+          "S-curve позиция",
+          "Base/Bull/Bear сценарии",
+          "TC/PC противоречия",
+          "Risk Register",
+          "Go/No-Go verdict"
+        ],
+        "golden_insights": [
+          "Платформы ужесточают API — главный риск",
+          "Hardware anti-ban — незанятая ниша",
+          "Русскоязычный рынок недообслужен"
+        ]
+      },
+      {
+        "id": "subtitle_extensions",
+        "input": "Прогноз развития системы браузерных расширений для субтитров. Контекст: SubtideX, EasySubs, Movie-Subtitles. Manifest V3 ограничения. YouTube меняет API. DRM на Netflix/Disney+.",
+        "expected_sections": [
+          "PoA-цепочка",
+          "S-curve",
+          "Угрозы Anti-System",
+          "Кандидаты решений"
+        ],
+        "golden_insights": [
+          "Облачный прокси — решение проблемы breakage",
+          "P2P сеть субтитров — альтернатива"
+        ]
+      },
+      {
+        "id": "ai_video_clipping",
+        "input": "Оценить идею: AI-сервис превращения длинных видео в viral shorts. Контекст: OpusClip доминирует, 10M+ пользователей. Фичи: ClipAnything, AI Captions, Reframe, Social scheduler. Pricing $0-29/mo.",
+        "expected_sections": [
+          "Конкурентный анализ",
+          "Value proposition",
+          "Differentiation strategy"
+        ],
+        "golden_insights": [
+          "Free tier как acquisition strategy",
+          "AI качество — commoditizing fast"
+        ]
+      }
+    ]
+  },
+
+  "fitness": {
+    "weights": {
+      "completeness": 0.25,
+      "evidence_tags": 0.20,
+      "actionability": 0.20,
+      "insight_quality": 0.20,
+      "structure": 0.15
+    },
+    "penalties": {
+      "missing_section": -10,
+      "no_verdict": -20,
+      "no_experiments": -15,
+      "generic_insights": -10,
+      "drift": -25
+    }
+  },
+
+  "operators": {
+    "mutation": {
+      "types": [
+        "add_section",
+        "deepen_analysis",
+        "add_evidence",
+        "clarify_actions",
+        "fix_drift"
+      ]
+    },
+    "crossover": {
+      "strategy": "section_swap"
+    },
+    "selection": {
+      "method": "tournament",
+      "tournament_size": 3
+    }
+  },
+
+  "logging": {
+    "output_dir": "_agent_shared/skills/forecasting/boris_v5/evolution/runs/",
+    "save_every_generation": true,
+    "track_metrics": [
+      "best_fitness",
+      "avg_fitness",
+      "diversity_score"
+    ]
+  }
+}

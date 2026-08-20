@@ -1,0 +1,125 @@
+---
+alwaysApply: false
+platforms: [cursor, claude-code]
+category: universal
+triggers: [check, verify, validate, test-cases, quality]
+description: "Output verification protocol with test cases and cross-checks"
+---
+
+# 🔍 CORE CHECK PROTOCOL
+
+**Purpose:** Verify outputs with test cases and independent cross-checks.
+
+> **Prerequisite:** Apply `core-anti-bias.mdc` for confidence calibration.
+
+---
+
+## Step 1: Define Test Cases
+
+**Always** define test cases before claiming "done":
+
+```markdown
+## Test Cases: [task name]
+
+### Positive Tests:
+1. [test] - expected: [result]
+
+### Negative Tests:
+1. [negative scenario] - expected: [handling]
+
+### Edge Cases:
+1. [edge case] - expected: [behavior]
+
+### Quality Criteria:
+- [ ] Criterion 1
+- [ ] Criterion 2
+```
+
+- **Never** proceed without written test cases
+- **Never** proceed without defined quality criteria
+
+---
+
+## Step 2: Execute and Verify
+
+- **Always** open and verify each artifact personally (don't assume!)
+- **Always** run each test and record PASS/FAIL
+- **Always** list all artifact links in chat
+
+```markdown
+## Verification Results:
+
+### Artifacts:
+- [path/to/file.ext] - [size, created]
+
+### Test Results:
+- ✅ Test 1: PASS - [details]
+- ❌ Test 2: FAIL - [reason, fix]
+
+### Confidence:
+Уверенность: [before]% → [after]% — [reason]
+```
+
+---
+
+## Step 3: Gap Analysis
+
+```markdown
+## Gap Analysis:
+Expected: [what was planned]
+Actual: [what was delivered]
+Gap: [differences]
+Root Cause: [why gap exists]
+Fix: [how to close gap]
+```
+
+- **Always** perform independent cross-check (min 2 methods)
+- **Never** confirm something is done without cross-check
+
+<!-- pass2-salvage 2026-04-25 -->
+### Challenge Your Output (6 self-review questions)
+1. Что я не учёл в выводе? 2. Что будет непонятно менеджеру? 3. Что будет непонятно разработчику? 4. Что будет непонятно команде? 5. Достаточно ли clarity для решения? 6. Технически точно (paths/tests/data)?
+> Если хоть на один вопрос ответ слабый — вернись на Step 1 или применяй `core-pizdej.mdc`.
+
+---
+
+## Step 4: UI Verification (if applicable)
+
+If changes affect UI (HTML/CSS/JS, browser extension, frontend):
+1. Apply `_agent_shared/rules/core-ui-verify.mdc`
+2. Include **verification ledger** in final output:
+
+```markdown
+## UI Verification Ledger:
+1. `npm run test` - PASS ✅
+2. `npm run lint` - PASS ✅
+3. Visual test - PASS ✅
+Console Errors: None ✅
+```
+
+---
+
+## Step 5: Build Verification
+
+- If TypeScript/JavaScript affected: **Always** run `tsc --noEmit`
+- If Rust/Backend affected: **Always** run `cargo check`
+- Include commands and results in verification ledger
+
+### Stack Consistency (Anti-Hallucination)
+Before coding, verify dependency versions:
+- `npm list <package>` / `cargo tree -p <crate>`
+- Or: `python3 _agent_shared/tools/stack_consistency_check.py <project> --run`
+
+---
+
+## Checklist
+
+**Never** say "done" without completing:
+- [ ] Test cases written and executed
+- [ ] All artifacts verified personally
+- [ ] Links to artifacts in chat
+- [ ] Gap analysis completed
+- [ ] Confidence calibrated
+- [ ] Cross-check performed
+- [ ] UI verification (if applicable)
+- [ ] Build verification (if applicable)

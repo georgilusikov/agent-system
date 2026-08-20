@@ -1,0 +1,16 @@
+[
+  {"query": "bouncer", "should_trigger": true, "note": "direct keyword"},
+  {"query": "audit this", "should_trigger": true, "note": "audit request"},
+  {"query": "score my work", "should_trigger": true, "note": "score request"},
+  {"query": "quality check", "should_trigger": true, "note": "quality review"},
+  {"query": "оцени мой код", "should_trigger": true, "note": "Russian evaluation request"},
+  {"query": "review my changes", "should_trigger": true, "note": "change review"},
+  {"query": "проверь качество", "should_trigger": true, "note": "Russian quality check"},
+  {"query": "how did I do", "should_trigger": true, "note": "performance self-assessment"},
+  {"query": "rate this", "should_trigger": true, "note": "rating request"},
+  {"query": "deep audit", "should_trigger": true, "note": "deep mode trigger"},
+  {"query": "score using gemini", "should_trigger": true, "note": "explicit Gemini audit"},
+  {"query": "fix my code", "should_trigger": false, "note": "fix request, not audit"},
+  {"query": "добавь комментарии", "should_trigger": false, "note": "documentation request"},
+  {"query": "запусти тесты", "should_trigger": false, "note": "test execution, not audit"}
+]

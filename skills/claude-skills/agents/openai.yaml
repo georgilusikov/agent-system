@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Skills"
+  short_description: "Use your Claude Code skills in Codex"
+  default_prompt: "Use $claude-skills to run one of my Claude Code slash skills in this Codex session."

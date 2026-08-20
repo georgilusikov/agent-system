@@ -1,0 +1,52 @@
+[
+  {
+    "generation": 1,
+    "best_fitness": 47.361111111111114,
+    "avg_fitness": 21.76851851851852,
+    "best_id": "v0_2_strategist_9671",
+    "best_mutators": [
+      "strategist_ux"
+    ]
+  },
+  {
+    "generation": 2,
+    "best_fitness": 60.083333333333336,
+    "avg_fitness": 31.703703703703706,
+    "best_id": "cross_v0_2_strategist_9671_v0_0_xerox_2211_3873",
+    "best_mutators": [
+      "xerox_competitive",
+      "strategist_ux"
+    ]
+  },
+  {
+    "generation": 3,
+    "best_fitness": 60.083333333333336,
+    "avg_fitness": 49.27777777777778,
+    "best_id": "cross_v0_2_strategist_9671_v0_0_xerox_2211_3873",
+    "best_mutators": [
+      "xerox_competitive",
+      "strategist_ux"
+    ]
+  },
+  {
+    "generation": 4,
+    "best_fitness": 60.083333333333336,
+    "avg_fitness": 57.96296296296296,
+    "best_id": "cross_v0_2_strategist_9671_v0_0_xerox_2211_3873",
+    "best_mutators": [
+      "xerox_competitive",
+      "strategist_ux"
+    ]
+  },
+  {
+    "generation": 5,
+    "best_fitness": 66.86111111111111,
+    "avg_fitness": 62.34259259259259,
+    "best_id": "cross_v0_3_xerox_8255_v0_0_xerox_2211_2597_strategist_6257_elena_9754",
+    "best_mutators": [
+      "xerox_competitive",
+      "strategist_ux",
+      "elena_triz"
+    ]
+  }
+]

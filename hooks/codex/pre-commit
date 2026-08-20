@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# pre-commit — машинный Gate A по канону скиллов ~/.codex/skills.
+# Прецедент 18ad7305 (в ~/.claude): SKILL.md с битым YAML frontmatter закоммичен
+# и грузился молча. Второй канон-стор (~40 codex-only скиллов) до сих пор был вне
+# проверки. Хук гоняет валидатор ТОЛЬКО по staged скиллам: существующие FAIL
+# незатронутых скиллов коммит не блокируют (иначе репозиторий встал бы целиком).
+# Обход при осознанной необходимости: git commit --no-verify.
+#
+# Файл версионируется (раньше жил только в .git/hooks и на новой машине молча
+# исчезал вместе с гейтом). Включение на чистом клоне — одна команда:
+#     git -C ~/.codex config core.hooksPath hooks
+set -uo pipefail
+
+VALIDATOR="$HOME/.claude/bin/validate_skills.py"
+SKILLS_ROOT="$HOME/.codex/skills"
+
+if [ -x "$VALIDATOR" ] || [ -f "$VALIDATOR" ]; then
+  if ! python3 "$VALIDATOR" --root "$SKILLS_ROOT" --changed; then
+    echo ""
+    echo "pre-commit BLOCKED: validate_skills.py --changed нашёл FAIL в staged скиллах ~/.codex/skills."
+    echo "Почини frontmatter/описание (см. ~/.claude/skills/0-how-to-write-skills/SKILL.md §3 Gate A)."
+    echo "Осознанный обход: git commit --no-verify"
+    exit 1
+  fi
+else
+  echo "pre-commit WARN: $VALIDATOR не найден — проверка скиллов пропущена." >&2
+fi
+
+exit 0

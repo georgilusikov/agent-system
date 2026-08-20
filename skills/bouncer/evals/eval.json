@@ -1,0 +1,27 @@
+[
+  {
+    "id": "script-invoked-not-inline",
+    "description": "Invokes bouncer-check.py script, does not do inline review itself",
+    "input": "bouncer — проверь последние изменения",
+    "assertions": [
+      {"type": "contains", "value": "bouncer-check.py"}
+    ]
+  },
+  {
+    "id": "deep-mode-activates",
+    "description": "Deep mode uses bouncer-deep.py for 'deep audit'",
+    "input": "deep audit — verify everything",
+    "assertions": [
+      {"type": "contains", "value": "bouncer-deep.py"}
+    ]
+  },
+  {
+    "id": "assistant-text-honest",
+    "description": "assistant_text field is honest summary, not marketing",
+    "input": "bouncer — оцени что я сделал сегодня",
+    "assertions": [
+      {"type": "contains", "value": "assistant_text"},
+      {"type": "not_contains", "value": "отличная работа"}
+    ]
+  }
+]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Retro"
+  short_description: "Retrospect a session and propose reusable Codex rules."
+  default_prompt: "Use $retro for this session: identify errors, useful patterns, recurring risks, rules, destinations, and wait for OK."

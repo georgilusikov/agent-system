@@ -1,0 +1,261 @@
+{
+  "akts": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "antisystem": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "arip": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "ariz": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "avf": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "benchmarking": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "causal_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "contradictions": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "diversion_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "dynamization": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "effects": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "flow_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "forty_principles": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "fos": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "functional_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "goldfish": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "ikr": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "inversion": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "limits_strategy": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "master_triz_orchestrator": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": false,
+    "validators": false,
+    "gate_check": false
+  },
+  "mmch": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "oas_transfer": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "oz_ov": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "reports": {
+    "SKILL.md": false,
+    "core_instructions.md": false,
+    "examples": false,
+    "validators": false,
+    "gate_check": false
+  },
+  "resource_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "reverse_fos": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "robinson": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "rtv": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "rvs": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "s_curve": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "standards": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "structural_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "system_operator": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "trimming": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "value_analysis": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "vepoli": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  },
+  "zrts": {
+    "SKILL.md": true,
+    "core_instructions.md": true,
+    "examples": true,
+    "validators": true,
+    "gate_check": true
+  }
+}

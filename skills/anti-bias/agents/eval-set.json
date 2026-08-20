@@ -1,0 +1,15 @@
+[
+  {"query": "какую БД выбрать: PostgreSQL или MongoDB", "should_trigger": true, "note": "technology choice decision"},
+  {"query": "стоит ли использовать микросервисы", "should_trigger": true, "note": "architecture decision"},
+  {"query": "мне кажется это хорошее решение", "should_trigger": true, "note": "implicit confirmation bias risk"},
+  {"query": "объективно оцени мой код", "should_trigger": true, "note": "explicit objectivity request"},
+  {"query": "это точно правильный подход?", "should_trigger": true, "note": "doubt about decision"},
+  {"query": "какой риск у этого решения", "should_trigger": true, "note": "risk assessment"},
+  {"query": "эти данные показывают что рост есть", "should_trigger": true, "note": "data interpretation — confirmation bias risk"},
+  {"query": "выбери лучший вариант", "should_trigger": true, "note": "explicit choice request"},
+  {"query": "bias check", "should_trigger": true, "note": "direct keyword"},
+  {"query": "добавь функцию сортировки", "should_trigger": false, "note": "implementation task, no decision"},
+  {"query": "почему тест падает", "should_trigger": false, "note": "debugging, not decision — /why territory"},
+  {"query": "напиши тест", "should_trigger": false, "note": "implementation, not decision"},
+  {"query": "задеплой", "should_trigger": false, "note": "action, not choice"}
+]

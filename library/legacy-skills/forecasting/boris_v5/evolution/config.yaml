@@ -1,0 +1,142 @@
+# Boris Evolution System Configuration
+# Дарвиновская эволюция оркестратора Boris
+
+version: "0.1.0"
+description: "Эволюционная оптимизация промптов Boris через мутации и отбор"
+
+# ============================================
+# ПОПУЛЯЦИЯ
+# ============================================
+population:
+  size: 6                    # Количество вариантов Boris в поколении
+  generations: 10            # Количество поколений
+  elite_count: 2             # Сколько лучших сохраняем без изменений
+  mutation_rate: 0.7         # Вероятность мутации (vs кроссовер)
+
+# ============================================
+# МУТАТОРЫ (твои агенты как "улучшатели")
+# ============================================
+mutators:
+  elena_triz:
+    path: "_agent_shared/skills/triz/"
+    focus: "Добавить ТРИЗ-инструменты: противоречия, IKR, ресурсы, trimming"
+    weight: 0.25
+
+  xerox_competitive:
+    path: "projects/xerox/"
+    focus: "Добавить конкурентный анализ: benchmarking, feature matrix, pricing"
+    weight: 0.20
+
+  boris_business:
+    path: "_agent_shared/skills/forecasting/boris_v5/"
+    focus: "Усилить бизнес-логику: Go/No-Go, риски, WTP, unit economics"
+    weight: 0.25
+
+  vanechka_jtbd:
+    path: "projects/VANECHKA3000/"
+    focus: "Добавить JTBD глубину: 4 Forces, switching cost, jobs hierarchy"
+    weight: 0.15
+
+  napoleon_ux:
+    path: "projects/napoleon/docs/workflows/execution_pilot.md"
+    focus: "Улучшить UX анализа: clarity, actionability, structure"
+    weight: 0.15
+
+# ============================================
+# BENCHMARK (тестовые данные из Xerox)
+# ============================================
+benchmark:
+  source: "projects/xerox/outputs/analysis/"
+  test_cases:
+    - id: "crosspost_saas"
+      input: |
+        Оценить идею: SaaS для кросспостинга контента в социальные сети.
+        Контекст: Рынок $5B+, конкуренты (Blotato $29-499/mo, Repurpose $35-180/mo,
+        OpusClip $0-29/mo). Основные фичи: multi-platform posting, AI captions,
+        scheduling, video reframe. Главные боли: API блокировки, pricing complexity.
+      expected_sections:
+        - "System Map с 6+ надсистемами"
+        - "S-curve позиция (Growth/Maturity)"
+        - "Base/Bull/Bear сценарии"
+        - "TC/PC противоречия"
+        - "Risk Register"
+        - "Go/No-Go verdict"
+      golden_insights:
+        - "Платформы ужесточают API — главный риск"
+        - "Hardware anti-ban — незанятая ниша"
+        - "Русскоязычный рынок недообслужен (только SMMBox)"
+
+    - id: "subtitle_extensions"
+      input: |
+        Прогноз развития системы браузерных расширений для субтитров.
+        Контекст: SubtideX, EasySubs, Movie-Subtitles. Manifest V3 ограничения.
+        YouTube меняет API. DRM на Netflix/Disney+.
+      expected_sections:
+        - "PoA-цепочка"
+        - "S-curve (Growth)"
+        - "Угрозы Anti-System"
+        - "Кандидаты решений (8+)"
+      golden_insights:
+        - "Облачный прокси — решение проблемы breakage"
+        - "P2P сеть субтитров — альтернатива"
+
+    - id: "ai_video_clipping"
+      input: |
+        Оценить идею: AI-сервис превращения длинных видео в viral shorts.
+        Контекст: OpusClip доминирует, 10M+ пользователей. Фичи: ClipAnything,
+        AI Captions, Reframe, Social scheduler. Pricing $0-29/mo.
+      expected_sections:
+        - "Конкурентный анализ"
+        - "Value proposition"
+        - "Differentiation strategy"
+      golden_insights:
+        - "Free tier как acquisition strategy"
+        - "AI качество — commoditizing fast"
+
+# ============================================
+# МЕТРИКА КАЧЕСТВА (Fitness Function)
+# ============================================
+fitness:
+  weights:
+    completeness: 0.25       # Все секции заполнены
+    evidence_tags: 0.20      # [OBS]/[DATA]/[ASSUME] используются
+    actionability: 0.20      # Есть конкретные next steps
+    insight_quality: 0.20    # Нетривиальные выводы (vs generic)
+    structure: 0.15          # Соответствие шаблону
+
+  penalties:
+    missing_section: -10     # За каждую пропущенную секцию
+    no_verdict: -20          # Нет Go/No-Go
+    no_experiments: -15      # Нет экспериментов
+    generic_insights: -10    # Банальные выводы типа "рынок растёт"
+    drift: -25               # Отклонение от SUA
+
+# ============================================
+# ЭВОЛЮЦИОННЫЕ ОПЕРАТОРЫ
+# ============================================
+operators:
+  mutation:
+    types:
+      - "add_section"        # Добавить недостающую секцию
+      - "deepen_analysis"    # Углубить существующий анализ
+      - "add_evidence"       # Добавить [OBS]/[DATA] теги
+      - "clarify_actions"    # Сделать recommendations более actionable
+      - "fix_drift"          # Вернуть фокус на SUA
+
+  crossover:
+    strategy: "section_swap" # Берём лучшие секции от двух родителей
+
+  selection:
+    method: "tournament"     # Турнирный отбор
+    tournament_size: 3
+
+# ============================================
+# ЛОГИРОВАНИЕ
+# ============================================
+logging:
+  output_dir: "_agent_shared/skills/forecasting/boris_v5/evolution/runs/"
+  save_every_generation: true
+  track_metrics:
+    - "best_fitness"
+    - "avg_fitness"
+    - "diversity_score"

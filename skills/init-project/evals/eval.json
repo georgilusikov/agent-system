@@ -1,0 +1,62 @@
+[
+  {
+    "id": "scans-project-first",
+    "description": "Reads project files before asking questions — does not start with questions blindly",
+    "input": "/init-project",
+    "assertions": [
+      {"type": "contains", "value": "ls"},
+      {"type": "contains", "value": "git log"}
+    ]
+  },
+  {
+    "id": "asks-purpose-and-narrative",
+    "description": "Asks about purpose (ради чего) and narrative direction (откуда/куда)",
+    "input": "Создай CLAUDE.md для этого проекта",
+    "assertions": [
+      {"type": "contains", "value": "Ради чего"},
+      {"type": "contains", "value": "Направлени"}
+    ]
+  },
+  {
+    "id": "template-has-all-sections",
+    "description": "Generated AGENTS.md includes every section of the SKILL.md template (heading names must match the template verbatim — see 2026-08-02 audit)",
+    "input": "init project — ответы: цель=квиз-бот, приоритет=скорость, target=macmini, готово=бот отвечает на /start",
+    "assertions": [
+      {"type": "contains", "value": "## Ради чего"},
+      {"type": "contains", "value": "## Нарратив проекта"},
+      {"type": "contains", "value": "## Для кого"},
+      {"type": "contains", "value": "## Среда"},
+      {"type": "contains", "value": "## Роль агента"},
+      {"type": "contains", "value": "## Текущее состояние"},
+      {"type": "contains", "value": "## Команды"},
+      {"type": "contains", "value": "## Следствия приоритетов"},
+      {"type": "contains", "value": "## Checkpoints"}
+    ]
+  },
+  {
+    "id": "includes-consequences",
+    "description": "Shows explicit priority→consequence chains, not just disconnected rules",
+    "input": "настрой проект — приоритет скорость, target Python 3.9",
+    "assertions": [
+      {"type": "contains", "value": "поэтому"},
+      {"type": "contains", "value": "→"}
+    ]
+  },
+  {
+    "id": "checks-contradictions",
+    "description": "Validates internal consistency — flags conflicting rules",
+    "input": "init project — приоритет=скорость, обязательно 100% test coverage",
+    "assertions": [
+      {"type": "contains", "value": "противореч"}
+    ]
+  },
+  {
+    "id": "no-empty-sections",
+    "description": "Does not leave placeholder sections in generated CLAUDE.md",
+    "input": "создай claude md — нет других агентов, нет MCP серверов",
+    "assertions": [
+      {"type": "not_contains", "value": "Другие исполнители"},
+      {"type": "not_contains", "value": "{"}
+    ]
+  }
+]

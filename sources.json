@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "allow": [
+    {"id": "portable-skills", "path": "/Users/georgijlusikov/.agents/skills", "classes": ["skills"]},
+    {"id": "claude-user", "path": "/Users/georgijlusikov/.claude", "classes": ["instructions", "agents", "skills", "hooks", "rules", "standards", "memory"]},
+    {"id": "codex-user", "path": "/Users/georgijlusikov/.codex", "classes": ["instructions", "skills", "hooks", "rules"]},
+    {"id": "gemini-user", "path": "/Users/georgijlusikov/.gemini", "classes": ["instructions", "skills", "hooks"]},
+    {"id": "grok-user", "path": "/Users/georgijlusikov/.grok", "classes": ["skills", "hooks", "rules"]},
+    {"id": "shared-current", "path": "/Users/georgijlusikov/Documents/курсор/_agent_shared", "classes": ["skills", "hooks", "rules", "standards", "memory", "library"]},
+    {"id": "shared-old", "path": "/Users/georgijlusikov/code/cursor-workspace/_agent_shared", "classes": ["skills", "hooks", "rules", "standards", "memory", "library"]}
+  ],
+  "deny_names": [
+    ".env", "auth.json", "credentials.json", "secrets.json", ".DS_Store",
+    "__pycache__", ".pytest_cache", "node_modules", ".git", "memtrace",
+    "rollout_summaries", "raw_memories.md", "last_interaction.md"
+  ],
+  "deny_suffixes": [".pyc", ".log", ".sqlite", ".sqlite-wal", ".sqlite-shm", ".db", ".lock"],
+  "deny_fragments": ["cache", "session", "telemetry", "crash", "tmp"],
+  "external_symlinks": "record-only"
+}

@@ -1,0 +1,45 @@
+---
+alwaysApply: true
+category: universal
+platforms: [cursor, claude-code, codex, antigravity, gemini]
+triggers: [read, grep, tokens, context, cost]
+description: "Токен-бюджет: grep → read 50 строк, никогда не читать файлы целиком"
+---
+
+# 💰 CORE CONTEXT BUDGET — экономия токенов
+
+Цель: не выжигать 400k токенов за сессию чтением файлов целиком.
+
+## Правило 1: read только с лимитом
+
+ЗАПРЕЩЕНО: `read(path)` без `limit`/`offset` — дефолт 2000 строк = весь файл в контекст навсегда.
+
+ОБЯЗАТЕЛЬНО:
+
+1. `grep(pattern, path)` → получи `Line 87: class Foo`
+2. `read(path, offset=75, limit=50)` — окно 50 строк вокруг найденного
+3. Нужно шире → второе окно `read(path, offset=130, limit=50)`, а не весь файл
+
+Исключение — файлы < 80 строк можно читать целиком.
+
+## Правило 2: что никогда не читать целиком
+
+Даже через grep — не грузи в контекст (>500KB каждый, раздувают историю):
+
+- `_agent_shared/data/metodolog_*.json` / `*.md` (1.4–1.6 MB)
+- `data/transcripts/*.json` (1.6–2.4 MB)
+- `projects/xerox/outputs/**/api_logs.json` (0.5–33 MB)
+- `_agent_shared/skills/REGISTRY.md` (27 KB — читай только через `SKILLS_INDEX.md` 20 KB)
+- `META_MANIFEST.md` / `EXECUTION_PLAN.md` (25–30 KB — только по запросу)
+- `node_modules/`, `.venv/`, `.mypy_cache/`, `.claude/worktrees/`
+
+Для них: `bash wc -l` / `bash head` / `grep -c` вместо `read`.
+
+## Правило 3: скиллы
+
+- Сначала `read _agent_shared/SKILLS_INDEX.md` (оглавление 148 строк)
+- Потом `skill("один-нужный")` — не грузи 3-5 скиллов на всякий случай (каждый +5-15k токенов)
+
+## Проверка
+
+Перед `read` без лимита — стоп и перепиши на `grep+read 50`.

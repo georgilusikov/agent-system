@@ -1,0 +1,67 @@
+---
+alwaysApply: false
+category: workflow
+platforms: [cursor, claude-code]
+triggers: [state.yaml, task.yaml, result.yaml, multi-agent, orchestration, long-run, backlog, worker]
+description: "State + task/result contracts for long-running or multi-agent project work"
+---
+
+# Agent State Contracts
+
+Use this rule when work spans multiple agent runs, multiple workers, a backlog,
+or unclear allowed/blocked actions.
+
+## What This Is
+
+Do not keep project state only in chat or prose. Use small files:
+
+- `agent/state.yaml` — current gates, allowed/blocked actions, active tasks.
+- `agent/tasks/<id>.yaml` — one bounded worker contract.
+- `agent/tasks/<id>-result.yaml` — worker evidence and residual blockers.
+
+Read the full method before creating or changing these files:
+`_agent_shared/standards/agent-state-contract-standard.md`.
+
+## When To Apply
+
+Apply for:
+
+- long-running projects with repeated agent sessions;
+- multi-agent Cursor/Claude/AGY/Fusion work;
+- backlogs, waves, or staged execution;
+- tasks where "what is allowed now?" matters;
+- expensive rework caused by vague prompts or stale context.
+
+Skip for:
+
+- one-shot local edits;
+- small questions with no persistent state;
+- throwaway experiments where a checklist is enough.
+
+## Operating Rule
+
+1. Read project rules first, then `agent/state.yaml` if present.
+2. If no state exists and the task is long-running, create the minimal state.
+3. Before launching a worker, write `agent/tasks/<id>.yaml`.
+4. In the worker prompt, pass the contract path, not a long context dump.
+5. Require `agent/tasks/<id>-result.yaml`.
+6. Before claiming done, spot-check evidence. State files route work; they are
+   not proof by themselves.
+
+## Thinking Gates
+
+Use extra review modes only when triggered:
+
+- `falsify`: before acceptance, publish/readiness claims, or disputed evidence.
+- `fusion_review`: when choosing between 2+ architectures or tradeoffs.
+- `root_cause`: after 3 repeated failures or contradictory test results.
+- `circuit_breaker`: stop after repeated failed fixes; write a failure report.
+
+## Result Shape
+
+Final answer must say:
+
+- which state/task files were created or updated;
+- which checks passed;
+- what remains blocked or unverified;
+- whether the next action is execute, review, retry, or stop.

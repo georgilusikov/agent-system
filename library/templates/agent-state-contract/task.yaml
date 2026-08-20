@@ -1,0 +1,31 @@
+version: project.task_contract.v1
+id: example-task
+status: ready
+created_at: "YYYY-MM-DD"
+goal: "One bounded outcome."
+recommended_worker: cursor_agent
+worktree: .
+
+source_of_truth:
+  - ./AGENTS.md
+  - ./agent/state.yaml
+
+scope:
+  intent: implement_or_verify
+  may_modify_files: true
+  files_to_read: []
+  files_to_modify: []
+  commands_to_consider: []
+
+forbidden_actions:
+  - commit
+  - push
+  - destructive_git
+  - live_external_call
+  - paid_call
+
+acceptance:
+  - "Exact evidence required before PASS."
+
+max_attempts: 3
+result_schema: ./agent/tasks/templates/result.yaml

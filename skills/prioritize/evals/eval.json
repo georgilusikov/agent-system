@@ -1,0 +1,48 @@
+[
+  {
+    "id": "isrice-table-present",
+    "description": "Output contains ISRICE scoring table with R/I/C/E columns",
+    "input": "Приоритизируй: 1) добавить оплату 2) редизайн лендинга 3) интеграция с телеграм",
+    "assertions": [
+      {"type": "contains", "value": "Reach"},
+      {"type": "contains", "value": "Impact"},
+      {"type": "contains", "value": "Effort"},
+      {"type": "contains", "value": "ISRICE"}
+    ]
+  },
+  {
+    "id": "sorted-by-score",
+    "description": "Results are sorted by ISRICE score descending",
+    "input": "Ранжируй: фича А, фича Б, фича В, фича Г",
+    "assertions": [
+      {"type": "contains", "value": "#"},
+      {"type": "contains", "value": "ДЕЛАТЬ"}
+    ]
+  },
+  {
+    "id": "drops-low-scorers",
+    "description": "Explicitly drops or deprioritizes low-scoring items",
+    "input": "5 задач: простая, средняя, сложная на месяц, мелкая но бесполезная, большая и важная",
+    "assertions": [
+      {"type": "regex", "value": "(ДРОПНУТЬ|ОТЛОЖИТЬ|дропнуть|отложить|низкий приоритет)"}
+    ]
+  },
+  {
+    "id": "one-metric-principle",
+    "description": "Each hypothesis targets ONE metric, not 'improve everything'",
+    "input": "Гипотеза: улучшить конверсию и средний чек одновременно",
+    "assertions": [
+      {"type": "contains", "value": "одн"},
+      {"type": "not_contains", "value": "улучшим всё сразу"}
+    ]
+  },
+  {
+    "id": "calibration-present",
+    "description": "Includes confidence calibration after scoring",
+    "input": "Приоритизируй 3 идеи для стартапа",
+    "assertions": [
+      {"type": "contains", "value": "Уверенность"},
+      {"type": "contains", "value": "%"}
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Improve Codebase Architecture"
+  short_description: "Find and grill architecture improvements"
+policy:
+  # Owner calls this in free text ("что здесь стоит отрефакторить"); a locked
+  # implicit door makes the trigger list in SKILL.md unreachable. Audit 2026-08-02.
+  allow_implicit_invocation: true

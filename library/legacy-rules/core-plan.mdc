@@ -1,0 +1,27 @@
+---
+alwaysApply: false
+category: workflow
+platforms: [cursor, claude-code]
+triggers: [plan, todo, task, roadmap]
+description: "Task planning protocol — record and update plans in .todo.md"
+---
+
+# 📋 CORE PLAN (Task Planning)
+
+## 1. Записать задачи
+Запиши задачи или обнови план в `[todo · incidents]/{projectname}.todo.md`.
+
+## 2. Принципы работы
+> Применяй `_agent_shared/rules/core-principles.mdc`
+
+Не срезай углы — решай корневую проблему. Если нужно, делай ресёрч и диагностику прежде чем действовать.
+
+## 3. Проверка результата
+- Прочитай результат, выпиши что не учёл и где ошибся.
+- Фальсифицируй вывод: протокол challenge.
+- Наведи порядок: файлы на своих местах?
+
+## 4. Финальная валидация
+- Gap Analysis: expected vs actual output.
+- Независимый cross-check обязателен.
+- Что будет непонятно менеджеру / разработчику / команде?

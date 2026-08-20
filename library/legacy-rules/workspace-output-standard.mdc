@@ -1,0 +1,186 @@
+---
+alwaysApply: false
+---
+
+# 📁 Workspace Output Standard
+
+**Цель:** Предотвратить создание мусорных папок в корне workspace.
+
+## 🚫 Правило 1: Никогда не создавай output в корне workspace
+
+**❌ ЗАПРЕЩЕНО:**
+```bash
+./test_results/
+./notion_analysis/
+./output/
+./temp/
+```
+
+**✅ ПРАВИЛЬНО:**
+```bash
+projects/{project_name}/outputs/
+_test_results/
+```
+
+---
+
+## 📂 Правило 2: Стандартные директории для output
+
+### Для результатов проектов:
+```
+projects/{project_name}/outputs/
+```
+
+**Примеры:**
+- `projects/xerox/outputs/notion_2026-01-19/`
+- `projects/Business_Architect_System/reports/`
+- `projects/elena_triz/test_runs/`
+
+### Для одноразовых экспериментов:
+```
+_test_results/{experiment_name}/
+```
+
+**Примеры:**
+- `_test_results/orai_test_results/`
+- `_test_results/quick_poc_2026-01-19/`
+
+### Для технических логов (НЕ отчеты):
+```
+_logs/{log_type}/
+```
+
+**Примеры:**
+- `_logs/metrics_2026-01-19.txt`
+- `_logs/architect_loop_20260119.log`
+
+---
+
+## 🏷️ Правило 3: Именование с timestamp
+
+**❌ ПЛОХО:**
+```
+./notion_test/
+./test1/
+./final/
+```
+
+**✅ ХОРОШО:**
+```
+projects/xerox/outputs/notion_2026-01-19_12-30/
+_test_results/poc_feature_x_2026-01-19/
+```
+
+**Формат:** `{name}_{YYYY-MM-DD}` или `{name}_{YYYY-MM-DD_HH-MM}`
+
+---
+
+## 🔧 Правило 4: Обновление флагов `--output`
+
+### Для скриптов с `--output`:
+
+**❌ Старый способ:**
+```bash
+python3 main.py --url https://notion.so --output ./notion_test
+```
+
+**✅ Новый способ:**
+```bash
+python3 main.py --url https://notion.so --output outputs/notion_$(date +%Y-%m-%d)
+```
+
+### Для Python кода:
+
+**❌ Старый код:**
+```python
+output_dir = args.output or "./analysis"
+```
+
+**✅ Новый код:**
+```python
+from datetime import datetime
+
+# Default to project outputs directory
+default_output = f"outputs/analysis_{datetime.now().strftime('%Y-%m-%d_%H-%M')}"
+output_dir = args.output or default_output
+
+# Ensure output is not in workspace root
+if output_dir.startswith('./') and '/' not in output_dir[2:]:
+    raise ValueError(f"Output directory '{output_dir}' would be created in workspace root. Use 'outputs/{output_dir[2:]}' instead.")
+```
+
+---
+
+## 🧹 Правило 5: Cleanup Policy
+
+### Автоматическая очистка:
+
+**`_test_results/`:**
+- Хранить максимум 30 дней
+- Еженедельно проверять и удалять старое
+
+**`projects/*/outputs/`:**
+- Архивировать результаты старше 90 дней
+- Переносить в `_archive/project_outputs/`
+
+**`_logs/`:**
+- Хранить максимум 14 дней
+- Автоматически ротировать логи
+
+---
+
+## ✅ Checklist перед commit
+
+Перед каждым commit проверь:
+
+- [ ] Нет новых папок в корне workspace (кроме `projects/`, `_test_results/`, `_logs/`, `_archive/`)
+- [ ] Все output директории используют timestamp в имени
+- [ ] Все временные результаты в `_test_results/`
+- [ ] Все отчеты проектов в `projects/{name}/outputs/` или `projects/{name}/reports/`
+
+---
+
+## 🚨 Исключения
+
+**Разрешены в корне workspace:**
+- `projects/` - активные проекты
+- `_test_results/` - временные эксперименты
+- `_logs/` - технические логи
+- `_archive/` - архив
+- `_agent_shared/` - общие ресурсы
+- `shared/` - общие библиотеки
+- `data/` - датасеты (если большие)
+
+**Все остальное - ЗАПРЕЩЕНО.**
+
+---
+
+## 📖 Примеры использования
+
+### Xerox (Competitor Analysis):
+```bash
+# ❌ Старый способ
+python3 main.py --url https://notion.so --output ./notion_test
+
+# ✅ Новый способ
+cd projects/xerox
+python3 main.py --url https://notion.so --output outputs/notion_$(date +%Y-%m-%d)
+```
+
+### Business Architect System:
+```bash
+# Отчеты сохраняются автоматически в:
+projects/Business_Architect_System/reports/MASTER_REPORT_$(date +%Y%m%d).md
+```
+
+### Быстрый эксперимент:
+```bash
+# Для одноразового теста
+mkdir -p _test_results/my_experiment_$(date +%Y-%m-%d)
+cd _test_results/my_experiment_$(date +%Y-%m-%d)
+# ... запуск эксперимента
+```
+
+---
+
+**Помни:** Чистый workspace = быстрая навигация = высокая продуктивность! 🚀

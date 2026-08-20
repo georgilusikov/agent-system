@@ -1,0 +1,7 @@
+interface:
+  display_name: "Handoff"
+  short_description: "Write or resume a dated session handoff document"
+policy:
+  # Owner calls this skill in free text ("хэндоф"), not via an explicit tool
+  # call — implicit invocation must stay open or the trigger list is dead.
+  allow_implicit_invocation: true

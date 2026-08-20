@@ -1,0 +1,7 @@
+interface:
+  display_name: "Teach"
+  short_description: "Learn a concept in a guided workspace"
+policy:
+  # Owner calls this in free text ("научи меня"); a locked implicit door makes
+  # the trigger list in SKILL.md unreachable. Audit 2026-08-02.
+  allow_implicit_invocation: true

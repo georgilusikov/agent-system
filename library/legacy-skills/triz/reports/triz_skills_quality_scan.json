@@ -1,0 +1,635 @@
+{
+  "akts": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 17,
+      "placeholders": [],
+      "empty_ratio": 0.06
+    },
+    "core_stats": {
+      "lines": 107,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "antisystem": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 80,
+      "placeholders": [],
+      "empty_ratio": 0.26
+    }
+  },
+  "arip": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 80,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "ariz": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 111,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "avf": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 96,
+      "placeholders": [],
+      "empty_ratio": 0.22
+    }
+  },
+  "benchmarking": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 86,
+      "placeholders": [],
+      "empty_ratio": 0.23
+    }
+  },
+  "causal_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 30,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 99,
+      "placeholders": [],
+      "empty_ratio": 0.23
+    }
+  },
+  "contradictions": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [
+        "\\[\\]"
+      ],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 116,
+      "placeholders": [],
+      "empty_ratio": 0.23
+    }
+  },
+  "diversion_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [
+        "\\[\\]"
+      ],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 95,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "dynamization": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 109,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "effects": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 96,
+      "placeholders": [],
+      "empty_ratio": 0.27
+    }
+  },
+  "flow_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 83,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "forty_principles": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 103,
+      "placeholders": [],
+      "empty_ratio": 0.27
+    }
+  },
+  "fos": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 81,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "functional_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 30,
+      "placeholders": [
+        "\\[\\]"
+      ],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 98,
+      "placeholders": [],
+      "empty_ratio": 0.23
+    }
+  },
+  "goldfish": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 78,
+      "placeholders": [],
+      "empty_ratio": 0.27
+    }
+  },
+  "ikr": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 80,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "inversion": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 67,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "limits_strategy": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 85,
+      "placeholders": [],
+      "empty_ratio": 0.31
+    }
+  },
+  "master_triz_orchestrator": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": false,
+    "has_validators": false,
+    "has_gate_check": false,
+    "skill_stats": {
+      "lines": 12,
+      "placeholders": [],
+      "empty_ratio": 0.0
+    },
+    "core_stats": {
+      "lines": 110,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "mmch": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 54,
+      "placeholders": [],
+      "empty_ratio": 0.3
+    }
+  },
+  "oas_transfer": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 78,
+      "placeholders": [],
+      "empty_ratio": 0.26
+    }
+  },
+  "oz_ov": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 58,
+      "placeholders": [],
+      "empty_ratio": 0.28
+    }
+  },
+  "reports": {
+    "has_skill": false,
+    "has_core": false,
+    "has_examples": false,
+    "has_validators": false,
+    "has_gate_check": false,
+    "skill_stats": null,
+    "core_stats": null
+  },
+  "resource_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 90,
+      "placeholders": [],
+      "empty_ratio": 0.22
+    }
+  },
+  "reverse_fos": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 73,
+      "placeholders": [],
+      "empty_ratio": 0.26
+    }
+  },
+  "robinson": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 60,
+      "placeholders": [],
+      "empty_ratio": 0.27
+    }
+  },
+  "rtv": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 29,
+      "placeholders": [],
+      "empty_ratio": 0.17
+    },
+    "core_stats": {
+      "lines": 82,
+      "placeholders": [],
+      "empty_ratio": 0.29
+    }
+  },
+  "rvs": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 69,
+      "placeholders": [],
+      "empty_ratio": 0.28
+    }
+  },
+  "s_curve": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 18,
+      "placeholders": [
+        "\\[\\]"
+      ],
+      "empty_ratio": 0.06
+    },
+    "core_stats": {
+      "lines": 291,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "standards": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 27,
+      "placeholders": [],
+      "empty_ratio": 0.19
+    },
+    "core_stats": {
+      "lines": 107,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "structural_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 68,
+      "placeholders": [],
+      "empty_ratio": 0.28
+    }
+  },
+  "system_operator": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 18,
+      "placeholders": [
+        "\\[\\]"
+      ],
+      "empty_ratio": 0.06
+    },
+    "core_stats": {
+      "lines": 222,
+      "placeholders": [],
+      "empty_ratio": 0.24
+    }
+  },
+  "trimming": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 105,
+      "placeholders": [
+        "\\?\\?\\?"
+      ],
+      "empty_ratio": 0.26
+    }
+  },
+  "value_analysis": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 72,
+      "placeholders": [],
+      "empty_ratio": 0.26
+    }
+  },
+  "vepoli": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 99,
+      "placeholders": [],
+      "empty_ratio": 0.25
+    }
+  },
+  "zrts": {
+    "has_skill": true,
+    "has_core": true,
+    "has_examples": true,
+    "has_validators": true,
+    "has_gate_check": true,
+    "skill_stats": {
+      "lines": 28,
+      "placeholders": [],
+      "empty_ratio": 0.18
+    },
+    "core_stats": {
+      "lines": 60,
+      "placeholders": [],
+      "empty_ratio": 0.28
+    }
+  }
+}

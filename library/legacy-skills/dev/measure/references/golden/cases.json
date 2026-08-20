@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "kind": "ab_traffic",
+      "input": "Two randomized checkout variants with per-user conversion logs",
+      "route": ["experiment_designer", "ab_testing_calculator"],
+      "must_block_if": ["no no-change repeat", "missing MDE or power", "early stopping"]
+    },
+    {
+      "kind": "llm_judge",
+      "input": "Compare two generators using an LLM judge",
+      "route": ["experiment_designer", "ab_testing_calculator"],
+      "must_block_if": ["judge not calibrated", "judge sees variant identity", "shared artifact leakage"]
+    },
+    {
+      "kind": "deterministic_benchmark",
+      "input": "Compare two parsers on a fixed labeled corpus",
+      "route": ["experiment_designer"],
+      "must_block_if": ["construct mismatch", "variants read the same output", "stop rule missing"]
+    }
+  ]
+}

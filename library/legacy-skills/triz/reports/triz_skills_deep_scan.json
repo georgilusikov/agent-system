@@ -1,0 +1,801 @@
+{
+  "akts": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 107,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 17,
+        "checkbox": 3
+      },
+      "examples/insurance_photo.md": {
+        "lines": 29
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "antisystem": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 80,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/noise_cancellation.md": {
+        "lines": 22
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "arip": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 80,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "ariz": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 111,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/pressure_chamber.md": {
+        "lines": 65
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "avf": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 96,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "benchmarking": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 86,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/vacuum_filter.md": {
+        "lines": 45
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "causal_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 99,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 30
+      },
+      "examples/drone_overheat.md": {
+        "lines": 58
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "contradictions": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 116,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 29,
+        "checkbox": 1
+      },
+      "examples/heated_knife.md": {
+        "lines": 56
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "examples/airplane_wing.md": {
+        "lines": 39
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "diversion_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 95,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 29,
+        "checkbox": 1
+      },
+      "examples/pipeline_sabotage.md": {
+        "lines": 48
+      },
+      "examples/titanic.md": {
+        "lines": 24
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "dynamization": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 109,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/car_suspension.md": {
+        "lines": 23
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "effects": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 96,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/greenhouse_vent.md": {
+        "lines": 30
+      },
+      "examples/micro_dosing.md": {
+        "lines": 54
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "flow_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 83,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/data_center.md": {
+        "lines": 43
+      },
+      "examples/factory_heat.md": {
+        "lines": 26
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "forty_principles": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 103,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/pizza_box.md": {
+        "lines": 23
+      },
+      "examples/aircraft_wing.md": {
+        "lines": 50
+      },
+      "examples/data_speed.md": {
+        "lines": 44
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "fos": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 81
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/lotus_effect.md": {
+        "lines": 27
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "functional_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 98,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 30,
+        "checkbox": 1
+      },
+      "examples/example_1.md": {
+        "lines": 44
+      },
+      "examples/electric_kettle.md": {
+        "lines": 48
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "goldfish": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 78,
+        "checkbox": 3
+      },
+      "audit_report.md": {
+        "lines": 54,
+        "checkbox": 2
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/flying_house.md": {
+        "lines": 32
+      },
+      "examples/flying_suit.md": {
+        "lines": 54
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "ikr": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 80,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/paint_filter.md": {
+        "lines": 28
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "inversion": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 67
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "limits_strategy": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 85
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "master_triz_orchestrator": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 110,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 12
+      }
+    }
+  },
+  "mmch": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 54
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/icebreaker.md": {
+        "lines": 29
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "oas_transfer": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 78
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "oz_ov": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 58
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "reports": {
+    "files": {
+      "triz_skills_quality_scan.md": {
+        "lines": 39
+      },
+      "triz_skills_audit.md": {
+        "lines": 19
+      }
+    }
+  },
+  "resource_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 90,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/light_bulb.md": {
+        "lines": 47
+      },
+      "examples/thermos.md": {
+        "lines": 24
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "reverse_fos": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 73
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "robinson": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 60
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/apollo_13.md": {
+        "lines": 35
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "rtv": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 82
+      },
+      "SKILL.md": {
+        "lines": 29
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "rvs": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 69
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "s_curve": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 291,
+        "checkbox": 61
+      },
+      "SKILL.md": {
+        "lines": 18,
+        "checkbox": 5
+      },
+      "examples/storage_media.md": {
+        "lines": 21
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "standards": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 107,
+        "checkbox": 5
+      },
+      "SKILL.md": {
+        "lines": 27
+      },
+      "examples/ice_crushing.md": {
+        "lines": 28
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "structural_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 68
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "system_operator": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 222,
+        "checkbox": 26
+      },
+      "SKILL.md": {
+        "lines": 18,
+        "checkbox": 5
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "trimming": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 105,
+        "checkbox": 6,
+        "question": 1
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/smartphone_bezel.md": {
+        "lines": 55
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "examples/tv_remote.md": {
+        "lines": 44
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "value_analysis": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 72
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/example_1.md": {
+        "lines": 13
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "vepoli": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 99,
+        "checkbox": 6
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/waffle_maker.md": {
+        "lines": 27
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  },
+  "zrts": {
+    "files": {
+      "core_instructions.md": {
+        "lines": 60
+      },
+      "SKILL.md": {
+        "lines": 28
+      },
+      "examples/phone_camera.md": {
+        "lines": 25
+      },
+      "validators/gate_check.md": {
+        "lines": 17,
+        "checkbox": 2,
+        "underscores": 2,
+        "criterion": 2,
+        "value": 2
+      }
+    }
+  }
+}

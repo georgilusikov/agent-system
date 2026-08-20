@@ -1,0 +1,31 @@
+version: project.agent_state.v1
+updated_at: "YYYY-MM-DD"
+phase: bootstrap
+
+source_of_truth:
+  project_rules: ./AGENTS.md
+  task_contracts_dir: ./agent/tasks
+
+allowed_actions:
+  - read_source
+  - read_artifact
+  - run_local_test
+  - write_task_contract
+  - update_state
+
+blocked_actions:
+  - id: no_commit_push_without_owner_permission
+    actions: [commit, push]
+    until: explicit_owner_permission_recorded
+    evidence: ./AGENTS.md
+  - id: no_live_external_side_effect_without_owner_permission
+    actions: [live_deploy, paid_call, destructive_action]
+    until: explicit_owner_permission_recorded
+    evidence: ./AGENTS.md
+
+thinking_gates:
+  before_acceptance: [falsify]
+  before_architecture_change: [fusion_review]
+  after_repeated_failure: [root_cause, circuit_breaker]
+
+active_task_contracts: []

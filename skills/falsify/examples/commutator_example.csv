@@ -1,0 +1,5 @@
+user_id,client_id,email_hash
+U1,C-shared,hash-a
+U2,C-shared,hash-b
+U3,C-3,hash-c
+U4,C-4,hash-d

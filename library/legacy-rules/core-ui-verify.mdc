@@ -1,0 +1,54 @@
+---
+alwaysApply: false
+category: qa
+description: Deterministic UI verification router (tests-first)
+triggers: [ui, frontend, browser, extension, popup, panel, css, html, react, vue, playwright, puppeteer, e2e]
+---
+
+# ✅ CORE UI VERIFY: дать агенту обратную связь по UI
+
+Цель: после UI‑изменений агент **обязан** получить проверяемый фидбек (зелёные тесты/скриншоты/логи), а не “кажется работает”.
+
+## 0) Триггер (когда применять)
+Применяй, если изменены файлы, похожие на UI:
+- `**/*.html`, `**/*.css`, `**/*.scss`, `**/*.jsx`, `**/*.tsx`, `**/*.vue`
+- `manifest.json`, `content_script.js`, `popup.js`, `popup.html`, `chat_ui.js`, `chat.css` (расширения/веб-UI)
+- любые UI‑папки: `ui/`, `frontend/`, `web/`, `pages/`, `components/`, `styles/`
+
+## 1) Определить “что именно проверяем” (2–5 минут)
+Составь mini‑список из 3–7 **критических UI flows** (действие → ожидаемый видимый результат).
+Пример: “Открыть popup → кнопки Download видны”, “Включить toggle → состояние сохранилось”.
+
+## 2) Найти автоматическую проверку (предпочтительно)
+Порядок выбора:
+1) Если в проекте есть `package.json` и скрипт `test:e2e` → запускай его.
+2) Иначе, если есть Playwright (`playwright.config.*`) → `npx playwright test`.
+3) Иначе, если есть Cypress → `npx cypress run`.
+4) Иначе, если есть Puppeteer‑тесты → запускай их через существующий test-runner (обычно `npm test` / `vitest` / `jest`).
+
+**Правило:** запускай **самую узкую** команду, которая покрывает изменённый UI (e2e‑папка/специфичный suite).
+
+## 3) Артефакты (обязательная обратная связь)
+Если тесты упали — выведи и сохрани:
+- stacktrace/лог
+- 1–3 скриншота (если браузерный раннер поддерживает)
+- ошибки консоли/Network (если доступны)
+
+## 4) Если нет автоматических тестов (fallback)
+Сделай “Manual Smoke Checklist” (5–10 пунктов) и прогони его:
+- как открыть UI (команда/URL/расширение)
+- что кликнуть
+- какой ожидаемый результат на экране
+- чем подтвердить (скриншот/лог/DOM‑селектор)
+
+## 5) Выход (verification ledger)
+В финальном сообщении всегда включай:
+- **Checks run:** точные команды
+- **Result:** PASS/FAIL + коротко почему
+- **Artifacts:** пути к скриншотам/логам (если есть)
+
+## Frontend Verify Checklist (Never Submit Without Verify)
+- Если изменялся TS/JS/UI код:
+  - [ ] `tsc --noEmit` проходит без ошибок
+  - [ ] `eslint`/`npm run lint` без критических ошибок (если есть конфиг)
+- Зафиксировать команды и результат в verification ledger

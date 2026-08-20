@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Orchestrator Standard"
+  short_description: "Coordinate delegated coding workers safely"
+  default_prompt: "Use $agent-orchestrator-standard to coordinate delegated worker lanes, load only the needed transport card, and verify results before integration."

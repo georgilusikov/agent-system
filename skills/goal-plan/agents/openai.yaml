@@ -1,0 +1,4 @@
+interface:
+  display_name: "Goal Plan"
+  short_description: "Plan goals with bounded subagents"
+  default_prompt: "Use $goal-plan to turn this goal into a verified plan with bounded scouts and a critic."

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "honest-self-diagnosis",
+    "description": "Produces honest gaps list, not defensive justifications",
+    "input": "Я написал API эндпоинт для загрузки файлов. Всё выглядит хорошо.",
+    "assertions": [
+      {"type": "contains", "value": "не учёл"},
+      {"type": "min_length", "value": 100},
+      {"type": "not_contains", "value": "всё правильно"}
+    ]
+  },
+  {
+    "id": "specific-gaps-not-generic",
+    "description": "Names specific things missing, not generic 'could be better'",
+    "input": "Написал функцию парсинга. Пиздёж.",
+    "assertions": [
+      {"type": "not_contains", "value": "можно улучшить"},
+      {"type": "min_length", "value": 80}
+    ]
+  },
+  {
+    "id": "calibration-present",
+    "description": "Includes confidence calibration",
+    "input": "Проверь что упустил",
+    "assertions": [
+      {"type": "contains", "value": "Уверенность"},
+      {"type": "contains", "value": "%"}
+    ]
+  },
+  {
+    "id": "back-pressure-applied",
+    "description": "Pushes back on initial assumptions when needed",
+    "input": "Задача выполнена идеально, что упустил?",
+    "assertions": [
+      {"type": "not_contains", "value": "идеально"},
+      {"type": "not_contains", "value": "всё верно"}
+    ]
+  }
+]

@@ -1,0 +1,79 @@
+---
+alwaysApply: false
+category: qa
+platforms: [cursor, claude-code]
+features_required: [browser-extension]
+description: "Automated verification loop — AI writes → tests → fixes → repeat until works"
+triggers: [verify, test, validation, check-code]
+---
+
+# Verification Loop Protocol
+
+**Principle:** Claude writes → Claude tests → Claude fixes → repeat until works.
+**Max iterations:** 5 (then escalate to human via `notify_user`).
+
+---
+
+## 1. WHEN TO ACTIVATE
+
+Automatically for any code change (backend or frontend). Skip for pure documentation or config-only updates.
+
+## 2. BACKEND VERIFICATION
+
+After writing backend code:
+1. **Run tests:** detect framework (`npm test` / `pytest` / `make test` / `cargo test`)
+2. **Linter:** `eslint` / `pylint` / `cargo clippy`
+3. **Type check:** `tsc --noEmit` / `mypy`
+4. All pass? ✅ Continue. Any fail? ❌ Analyze → Fix → Retest. **No human involvement.**
+
+## 3. FRONTEND/UI VERIFICATION
+
+After writing UI code:
+1. Open browser (MCP browser tool or Playwright)
+2. Navigate to changed page
+3. Test user flow (fill forms, click buttons, verify results)
+4. Take screenshots (before/after)
+5. Check console errors — fix if found
+
+## 4. ITERATION PROTOCOL
+
+```
+Write code → Test → FAIL → Analyze error → Fix → Test → FAIL → Fix → Test → PASS ✅
+```
+
+Max 5 iterations. If not passing → generate Failure Report → escalate.
+
+## 5. VERIFICATION CHECKLIST (before showing result)
+
+### Backend:
+- [ ] All tests pass
+- [ ] Linter clean
+- [ ] Types check
+- [ ] Edge cases handled
+
+### Frontend:
+- [ ] Page loads without errors
+- [ ] UI renders correctly
+- [ ] User flows work
+- [ ] No console errors
+
+<!-- pass2-salvage 2026-04-25 -->
+### DO / DON'T (condensed)
+- ✅ DO: тестируй каждое изменение, чини ошибки сразу, итерируй до зелёного, сохраняй скриншоты артефактов.
+- ❌ DON'T: показывать сломанный код, игнорировать линтер, останавливаться после первой ошибки без анализа.
+
+## 6. REPORT FORMAT
+
+```markdown
+## Verification Report
+### Changes Made: [1-5 items]
+### Tests Run: [unit/integration/UI — N/N passing]
+### Result: PASS/FAIL + why
+### Iterations: N — [what was fixed]
+```
+
+## 7. INTEGRATION
+
+Combines with: `core-auto.mdc`, `core-reflect.mdc`, `core-ui-verify.mdc`.
+
+> Применяй `_agent_shared/rules/core-principles.mdc`

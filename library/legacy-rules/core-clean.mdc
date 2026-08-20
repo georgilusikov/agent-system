@@ -1,0 +1,70 @@
+---
+alwaysApply: false
+platforms: [cursor, claude-code]
+category: universal
+triggers: [clean, organize, linter, problems, errors]
+description: "File organization, linter fixes, and code cleanup protocol"
+---
+
+# 🧹 CORE CLEAN PROTOCOL
+
+> **Always** apply `_agent_shared/standards/safe-deletion-standard.md` before deleting files.
+> **Always** apply `_agent_shared/rules/workspace-output-standard.mdc` before creating output dirs.
+
+---
+
+## Step 1: File Audit
+
+Report confidence for each action.
+
+- **Always** check project root and created folders for misplaced files
+- **Always** write results to `{projectname}.todo.md`, not separate report files
+- **Never** leave `_fixed`, `_final`, `_FINAL` postfix files
+- **Never** create separate reports when results belong in existing todo
+
+**Self-check:**
+```
+find . -maxdepth 2 -name "*_fixed*" -o -name "*_final*" -o -name "*_FINAL*"
+```
+
+---
+
+## Step 2: Code Review
+
+- **Always** read and review all generated code
+- **Always** check for dead code and unused imports
+- **Always** verify file structure matches project standards
+
+---
+
+## Step 3: Linter Zero-Tolerance
+
+- **Always** fix ALL errors in Problems panel and linters (zero errors target)
+- **Always** do deep research if fix is unclear
+
+| Confidence | Action |
+|-----------|--------|
+| ≥ 95% | Fix autonomously |
+| 90-94% | Fix, then verify carefully |
+| 80-89% | Read full file context, then fix |
+| < 80% | Run RCA via `core-reflect.mdc` |
+| Unsure | Ask user |
+
+**IDE Logs Check:**
+```bash
+# macOS Cursor logs
+find ~/Library/Application\ Support/Cursor/logs/ -name "*mcp*"
+grep -r "Unexpected token" ~/Library/Application\ Support/Cursor/logs/
+```
+
+- **Always** report all found errors with evidence
+- **Always** propose solutions for each error
+
+---
+
+## Step 4: Gap Analysis
+
+> Apply gap analysis from `core-check.mdc` (Step 3).
+
+- **Always** perform independent cross-check
+- **Never** confirm completion without cross-check evidence

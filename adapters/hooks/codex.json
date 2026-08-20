@@ -1,0 +1,87 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/Users/georgijlusikov/.codex/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh' ]; then /bin/sh '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh'; fi"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "sh '/Users/georgijlusikov/.codex/hooks/response-contract-reminder.sh'",
+            "timeout": 1,
+            "type": "command"
+          },
+          {
+            "command": "sh '/Users/georgijlusikov/.codex/hooks/context-budget-guard.sh'",
+            "timeout": 1,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh' ]; then /bin/sh '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh'; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh' ]; then /bin/sh '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh'; fi"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh' ]; then /bin/sh '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh'; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh' ]; then /bin/sh '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh'; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh' ]; then /bin/sh '/Users/georgijlusikov/.nodeterm/agent-hooks/codex.sh'; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

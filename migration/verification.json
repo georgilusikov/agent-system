@@ -1,0 +1,25 @@
+{
+  "date": "2026-08-20",
+  "canonical_repo": "/Users/georgijlusikov/code/agent-system",
+  "github": "https://github.com/georgilusikov/agent-system",
+  "active_skills": 98,
+  "external_skills": ["fusion"],
+  "rollback_snapshots_newest_first": [
+    "/Users/georgijlusikov/.agent-system-backups/20260820T134907926844Z",
+    "/Users/georgijlusikov/.agent-system-backups/20260820T134151Z",
+    "/Users/georgijlusikov/.agent-system-backups/20260820T134122Z"
+  ],
+  "checks": {
+    "repository_validator": "pass",
+    "deployed_symlinks": "pass",
+    "post_cutover_rebuild": "pass",
+    "fixture_apply_rollback_and_drift": "pass",
+    "secret_scan": "pass",
+    "codex_instruction_skill_consumer": "pass",
+    "codex_hooks_deployed_path": "pass",
+    "gemini_skill_consumer_no_collision": "pass",
+    "gemini_headless_instruction_canary": "blocked: unsupported legacy Code Assist authentication; use agy",
+    "grok_instruction_skill_hook_consumer": "pass",
+    "agy_gemini_flash_read_only_audits": "5 pass after one skill-audit fix and rerun"
+  }
+}

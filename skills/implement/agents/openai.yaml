@@ -1,0 +1,7 @@
+interface:
+  display_name: "Implement"
+  short_description: "Build work from a spec or tickets"
+policy:
+  # Owner calls this in free text ("реализуй по спеке"); a locked implicit door
+  # makes the trigger list in SKILL.md unreachable. Audit 2026-08-02.
+  allow_implicit_invocation: true

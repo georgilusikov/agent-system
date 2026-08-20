@@ -1,0 +1,28 @@
+---
+alwaysApply: false
+category: analysis
+platforms: [cursor, claude-code]
+triggers: [why, rca, root-cause, debug, diagnosis]
+description: "Root cause analysis protocol — 5 Whys, design injection, deep research"
+---
+
+# 🔍 CORE WHY (Root Cause Analysis)
+
+## 1. Прочитай стандарт RCA
+Прочитай `_agent_shared/standards/root-cause-analysis-standard.md` и сделай RCA.
+
+## 2. Deep Research
+- Сделай deep research смежного кода и проблемы.
+- Проверь: какие ещё есть корневые проблемы?
+- Найди место для **design injection**: где в цепочке рассуждений ты свернул не туда? Какой AI Guidance по 5W+H не хватило?
+
+## 3. Не срезай углы
+Твоя задача — найти **корневую проблему**, а не создавать альтернативные обходные пути. Только при уверенности 99.999% допустим другой подход.
+
+## 4. Принципы работы
+> Применяй `_agent_shared/rules/core-principles.mdc`
+
+## 5. Проверка
+- Фальсифицируй вывод и гипотезу (протокол challenge).
+- Gap Analysis: expected vs actual output.
+- По стандарту RCA сделай финальный отчёт.
