@@ -74,17 +74,5 @@ class GuardTest(unittest.TestCase):
         self.assertEqual(json.loads(warn.stdout)["decision"], "allow")
         self.assertEqual(json.loads(block.stdout)["decision"], "deny")
 
-    def test_agy_context_and_stop_contracts(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            context = run(
-                {"conversationId": "a", "initialNumSteps": 80},
-                "agy-pre",
-                GEMINI_GUARD_STATE_DIR=tmp,
-            )
-        stop = run({"fullyIdle": False}, "agy-stop")
-        self.assertIn("injectSteps", json.loads(context.stdout))
-        self.assertEqual(json.loads(stop.stdout)["decision"], "continue")
-
-
 if __name__ == "__main__":
     unittest.main()

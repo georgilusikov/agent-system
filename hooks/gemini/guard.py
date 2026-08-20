@@ -116,59 +116,14 @@ def before_tool(payload: dict[str, object], agy: bool = False) -> int:
     return 2 if enforce else 0
 
 
-def agy_pre(payload: dict[str, object]) -> int:
-    try:
-        warn = int(os.environ.get("AGY_CONTEXT_WARN_STEPS", "80"))
-        steps = int(payload.get("initialNumSteps") or 0)
-    except (TypeError, ValueError):
-        print("{}")
-        return 0
-    path = state_path(payload, "agy")
-    if steps < warn or not path or path.exists():
-        print("{}")
-        return 0
-    try:
-        path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-        path.write_text(json.dumps({"warnedAtSteps": steps}), encoding="utf-8")
-    except OSError:
-        pass
-    print(
-        json.dumps(
-            {
-                "injectSteps": [
-                    {
-                        "ephemeralMessage": (
-                            f"Trajectory context has {steps} steps. Finish the current "
-                            "milestone, persist decisions and checks, and avoid scope expansion."
-                        )
-                    }
-                ]
-            }
-        )
-    )
-    return 0
-
-
-def agy_stop(payload: dict[str, object]) -> int:
-    if payload.get("fullyIdle") is False:
-        print(json.dumps({"decision": "continue", "reason": "Background tasks are still active."}))
-    else:
-        print('{"decision":"stop"}')
-    return 0
-
-
 def main() -> int:
     mode = sys.argv[1] if len(sys.argv) > 1 else "gemini"
     try:
         payload = json.load(sys.stdin)
         if not isinstance(payload, dict):
             return 0
-        if mode == "agy-pre":
-            return agy_pre(payload)
         if mode == "agy-tool":
             return before_tool(payload, agy=True)
-        if mode == "agy-stop":
-            return agy_stop(payload)
         event = payload.get("hook_event_name")
         if event == "PreCompress":
             return precompress(payload)
@@ -181,10 +136,6 @@ def main() -> int:
         print(f"[gemini-guard] internal error (fail-open): {exc}", file=sys.stderr)
         if mode == "agy-tool":
             print('{"decision":"allow"}')
-        elif mode == "agy-stop":
-            print('{"decision":"stop"}')
-        elif mode == "agy-pre":
-            print("{}")
         return 0
 
 

@@ -1,12 +1,5 @@
 {
   "shared-agent-guard": {
-    "PreInvocation": [
-      {
-        "type": "command",
-        "command": "python3 '/Users/georgijlusikov/.gemini/hooks/guard.py' agy-pre",
-        "timeout": 2
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "run_command",
@@ -17,13 +10,6 @@
             "timeout": 2
           }
         ]
-      }
-    ],
-    "Stop": [
-      {
-        "type": "command",
-        "command": "python3 '/Users/georgijlusikov/.gemini/hooks/guard.py' agy-stop",
-        "timeout": 2
       }
     ]
   }

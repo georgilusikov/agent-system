@@ -22,7 +22,6 @@ INSTRUCTIONS = {
 }
 SETTING_MERGES = {
     ".claude/settings.json": (REPO / "adapters/hooks/claude.json", ("hooks",)),
-    ".gemini/settings.json": (REPO / "adapters/hooks/gemini.json", ("context", "hooks")),
 }
 SKILL_ROOTS = (
     ".agents/skills",

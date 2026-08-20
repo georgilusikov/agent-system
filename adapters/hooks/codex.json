@@ -1,6 +1,18 @@
 {
+  "description": "Shared Codex lifecycle hooks: status reporting and non-blocking continuity after compaction.",
   "hooks": {
     "SessionStart": [
+      {
+        "matcher": "^compact$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Context was compacted. Re-read the retained objective, decisions, completed checks, and next action, then continue the same task. Never stop or start a fresh task solely because of compaction.\"}}'",
+            "timeout": 1,
+            "statusMessage": "Restoring task continuity"
+          }
+        ]
+      },
       {
         "hooks": [
           {
@@ -24,11 +36,6 @@
         "hooks": [
           {
             "command": "sh '/Users/georgijlusikov/.codex/hooks/response-contract-reminder.sh'",
-            "timeout": 1,
-            "type": "command"
-          },
-          {
-            "command": "sh '/Users/georgijlusikov/.codex/hooks/context-budget-guard.sh'",
             "timeout": 1,
             "type": "command"
           }

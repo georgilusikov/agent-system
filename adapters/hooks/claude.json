@@ -60,16 +60,6 @@
     ],
     "UserPromptSubmit": [
       {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/context-budget-guard.sh",
-            "timeout": 1
-          }
-        ]
-      },
-      {
         "hooks": [
           {
             "type": "command",

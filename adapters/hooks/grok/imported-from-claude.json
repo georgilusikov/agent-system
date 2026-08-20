@@ -40,26 +40,6 @@
         ],
         "matcher": "*"
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/gemini-audit.sh",
-            "timeout": 60
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/stop-python-checks.sh",
-            "timeout": 60
-          }
-        ]
-      }
     ]
   }
 }
