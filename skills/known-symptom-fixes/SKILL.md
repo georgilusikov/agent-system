@@ -1,6 +1,7 @@
 ---
 name: known-symptom-fixes
-description: Известный симптом → известная причина. Загружай, когда падение уже наблюдается и подходит под один из четырёх случаев. Triggers: "новый тест падает, а соседний идентичный проходит", "same code same call existing test passes mine fails", "гонка в asyncio", "read-modify-write race", "Antigravity Cascade не отвечает на промпты", "worktreeconfig", "core.repositoryformatversion does not support extension", "Antigravity не принимает approval gate", "CDP клик не срабатывает". NOT for: общий RCA неизвестного падения (/debug), верификация готового результата (/check), аудит правок правил внешним агентом (/rules-and-hooks-maintenance).
+description: >-
+  Известный симптом → известная причина. Загружай, когда падение уже наблюдается и подходит под один из четырёх случаев. Triggers: "новый тест падает, а соседний идентичный проходит", "same code same call existing test passes mine fails", "гонка в asyncio", "read-modify-write race", "Antigravity Cascade не отвечает на промпты", "worktreeconfig", "core.repositoryformatversion does not support extension", "Antigravity не принимает approval gate", "CDP клик не срабатывает". NOT for: общий RCA неизвестного падения (/debug), верификация готового результата (/check), аудит правок правил внешним агентом (/rules-and-hooks-maintenance).
 ---
 
 # Известный симптом → известная причина

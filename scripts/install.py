@@ -18,13 +18,29 @@ INSTRUCTIONS = {
     ".gemini/GEMINI.md": REPO / "AGENTS.md",
     ".claude/CLAUDE.md": REPO / "AGENTS.md",
     ".grok/rules/00-agent-system.md": REPO / "AGENTS.md",
+    ".gemini/config/hooks.json": REPO / "adapters/hooks/agy.json",
 }
 SETTING_MERGES = {
     ".claude/settings.json": (REPO / "adapters/hooks/claude.json", ("hooks",)),
     ".gemini/settings.json": (REPO / "adapters/hooks/gemini.json", ("context", "hooks")),
 }
-SKILL_ROOTS = (".agents/skills", ".codex/skills", ".claude/skills", ".grok/skills")
-RETIRED_ALIASES = ("0-how-to-write-skills", "1-critical-chain-design", "2-hypothesis-eval-loop")
+SKILL_ROOTS = (
+    ".agents/skills",
+    ".codex/skills",
+    ".claude/skills",
+    ".gemini/config/skills",
+    ".grok/skills",
+)
+RETIRED_ALIASES = (
+    "0-how-to-write-skills",
+    "1-critical-chain-design",
+    "2-hypothesis-eval-loop",
+    "grill-with-docs",
+    "pizdej-protocol",
+    "tdd",
+    "to-issues",
+    "to-prd",
+)
 RETIRED_SKILLS = ("skill-creator", "writing-skills")
 
 

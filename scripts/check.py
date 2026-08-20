@@ -63,6 +63,7 @@ def check_deployed() -> list[str]:
         HOME / ".gemini" / "GEMINI.md": REPO / "AGENTS.md",
         HOME / ".claude" / "CLAUDE.md": REPO / "AGENTS.md",
         HOME / ".grok" / "rules" / "00-agent-system.md": REPO / "AGENTS.md",
+        HOME / ".gemini" / "config" / "hooks.json": REPO / "adapters/hooks/agy.json",
     }
     errors: list[str] = []
     for target, source in expected.items():
@@ -71,7 +72,13 @@ def check_deployed() -> list[str]:
             continue
         if target.resolve() != source.resolve():
             errors.append(f"wrong-target:{target}:{target.resolve()}")
-    for root in (HOME / ".agents" / "skills", HOME / ".codex" / "skills", HOME / ".claude" / "skills", HOME / ".grok" / "skills"):
+    for root in (
+        HOME / ".agents" / "skills",
+        HOME / ".codex" / "skills",
+        HOME / ".claude" / "skills",
+        HOME / ".gemini" / "config" / "skills",
+        HOME / ".grok" / "skills",
+    ):
         if not root.is_dir():
             errors.append(f"missing-skill-root:{root}")
             continue

@@ -20,6 +20,8 @@ Checked 2026-08-20 against first-party documentation.
 
 8. **Make the active instruction stack inspectable.** Verify after changes from the real runtime: Codex can be asked to list loaded sources; Gemini exposes `/memory show` and `/memory reload`; Claude exposes `/context` and `/memory`. Version-control the canonical instructions and review changes like documentation. ([OpenAI](https://developers.openai.com/codex/guides/agents-md), [Gemini CLI](https://geminicli.com/docs/cli/gemini-md/), [Claude Code](https://code.claude.com/docs/en/memory))
 
+9. **Treat AGY as a separate native runtime.** Antigravity CLI loads global hooks from `~/.gemini/config/hooks.json`, uses camelCase payloads, and exposes `PreInvocation`, `PreToolUse`, `PostToolUse`, `PostInvocation`, and `Stop`. Sharing a Gemini model does not make Gemini CLI hook wiring compatible. ([Google Antigravity](https://antigravity.google/docs/hooks))
+
 ## Recommended delta for this repository
 
 - Keep the global `AGENTS.md` near its current size; add only operational invariants that apply to every project.

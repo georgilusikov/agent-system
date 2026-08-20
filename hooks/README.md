@@ -7,6 +7,8 @@ Hook implementations live here, but each runtime keeps its native event wiring.
 - Grok keeps its native JSON adapters and currently consumes the compatible hooks.
 - Gemini uses `hooks/gemini/` for context/worktree guards and the shared Python stop
   check; Nodeterm still owns lifecycle status reporting.
+- AGY uses the same guard through its camelCase `PreInvocation`, `PreToolUse`, and
+  `Stop` contracts in `~/.gemini/config/hooks.json`.
 
 Do not compile one runtime's event schema into another. `context-budget-guard.sh`
 has separate Codex and Claude implementations because their transcript payloads differ.

@@ -10,10 +10,10 @@ Grok currently consumes parts of the Claude layout.
 | Concern | Canon | Runtime projection |
 |---|---|---|
 | Global instructions | `AGENTS.md` | `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.claude/CLAUDE.md`, `~/.grok/rules/00-agent-system.md` |
-| Discoverable skills | `skills/` | per-skill links in each runtime; Gemini reads `~/.agents/skills` |
+| Discoverable skills | `skills/` | per-skill links; Gemini CLI reads `~/.agents/skills`, AGY reads `~/.gemini/config/skills` |
 | Specialist agents | `agents/` | Claude-compatible projection |
 | Hook implementations | `hooks/` | native Codex/Claude/Gemini hook locations |
-| Hook wiring | `adapters/hooks/` | native JSON; Claude/Gemini preserve unrelated settings |
+| Hook wiring | `adapters/hooks/` | native JSON for Codex, Gemini CLI, AGY, Grok, and Claude |
 | Rules and standards | `rules/`, `standards/` | loaded through instructions and skills |
 | Reviewed learning | `memory/` | repository only; raw runtime traces stay local |
 | Large domain bodies | `library/` | loaded by routers, never advertised as top-level skills |
@@ -38,7 +38,7 @@ Project-local instructions remain project-local and may add domain context.
 
 ## Daily launch
 
-Start `codex`, `gemini`, or `grok` from the project repository they should edit
+Start `codex`, `agy`, `gemini`, or `grok` from the project repository they should edit
 (or from the relevant subdirectory), not from this canon repository. Put shared
 project facts in that repository's `AGENTS.md`; nested `AGENTS.md` files contain
 only subtree-specific differences. Gemini is configured to discover both

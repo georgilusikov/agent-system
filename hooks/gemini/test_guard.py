@@ -14,9 +14,9 @@ from pathlib import Path
 GUARD = Path(__file__).with_name("guard.py")
 
 
-def run(payload: object, **env: str) -> subprocess.CompletedProcess[str]:
+def run(payload: object, *args: str, **env: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["python3", str(GUARD)],
+        ["python3", str(GUARD), *args],
         input=json.dumps(payload),
         text=True,
         capture_output=True,
@@ -61,6 +61,29 @@ class GuardTest(unittest.TestCase):
         self.assertIn("checkpoint", pre.stdout)
         self.assertIn("additionalContext", first.stdout)
         self.assertEqual(second.stdout, "")
+
+    def test_agy_worktree_contract(self) -> None:
+        payload = {
+            "toolCall": {
+                "name": "run_command",
+                "args": {"CommandLine": "git worktree add --sparse /tmp/wt"},
+            }
+        }
+        warn = run(payload, "agy-tool")
+        block = run(payload, "agy-tool", GEMINI_WORKTREE_ENFORCE="1")
+        self.assertEqual(json.loads(warn.stdout)["decision"], "allow")
+        self.assertEqual(json.loads(block.stdout)["decision"], "deny")
+
+    def test_agy_context_and_stop_contracts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            context = run(
+                {"conversationId": "a", "initialNumSteps": 80},
+                "agy-pre",
+                GEMINI_GUARD_STATE_DIR=tmp,
+            )
+        stop = run({"fullyIdle": False}, "agy-stop")
+        self.assertIn("injectSteps", json.loads(context.stdout))
+        self.assertEqual(json.loads(stop.stdout)["decision"], "continue")
 
 
 if __name__ == "__main__":
