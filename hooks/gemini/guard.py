@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Gemini PreCompress handoff and unsafe partial-worktree warning."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+BAD_WORKTREE = re.compile(
+    r"\bgit\b[^\n]*\bworktree\s+add\b[^\n]*(?:--no-checkout|--sparse|--orphan)\b"
+)
+ACK = re.compile(r"^(?=.{12,})(?=.*[A-Za-z]{3,}).+[\s\-_:]+.+$")
+
+
+def state_path(payload: dict[str, object]) -> Path | None:
+    session = str(payload.get("session_id") or "")
+    if not session:
+        return None
+    root = Path(
+        os.environ.get(
+            "GEMINI_GUARD_STATE_DIR", Path.home() / ".cache" / "gemini-guard"
+        )
+    )
+    return root / f"{hashlib.sha256(session.encode()).hexdigest()[:32]}.json"
+
+
+def precompress(payload: dict[str, object]) -> int:
+    path = state_path(payload)
+    if path:
+        try:
+            path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            path.write_text(
+                json.dumps(
+                    {
+                        "pending": True,
+                        "trigger": payload.get("trigger"),
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    }
+                ),
+                encoding="utf-8",
+            )
+        except OSError:
+            pass
+    print(json.dumps({"systemMessage": "Context compression checkpoint recorded."}))
+    return 0
+
+
+def before_agent(payload: dict[str, object]) -> int:
+    path = state_path(payload)
+    if not path or not path.exists():
+        return 0
+    try:
+        state = json.loads(path.read_text(encoding="utf-8"))
+        path.unlink()
+    except (OSError, json.JSONDecodeError):
+        return 0
+    if state.get("pending"):
+        print(
+            json.dumps(
+                {
+                    "hookSpecificOutput": {
+                        "additionalContext": (
+                            "Context was compressed. Reconfirm the objective, decisions, "
+                            "completed checks, and next milestone before expanding scope."
+                        )
+                    }
+                }
+            )
+        )
+    return 0
+
+
+def before_tool(payload: dict[str, object]) -> int:
+    tool = str(payload.get("tool_name") or payload.get("toolName") or "")
+    if tool not in {"run_shell_command", "Bash"}:
+        return 0
+    tool_input = payload.get("tool_input") or payload.get("toolInput") or {}
+    command = str(tool_input.get("command") or "") if isinstance(tool_input, dict) else ""
+    if not BAD_WORKTREE.search(command):
+        return 0
+    reason = os.environ.get("GEMINI_WORKTREE_ACK", "").strip()
+    if ACK.match(reason):
+        print("[gemini-worktree] ACK accepted.", file=sys.stderr)
+        return 0
+    enforce = os.environ.get("GEMINI_WORKTREE_ENFORCE") == "1"
+    verdict = "BLOCK" if enforce else "WARN (Phase 1)"
+    print(
+        f"[gemini-worktree] {verdict}: partial worktree checkout can turn "
+        "blanket staging into mass deletion. Use a complete checkout, or set "
+        "GEMINI_WORKTREE_ACK to a real reason (12+ chars).",
+        file=sys.stderr,
+    )
+    return 2 if enforce else 0
+
+
+def main() -> int:
+    try:
+        payload = json.load(sys.stdin)
+        if not isinstance(payload, dict):
+            return 0
+        event = payload.get("hook_event_name")
+        if event == "PreCompress":
+            return precompress(payload)
+        if event == "BeforeAgent":
+            return before_agent(payload)
+        if event == "BeforeTool":
+            return before_tool(payload)
+        return 0
+    except Exception as exc:  # fail-open: hooks must not strand a session
+        print(f"[gemini-guard] internal error (fail-open): {exc}", file=sys.stderr)
+        return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

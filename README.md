@@ -12,7 +12,7 @@ Grok currently consumes parts of the Claude layout.
 | Global instructions | `AGENTS.md` | `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.claude/CLAUDE.md`, `~/.grok/rules/00-agent-system.md` |
 | Discoverable skills | `skills/` | per-skill links in each runtime; Gemini reads `~/.agents/skills` |
 | Specialist agents | `agents/` | Claude-compatible projection |
-| Hook implementations | `hooks/` | native Codex/Claude hook locations |
+| Hook implementations | `hooks/` | native Codex/Claude/Gemini hook locations |
 | Hook wiring | `adapters/hooks/` | native JSON; Claude/Gemini preserve unrelated settings |
 | Rules and standards | `rules/`, `standards/` | loaded through instructions and skills |
 | Reviewed learning | `memory/` | repository only; raw runtime traces stay local |
@@ -35,6 +35,18 @@ whole code directory canonical would mix projects, generated data, and secrets.
 
 Runtime directories are deployment targets, never canonical sources after cutover.
 Project-local instructions remain project-local and may add domain context.
+
+## Daily launch
+
+Start `codex`, `gemini`, or `grok` from the project repository they should edit
+(or from the relevant subdirectory), not from this canon repository. Put shared
+project facts in that repository's `AGENTS.md`; nested `AGENTS.md` files contain
+only subtree-specific differences. Gemini is configured to discover both
+`AGENTS.md` and `GEMINI.md`.
+
+Canonical configuration changes are logged by Git commits in this repository.
+Runtime lifecycle status remains in each agent/Nodeterm runtime; raw prompts,
+responses, environments, and tool payloads are not copied into the canon.
 
 ## Migration acceptance
 

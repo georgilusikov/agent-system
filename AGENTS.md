@@ -69,6 +69,21 @@ cost, exposure, publication, or destructive action not already authorized.
   without explicit current authorization.
 - Never weaken security, release, or quality gates.
 
+## Operational discipline
+
+- Batch independent read-only probes and filter verbose output at the source.
+- Search with scoped `rg`/`rg --files`; never scan the whole home for common words.
+- Before an important edit, inspect `git log -5 --oneline -- <file>`.
+- Before changing shared code or config, identify every runtime consumer.
+- Check both sides before making a negative or comparative claim.
+- Treat a runner timeout as unknown: inspect partial files, logs, and process state.
+- Estimate long work from one or two measured samples, not intuition.
+- For live or paid work: offline proof, then the smallest bounded sample, then scale.
+- Log event metadata and outcomes only; do not log prompts, responses, environments,
+  or tool payloads unless the owner explicitly requests that exposure.
+- After a correction, false completion, or recurrence, propose a deduplicated,
+  evidence-backed canon update; persist it only with owner approval.
+
 ## Canon and learning
 
 - Global user-owned canon: `/Users/georgijlusikov/code/agent-system`.
@@ -79,10 +94,13 @@ cost, exposure, publication, or destructive action not already authorized.
 - Raw chats, rollout summaries, traces, caches, and project-specific memories are
   not global learning and stay outside this repository.
 - Do not let multiple agents write the same learning ledger concurrently.
-- Version approved canon changes in this repository; Git history is the changelog.
+- Commit every approved canon change here with what and why; Git history is the
+  changelog. Do not maintain a second manual change ledger.
 
 ## Instruction precedence
 
+Project-root instructions should hold exact setup, build, test, style, architecture,
+security, and review facts. Nested instruction files contain only subtree deltas.
 Project-local instructions and artifacts may add or specialize domain context.
 They do not make a project-specific fact globally true. If a local instruction
 conflicts with safety, non-deletion, evidence, or the owner response contract,

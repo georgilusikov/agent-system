@@ -19,9 +19,9 @@ INSTRUCTIONS = {
     ".claude/CLAUDE.md": REPO / "AGENTS.md",
     ".grok/rules/00-agent-system.md": REPO / "AGENTS.md",
 }
-HOOK_MERGES = {
-    ".claude/settings.json": REPO / "adapters/hooks/claude.json",
-    ".gemini/settings.json": REPO / "adapters/hooks/gemini.json",
+SETTING_MERGES = {
+    ".claude/settings.json": (REPO / "adapters/hooks/claude.json", ("hooks",)),
+    ".gemini/settings.json": (REPO / "adapters/hooks/gemini.json", ("context", "hooks")),
 }
 SKILL_ROOTS = (".agents/skills", ".codex/skills", ".claude/skills", ".grok/skills")
 RETIRED_ALIASES = ("0-how-to-write-skills", "1-critical-chain-design", "2-hypothesis-eval-loop")
@@ -45,7 +45,7 @@ def targets(home: Path) -> list[tuple[Path, Path | None]]:
         result.extend((root / alias, None) for alias in RETIRED_ALIASES)
         result.extend((root / name, None) for name in RETIRED_SKILLS)
     result.extend((home / ".claude/agents" / path.name, path) for path in sorted((REPO / "agents").glob("*.md")))
-    for runtime in ("codex", "claude"):
+    for runtime in ("codex", "claude", "gemini"):
         result.extend(
             (home / f".{runtime}/hooks" / path.name, path)
             for path in sorted((REPO / "hooks" / runtime).iterdir()) if path.is_file()
@@ -75,24 +75,25 @@ def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
             "source": str(source) if source is not None else None,
             "backup": str(backup) if backup is not None else None,
         })
-    for target_name, adapter in HOOK_MERGES.items():
+    for target_name, (adapter, keys) in SETTING_MERGES.items():
         target = home / target_name
         current = json.loads(target.read_text(encoding="utf-8")) if target.exists() else {}
-        hooks = json.loads(adapter.read_text(encoding="utf-8"))["hooks"]
-        if current.get("hooks") == hooks:
+        desired = json.loads(adapter.read_text(encoding="utf-8"))
+        if all(current.get(key) == desired[key] for key in keys):
             continue
         backup = backup_path(snapshot, home, target) if target.exists() else None
         operations.append({
             "kind": "merge",
             "target": str(target),
             "source": str(adapter),
+            "keys": list(keys),
             "backup": str(backup) if backup is not None else None,
         })
     for operation in operations:
         if operation["kind"] == "retire":
             print(f"retire {operation['target']}")
         elif operation["kind"] == "merge":
-            print(f"merge hooks into {operation['target']}")
+            print(f"merge settings into {operation['target']}")
         else:
             print(f"link {operation['target']} -> {operation['source']}")
     if dry_run:
@@ -116,7 +117,9 @@ def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
             target.symlink_to(source, target_is_directory=source.is_dir())
         elif operation["kind"] == "merge" and source is not None:
             current = json.loads(backup.read_text(encoding="utf-8")) if backup else {}
-            current["hooks"] = json.loads(source.read_text(encoding="utf-8"))["hooks"]
+            desired = json.loads(source.read_text(encoding="utf-8"))
+            for key in operation["keys"]:
+                current[key] = desired[key]
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"snapshot: {snapshot}")
@@ -134,10 +137,11 @@ def rollback(snapshot: Path) -> None:
         if kind == "merge":
             current = json.loads(target.read_text(encoding="utf-8")) if target.exists() else {}
             previous = json.loads(backup.read_text(encoding="utf-8")) if backup and backup.exists() else {}
-            if "hooks" in previous:
-                current["hooks"] = previous["hooks"]
-            else:
-                current.pop("hooks", None)
+            for key in operation.get("keys", ["hooks"]):
+                if key in previous:
+                    current[key] = previous[key]
+                else:
+                    current.pop(key, None)
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             continue

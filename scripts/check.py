@@ -81,6 +81,16 @@ def check_deployed() -> list[str]:
             target = root / skill.name
             if not target.is_symlink() or target.resolve() != skill.resolve():
                 errors.append(f"skill-not-deployed:{target}")
+    gemini_guard = HOME / ".gemini" / "hooks" / "guard.py"
+    if not gemini_guard.is_symlink() or gemini_guard.resolve() != (REPO / "hooks/gemini/guard.py").resolve():
+        errors.append(f"hook-not-deployed:{gemini_guard}")
+    gemini_settings = HOME / ".gemini" / "settings.json"
+    if gemini_settings.exists():
+        actual = json.loads(gemini_settings.read_text(encoding="utf-8"))
+        desired = json.loads((REPO / "adapters/hooks/gemini.json").read_text(encoding="utf-8"))
+        for key in ("context", "hooks"):
+            if actual.get(key) != desired[key]:
+                errors.append(f"settings-drift:{gemini_settings}:{key}")
     return errors
 
 
