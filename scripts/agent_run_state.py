@@ -12,9 +12,9 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 if __package__:
-    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 else:
-    from runtime_receipts import ReceiptContext, emit_change, file_hash
+    from runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 
 
 STATE_FIELDS = frozenset({
@@ -84,6 +84,7 @@ def create_run(path: Path, *, run_id: str, bead_id: str, source_commit: str,
     if path.exists():
         current = load_state(path)
         if current == state:
+            _persist(path, state, receipt_context, "state.create", None, ())
             return current
         raise StateConflictError("run state already exists with different metadata")
     _persist(path, state, receipt_context, "state.create", None, ())
@@ -95,10 +96,10 @@ def start_run(path: Path, *, operation_key: str | None = None,
     """Move a planned run to running; repeated starts are no-ops."""
     state = load_state(path)
     if _record_operation(state, operation_key, "start", {}):
+        _persist(path, state, receipt_context, "state.start", operation_key, ())
         return state
     if state["phase"] == "running":
-        if operation_key is not None:
-            _persist(path, state, receipt_context, "state.start", operation_key, ())
+        _persist(path, state, receipt_context, "state.start", operation_key, ())
         return state
     if state["phase"] != "planned":
         raise IllegalTransitionError(f"cannot start from {state['phase']}")
@@ -120,11 +121,11 @@ def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] 
     if not all(isinstance(ref, str) for ref in refs):
         raise MalformedStateError("evidence_refs must contain strings")
     if _record_operation(state, operation_key, "verify", {"step": step, "evidence_refs": refs}):
+        _persist(path, state, receipt_context, "state.verify", operation_key, refs)
         return state
     previous = state["last_verified_step"]
     if previous == step:
-        if operation_key is not None:
-            _persist(path, state, receipt_context, "state.verify", operation_key, refs)
+        _persist(path, state, receipt_context, "state.verify", operation_key, refs)
         return state
     if previous is not None and step != previous + 1:
         raise StateConflictError("verified steps must be consecutive")
@@ -164,10 +165,10 @@ def finish_run(path: Path, outcome: str, *, evidence_refs: Iterable[str] = (),
     if not all(isinstance(ref, str) for ref in refs):
         raise MalformedStateError("evidence_refs must contain strings")
     if _record_operation(state, operation_key, "finish", {"outcome": outcome, "evidence_refs": refs}):
+        _persist(path, state, receipt_context, "state.finish", operation_key, refs)
         return state
     if state["phase"] == outcome:
-        if operation_key is not None:
-            _persist(path, state, receipt_context, "state.finish", operation_key, refs)
+        _persist(path, state, receipt_context, "state.finish", operation_key, refs)
         return state
     if state["phase"] != "verifying":
         raise IllegalTransitionError(f"cannot finish from {state['phase']}")
@@ -207,15 +208,16 @@ def write_state(path: Path, state: Mapping[str, Any]) -> None:
 def _persist(path: Path, state: Mapping[str, Any], context: ReceiptContext | None,
              operation: str, operation_key: str | None, evidence_refs: Iterable[str]) -> None:
     before = file_hash(path) if path.exists() else None
-    write_state(path, state)
     if context is None:
+        write_state(path, state)
         return
-    after = file_hash(path)
-    if before == after:
-        return
-    retry_seed = operation_key or f"{before or 'none'}:{after}"
+    retry_seed = operation_key or _fingerprint(dict(state))
     event_seed = f"{context.run_id}:{operation}:{retry_seed}"
     event_id = f"change-{hashlib.sha256(event_seed.encode()).hexdigest()}"
+    if preflight(context, event_id) is not None:
+        return
+    write_state(path, state)
+    after = file_hash(path)
     emit_change(context, event_id, operation, "class:agent-run-state", before, after,
                 "applied", evidence_refs=evidence_refs)
 

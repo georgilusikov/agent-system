@@ -8,10 +8,10 @@ from pathlib import Path
 
 if __package__:
     from . import change_receipts
-    from .runtime_receipts import ReceiptContext, emit_change
+    from .runtime_receipts import ReceiptContext, emit_change, preflight
 else:
     import change_receipts
-    from runtime_receipts import ReceiptContext, emit_change
+    from runtime_receipts import ReceiptContext, emit_change, preflight
 
 
 def main() -> int:
@@ -42,6 +42,15 @@ def main() -> int:
             context, "event-1", "state.create", "class:agent-run-state", None, "b" * 64,
             "applied", evidence_refs=["id:check-1"],
         ) == first
+        change_receipts.disable_journal(journal, repo_root=root)
+        assert preflight(context, "event-1") == first
+        try:
+            preflight(context, "event-3")
+        except change_receipts.ReceiptDisabledError:
+            pass
+        else:
+            raise AssertionError("disabled journal allowed a new receipt event")
+        change_receipts.enable_journal(journal, repo_root=root)
         try:
             emit_change(context, "event-3", "state.create", "class:agent-run-state", None, None,
                         "applied", evidence_refs=["prompt:never"])

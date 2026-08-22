@@ -152,6 +152,48 @@ def main() -> int:
         assert recovered["status"] == "draft"
         assert len(validate_journal(retry_context.journal, repo_root=repo)) == 1
 
+        approval_retry_ledger = Path(directory) / "approval-retry-memory.jsonl"
+        old_candidate = candidate("mem-approve-old")
+        memory.create_candidate(approval_retry_ledger, old_candidate, receipt(), repo_root=repo)
+        memory.review_candidate(approval_retry_ledger, "mem-approve-old", decision="reviewed",
+                                reviewer_id="reviewer-1", evidence_ref="test:approval-review", repo_root=repo)
+        memory.approve_candidate(approval_retry_ledger, "mem-approve-old", owner_id="owner-1",
+                                 evidence_ref="test:approval-old", repo_root=repo)
+        memory.create_candidate(approval_retry_ledger,
+                                candidate("mem-approve-new", statement="retry is safe after approval",
+                                          supersedes="mem-approve-old"), receipt(), repo_root=repo)
+        memory.review_candidate(approval_retry_ledger, "mem-approve-new", decision="reviewed",
+                                reviewer_id="reviewer-1", evidence_ref="test:approval-review-new", repo_root=repo)
+        approval_context = ReceiptContext(
+            journal=Path(directory) / "approval-retry-receipts.jsonl", repo_root=repo,
+            run_id="approval-retry-run", actor="agent", runtime="codex", task_id="task-5",
+        )
+        original_emit = memory.emit_change
+        failed = True
+
+        def fail_approval_once(*args: object, **kwargs: object) -> dict[str, object]:
+            nonlocal failed
+            if failed:
+                failed = False
+                raise OSError("one-time approval receipt failure")
+            return original_emit(*args, **kwargs)  # type: ignore[arg-type]
+
+        memory.emit_change = fail_approval_once  # type: ignore[assignment]
+        try:
+            expect(OSError, lambda: memory.approve_candidate(
+                approval_retry_ledger, "mem-approve-new", owner_id="owner-1",
+                evidence_ref="test:approval-new", repo_root=repo, receipt_context=approval_context))
+            recovered_approval = memory.approve_candidate(
+                approval_retry_ledger, "mem-approve-new", owner_id="owner-1",
+                evidence_ref="test:approval-new", repo_root=repo, receipt_context=approval_context)
+        finally:
+            memory.emit_change = original_emit
+        assert recovered_approval["status"] == "approved"
+        approval_events = memory._read_events(approval_retry_ledger)
+        assert sum(event["candidate_id"] == "mem-approve-new" and event["action"] == "approved"
+                   for event in approval_events) == 1
+        assert len(validate_journal(approval_context.journal, repo_root=repo)) == 1
+
         created_event = memory._read_events(ledger)[0]
         bypass = Path(directory) / "bypass.jsonl"
         approved_event = {

@@ -66,6 +66,28 @@ def main() -> int:
         assert result.returncode != 0
         assert not any(internal_backup.iterdir())
 
+        invalid_home = root / "invalid-home"
+        invalid_home.mkdir()
+        invalid_backup = root / "invalid-backups"
+        invalid_journal = root / "invalid-install-receipts.jsonl"
+        invalid_journal.write_text("{not-json}\n", encoding="utf-8")
+        result = run(
+            "--apply",
+            "--home",
+            str(invalid_home),
+            "--backup-root",
+            str(invalid_backup),
+            "--receipt-journal",
+            str(invalid_journal),
+            "--run-id",
+            "run-invalid-install",
+            "--task-id",
+            "task-install",
+        )
+        assert result.returncode != 0
+        assert not invalid_backup.exists()
+        assert not (invalid_home / ".dsh" / "AGENTS.md").exists()
+
         explicit_home = root / "explicit-home"
         explicit_home.mkdir()
         explicit_backup = root / "explicit-backups"
@@ -92,6 +114,8 @@ def main() -> int:
         rollback_manifest_hash = hashlib.sha256(snapshots[0].read_bytes()).hexdigest()
         assert apply_receipt["after_hash"] != rollback_manifest_hash
 
+        missing_target = explicit_home / ".dsh" / "AGENTS.md"
+        missing_target.unlink()
         result = run(
             "--apply",
             "--home",
@@ -107,8 +131,30 @@ def main() -> int:
         )
         assert result.returncode == 0
         assert len(list(explicit_backup.glob("*/rollback.json"))) == 1
+        assert not missing_target.exists()
         records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
         assert [record["operation"] for record in records] == ["install.apply"]
+
+        missing_target.parent.mkdir(parents=True, exist_ok=True)
+        missing_target.symlink_to(REPO / "AGENTS.md")
+        blocked_rollback_journal = root / "blocked-rollback-receipts.jsonl"
+        blocked_rollback_journal.with_name(f"{blocked_rollback_journal.name}.mode").write_text(
+            "disabled\n", encoding="utf-8")
+        protected_target = explicit_home / ".codex" / "AGENTS.md"
+        assert protected_target.is_symlink()
+        result = run(
+            "--rollback",
+            str(snapshots[0].parent),
+            "--receipt-journal",
+            str(blocked_rollback_journal),
+            "--run-id",
+            "run-install",
+            "--task-id",
+            "task-install",
+        )
+        assert result.returncode != 0
+        assert protected_target.is_symlink()
+        assert snapshots[0].is_file()
 
         result = run(
             "--rollback",
@@ -126,6 +172,8 @@ def main() -> int:
         rollback_receipt = records[1]
         assert rollback_receipt["before_hash"] == apply_receipt["after_hash"]
 
+        missing_target.parent.mkdir(parents=True, exist_ok=True)
+        missing_target.symlink_to(REPO / "AGENTS.md")
         result = run(
             "--rollback",
             str(snapshots[0].parent),
@@ -137,6 +185,7 @@ def main() -> int:
             "task-install",
         )
         assert result.returncode == 0
+        assert missing_target.is_symlink()
         records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
         assert [record["operation"] for record in records] == ["install.apply", "install.rollback"]
 

@@ -149,10 +149,78 @@ def main() -> int:
         state.finish_run(receipt_state, "accepted", operation_key="finish", receipt_context=context)
         receipts = change_receipts.validate_journal(receipt_path, repo_root=context.repo_root)
         assert [receipt["operation"] for receipt in receipts] == [
-            "state.create", "state.start", "state.verify", "state.finish",
+            "state.create", "state.start", "state.resume", "state.verify", "state.finish",
         ]
         assert state.start_run(receipt_state, operation_key="start", receipt_context=context)
-        assert len(change_receipts.validate_journal(receipt_path, repo_root=context.repo_root)) == 4
+        assert len(change_receipts.validate_journal(receipt_path, repo_root=context.repo_root)) == 5
+
+        invalid_receipt = Path(directory) / "invalid-runtime-receipts.jsonl"
+        invalid_receipt.write_text("{not-json}\n", encoding="utf-8")
+        invalid_state = Path(directory) / "invalid-receipt-state.json"
+        invalid_context = ReceiptContext(
+            journal=invalid_receipt, repo_root=context.repo_root, run_id="invalid-receipt-run",
+            actor="agent", runtime="codex", bead_id="bead-invalid",
+        )
+        try:
+            state.create_run(invalid_state, run_id="invalid-receipt-run", bead_id="bead-invalid",
+                             source_commit="a" * 40, opaque_goal_id="goal", receipt_context=invalid_context)
+        except change_receipts.ReceiptIntegrityError:
+            pass
+        else:
+            raise AssertionError("invalid receipt journal allowed a state mutation")
+        assert not invalid_state.exists()
+
+        disabled_receipt = Path(directory) / "disabled-runtime-receipts.jsonl"
+        change_receipts.disable_journal(disabled_receipt, repo_root=context.repo_root)
+        disabled_state = Path(directory) / "disabled-receipt-state.json"
+        disabled_context = ReceiptContext(
+            journal=disabled_receipt, repo_root=context.repo_root, run_id="disabled-receipt-run",
+            actor="agent", runtime="codex", bead_id="bead-disabled",
+        )
+        try:
+            state.create_run(disabled_state, run_id="disabled-receipt-run", bead_id="bead-disabled",
+                             source_commit="a" * 40, opaque_goal_id="goal", receipt_context=disabled_context)
+        except change_receipts.ReceiptDisabledError:
+            pass
+        else:
+            raise AssertionError("disabled receipt journal allowed a state mutation")
+        assert not disabled_state.exists()
+
+        retry_receipt = Path(directory) / "retry-runtime-receipts.jsonl"
+        retry_state = Path(directory) / "retry-receipt-state.json"
+        retry_context = ReceiptContext(
+            journal=retry_receipt, repo_root=context.repo_root, run_id="retry-receipt-run",
+            actor="agent", runtime="codex", bead_id="bead-retry",
+        )
+        state.create_run(retry_state, run_id="retry-receipt-run", bead_id="bead-retry",
+                         source_commit="a" * 40, opaque_goal_id="goal", receipt_context=retry_context)
+        original_emit = state.emit_change
+        failed_event_id: str | None = None
+        failed = True
+
+        def fail_state_receipt_once(*args: object, **kwargs: object) -> dict[str, object]:
+            nonlocal failed, failed_event_id
+            failed_event_id = str(args[1])
+            if failed:
+                failed = False
+                raise OSError("one-time state receipt failure")
+            return original_emit(*args, **kwargs)  # type: ignore[arg-type]
+
+        state.emit_change = fail_state_receipt_once  # type: ignore[assignment]
+        try:
+            try:
+                state.start_run(retry_state, operation_key="start", receipt_context=retry_context)
+            except OSError:
+                pass
+            else:
+                raise AssertionError("one-time state receipt failure was not raised")
+            recovered_state = state.start_run(retry_state, operation_key="start", receipt_context=retry_context)
+        finally:
+            state.emit_change = original_emit
+        assert recovered_state["phase"] == "running"
+        retry_records = change_receipts.validate_journal(retry_receipt, repo_root=context.repo_root)
+        assert [record["operation"] for record in retry_records] == ["state.create", "state.start"]
+        assert retry_records[-1]["event_id"] == failed_event_id
     print("PASS metadata-only run state")
     return 0
 

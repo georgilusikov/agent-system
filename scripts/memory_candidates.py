@@ -236,15 +236,14 @@ def _receipt_event_id(context: ReceiptContext | None, action: str, candidate_id:
 
 def _recoverable(events: list[dict[str, Any]], candidate_id: str, action: str,
                  actor: str, evidence: Any) -> bool:
-    if not events:
-        return False
-    event = events[-1]
-    if action == "created":
-        return (event["candidate_id"] == candidate_id and event["action"] == action
-                and event["actor"] == actor and event["data"] == evidence
-                and event["evidence_ref"] == evidence["source_receipt"])
-    return (event["candidate_id"] == candidate_id and event["action"] == action
-            and event["actor"] == actor and event["evidence_ref"] == evidence)
+    for event in reversed(events):
+        if (event["candidate_id"] != candidate_id or event["action"] != action
+                or event["actor"] != actor):
+            continue
+        if action == "created":
+            return (event["data"] == evidence and event["evidence_ref"] == evidence["source_receipt"])
+        return event["evidence_ref"] == evidence
+    return False
 
 
 def retrieve_current(

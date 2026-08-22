@@ -14,9 +14,9 @@ from pathlib import Path
 from typing import Iterable
 
 if __package__:
-    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 else:
-    from runtime_receipts import ReceiptContext, emit_change, file_hash
+    from runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 
 
 REPO = Path(__file__).resolve().parents[1]
@@ -161,6 +161,9 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
     if not operations:
         print("no changes")
         return None
+    if receipt_context is not None and preflight(
+            receipt_context, _deployment_event_id(receipt_context, "apply")) is not None:
+        return None
     before_hash = _deployment_fingerprint(home, (Path(operation["target"]) for operation in operations))
     snapshot.mkdir(parents=True, exist_ok=True)
     manifest = {"version": 1, "home": str(home), "repo": str(REPO), "operations": operations}
@@ -204,6 +207,9 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
 def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> None:
     manifest = json.loads((snapshot / "rollback.json").read_text(encoding="utf-8"))
     home = Path(manifest["home"])
+    if receipt_context is not None and preflight(
+            receipt_context, _deployment_event_id(receipt_context, "rollback")) is not None:
+        return
     affected_targets = tuple(Path(operation["target"]) for operation in manifest["operations"])
     before_hash = _deployment_fingerprint(home, affected_targets)
     for operation in manifest["operations"]:
