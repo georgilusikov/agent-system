@@ -78,7 +78,7 @@ _agent_shared/standards/
 | Стандарт | Класс | Описание | Используется в |
 | :--- | :--- | :--- | :--- |
 | `agent_loops/ralph_loop.md` | contract | Persistent autonomous plan loop: один таск за итерацию, exact-match completion-маркер, без `git add .`/auto-commit. **Эталон contract-класса** | `tools/agent_loops/` |
-| `agent_loops/dev_swarm.md` | contract | Иерархическая мульти-модельная оркестрация: manager → 3 generator ∥ → 1 critic → synthesizer, всё через VibeProxy; cost/confidence — явные поля | `CLAUDE.md` (`dev_swarm.py`) |
+| `agent_loops/dev_swarm.md` | contract (optional/stale) | Исторический reference: manager → 3 generator ∥ → 1 critic → synthesizer; текущего executable consumer/runtime не найдено | нет verified consumer; solo autonomy остаётся default |
 | `agent_loops/architect_loop.md` | contract | Стратегический планинг PRD → Critique → Tasks → Execute, фаза = файл, провайдер-агностично | `workspace-output-standard.mdc` |
 | `agent_loops/extraction_protocol.md` | contract | Протокол выноса root-скриптов в standards+tools: стандарт ПЕРВЫМ, owner-approval, потом рефактор по model-adapter contract | мета-контракт остальных `agent_loops/` |
 | `agent_loops/parallel_worktree_swarm.md` | contract | N кодеров в N изолированных `git worktree`, сбор патчей, единый reviewer перед apply; кодер не пишет вне своего worktree | `tools/agent_loops/` |
