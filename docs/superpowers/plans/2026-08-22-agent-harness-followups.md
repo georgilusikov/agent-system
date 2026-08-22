@@ -169,9 +169,9 @@ VERDICT: ADVISORY (план выдаётся с возражениями)
 ## Фактический статус реализации
 
 - Task 1–4: завершены и проверены ранее.
-- Task 5: завершён в `dd6aa1d`; state, installer, memory и evaluation producers
-  выполняют receipt preflight до мутации, а одинаковые retry восстанавливают
-  отсутствующий receipt.
+- Task 5: завершён в `dd6aa1d` и `8db4f70`; state, installer, memory и
+  evaluation producers выполняют receipt preflight до мутации, а одинаковые
+  retry восстанавливают отсутствующий receipt.
 - Hook privacy follow-up: завершён в `cc092ed` и `6c3553e`; incident parking и
   precompact handoff сохраняют только metadata, без transcript path/content, а
   content-bearing Gemini audit требует отдельный `GEMINI_AUDIT_ALLOW_CONTENT=1`.
