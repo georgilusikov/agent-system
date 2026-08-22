@@ -25,6 +25,12 @@ dates exact. This is a compact default; explicit `объясни простым�
 requests route to `skills/feynman/SKILL.md` and retain its stronger analogy and
 understanding contract.
 
+For architecture/design, costly or irreversible, ambiguous, high-risk, or
+explicit compare/alternatives decisions, load
+`standards/operational/decision-alternatives-standard.md`; skip it for routine
+reversible one-path work with a brief reason. Route diagnosis to `/debug` and
+IKR-lite to `/triz` without exposing private chain-of-thought.
+
 ## Core loop
 
 1. Inspect current instructions, runtime, source artifacts, and consumers.
