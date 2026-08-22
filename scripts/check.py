@@ -8,7 +8,6 @@ import json
 import re
 from pathlib import Path
 
-
 REPO = Path(__file__).resolve().parents[1]
 HOME = Path.home()
 FRONTMATTER = re.compile(r"\A---\s*\n(?P<body>.*?)\n---\s*\n", re.DOTALL)
@@ -63,6 +62,7 @@ def check_deployed() -> list[str]:
         HOME / ".gemini" / "GEMINI.md": REPO / "AGENTS.md",
         HOME / ".claude" / "CLAUDE.md": REPO / "AGENTS.md",
         HOME / ".grok" / "rules" / "00-agent-system.md": REPO / "AGENTS.md",
+        HOME / ".codex" / "hooks.json": REPO / "adapters/hooks/codex.json",
         HOME / ".gemini" / "config" / "hooks.json": REPO / "adapters/hooks/agy.json",
     }
     errors: list[str] = []
@@ -88,9 +88,13 @@ def check_deployed() -> list[str]:
             target = root / skill.name
             if not target.is_symlink() or target.resolve() != skill.resolve():
                 errors.append(f"skill-not-deployed:{target}")
-    gemini_guard = HOME / ".gemini" / "hooks" / "guard.py"
-    if not gemini_guard.is_symlink() or gemini_guard.resolve() != (REPO / "hooks/gemini/guard.py").resolve():
-        errors.append(f"hook-not-deployed:{gemini_guard}")
+    for runtime in ("codex", "claude", "gemini"):
+        for source in (REPO / "hooks" / runtime).iterdir():
+            if not source.is_file():
+                continue
+            target = HOME / f".{runtime}" / "hooks" / source.name
+            if not target.is_symlink() or target.resolve() != source.resolve():
+                errors.append(f"hook-not-deployed:{target}")
     return errors
 
 

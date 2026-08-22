@@ -86,6 +86,11 @@
             "type": "command",
             "command": "python3 /Users/georgijlusikov/.claude/hooks/session_start_handoff.py",
             "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "bash '/Users/georgijlusikov/.claude/hooks/session-start-memory.sh'",
+            "timeout": 10
           }
         ]
       },
