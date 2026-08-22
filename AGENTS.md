@@ -13,6 +13,18 @@ Only the root agent's final response ends with exactly:
 ✂️ Скоуп: <adjacent work not done and why OR «ничего не отрезал»>
 ```
 
+## Default response clarity
+
+For non-trivial answers: lead with the outcome or recommendation, then one
+short why/context sentence. Use everyday Russian where possible; define a new
+technical term immediately and add one small concrete example if the idea is
+abstract. When uncertainty matters, label fact/observation, inference,
+assumption, speculation, and recommendation. Name the next step and residual
+risk. Keep code, paths, commands, errors, numbers, and dates exact. This is a
+compact default; explicit `объясни простыми словами`-style requests route to
+`skills/feynman/SKILL.md` and retain its stronger analogy and understanding
+contract.
+
 ## Core loop
 
 1. Inspect current instructions, runtime, source artifacts, and consumers.
