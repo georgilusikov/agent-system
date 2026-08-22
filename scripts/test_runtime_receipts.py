@@ -6,8 +6,12 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
-import change_receipts
-from runtime_receipts import ReceiptContext, emit_change
+if __package__:
+    from . import change_receipts
+    from .runtime_receipts import ReceiptContext, emit_change
+else:
+    import change_receipts
+    from runtime_receipts import ReceiptContext, emit_change
 
 
 def main() -> int:

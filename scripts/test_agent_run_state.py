@@ -10,11 +10,16 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+if not __package__:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import agent_run_state as state
-import change_receipts
-from runtime_receipts import ReceiptContext
+if __package__:
+    from . import agent_run_state as state, change_receipts
+    from .runtime_receipts import ReceiptContext
+else:
+    import agent_run_state as state
+    import change_receipts
+    from runtime_receipts import ReceiptContext
 
 
 def main() -> int:
@@ -65,7 +70,7 @@ def main() -> int:
         atomic = Path(directory) / "atomic.json"
         state.write_state(atomic, created)
         before = atomic.read_bytes()
-        with patch("agent_run_state.os.replace", side_effect=OSError("simulated")):
+        with patch(f"{state.__name__}.os.replace", side_effect=OSError("simulated")):
             try:
                 state.write_state(atomic, {**created, "retry_budget": 1})
             except OSError:

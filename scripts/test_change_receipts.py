@@ -9,8 +9,12 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-import agent_run_state as state
-import change_receipts as receipts
+if __package__:
+    from . import agent_run_state as state
+    from . import change_receipts as receipts
+else:
+    import agent_run_state as state
+    import change_receipts as receipts
 
 
 def receipt(event_id: str, parent_event_id: str | None = None) -> dict[str, object]:
