@@ -17,7 +17,7 @@ from typing import Any, Mapping
 
 
 FORBIDDEN_FIELD_PARTS = (
-    "prompt", "response", "transcript", "payload", "credential", "secret", "environment",
+    "prompt", "response", "transcript", "payload", "credential", "secret", "token", "environment",
 )
 TERMINAL_STATUSES = frozenset({"accepted", "partial", "blocked", "escalated", "failed", "cancelled"})
 
@@ -207,9 +207,18 @@ def _is_nonnegative_int(value: Any) -> bool:
 
 def _has_forbidden_field(value: Any) -> bool:
     if isinstance(value, Mapping):
-        return any(any(part in str(key).lower() for part in FORBIDDEN_FIELD_PARTS) or _has_forbidden_field(nested)
+        return any(_is_forbidden_key(str(key)) or _has_forbidden_field(nested)
                    for key, nested in value.items())
     return isinstance(value, list) and any(_has_forbidden_field(item) for item in value)
+
+
+def _is_forbidden_key(key: str) -> bool:
+    lowered = key.lower()
+    return any(
+        (lowered == "token" or lowered.endswith("_token"))
+        if part == "token" else part in lowered
+        for part in FORBIDDEN_FIELD_PARTS
+    )
 
 
 def main() -> int:
