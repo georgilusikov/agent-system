@@ -4,7 +4,10 @@ Gemini independent audit hook for Claude Code Stop events.
 Sends assistant output + user request + CLAUDE.md + workplan + git diff to Gemini.
 If score < 10/10, feeds back issues to Claude to keep working.
 
-ON by default. Disable with: rm ~/.claude/.gemini-audit-enabled
+This is a content-bearing feature. It runs only when the wrapper flag
+``~/.claude/.gemini-audit-enabled`` exists and ``GEMINI_AUDIT_ALLOW_CONTENT=1``
+is set for the invocation. The explicit second gate is required before any
+session content is sent to an external provider.
 Skip: only trivial responses (<50 chars).
 """
 
@@ -319,6 +322,10 @@ def main():
 
     # Check opt-in flag
     if not os.path.exists(FLAG_FILE):
+        sys.exit(0)
+
+    if os.environ.get("GEMINI_AUDIT_ALLOW_CONTENT") != "1":
+        log("SKIP: content audit gate is not enabled")
         sys.exit(0)
 
     # Fail-open if no API key

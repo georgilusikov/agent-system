@@ -13,6 +13,19 @@ assert_not_contains() {
   fi
 }
 
+AUDIT_HOME=$STATE/audit-home
+AUDIT_MARKER=$STATE/audit-ran
+mkdir -p "$AUDIT_HOME/.claude/hooks"
+printf '%s\n' '#!/bin/sh' 'touch "$AUDIT_MARKER"' >"$AUDIT_HOME/.claude/hooks/gemini-audit.py"
+chmod +x "$AUDIT_HOME/.claude/hooks/gemini-audit.py"
+touch "$AUDIT_HOME/.claude/.gemini-audit-enabled"
+printf '%s\n' '{}' |
+  HOME="$AUDIT_HOME" \
+  GEMINI_AUDIT_ALLOW_CONTENT=0 \
+  AUDIT_MARKER="$AUDIT_MARKER" \
+  bash "$ROOT/hooks/claude/gemini-audit.sh"
+test ! -e "$AUDIT_MARKER"
+
 HOME_DIR=$STATE/home
 mkdir -p "$HOME_DIR/.claude/bin"
 TRANSCRIPT=$STATE/private-transcript.jsonl
