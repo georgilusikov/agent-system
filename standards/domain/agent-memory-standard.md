@@ -87,10 +87,15 @@ reviewable/approvable. `redacted` is required for `reviewed` and `approved`.
 | `reviewed` or `approved` | `expired` | retention review is due; transition evidence present |
 | `expired` | `reviewed` | a new complete review, redaction and review evidence |
 
-`draft → approved` is impossible. `rejected` and `superseded` are audit-only
-terminal states. Promotion also requires repeatability, or an explicit reason
-why it does not apply, and a contradiction check against approved/reviewed
-notes. A note never authorizes a canon change by itself.
+The table is exhaustive: only the listed source/status pairs are valid; every
+other pair is invalid, including `approved → reviewed`, `draft → superseded`,
+`rejected → draft`, and every self-transition unless a new record explicitly
+states why it is permitted. `transitions[-1].to` must equal the current
+`status`. `draft → approved` is therefore impossible. `rejected` and
+`superseded` are audit-only terminal states. Promotion also requires
+repeatability, or an explicit reason why it does not apply, and a contradiction
+check against approved/reviewed notes. A note never authorizes a canon change
+by itself.
 
 ## 4. Retrieval, legacy, and evidence
 
@@ -118,9 +123,10 @@ not permission to retain them. Redact before persistence; `pending` remains
 quarantined.
 
 Before promotion, run a synthetic document canary that asserts: schema version
-and audit fields; matrix rules (including no `draft → approved`); scope boundary
-and opaque-pointer-only project/session references; legacy exclusion; denylist;
-README/rule registration; and this no-runtime claim. It checks the declarative
+and audit fields; the exhaustive matrix (including rejection of an unlisted
+transition and no `draft → approved`); scope boundary and opaque-pointer-only
+project/session references; legacy exclusion; denylist; README/rule
+registration; and this no-runtime claim. It checks the declarative
 standard/manual workflow only, not an executable schema or consumer.
 
 ## Cross-references
