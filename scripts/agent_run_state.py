@@ -90,6 +90,8 @@ def start_run(path: Path, *, operation_key: str | None = None) -> dict[str, Any]
     if _record_operation(state, operation_key, "start", {}):
         return state
     if state["phase"] == "running":
+        if operation_key is not None:
+            write_state(path, state)
         return state
     if state["phase"] != "planned":
         raise IllegalTransitionError(f"cannot start from {state['phase']}")
@@ -113,6 +115,8 @@ def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] 
         return state
     previous = state["last_verified_step"]
     if previous == step:
+        if operation_key is not None:
+            write_state(path, state)
         return state
     if previous is not None and step != previous + 1:
         raise StateConflictError("verified steps must be consecutive")
@@ -152,6 +156,8 @@ def finish_run(path: Path, outcome: str, *, evidence_refs: Iterable[str] = (),
     if _record_operation(state, operation_key, "finish", {"outcome": outcome, "evidence_refs": refs}):
         return state
     if state["phase"] == outcome:
+        if operation_key is not None:
+            write_state(path, state)
         return state
     if state["phase"] != "verifying":
         raise IllegalTransitionError(f"cannot finish from {state['phase']}")

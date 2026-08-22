@@ -18,6 +18,14 @@ def main() -> int:
         assert created["phase"] == "planned"
         assert "opaque" not in path.read_text(encoding="utf-8")
         assert state.start_run(path, operation_key="start") == state.start_run(path, operation_key="start")
+        state.start_run(path, operation_key="noop-start")
+        state.load_state(path)
+        try:
+            state.record_verified_step(path, 1, operation_key="noop-start")
+        except state.StateConflictError:
+            pass
+        else:
+            raise AssertionError("start no-op key was not persisted")
         try:
             state.finish_run(path, "accepted")
         except state.IllegalTransitionError:
@@ -26,9 +34,10 @@ def main() -> int:
             raise AssertionError("finish before verification did not fail")
         first = state.record_verified_step(path, 1, evidence_refs=["check:1"], operation_key="step-1")
         assert first == state.record_verified_step(path, 1, evidence_refs=["check:1"], operation_key="step-1")
+        state.record_verified_step(path, 1, operation_key="noop-step")
         state.load_state(path)
         try:
-            state.record_verified_step(path, 2, operation_key="step-1")
+            state.record_verified_step(path, 2, operation_key="noop-step")
         except state.StateConflictError:
             pass
         else:
@@ -37,6 +46,14 @@ def main() -> int:
         state.record_verified_step(path, 2, evidence_refs=["check:2"])
         assert state.finish_run(path, "accepted", operation_key="finish-1")["status"] == "accepted"
         assert state.finish_run(path, "accepted", operation_key="finish-1")["status"] == "accepted"
+        state.finish_run(path, "accepted", operation_key="noop-finish")
+        state.load_state(path)
+        try:
+            state.start_run(path, operation_key="noop-finish")
+        except state.StateConflictError:
+            pass
+        else:
+            raise AssertionError("finish no-op key was not persisted")
 
         atomic = Path(directory) / "atomic.json"
         state.write_state(atomic, created)
