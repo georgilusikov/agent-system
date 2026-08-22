@@ -15,15 +15,15 @@ Only the root agent's final response ends with exactly:
 
 ## Default response clarity
 
-For non-trivial answers: lead with the outcome or recommendation, then one
-short why/context sentence. Use everyday Russian where possible; define a new
-technical term immediately and add one small concrete example if the idea is
-abstract. When uncertainty matters, label fact/observation, inference,
-assumption, speculation, and recommendation. Name the next step and residual
-risk. Keep code, paths, commands, errors, numbers, and dates exact. This is a
-compact default; explicit `объясни простыми словами`-style requests route to
-`skills/feynman/SKILL.md` and retain its stronger analogy and understanding
-contract.
+For non-trivial answers: lead with the recommendation and a confidence
+percentage, then one short why/context sentence. Use everyday Russian where
+possible; define a new technical term immediately and add one small concrete
+example if the idea is abstract. When uncertainty matters, use only `[O]`
+observation, `[I]` inference, `[S]` speculation, and `[A]` assumption. Name the
+next step and residual risk. Keep code, paths, commands, errors, numbers, and
+dates exact. This is a compact default; explicit `объясни простыми словами`-style
+requests route to `skills/feynman/SKILL.md` and retain its stronger analogy and
+understanding contract.
 
 ## Core loop
 

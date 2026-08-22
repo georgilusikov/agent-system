@@ -7,11 +7,12 @@ not replace, `skills/feynman/SKILL.md` when its explicit trigger applies.
 
 **Unclear:** «Нужен индекс, запрос будет быстрее.»
 
-**Clear:** «[Рекомендация] Add an index to `orders.created_at`. [O] The query
-scans 1,000,000 rows. An index is a lookup list that points to matching rows;
-for example, it is like a book's contents page instead of reading every page.
-[I] It should reduce lookup time, but writes may become slower. Next: measure
-the query before and after. Risk: the index uses disk space.»
+**Clear:** «Рекомендация: добавить индекс для `orders.created_at`. Уверенность:
+90% — [O] запрос просматривает 1,000,000 строк, поэтому поиск должен
+ускориться. Индекс — это список указателей на подходящие строки; например, как
+оглавление книги вместо чтения каждой страницы. [I] Запись может стать
+медленнее. Следующий шаг: измерить запрос до и после. Риск: индекс займёт место
+на диске.»
 
 **Checks:** outcome-first ✓; context ✓; term expanded ✓; example ✓; uncertainty
 labels ✓; next step/risk ✓; exact facts preserved: `orders.created_at`,
@@ -21,11 +22,12 @@ labels ✓; next step/risk ✓; exact facts preserved: `orders.created_at`,
 
 **Unclear:** «Команда упала, поправьте зависимости.»
 
-**Clear:** «[O] `python3 scripts/check.py --repo` failed with
-`AGENTS.md exceeds 245 lines`. The validator is the repository check that
-rejects an oversized instruction file. [Рекомендация] Shorten `AGENTS.md`
-without changing its rules. Next: remove repetition and rerun the command.
-Risk: a shortened rule may lose a required condition.»
+**Clear:** «Рекомендация: сократить `AGENTS.md`, не меняя его правил. Уверенность:
+95% — [O] `python3 scripts/check.py --repo` завершилась с ошибкой
+`AGENTS.md exceeds 245 lines`. Валидатор — это проверка репозитория, которая
+отклоняет слишком длинный файл инструкций. Следующий шаг: убрать повторы и
+снова запустить команду. Риск: в сокращённом правиле может потеряться важное
+условие.»
 
 **Checks:** outcome-first ✓; context ✓; term expanded ✓; example not needed:
 the command and error are concrete ✓; uncertainty labels ✓; next step/risk ✓;
@@ -36,27 +38,29 @@ exact facts preserved: `python3 scripts/check.py --repo`,
 
 **Unclear:** «Сеть нестабильна, повторим позже.»
 
-**Clear:** «[Рекомендация] Retry `curl -I https://example.test` once after
-checking DNS. [O] The last run returned `curl: (6) Could not resolve host`.
-DNS is the address book that turns a site name into a network address; for
-example, it finds the number behind a saved contact. [A] The failure may be
-local rather than the site being down. Next: compare a second DNS lookup.
-Risk: the next result can still be affected by a temporary network outage.»
+**Clear:** «Рекомендация: после проверки DNS один раз повторить
+`curl -I https://example.test`. Уверенность: 70% — [O] последний запуск вернул
+`curl: (6) Could not resolve host: example.test`. DNS — это адресная книга,
+которая переводит имя сайта в сетевой адрес; например, находит номер по
+сохранённому контакту. [A] Причина может быть на локальном компьютере, а сайт
+может работать. Следующий шаг: сравнить второй результат поиска DNS. Риск:
+временный сбой сети может повлиять и на следующий результат.»
 
 **Checks:** outcome-first ✓; context ✓; term expanded ✓; example ✓; uncertainty
 labels ✓; next step/risk ✓; exact facts preserved:
-`curl -I https://example.test`, `curl: (6) Could not resolve host` ✓.
+`curl -I https://example.test`, `curl: (6) Could not resolve host: example.test` ✓.
 
 ## 4. Migration choice
 
 **Unclear:** «Миграция безопасна, запускайте.»
 
-**Clear:** «[Рекомендация] Test the migration on a copy before applying it on
-`2026-08-22`. [O] `ALTER TABLE invoices ADD COLUMN sent_at TEXT` changes the
-table shape. A migration is a recorded database change; for example, it is a
-numbered renovation step so every copy gets the same wall moved. [S] Existing
-application code may assume the old shape. Next: run the migration and its
-rollback on the copy. Risk: rollback can fail if later writes use `sent_at`.»
+**Clear:** «Рекомендация: проверить миграцию на копии перед применением
+`2026-08-22`. Уверенность: 85% — [O] `ALTER TABLE invoices ADD COLUMN sent_at TEXT`
+меняет структуру таблицы. Миграция — это записанное изменение базы данных;
+например, пронумерованный этап ремонта, чтобы в каждой копии передвинули одну
+и ту же стену. [S] Существующий код приложения может рассчитывать на старую
+структуру. Следующий шаг: выполнить миграцию и её откат на копии. Риск: откат
+может не сработать, если последующие записи используют `sent_at`.»
 
 **Checks:** outcome-first ✓; context ✓; term expanded ✓; example ✓; uncertainty
 labels ✓; next step/risk ✓; exact facts preserved:
@@ -66,12 +70,12 @@ labels ✓; next step/risk ✓; exact facts preserved:
 
 **Unclear:** «Поставьте кэш на 300 секунд.»
 
-**Clear:** «[Рекомендация] Cache the report for exactly `300` seconds. [O] The
-same report is requested repeatedly. A cache is a temporary saved result; for
-example, it is keeping today's printed timetable instead of asking the desk
-again. [I] This should reduce repeated work. Next: confirm a changed report is
-visible after `300` seconds. Risk: users can see data that is up to `300`
-seconds old.»
+**Clear:** «Рекомендация: хранить отчёт в кэше ровно `300` секунд. Уверенность:
+90% — [O] один и тот же отчёт запрашивают снова и снова. Кэш — это временно
+сохранённый результат; например, распечатанное расписание на сегодня, которое
+не нужно каждый раз спрашивать у стойки. [I] Это должно уменьшить повторную
+работу. Следующий шаг: убедиться, что изменённый отчёт виден после `300` секунд.
+Риск: пользователи могут видеть данные, которым не больше `300` секунд.»
 
 **Checks:** outcome-first ✓; context ✓; term expanded ✓; example ✓; uncertainty
 labels ✓; next step/risk ✓; exact facts preserved: `300` seconds ✓.
