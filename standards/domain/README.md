@@ -51,7 +51,7 @@ _agent_shared/standards/
     └── rule_dialects.md               # contract (диалекты правил)
 ```
 
-## 📋 Канон стандартов (все 19)
+## 📋 Канон стандартов (все 20)
 
 ### Топ-уровень (micro + method)
 
@@ -68,6 +68,7 @@ _agent_shared/standards/
 | `universal-matrix-standard.md` | method | Универсальная матрица доноров-кандидатов: что строить с нуля (промоут Nikita `UNIVERSAL_MATRIX_STANDARD.md`). Пара к `triz-gap-closure` (gap-аудит построенного) | `triz-gap-closure-audit-standard.md`, Nikita engineering |
 | `rat-framework-standard.md` | method | RAT (Riskiest Assumption Test): выявление и проверка самого рискованного допущения (промоут VANECHKA `rat-framework.md`) | VANECHKA, продуктовые гипотезы |
 | `competitor-analysis-standard.md` | method | Пайплайн анализа конкурентов: рамка через джобу → intel → value/feature teardown → Desire-Delivery gap → скоринг доноров → позиционные разрывы + бэклог. Триггеры: «анализ конкурентов», «competitor teardown», «разбери конкурента» | `projects/xerox`, BAS workflows, `triz-gap-closure`, `/jobs-to-be-done`, `/prioritize` |
+| `change-receipts-standard.md` | contract | Metadata-only append-only JSONL receipts: связывают state, tasks, hooks, deployments и projections с runtime evidence без содержимого разговоров или tool payloads | state/task writers, hooks, deployment/projection writers, runtime adapters |
 
 ### `agent_loops/` — контракты agent-loop инструментов
 
