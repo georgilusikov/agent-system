@@ -61,6 +61,10 @@ def create_candidate(
     data = dict(candidate)
     _validate_candidate(data)
     _validate_receipt(receipt)
+    if data["source_receipt"] != f"receipt:{receipt['event_id']}":
+        raise CandidateValidationError("candidate source receipt does not match the verified receipt")
+    if data["source_hash"] != receipt["receipt_hash"]:
+        raise CandidateValidationError("candidate source hash does not match the verified receipt")
     root = _resolved_root(repo_root)
     with _locked(ledger, root) as path:
         events = _read_events(path)
@@ -239,6 +243,8 @@ def _validate_receipt(receipt: Mapping[str, Any]) -> None:
     refs = receipt.get("evidence_refs")
     if not isinstance(refs, list) or len(refs) > 32:
         raise CandidateValidationError("receipt evidence is invalid")
+    for reference in refs:
+        _validate_ref(reference)
 
 
 def _check_create_conflict(data: Mapping[str, Any], states: Mapping[str, dict[str, Any]]) -> None:
@@ -266,20 +272,36 @@ def _states(events: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
         if action == "created":
             if candidate_id in states or not isinstance(event["data"], dict):
                 raise CandidateIntegrityError("candidate creation is duplicated or malformed")
+            try:
+                _validate_candidate(event["data"])
+            except CandidateValidationError as error:
+                raise CandidateIntegrityError("persisted candidate payload is invalid") from error
+            if event["data"]["candidate_id"] != candidate_id:
+                raise CandidateIntegrityError("candidate event and payload ids differ")
             states[candidate_id] = {**event["data"], "status": "draft", "rolled_back": False}
             continue
         state = _require_state(states, candidate_id)
         if action == "reviewed":
+            if state["status"] != "draft":
+                raise CandidateIntegrityError("reviewed event has an invalid predecessor")
             state["status"] = "reviewed"
             state["reviewed_by"] = event["actor"]
         elif action == "approved":
+            if state["status"] != "reviewed" or event["actor"] != state["owner"]:
+                raise CandidateIntegrityError("approved event lacks review or owner approval")
             state["status"] = "approved"
             state["approved_by"] = event["actor"]
         elif action == "rejected":
+            if state["status"] not in {"draft", "reviewed"}:
+                raise CandidateIntegrityError("rejected event has an invalid predecessor")
             state["status"] = "rejected"
         elif action == "superseded":
+            if state["status"] != "approved":
+                raise CandidateIntegrityError("superseded event has an invalid predecessor")
             state["status"] = "superseded"
         elif action == "rolled_back":
+            if state["status"] not in {"reviewed", "approved"} or state.get("rolled_back"):
+                raise CandidateIntegrityError("rollback event has an invalid predecessor")
             state["rolled_back"] = True
         else:
             raise CandidateIntegrityError("unknown candidate action")

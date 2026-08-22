@@ -23,7 +23,7 @@ def candidate(candidate_id: str, *, topic: str = "retry-safety", statement: str 
         "applicability": "verified state transitions",
         "limits": "single-process ledger",
         "source_receipt": "receipt:run-step-1",
-        "source_hash": "a" * 64,
+        "source_hash": hashlib.sha256(b"receipt").hexdigest(),
         "result_metric": "test:memory-canary",
         "evidence_refs": ["receipt:run-step-1", "test:memory-canary"],
         "contradicts": [],
@@ -71,6 +71,10 @@ def main() -> int:
                lambda: memory.create_candidate(ledger, candidate("mem-contradiction", statement="retry is unsafe"), receipt(), repo_root=repo))
         expect(memory.CandidateValidationError,
                lambda: memory.create_candidate(ledger, {**candidate("mem-private"), "statement": "store the prompt"}, receipt(), repo_root=repo))
+        expect(memory.CandidateValidationError,
+               lambda: memory.create_candidate(ledger, {**candidate("mem-wrong-receipt"), "source_receipt": "receipt:other"}, receipt(), repo_root=repo))
+        expect(memory.CandidateValidationError,
+               lambda: memory.create_candidate(ledger, {**candidate("mem-wrong-hash"), "source_hash": "a" * 64}, receipt(), repo_root=repo))
 
         replacement = memory.create_candidate(ledger, candidate("mem-replacement", statement="retry is safe after resume",
                                                                 supersedes="mem-first"), receipt(), repo_root=repo)
@@ -91,6 +95,24 @@ def main() -> int:
         assert memory.retrieve_current(ledger, scope="project", project="agent-system", repo_root=repo) == []
         expect(memory.CandidateValidationError,
                lambda: memory.create_candidate(repo / "memory.jsonl", candidate("mem-inside"), receipt(), repo_root=repo))
+
+        created_event = memory._read_events(ledger)[0]
+        bypass = Path(directory) / "bypass.jsonl"
+        approved_event = {
+            "event_id": "memory:mem-bypass:approved:2",
+            "candidate_id": "mem-first",
+            "action": "approved",
+            "actor": "owner-1",
+            "evidence_ref": "test:bypass",
+            "occurred_at": "2026-08-22T12:00:00Z",
+            "data": None,
+            "previous_event_hash": created_event["event_hash"],
+        }
+        approved_event["event_hash"] = memory._event_hash(approved_event)
+        bypass.write_text("\n".join(memory.json.dumps(item, sort_keys=True, separators=(",", ":"))
+                          for item in (created_event, approved_event)) + "\n", encoding="utf-8")
+        expect(memory.CandidateIntegrityError,
+               lambda: memory.retrieve_current(bypass, scope="project", project="agent-system", repo_root=repo))
     print("PASS metadata-only memory candidate lifecycle")
     return 0
 
