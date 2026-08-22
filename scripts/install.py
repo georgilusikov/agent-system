@@ -159,15 +159,31 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
     if dry_run:
         print(f"dry-run: {len(operations)} changes")
         return None
-    if not operations:
-        print("no changes")
+    event_id = _deployment_event_id(receipt_context, "apply") if receipt_context else None
+    if receipt_context is not None and preflight(receipt_context, event_id) is not None:
         return None
-    if receipt_context is not None and preflight(
-            receipt_context, _deployment_event_id(receipt_context, "apply")) is not None:
+    if not operations:
+        if event_id is not None:
+            pending = _find_pending_apply(backup_root, event_id, home)
+            if pending is not None:
+                affected_targets = tuple(Path(item["target"]) for item in pending["operations"])
+                emit_change(
+                    receipt_context,
+                    event_id,
+                    "install.apply",
+                    "class:installer-deployment",
+                    None,
+                    _deployment_fingerprint(home, affected_targets),
+                    "applied",
+                )
+                return None
+        print("no changes")
         return None
     before_hash = _deployment_fingerprint(home, (Path(operation["target"]) for operation in operations))
     snapshot.mkdir(parents=True, exist_ok=True)
     manifest = {"version": 1, "home": str(home), "repo": str(REPO), "operations": operations}
+    if event_id is not None:
+        manifest["receipt_event_id"] = event_id
     (snapshot / "rollback.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     for operation in operations:
         target = Path(operation["target"])
@@ -208,11 +224,27 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
 def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> None:
     manifest = json.loads((snapshot / "rollback.json").read_text(encoding="utf-8"))
     home = Path(manifest["home"])
-    if receipt_context is not None and preflight(
-            receipt_context, _deployment_event_id(receipt_context, "rollback")) is not None:
-        return
+    event_id = _deployment_event_id(receipt_context, "rollback") if receipt_context else None
+    if receipt_context is not None:
+        if preflight(receipt_context, event_id) is not None:
+            return
     affected_targets = tuple(Path(operation["target"]) for operation in manifest["operations"])
     before_hash = _deployment_fingerprint(home, affected_targets)
+    pending_path = snapshot / "receipt-pending.json"
+    pending = _read_pending_receipt(pending_path, event_id) if event_id is not None else None
+    if pending is not None and pending.get("after_hash") == before_hash:
+        emit_change(
+            receipt_context,
+            event_id,
+            "install.rollback",
+            "class:installer-deployment",
+            pending.get("before_hash"),
+            pending["after_hash"],
+            "applied",
+        )
+        return
+    if event_id is not None:
+        _write_pending_receipt(pending_path, event_id, before_hash)
     for operation in manifest["operations"]:
         target = Path(operation["target"])
         if operation.get("kind", "link" if operation.get("source") else "retire") == "merge":
@@ -251,9 +283,10 @@ def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> N
             shutil.move(str(backup), str(target))
     after_hash = _deployment_fingerprint(home, affected_targets)
     if receipt_context is not None and before_hash != after_hash:
+        _write_pending_receipt(pending_path, event_id, before_hash, after_hash)
         emit_change(
             receipt_context,
-            _deployment_event_id(receipt_context, "rollback"),
+            event_id,
             "install.rollback",
             "class:installer-deployment",
             before_hash,
@@ -265,6 +298,42 @@ def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> N
 
 def _deployment_event_id(context: ReceiptContext, operation: str) -> str:
     return f"deployment-{hashlib.sha256(f'{context.run_id}:{operation}'.encode()).hexdigest()}"
+
+
+def _find_pending_apply(backup_root: Path, event_id: str, home: Path) -> dict[str, object] | None:
+    if not backup_root.is_dir():
+        return None
+    for manifest_path in sorted(backup_root.glob("*/rollback.json"), reverse=True):
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if (not isinstance(manifest, dict) or manifest.get("receipt_event_id") != event_id
+                or manifest.get("home") != str(home) or not isinstance(manifest.get("operations"), list)):
+            continue
+        if all(isinstance(item, dict) and isinstance(item.get("target"), str)
+               for item in manifest["operations"]):
+            return manifest
+    return None
+
+
+def _read_pending_receipt(path: Path, event_id: str) -> dict[str, object] | None:
+    try:
+        pending = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if (not isinstance(pending, dict) or pending.get("event_id") != event_id
+            or not isinstance(pending.get("before_hash"), str)):
+        return None
+    if pending.get("after_hash") is not None and not isinstance(pending["after_hash"], str):
+        return None
+    return pending
+
+
+def _write_pending_receipt(path: Path, event_id: str, before_hash: str,
+                           after_hash: str | None = None) -> None:
+    path.write_text(json.dumps({"event_id": event_id, "before_hash": before_hash,
+                                "after_hash": after_hash}, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def _deployment_fingerprint(home: Path, targets_to_hash: Iterable[Path]) -> str:

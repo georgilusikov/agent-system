@@ -7,12 +7,24 @@ import json
 import hashlib
 import os
 import subprocess
+import sys
 import tempfile
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
-
 
 REPO = Path(__file__).resolve().parents[1]
 INSTALLER = REPO / "scripts" / "install.py"
+
+if __package__:
+    from . import install as installer
+    from .change_receipts import validate_journal
+    from .runtime_receipts import ReceiptContext
+else:
+    sys.path.insert(0, str(REPO))
+    from scripts import install as installer
+    from scripts.change_receipts import validate_journal
+    from scripts.runtime_receipts import ReceiptContext
 
 
 def run(*arguments: str) -> subprocess.CompletedProcess[str]:
@@ -200,6 +212,65 @@ def main() -> int:
         )
         assert result.returncode != 0
         assert not (root / "linked-backups-target").exists()
+
+        retry_home = root / "retry-home"
+        retry_home.mkdir()
+        retry_backup = root / "retry-backups"
+        retry_context = ReceiptContext(
+            journal=root / "retry-receipts.jsonl", repo_root=REPO,
+            run_id="retry-install", actor="system", runtime="system", task_id="task-install",
+        )
+        original_emit = installer.emit_change
+        failed = True
+
+        def fail_once(*args: object, **kwargs: object) -> dict[str, object]:
+            nonlocal failed
+            if failed:
+                failed = False
+                raise OSError("one-time installer receipt failure")
+            return original_emit(*args, **kwargs)  # type: ignore[arg-type]
+
+        installer.emit_change = fail_once  # type: ignore[assignment]
+        try:
+            try:
+                with redirect_stdout(StringIO()):
+                    installer.apply(retry_home, retry_backup, False, retry_context)
+            except OSError:
+                pass
+            else:
+                raise AssertionError("one-time apply receipt failure was not exercised")
+            with redirect_stdout(StringIO()):
+                installer.apply(retry_home, retry_backup, False, retry_context)
+        finally:
+            installer.emit_change = original_emit
+        assert len(validate_journal(retry_context.journal, repo_root=REPO)) == 1
+
+        rollback_home = root / "rollback-home"
+        rollback_home.mkdir()
+        rollback_backup = root / "rollback-backups"
+        rollback_context = ReceiptContext(
+            journal=root / "retry-rollback-receipts.jsonl", repo_root=REPO,
+            run_id="retry-rollback", actor="system", runtime="system", task_id="task-install",
+        )
+        with redirect_stdout(StringIO()):
+            snapshot = installer.apply(rollback_home, rollback_backup, False, rollback_context)
+        assert snapshot is not None
+        original_emit = installer.emit_change
+        failed = True
+        installer.emit_change = fail_once  # type: ignore[assignment]
+        try:
+            try:
+                with redirect_stdout(StringIO()):
+                    installer.rollback(snapshot, rollback_context)
+            except OSError:
+                pass
+            else:
+                raise AssertionError("one-time rollback receipt failure was not exercised")
+            with redirect_stdout(StringIO()):
+                installer.rollback(snapshot, rollback_context)
+        finally:
+            installer.emit_change = original_emit
+        assert len(validate_journal(rollback_context.journal, repo_root=REPO)) == 2
     print("PASS installer symlink escape rejected")
     return 0
 
