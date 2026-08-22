@@ -52,7 +52,7 @@ def main() -> int:
     chosen = governor.decide(request())
     assert chosen["action"] == "allow" and chosen["selected_issue"] == "gl.1"
     assert governor.decide(request()) == chosen  # deterministic, including evidence order
-    assert governor.decide(request(wip_count=1))["reason"] == "WIP_LIMIT_REACHED"
+    assert governor.decide(request(active_runs=[{"issue_id": "other", "status": "running"}], wip_count=1))["reason"] == "WIP_LIMIT_REACHED"
 
     expired = request()
     expired["capabilities"] = {"beads": {"status": "available", "valid_until": 100}}
@@ -67,9 +67,13 @@ def main() -> int:
     assert fallback["action"] == "allow" and fallback["next_action"] == "RUN_SAFE_FALLBACK"
     assert exhausted["action"] == "escalate" and exhausted["next_action"] == "OWNER_QUEUE"
 
-    duplicate = request(active_runs=[{"issue_id": "gl.1", "status": "running"}])
+    duplicate = request(active_runs=[{"issue_id": "gl.1", "status": "running"}], wip_count=1)
     assert governor.decide(duplicate)["selected_issue"] == "gl.2"
-    assert governor.decide(request(active_runs=[{"issue_id": "gl.1", "status": "unknown"}]))["selected_issue"] == "gl.2"
+    assert governor.decide(request(active_runs=[{"issue_id": "gl.1", "status": "unknown"}], wip_count=1))["selected_issue"] == "gl.2"
+    assert governor.decide(request(active_runs=[{"issue_id": "gl.1", "status": "running"}], wip_count=0))["reason"] == "INVALID_WIP_COUNT"
+    assert governor.decide(request(active_runs=[{"issue_id": "gl.1", "status": "running"},
+                                                 {"issue_id": "gl.1", "status": "ready"}], wip_count=2))["reason"] == "DUPLICATE_ACTIVE_CLAIM"
+    assert governor.decide(request(active_runs=[{"status": "running"}], wip_count=1))["reason"] == "INVALID_ACTIVE_CLAIM"
     for key, reason in (("attempts_used", "RETRY_BUDGET_EXHAUSTED"), ("elapsed_seconds", "TIMEOUT_BUDGET_EXHAUSTED"),
                         ("tokens_used", "TOKEN_BUDGET_EXHAUSTED")):
         limited = request()

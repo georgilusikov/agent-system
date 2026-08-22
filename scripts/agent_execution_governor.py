@@ -59,18 +59,15 @@ def decide(document: Mapping[str, Any]) -> dict[str, Any]:
     if limit_reason:
         return _decision("defer", None, limit_reason, "WAIT_FOR_BUDGET", extras, ["budget"])
 
-    active_runs = document.get("active_runs", [])
-    if not isinstance(active_runs, list):
-        return _decision("escalate", None, "INVALID_ACTIVE_RUNS", "OWNER_QUEUE", extras, ["active_runs"])
-    active_ids = {
-        run.get("issue_id") for run in active_runs
-        if isinstance(run, Mapping) and run.get("status") not in TERMINAL_STATUSES and isinstance(run.get("issue_id"), str)
-    }
-    wip_count = document.get("wip_count", len(active_ids))
-    if not _is_nonnegative_int(wip_count):
-        return _decision("escalate", None, "INVALID_WIP", "OWNER_QUEUE", extras, ["active_runs"])
+    active_ids, wip_error = _active_claims(document.get("active_runs", []))
+    if wip_error:
+        return _decision("escalate", None, wip_error, "OWNER_QUEUE", extras, ["active_runs"])
+    derived_wip_count = len(active_ids)
+    if ("wip_count" in document and (not _is_nonnegative_int(document["wip_count"])
+                                    or document["wip_count"] != derived_wip_count)):
+        return _decision("escalate", None, "INVALID_WIP_COUNT", "OWNER_QUEUE", extras, ["active_runs", "wip"])
     candidate = _select_issue(document.get("issues"), active_ids)
-    if wip_count >= wip_limit:
+    if derived_wip_count >= wip_limit:
         return _decision("defer", candidate, "WIP_LIMIT_REACHED", "WAIT_FOR_WIP", extras, ["active_runs", "wip"])
     if candidate is not None:
         return _decision("allow", candidate, "READY_ISSUE_SELECTED", "START_ONE_LANE", extras, ["issues", "active_runs", "budgets"])
@@ -110,6 +107,24 @@ def _select_issue(issues: Any, active_ids: set[str]) -> str | None:
             continue
         ready.append((priority, issue_id))
     return min(ready, default=None)[1] if ready else None
+
+
+def _active_claims(active_runs: Any) -> tuple[set[str], str | None]:
+    if not isinstance(active_runs, list):
+        return set(), "INVALID_ACTIVE_RUNS"
+    claims: list[str] = []
+    for run in active_runs:
+        if not isinstance(run, Mapping):
+            return set(), "INVALID_ACTIVE_RUNS"
+        if run.get("status") in TERMINAL_STATUSES:
+            continue
+        issue_id = run.get("issue_id")
+        if not isinstance(issue_id, str) or not issue_id:
+            return set(), "INVALID_ACTIVE_CLAIM"
+        claims.append(issue_id)
+    if len(claims) != len(set(claims)):
+        return set(), "DUPLICATE_ACTIVE_CLAIM"
+    return set(claims), None
 
 
 def _required_fact_failure(facts: Any, names: tuple[str, ...], as_of: int, status: str) -> bool:
