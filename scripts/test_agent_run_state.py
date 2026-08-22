@@ -43,7 +43,7 @@ def main() -> int:
         before = atomic.read_bytes()
         with patch("agent_run_state.os.replace", side_effect=OSError("simulated")):
             try:
-                state.write_state(atomic, {**created, "next_action": "changed"})
+                state.write_state(atomic, {**created, "retry_budget": 1})
             except OSError:
                 pass
         assert atomic.read_bytes() == before
@@ -67,6 +67,32 @@ def main() -> int:
                 pass
             else:
                 raise AssertionError(f"{name} numeric value did not fail closed")
+
+        invalid_states = (
+            ("run-id", {"run_id": None}),
+            ("goal-fingerprint", {"goal_fingerprint": []}),
+            ("bead-id", {"bead_id": 1}),
+            ("next-action", {"next_action": None}),
+            ("source-commit", {"source_commit": {}}),
+            ("redaction-status", {"redaction_status": []}),
+            ("evidence-ref", {"evidence_refs": [1]}),
+            ("planned-action", {"next_action": "verify step 1"}),
+            ("verifying-action", {"phase": "verifying", "status": "verifying", "last_verified_step": 1,
+                                    "next_action": None}),
+            ("finished-action", {"phase": "accepted", "status": "accepted", "last_verified_step": 1,
+                                  "next_action": "verify step 2"}),
+            ("nested-forbidden-receipt", {"operation_receipts": [{"key_fingerprint": "a",
+                                             "operation_fingerprint": {"secret": None}}]}),
+        )
+        for name, change in invalid_states:
+            invalid = Path(directory) / f"invalid-{name}.json"
+            invalid.write_text(json.dumps({**created, **change}), encoding="utf-8")
+            try:
+                state.load_state(invalid)
+            except state.MalformedStateError:
+                pass
+            else:
+                raise AssertionError(f"{name} state did not fail closed")
 
         try:
             state.goal_fingerprint(redacted_goal_metadata={"prompt": None})

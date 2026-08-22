@@ -192,6 +192,9 @@ def _validate_state(data: Any) -> None:
     if not isinstance(data, dict) or set(data) != STATE_FIELDS:
         raise MalformedStateError("state fields do not match metadata-only contract")
     _reject_forbidden_fields(data)
+    for field in ("run_id", "goal_fingerprint", "bead_id", "source_commit"):
+        if not _is_nonempty_string(data[field]):
+            raise MalformedStateError(f"{field} must be a non-empty string")
     if data["phase"] not in (*PHASES, *OUTCOMES) or data["status"] != data["phase"]:
         raise MalformedStateError("invalid phase or status")
     if data["last_verified_step"] is not None and not _is_nonnegative_int(data["last_verified_step"]):
@@ -200,8 +203,8 @@ def _validate_state(data: Any) -> None:
         raise MalformedStateError("attempt and retry_budget must be non-negative integers")
     if data["attempt"] > data["retry_budget"]:
         raise MalformedStateError("attempt exceeds retry_budget")
-    if not isinstance(data["evidence_refs"], list) or not all(isinstance(ref, str) for ref in data["evidence_refs"]):
-        raise MalformedStateError("evidence_refs must be a list of strings")
+    if not isinstance(data["evidence_refs"], list) or not all(_is_nonempty_string(ref) for ref in data["evidence_refs"]):
+        raise MalformedStateError("evidence_refs must be a list of non-empty strings")
     if data["redaction_status"] != "metadata-only":
         raise MalformedStateError("redaction_status must be metadata-only")
     if not isinstance(data["operation_receipts"], list):
@@ -209,12 +212,30 @@ def _validate_state(data: Any) -> None:
     for receipt in data["operation_receipts"]:
         if not isinstance(receipt, dict) or set(receipt) != OPERATION_RECEIPT_FIELDS:
             raise MalformedStateError("invalid operation receipt")
-        if not all(isinstance(value, str) and value for value in receipt.values()):
+        if not all(_is_fingerprint(value) for value in receipt.values()):
             raise MalformedStateError("invalid operation receipt fingerprint")
-    if data["phase"] in {"planned", "ready", "running"} and data["last_verified_step"] is not None:
+    if len({receipt["key_fingerprint"] for receipt in data["operation_receipts"]}) != len(data["operation_receipts"]):
+        raise MalformedStateError("duplicate operation receipt key")
+    _validate_phase_invariants(data)
+
+
+def _validate_phase_invariants(data: Mapping[str, Any]) -> None:
+    phase = data["phase"]
+    step = data["last_verified_step"]
+    next_action = data["next_action"]
+    if phase in {"planned", "ready", "running"} and step is not None:
         raise MalformedStateError("unverified phase has a verified step")
-    if data["phase"] in {"verifying", *OUTCOMES} and not data["last_verified_step"]:
+    if phase in {"verifying", *OUTCOMES} and not step:
         raise MalformedStateError("verified phase needs a verified step")
+    expected_actions = {"planned": "start", "ready": "start", "running": "verify step 1"}
+    if phase in expected_actions:
+        if next_action != expected_actions[phase]:
+            raise MalformedStateError("invalid next_action for phase")
+    elif phase == "verifying":
+        if next_action != f"verify step {step + 1}":
+            raise MalformedStateError("invalid next_action for verified step")
+    elif next_action is not None:
+        raise MalformedStateError("finished state must not have next_action")
 
 
 def _transition(state: dict[str, Any], target: str) -> None:
@@ -254,6 +275,14 @@ def _fingerprint(value: Any) -> str:
 
 def _is_nonnegative_int(value: Any) -> bool:
     return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
+def _is_nonempty_string(value: Any) -> bool:
+    return isinstance(value, str) and bool(value)
+
+
+def _is_fingerprint(value: Any) -> bool:
+    return _is_nonempty_string(value) and len(value) == 64 and all(character in "0123456789abcdef" for character in value)
 
 
 def _reject_forbidden_fields(value: Any) -> None:
