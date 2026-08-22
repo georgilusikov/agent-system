@@ -10,6 +10,13 @@ import sys
 import tempfile
 from pathlib import Path
 
+if __package__:
+    from .change_receipts import validate_journal
+    from .runtime_receipts import ReceiptContext
+else:
+    from change_receipts import validate_journal
+    from runtime_receipts import ReceiptContext
+
 try:
     from . import memory_capture as capture
 except ImportError:
@@ -63,7 +70,10 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory)
         ledger = root / "memory.jsonl"
-        created = capture.capture_verified_candidate(ledger, candidate(), receipt(), repo_root=repo)
+        context = ReceiptContext(journal=root / "capture-receipts.jsonl", repo_root=repo,
+                                 run_id="capture-run", actor="agent", runtime="codex", bead_id="bead-5")
+        created = capture.capture_verified_candidate(ledger, candidate(), receipt(), repo_root=repo,
+                                                     receipt_context=context)
         assert created["candidate_id"] == "mem-capture"
         assert created["status"] == "draft"
 
@@ -88,6 +98,16 @@ def main() -> int:
         assert result.returncode == 0, result.stderr
         assert result.stdout.strip() == "candidate_id=mem-cli status=draft"
         assert cli_ledger.exists()
+
+        cli_journal = root / "cli-receipts.jsonl"
+        result = subprocess.run(
+            [sys.executable, "-m", "scripts.memory_capture", "--ledger", str(root / "cli-context.jsonl"),
+             "--receipt-journal", str(cli_journal), "--receipt-run-id", "cli-run", "--receipt-task-id", "task-5"],
+            cwd=repo, input=json.dumps({"candidate": candidate("mem-cli-context"), "receipt": receipt()}),
+            text=True, capture_output=True, check=False)
+        assert result.returncode == 0, result.stderr
+        assert result.stdout.strip() == "candidate_id=mem-cli-context status=draft"
+        assert validate_journal(cli_journal, repo_root=repo)[0]["operation"] == "memory.create"
 
         no_ledger = repo / "memory.jsonl"
         assert not no_ledger.exists()

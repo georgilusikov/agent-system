@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -12,7 +13,12 @@ import tempfile
 from pathlib import Path
 from typing import Any, Mapping
 
-from agent_run_state import FORBIDDEN_FIELD_PARTS, _reject_forbidden_fields
+if __package__:
+    from .agent_run_state import FORBIDDEN_FIELD_PARTS, _reject_forbidden_fields
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+else:
+    from agent_run_state import FORBIDDEN_FIELD_PARTS, _reject_forbidden_fields
+    from runtime_receipts import ReceiptContext, emit_change, file_hash
 
 
 TASK_IDS = {
@@ -129,7 +135,7 @@ def validate_envelope(envelope: Mapping[str, Any]) -> dict[str, Any]:
     return dict(envelope)
 
 
-def write_result(path: Path, result: Mapping[str, Any]) -> None:
+def write_result(path: Path, result: Mapping[str, Any], *, receipt_context: ReceiptContext | None = None) -> None:
     if not isinstance(path, Path):
         raise EvaluationError("path must be a pathlib.Path")
     result = validate_envelope(result)
@@ -138,6 +144,7 @@ def write_result(path: Path, result: Mapping[str, Any]) -> None:
             return
         raise EvaluationError("result exists; use a new run_id for rollback or changed hypothesis")
     path.parent.mkdir(parents=True, exist_ok=True)
+    before_hash = file_hash(path) if path.exists() else None
     temporary: Path | None = None
     try:
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as stream:
@@ -147,6 +154,11 @@ def write_result(path: Path, result: Mapping[str, Any]) -> None:
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(temporary, path)
+        if receipt_context is not None:
+            event_id = "evaluation-" + hashlib.sha256(
+                f"{receipt_context.run_id}:evaluation.write:{path}".encode()).hexdigest()
+            emit_change(receipt_context, event_id, "evaluation.write", "class:evaluation-result",
+                        before_hash, file_hash(path), "applied")
     finally:
         if temporary is not None and temporary.exists():
             temporary.unlink()
@@ -366,6 +378,10 @@ def main() -> int:
     parser.add_argument("--records", type=Path)
     parser.add_argument("--comparison-verdicts", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--receipt-journal", type=Path)
+    parser.add_argument("--receipt-run-id")
+    parser.add_argument("--receipt-task-id")
+    parser.add_argument("--receipt-bead-id")
     args = parser.parse_args()
     try:
         common = vars(args).copy()
@@ -373,6 +389,18 @@ def main() -> int:
         records_path = common.pop("records")
         comparisons_path = common.pop("comparison_verdicts")
         output = common.pop("output")
+        common.pop("receipt_journal")
+        common.pop("receipt_run_id")
+        common.pop("receipt_task_id")
+        common.pop("receipt_bead_id")
+        if args.receipt_journal and (not args.receipt_run_id or not (args.receipt_task_id or args.receipt_bead_id)):
+            raise EvaluationError(
+                "--receipt-journal requires --receipt-run-id and --receipt-task-id or --receipt-bead-id")
+        receipt_context = ReceiptContext(
+            journal=args.receipt_journal, repo_root=Path(__file__).resolve().parents[1],
+            run_id=args.receipt_run_id, actor="system", runtime="codex",
+            task_id=args.receipt_task_id, bead_id=args.receipt_bead_id,
+        ) if args.receipt_journal else None
         if records_path is None:
             if args.consumer_available or comparisons_path is not None:
                 raise EvaluationError("consumer records are required when consumer is available")
@@ -388,7 +416,7 @@ def main() -> int:
         if output is None:
             print(json.dumps(result, sort_keys=True, separators=(",", ":")))
         else:
-            write_result(output, result)
+            write_result(output, result, receipt_context=receipt_context)
     except (EvaluationError, OSError, json.JSONDecodeError) as error:
         parser.error(str(error))
     return 0

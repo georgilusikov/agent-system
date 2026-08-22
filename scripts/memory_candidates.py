@@ -13,6 +13,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator, Mapping
 
+if __package__:
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+else:
+    from runtime_receipts import ReceiptContext, emit_change, file_hash
+
 
 class MemoryCandidateError(ValueError):
     """Base error for untrusted candidate or ledger data."""
@@ -56,6 +61,7 @@ def create_candidate(
     receipt: Mapping[str, Any],
     *,
     repo_root: Path,
+    receipt_context: ReceiptContext | None = None,
 ) -> dict[str, Any]:
     """Put one verified, redacted candidate in the external inbox."""
     data = dict(candidate)
@@ -68,12 +74,14 @@ def create_candidate(
     root = _resolved_root(repo_root)
     with _locked(ledger, root) as path:
         events = _read_events(path)
+        before_hash = file_hash(path) if path.exists() else None
         states = _states(events)
         candidate_id = data["candidate_id"]
         if candidate_id in states:
             raise CandidateConflictError("candidate id already exists")
         _check_create_conflict(data, states)
         _append_event(path, events, candidate_id, "created", "system", data["source_receipt"], data)
+        _emit_receipt(receipt_context, "create", candidate_id, before_hash, file_hash(path))
         return _states(_read_events(path))[candidate_id]
 
 
@@ -85,6 +93,7 @@ def review_candidate(
     reviewer_id: str,
     evidence_ref: str,
     repo_root: Path,
+    receipt_context: ReceiptContext | None = None,
 ) -> dict[str, Any]:
     """Move a draft to reviewed or rejected; owner approval is separate."""
     _validate_id(candidate_id, CANDIDATE_ID, "candidate_id")
@@ -95,11 +104,13 @@ def review_candidate(
     root = _resolved_root(repo_root)
     with _locked(ledger, root) as path:
         events = _read_events(path)
+        before_hash = file_hash(path)
         state = _require_state(_states(events), candidate_id)
         if state["status"] != "draft":
             raise CandidateValidationError("only draft candidates can be reviewed")
         action = "reviewed" if decision == "reviewed" else "rejected"
         _append_event(path, events, candidate_id, action, reviewer_id, evidence_ref)
+        _emit_receipt(receipt_context, "review", candidate_id, before_hash, file_hash(path))
         return _states(_read_events(path))[candidate_id]
 
 
@@ -110,6 +121,7 @@ def approve_candidate(
     owner_id: str,
     evidence_ref: str,
     repo_root: Path,
+    receipt_context: ReceiptContext | None = None,
 ) -> dict[str, Any]:
     """Promote only a reviewed candidate after explicit owner approval."""
     _validate_id(candidate_id, CANDIDATE_ID, "candidate_id")
@@ -118,6 +130,7 @@ def approve_candidate(
     root = _resolved_root(repo_root)
     with _locked(ledger, root) as path:
         events = _read_events(path)
+        before_hash = file_hash(path)
         states = _states(events)
         state = _require_state(states, candidate_id)
         if state["status"] != "reviewed":
@@ -139,6 +152,7 @@ def approve_candidate(
         _append_event(path, events, candidate_id, "approved", owner_id, evidence_ref)
         if supersedes is not None:
             _append_event(path, _read_events(path), supersedes, "superseded", owner_id, evidence_ref)
+        _emit_receipt(receipt_context, "approve", candidate_id, before_hash, file_hash(path))
         return _states(_read_events(path))[candidate_id]
 
 
@@ -149,6 +163,7 @@ def rollback_candidate(
     actor_id: str,
     evidence_ref: str,
     repo_root: Path,
+    receipt_context: ReceiptContext | None = None,
 ) -> dict[str, Any]:
     """Revoke retrieval without rewriting history or changing global canon."""
     _validate_id(candidate_id, CANDIDATE_ID, "candidate_id")
@@ -157,11 +172,23 @@ def rollback_candidate(
     root = _resolved_root(repo_root)
     with _locked(ledger, root) as path:
         events = _read_events(path)
+        before_hash = file_hash(path)
         state = _require_state(_states(events), candidate_id)
         if state["status"] not in {"reviewed", "approved"} or state.get("rolled_back"):
             raise CandidateValidationError("only active reviewed or approved notes can be rolled back")
         _append_event(path, events, candidate_id, "rolled_back", actor_id, evidence_ref)
+        _emit_receipt(receipt_context, "rollback", candidate_id, before_hash, file_hash(path))
         return _states(_read_events(path))[candidate_id]
+
+
+def _emit_receipt(context: ReceiptContext | None, action: str, candidate_id: str,
+                  before_hash: str | None, after_hash: str) -> None:
+    if context is None:
+        return
+    event_id = "memory-" + hashlib.sha256(
+        f"{context.run_id}:memory.{action}:{candidate_id}".encode()).hexdigest()
+    emit_change(context, event_id, f"memory.{action}", "class:memory-ledger",
+                before_hash, after_hash, "applied")
 
 
 def retrieve_current(

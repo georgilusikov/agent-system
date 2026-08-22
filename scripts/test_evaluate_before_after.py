@@ -4,10 +4,19 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
-import evaluate_before_after as evaluation
+if __package__:
+    from . import evaluate_before_after as evaluation
+    from .change_receipts import validate_journal
+    from .runtime_receipts import ReceiptContext
+else:
+    import evaluate_before_after as evaluation
+    from change_receipts import validate_journal
+    from runtime_receipts import ReceiptContext
 
 
 SHA = "a" * 40
@@ -30,6 +39,7 @@ def args(**changes: object) -> dict[str, object]:
 
 
 def main() -> int:
+    repo = Path(__file__).resolve().parents[1]
     not_run = evaluation.build_not_run(**args())
     assert not_run["status"] == "not_run"
     assert len(not_run["records"]) == 10
@@ -161,9 +171,30 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / "result.json"
-        evaluation.write_result(path, not_run)
+        context = ReceiptContext(journal=Path(directory) / "receipts.jsonl", repo_root=Path(directory) / "repo",
+                                 run_id="eval-run", actor="agent", runtime="codex", task_id="task-5")
+        context.repo_root.mkdir()
+        evaluation.write_result(path, not_run, receipt_context=context)
         assert evaluation.load_result(path) == not_run
         assert "prompt" not in path.read_text(encoding="utf-8")
+        records = validate_journal(context.journal, repo_root=context.repo_root)
+        assert records[0]["target"] == "class:evaluation-result"
+        assert records[0]["before_hash"] is None
+        assert records[0]["after_hash"]
+        evaluation.write_result(path, not_run, receipt_context=context)
+        assert len(validate_journal(context.journal, repo_root=context.repo_root)) == 1
+        cli_path = Path(directory) / "cli-result.json"
+        cli_journal = Path(directory) / "cli-receipts.jsonl"
+        cli = subprocess.run([
+            sys.executable, "-m", "scripts.evaluate_before_after", "--run-id", "cli-run",
+            "--hypothesis-id", "cli-hypothesis", "--baseline-commit", "a" * 40,
+            "--treatment-commit", "c" * 40, "--baseline-config", "b" * 64,
+            "--treatment-config", "d" * 64, "--output", str(cli_path),
+            "--receipt-journal", str(cli_journal), "--receipt-run-id", "cli-receipt-run",
+            "--receipt-bead-id", "bead-5",
+        ], cwd=repo, text=True, capture_output=True, check=False)
+        assert cli.returncode == 0, cli.stderr
+        assert validate_journal(cli_journal, repo_root=repo)[0]["target"] == "class:evaluation-result"
         mixed_path = Path(directory) / "mixed.json"
         mixed_path.write_text(json.dumps(mixed_identity), encoding="utf-8")
         try:

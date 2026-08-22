@@ -7,7 +7,14 @@ import hashlib
 import tempfile
 from pathlib import Path
 
-import memory_candidates as memory
+if __package__:
+    from . import memory_candidates as memory
+    from .change_receipts import validate_journal
+    from .runtime_receipts import ReceiptContext
+else:
+    import memory_candidates as memory
+    from change_receipts import validate_journal
+    from runtime_receipts import ReceiptContext
 
 
 def candidate(candidate_id: str, *, topic: str = "retry-safety", statement: str = "retry is safe",
@@ -56,12 +63,16 @@ def main() -> int:
     repo = Path(__file__).resolve().parents[1]
     with tempfile.TemporaryDirectory() as directory:
         ledger = Path(directory) / "memory.jsonl"
-        first = memory.create_candidate(ledger, candidate("mem-first"), receipt(), repo_root=repo)
+        context = ReceiptContext(journal=Path(directory) / "receipts.jsonl", repo_root=repo,
+                                 run_id="memory-run", actor="agent", runtime="codex", task_id="task-5")
+        first = memory.create_candidate(ledger, candidate("mem-first"), receipt(), repo_root=repo,
+                                        receipt_context=context)
         assert first["status"] == "draft"
         memory.review_candidate(ledger, "mem-first", decision="reviewed", reviewer_id="reviewer-1",
-                                evidence_ref="test:memory-review", repo_root=repo)
+                                evidence_ref="test:memory-review", repo_root=repo, receipt_context=context)
         approved = memory.approve_candidate(ledger, "mem-first", owner_id="owner-1",
-                                             evidence_ref="test:memory-approval", repo_root=repo)
+                                             evidence_ref="test:memory-approval", repo_root=repo,
+                                             receipt_context=context)
         assert approved["status"] == "approved"
         assert len(memory.retrieve_current(ledger, scope="project", project="agent-system", repo_root=repo)) == 1
 
@@ -82,12 +93,22 @@ def main() -> int:
         memory.review_candidate(ledger, "mem-replacement", decision="reviewed", reviewer_id="reviewer-1",
                                 evidence_ref="test:memory-review-2", repo_root=repo)
         memory.approve_candidate(ledger, "mem-replacement", owner_id="owner-1",
-                                 evidence_ref="test:memory-approval-2", repo_root=repo)
+                                 evidence_ref="test:memory-approval-2", repo_root=repo,
+                                 receipt_context=context)
         current = memory.retrieve_current(ledger, scope="project", project="agent-system", repo_root=repo)
         assert [item["candidate_id"] for item in current] == ["mem-replacement"]
         memory.rollback_candidate(ledger, "mem-replacement", actor_id="owner-1",
-                                  evidence_ref="test:memory-rollback", repo_root=repo)
+                                  evidence_ref="test:memory-rollback", repo_root=repo, receipt_context=context)
         assert memory.retrieve_current(ledger, scope="project", project="agent-system", repo_root=repo) == []
+        receipts = validate_journal(context.journal, repo_root=repo)
+        assert [item["operation"] for item in receipts] == [
+            "memory.create", "memory.review", "memory.approve", "memory.approve", "memory.rollback"]
+        assert all(item["target"] == "class:memory-ledger" for item in receipts)
+        assert all(item["before_hash"] != item["after_hash"] for item in receipts)
+        assert all(set(item) <= {"event_id", "parent_event_id", "run_id", "actor", "runtime",
+                                  "operation", "target", "source_commit", "before_hash", "after_hash",
+                                  "outcome", "evidence_refs", "occurred_at", "redaction_status",
+                                  "task_id", "receipt_hash", "previous_receipt_hash"} for item in receipts)
 
         memory.create_candidate(ledger, candidate("mem-rejected", topic="other-topic"), receipt(), repo_root=repo)
         memory.review_candidate(ledger, "mem-rejected", decision="rejected", reviewer_id="reviewer-1",
