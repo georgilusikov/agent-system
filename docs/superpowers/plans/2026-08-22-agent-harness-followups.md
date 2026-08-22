@@ -172,9 +172,10 @@ VERDICT: ADVISORY (план выдаётся с возражениями)
 - Task 5: завершён в `dd6aa1d`; state, installer, memory и evaluation producers
   выполняют receipt preflight до мутации, а одинаковые retry восстанавливают
   отсутствующий receipt.
-- Hook privacy follow-up: завершён в `cc092ed`; incident parking и precompact
-  handoff сохраняют только metadata, без transcript path/content; self-check
-  запускается из `scripts/check.py --repo`.
+- Hook privacy follow-up: завершён в `cc092ed` и `6c3553e`; incident parking и
+  precompact handoff сохраняют только metadata, без transcript path/content, а
+  content-bearing Gemini audit требует отдельный `GEMINI_AUDIT_ALLOW_CONTENT=1`.
+  Self-check запускается из `scripts/check.py --repo`.
 - Acceptance extension: завершён в `fbb9b5e`; runtime canary проверяет receipts
   для memory и evaluation producers. Test-only hook files не считаются runtime
   consumer paths для deployed drift.
