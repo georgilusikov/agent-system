@@ -109,6 +109,15 @@ def main() -> int:
         assert result.stdout.strip() == "candidate_id=mem-cli-context status=draft"
         assert validate_journal(cli_journal, repo_root=repo)[0]["operation"] == "memory.create"
 
+        for partial_context in (("--receipt-run-id", "run-only"),
+                                ("--receipt-task-id", "task-only"),
+                                ("--receipt-journal", str(root / "partial.jsonl"))):
+            result = subprocess.run(
+                [sys.executable, "-m", "scripts.memory_capture", "--ledger", str(root / "partial-memory.jsonl"),
+                 *partial_context], cwd=repo, input=cli_input, text=True, capture_output=True, check=False)
+            assert result.returncode != 0
+            assert "prompt" not in result.stdout.lower() + result.stderr.lower()
+
         no_ledger = repo / "memory.jsonl"
         assert not no_ledger.exists()
         result = subprocess.run([sys.executable, "-m", "scripts.memory_capture"],

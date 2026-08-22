@@ -195,6 +195,20 @@ def main() -> int:
         ], cwd=repo, text=True, capture_output=True, check=False)
         assert cli.returncode == 0, cli.stderr
         assert validate_journal(cli_journal, repo_root=repo)[0]["target"] == "class:evaluation-result"
+        evaluation_args = [
+            sys.executable, "-m", "scripts.evaluate_before_after", "--run-id", "cli-run",
+            "--hypothesis-id", "cli-hypothesis", "--baseline-commit", "a" * 40,
+            "--treatment-commit", "c" * 40, "--baseline-config", "b" * 64,
+            "--treatment-config", "d" * 64,
+        ]
+        for partial_context in (("--receipt-run-id", "run-only"),
+                                ("--receipt-task-id", "task-only"),
+                                ("--receipt-journal", str(Path(directory) / "partial.jsonl"))):
+            result = subprocess.run(
+                [*evaluation_args, *partial_context], cwd=repo, text=True,
+                capture_output=True, check=False)
+            assert result.returncode != 0
+            assert "prompt" not in result.stdout.lower() + result.stderr.lower()
         mixed_path = Path(directory) / "mixed.json"
         mixed_path.write_text(json.dumps(mixed_identity), encoding="utf-8")
         try:

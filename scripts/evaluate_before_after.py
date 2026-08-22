@@ -393,9 +393,12 @@ def main() -> int:
         common.pop("receipt_run_id")
         common.pop("receipt_task_id")
         common.pop("receipt_bead_id")
-        if args.receipt_journal and (not args.receipt_run_id or not (args.receipt_task_id or args.receipt_bead_id)):
+        receipt_fields = (args.receipt_journal, args.receipt_run_id, args.receipt_task_id, args.receipt_bead_id)
+        if any(receipt_fields) and not (
+            args.receipt_journal and args.receipt_run_id and (args.receipt_task_id or args.receipt_bead_id)
+        ):
             raise EvaluationError(
-                "--receipt-journal requires --receipt-run-id and --receipt-task-id or --receipt-bead-id")
+                "receipt context requires --receipt-journal, --receipt-run-id, and --receipt-task-id or --receipt-bead-id")
         receipt_context = ReceiptContext(
             journal=args.receipt_journal, repo_root=Path(__file__).resolve().parents[1],
             run_id=args.receipt_run_id, actor="system", runtime="codex",
