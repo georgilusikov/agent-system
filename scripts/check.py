@@ -58,6 +58,7 @@ def check_repo() -> list[str]:
 
 def check_deployed() -> list[str]:
     expected = {
+        HOME / ".dsh" / "AGENTS.md": REPO / "AGENTS.md",
         HOME / ".codex" / "AGENTS.md": REPO / "AGENTS.md",
         HOME / ".gemini" / "GEMINI.md": REPO / "AGENTS.md",
         HOME / ".claude" / "CLAUDE.md": REPO / "AGENTS.md",

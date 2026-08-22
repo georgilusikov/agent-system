@@ -9,7 +9,7 @@ Grok currently consumes parts of the Claude layout.
 
 | Concern | Canon | Runtime projection |
 |---|---|---|
-| Global instructions | `AGENTS.md` | `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.claude/CLAUDE.md`, `~/.grok/rules/00-agent-system.md` |
+| Global instructions | `AGENTS.md` | `~/.dsh/AGENTS.md`, `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.claude/CLAUDE.md`, `~/.grok/rules/00-agent-system.md` |
 | Discoverable skills | `skills/` | per-skill links; AGY reads `~/.gemini/config/skills` |
 | Specialist agents | `agents/` | Claude-compatible projection |
 | Hook implementations | `hooks/` | native Codex/Claude/AGY hook locations |
@@ -24,7 +24,12 @@ whole code directory canonical would mix projects, generated data, and secrets.
 ## Contract
 
 - `AGENTS.md` is the shared behavioral core.
+- DeepSeek Harness reads `~/.dsh/AGENTS.md` as its user-global instructions,
+  then project `AGENTS.md`/`CLAUDE.md` from the invoking workspace.
 - `skills/` contains globally discoverable user skills and category routers.
+- DeepSeek Harness discovers the canonical delivery bridge at
+  `~/.agents/skills` as its `user-agents` skill root; no duplicate `~/.dsh/skills`
+  copy is required.
 - `library/` contains domain material loaded by routers, not advertised at startup.
 - `rules/`, `standards/`, and `memory/` contain reviewed material only.
 - `hooks/` contains executable implementations; `adapters/` contains native wiring.
