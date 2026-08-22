@@ -38,6 +38,7 @@ _agent_shared/standards/
 ├── rat-framework-standard.md          # method
 ├── competitor-analysis-standard.md    # method
 ├── change-receipts-standard.md         # contract
+├── agent-memory-standard.md            # contract
 │
 ├── agent_loops/                       # contract-стандарты для tools/agent_loops/
 │   ├── ralph_loop.md
@@ -52,7 +53,7 @@ _agent_shared/standards/
     └── rule_dialects.md               # contract (диалекты правил)
 ```
 
-## 📋 Канон стандартов (все 20)
+## 📋 Канон стандартов (все 21)
 
 ### Топ-уровень (micro + method + contract)
 
@@ -70,6 +71,7 @@ _agent_shared/standards/
 | `rat-framework-standard.md` | method | RAT (Riskiest Assumption Test): выявление и проверка самого рискованного допущения (промоут VANECHKA `rat-framework.md`) | VANECHKA, продуктовые гипотезы |
 | `competitor-analysis-standard.md` | method | Пайплайн анализа конкурентов: рамка через джобу → intel → value/feature teardown → Desire-Delivery gap → скоринг доноров → позиционные разрывы + бэклог. Триггеры: «анализ конкурентов», «competitor teardown», «разбери конкурента» | `projects/xerox`, BAS workflows, `triz-gap-closure`, `/jobs-to-be-done`, `/prioritize` |
 | `change-receipts-standard.md` | contract | Metadata-only append-only JSONL receipts: связывают state, tasks, hooks, deployments и projections с runtime evidence без содержимого разговоров или tool payloads | state/task writers, hooks, deployment/projection writers, runtime adapters |
+| `agent-memory-standard.md` | contract | Версионированный review/approval lifecycle для global learning; project/session content остаётся вне canon, допускаются только content-free pointers | `rules/operational/incident-parking.md`, memory review |
 
 ### `agent_loops/` — контракты agent-loop инструментов
 

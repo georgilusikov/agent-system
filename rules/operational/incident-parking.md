@@ -34,7 +34,9 @@
 `~/.claude/memory/incidents/parking.jsonl` — это входная очередь, а не архив.
 Разобранные строки **переносятся** в `processed.jsonl` рядом (с полем
 `verdict`: `rule` / `incident` / `noise`), парковка остаётся пустой. Непустая
-парковка на старте retro = долг; пустая = всё разобрано.
+парковка на старте retro = долг; пустая = всё разобрано. Дальнейший
+review/promotion подчиняется `standards/domain/agent-memory-standard.md`;
+парковка не является approved memory.
 
 Парковка — входная очередь, `ai.incidents.jsonl` — подтверждённое: строка с
 `verdict=incident` при разборе дополнительно проводится через
