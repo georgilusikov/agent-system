@@ -11,6 +11,8 @@ import tempfile
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
+from runtime_receipts import ReceiptContext, emit_change, file_hash
+
 
 STATE_FIELDS = frozenset({
     "run_id", "goal_fingerprint", "bead_id", "phase", "last_verified_step",
@@ -55,7 +57,8 @@ def goal_fingerprint(*, opaque_id: str | None = None,
 def create_run(path: Path, *, run_id: str, bead_id: str, source_commit: str,
                opaque_goal_id: str | None = None,
                redacted_goal_metadata: Mapping[str, Any] | None = None,
-               retry_budget: int = 0) -> dict[str, Any]:
+               retry_budget: int = 0,
+               receipt_context: ReceiptContext | None = None) -> dict[str, Any]:
     """Create a planned run, returning an existing identical run unchanged."""
     if retry_budget < 0:
         raise StateError("retry_budget must be non-negative")
@@ -80,30 +83,32 @@ def create_run(path: Path, *, run_id: str, bead_id: str, source_commit: str,
         if current == state:
             return current
         raise StateConflictError("run state already exists with different metadata")
-    write_state(path, state)
+    _persist(path, state, receipt_context, "state.create", None, ())
     return state
 
 
-def start_run(path: Path, *, operation_key: str | None = None) -> dict[str, Any]:
+def start_run(path: Path, *, operation_key: str | None = None,
+              receipt_context: ReceiptContext | None = None) -> dict[str, Any]:
     """Move a planned run to running; repeated starts are no-ops."""
     state = load_state(path)
     if _record_operation(state, operation_key, "start", {}):
         return state
     if state["phase"] == "running":
         if operation_key is not None:
-            write_state(path, state)
+            _persist(path, state, receipt_context, "state.start", operation_key, ())
         return state
     if state["phase"] != "planned":
         raise IllegalTransitionError(f"cannot start from {state['phase']}")
     _transition(state, "ready")
     _transition(state, "running")
     state["next_action"] = "verify step 1"
-    write_state(path, state)
+    _persist(path, state, receipt_context, "state.start", operation_key, ())
     return state
 
 
 def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] = (),
-                         operation_key: str | None = None) -> dict[str, Any]:
+                         operation_key: str | None = None,
+                         receipt_context: ReceiptContext | None = None) -> dict[str, Any]:
     """Record the next verified step once; duplicate operations are no-ops."""
     if isinstance(step, bool) or step < 1:
         raise StateError("step must be positive")
@@ -116,7 +121,7 @@ def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] 
     previous = state["last_verified_step"]
     if previous == step:
         if operation_key is not None:
-            write_state(path, state)
+            _persist(path, state, receipt_context, "state.verify", operation_key, refs)
         return state
     if previous is not None and step != previous + 1:
         raise StateConflictError("verified steps must be consecutive")
@@ -127,11 +132,12 @@ def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] 
     if state["phase"] == "running":
         _transition(state, "verifying")
     state.update(last_verified_step=step, evidence_refs=refs, next_action=f"verify step {step + 1}")
-    write_state(path, state)
+    _persist(path, state, receipt_context, "state.verify", operation_key, refs)
     return state
 
 
-def resume_run(path: Path, *, expected_source_commit: str | None = None) -> dict[str, Any]:
+def resume_run(path: Path, *, expected_source_commit: str | None = None,
+               receipt_context: ReceiptContext | None = None) -> dict[str, Any]:
     """Return trusted state with the next unverified step selected."""
     state = load_state(path)
     if expected_source_commit is not None and state["source_commit"] != expected_source_commit:
@@ -140,12 +146,13 @@ def resume_run(path: Path, *, expected_source_commit: str | None = None) -> dict
         raise IllegalTransitionError(f"cannot resume from {state['phase']}")
     next_step = (state["last_verified_step"] or 0) + 1
     state["next_action"] = f"verify step {next_step}"
-    write_state(path, state)
+    _persist(path, state, receipt_context, "state.resume", None, ())
     return state
 
 
 def finish_run(path: Path, outcome: str, *, evidence_refs: Iterable[str] = (),
-               operation_key: str | None = None) -> dict[str, Any]:
+               operation_key: str | None = None,
+               receipt_context: ReceiptContext | None = None) -> dict[str, Any]:
     """Finish only after verification with an allowed outcome."""
     if outcome not in OUTCOMES:
         raise IllegalTransitionError(f"unknown outcome: {outcome}")
@@ -157,13 +164,13 @@ def finish_run(path: Path, outcome: str, *, evidence_refs: Iterable[str] = (),
         return state
     if state["phase"] == outcome:
         if operation_key is not None:
-            write_state(path, state)
+            _persist(path, state, receipt_context, "state.finish", operation_key, refs)
         return state
     if state["phase"] != "verifying":
         raise IllegalTransitionError(f"cannot finish from {state['phase']}")
     _transition(state, outcome)
     state.update(evidence_refs=refs, next_action=None)
-    write_state(path, state)
+    _persist(path, state, receipt_context, "state.finish", operation_key, refs)
     return state
 
 
@@ -192,6 +199,22 @@ def write_state(path: Path, state: Mapping[str, Any]) -> None:
     finally:
         if temporary is not None and temporary.exists():
             temporary.unlink()
+
+
+def _persist(path: Path, state: Mapping[str, Any], context: ReceiptContext | None,
+             operation: str, operation_key: str | None, evidence_refs: Iterable[str]) -> None:
+    before = file_hash(path) if path.exists() else None
+    write_state(path, state)
+    if context is None:
+        return
+    after = file_hash(path)
+    if before == after:
+        return
+    retry_seed = operation_key or f"{before or 'none'}:{after}"
+    event_seed = f"{context.run_id}:{operation}:{retry_seed}"
+    event_id = f"change-{hashlib.sha256(event_seed.encode()).hexdigest()}"
+    emit_change(context, event_id, operation, "class:agent-run-state", before, after,
+                "applied", evidence_refs=evidence_refs)
 
 
 def _validate_state(data: Any) -> None:

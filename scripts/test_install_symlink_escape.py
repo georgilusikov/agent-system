@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import tempfile
@@ -67,15 +68,39 @@ def main() -> int:
         explicit_home = root / "explicit-home"
         explicit_home.mkdir()
         explicit_backup = root / "explicit-backups"
+        receipt_journal = root / "install-receipts.jsonl"
         result = run(
             "--apply",
             "--home",
             str(explicit_home),
             "--backup-root",
             str(explicit_backup),
+            "--receipt-journal",
+            str(receipt_journal),
+            "--run-id",
+            "run-install",
+            "--task-id",
+            "task-install",
         )
         assert result.returncode == 0
-        assert list(explicit_backup.glob("*/rollback.json"))
+        snapshots = list(explicit_backup.glob("*/rollback.json"))
+        assert snapshots
+        records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
+        assert [record["operation"] for record in records] == ["install.apply"]
+
+        result = run(
+            "--rollback",
+            str(snapshots[0].parent),
+            "--receipt-journal",
+            str(receipt_journal),
+            "--run-id",
+            "run-install",
+            "--task-id",
+            "task-install",
+        )
+        assert result.returncode == 0
+        records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
+        assert [record["operation"] for record in records] == ["install.apply", "install.rollback"]
 
         linked_backup = root / "linked-backups"
         linked_backup.symlink_to(root / "linked-backups-target", target_is_directory=True)

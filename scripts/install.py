@@ -4,11 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
+
+from runtime_receipts import ReceiptContext, emit_change, file_hash
 
 
 REPO = Path(__file__).resolve().parents[1]
@@ -105,7 +108,8 @@ def ensure_backup_root(home: Path, backup_root: Path, require_inside_home: bool)
     return resolved
 
 
-def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
+def apply(home: Path, backup_root: Path, dry_run: bool,
+          receipt_context: ReceiptContext | None = None) -> Path | None:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     snapshot = backup_root / timestamp
     operations: list[dict[str, str | None]] = []
@@ -176,11 +180,21 @@ def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
                 current[key] = desired[key]
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if receipt_context is not None:
+        emit_change(
+            receipt_context,
+            _deployment_event_id(receipt_context, "apply"),
+            "install.apply",
+            "class:installer-deployment",
+            None,
+            file_hash(snapshot / "rollback.json"),
+            "applied",
+        )
     print(f"snapshot: {snapshot}")
     return snapshot
 
 
-def rollback(snapshot: Path) -> None:
+def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> None:
     manifest = json.loads((snapshot / "rollback.json").read_text(encoding="utf-8"))
     home = Path(manifest["home"])
     for operation in manifest["operations"]:
@@ -219,7 +233,21 @@ def rollback(snapshot: Path) -> None:
                 shutil.move(str(target), str(drift))
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.move(str(backup), str(target))
+    if receipt_context is not None:
+        emit_change(
+            receipt_context,
+            _deployment_event_id(receipt_context, "rollback"),
+            "install.rollback",
+            "class:installer-deployment",
+            file_hash(snapshot / "rollback.json"),
+            None,
+            "applied",
+        )
     print(f"rolled back: {snapshot}")
+
+
+def _deployment_event_id(context: ReceiptContext, operation: str) -> str:
+    return f"deployment-{hashlib.sha256(f'{context.run_id}:{operation}'.encode()).hexdigest()}"
 
 
 def main() -> int:
@@ -230,10 +258,25 @@ def main() -> int:
     mode.add_argument("--rollback", type=Path)
     parser.add_argument("--home", type=Path, default=DEFAULT_HOME)
     parser.add_argument("--backup-root", type=Path)
+    parser.add_argument("--receipt-journal", type=Path)
+    parser.add_argument("--run-id")
+    parser.add_argument("--task-id")
+    parser.add_argument("--bead-id")
     args = parser.parse_args()
     try:
+        if args.receipt_journal and (not args.run_id or not (args.task_id or args.bead_id)):
+            raise ValueError("--receipt-journal requires --run-id and --task-id or --bead-id")
+        receipt_context = ReceiptContext(
+            journal=args.receipt_journal,
+            repo_root=REPO,
+            run_id=args.run_id,
+            actor="system",
+            runtime="system",
+            task_id=args.task_id,
+            bead_id=args.bead_id,
+        ) if args.receipt_journal else None
         if args.rollback:
-            rollback(args.rollback)
+            rollback(args.rollback, receipt_context)
             return 0
         backup_root = args.backup_root or args.home / ".agent-system-backups"
         backup_root = ensure_backup_root(
@@ -241,7 +284,7 @@ def main() -> int:
             backup_root,
             require_inside_home=args.backup_root is None,
         )
-        apply(args.home, backup_root, args.dry_run)
+        apply(args.home, backup_root, args.dry_run, receipt_context)
     except ValueError as error:
         parser.error(str(error))
     return 0

@@ -9,6 +9,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 import agent_run_state as state
+import change_receipts
+from runtime_receipts import ReceiptContext
 
 
 def main() -> int:
@@ -122,6 +124,25 @@ def main() -> int:
         assert "step-1" not in path.read_text(encoding="utf-8")
         assert not any("prompt" in key or "secret" in key for key in persisted)
         assert not any("token" in key or "environment" in key for key in persisted)
+
+        receipt_path = Path(directory) / "runtime-receipts.jsonl"
+        receipt_state = Path(directory) / "receipt-run.json"
+        context = ReceiptContext(
+            journal=receipt_path, repo_root=Path(__file__).resolve().parents[1], run_id="run-receipts",
+            actor="agent", runtime="codex", bead_id="bead-receipts",
+        )
+        state.create_run(receipt_state, run_id="run-receipts", bead_id="bead-receipts",
+                         source_commit="a" * 40, opaque_goal_id="goal", receipt_context=context)
+        state.start_run(receipt_state, operation_key="start", receipt_context=context)
+        state.resume_run(receipt_state, receipt_context=context)
+        state.record_verified_step(receipt_state, 1, operation_key="verify", receipt_context=context)
+        state.finish_run(receipt_state, "accepted", operation_key="finish", receipt_context=context)
+        receipts = change_receipts.validate_journal(receipt_path, repo_root=context.repo_root)
+        assert [receipt["operation"] for receipt in receipts] == [
+            "state.create", "state.start", "state.verify", "state.finish",
+        ]
+        assert state.start_run(receipt_state, operation_key="start", receipt_context=context)
+        assert len(change_receipts.validate_journal(receipt_path, repo_root=context.repo_root)) == 4
     print("PASS metadata-only run state")
     return 0
 
