@@ -2,7 +2,7 @@
 
 **Класс:** contract
 **Дата создания:** 2026-08-22
-**Статус:** declarative governance; native-runtime wiring is not implemented
+**Статус:** declarative governance with a metadata-only capture seam
 
 ## 1. Назначение и storage boundary
 
@@ -126,8 +126,26 @@ Before promotion, run a synthetic document canary that asserts: schema version
 and audit fields; the exhaustive matrix (including rejection of an unlisted
 transition and no `draft → approved`); scope boundary and opaque-pointer-only
 project/session references; legacy exclusion; denylist; README/rule
-registration; and this no-runtime claim. It checks the declarative
-standard/manual workflow only, not an executable schema or consumer.
+registration; and the metadata-only runtime boundary. It checks the declarative
+standard/manual workflow and the executable consumer separately.
+
+## 6. Executable capture seam
+
+`scripts/memory_capture.py` exposes
+`capture_verified_candidate(ledger, candidate, receipt, repo_root)`. It accepts
+only the existing `memory_candidates` candidate contract with
+`redaction_status: redacted` and a receipt with `outcome: verified` and
+`redaction_status: metadata-only`, then delegates to
+`memory_candidates.create_candidate`. Validation happens before the append, so
+forbidden fields/content and invalid receipts leave the external ledger
+unchanged. Capture always produces `draft`; review and owner approval remain
+separate `memory_candidates` actions.
+
+Its CLI accepts exactly a JSON object containing `candidate` and `receipt` from
+`--input` or stdin, writes only when an explicit external `--ledger` is given,
+and prints only `candidate_id` and `status` on success. It never accepts model
+prompts, responses, transcripts, tool payloads, credentials, secrets, tokens or
+environment values as capture input or persisted data.
 
 ## Cross-references
 
