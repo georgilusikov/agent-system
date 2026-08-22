@@ -73,6 +73,7 @@ def targets(home: Path) -> list[tuple[Path, Path | None]]:
         result.extend(
             (home / f".{runtime}/hooks" / path.name, path)
             for path in sorted((REPO / "hooks" / runtime).iterdir()) if path.is_file()
+            and not path.name.startswith(("test-", "test_"))
         )
     return result
 

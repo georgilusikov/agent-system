@@ -21,7 +21,8 @@ def check_repo() -> list[str]:
         "AGENTS.md", "README.md", "sources.json", "skills", "scripts",
         "scripts/agent_run_state.py", "scripts/runtime_receipts.py",
         "scripts/change_receipts.py", "scripts/memory_candidates.py",
-        "scripts/memory_capture.py", "scripts/provider_canary.py",
+        "scripts/memory_capture.py", "scripts/evaluate_before_after.py",
+        "scripts/provider_canary.py", "hooks/claude/test-privacy-hooks.sh",
         "scripts/test_runtime_acceptance.py",
     ]
     for relative in required:
@@ -40,6 +41,19 @@ def check_repo() -> list[str]:
         else:
             if result.returncode:
                 errors.append(f"runtime-acceptance-failed:{result.returncode}")
+    hook_privacy = REPO / "hooks/claude/test-privacy-hooks.sh"
+    if hook_privacy.exists():
+        try:
+            result = subprocess.run(
+                ["bash", str(hook_privacy)], cwd=REPO,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                timeout=10, check=False,
+            )
+        except subprocess.TimeoutExpired:
+            errors.append("hook-privacy-timeout")
+        else:
+            if result.returncode:
+                errors.append(f"hook-privacy-failed:{result.returncode}")
     agents = REPO / "AGENTS.md"
     if agents.exists() and len(agents.read_text(encoding="utf-8").splitlines()) > 245:
         errors.append("AGENTS.md exceeds 245 lines")
@@ -112,7 +126,7 @@ def check_deployed() -> list[str]:
                 errors.append(f"skill-not-deployed:{target}")
     for runtime in ("codex", "claude", "gemini"):
         for source in (REPO / "hooks" / runtime).iterdir():
-            if not source.is_file():
+            if not source.is_file() or source.name.startswith(("test-", "test_")):
                 continue
             target = HOME / f".{runtime}" / "hooks" / source.name
             if not target.is_symlink() or target.resolve() != source.resolve():

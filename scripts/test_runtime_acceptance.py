@@ -12,12 +12,12 @@ from typing import Any
 
 if __package__:
     from . import agent_run_state as run_state
-    from . import change_receipts, memory_capture, provider_canary
+    from . import change_receipts, evaluate_before_after, memory_capture, provider_canary
     from .runtime_receipts import ReceiptContext, emit_change
 else:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     import agent_run_state as run_state
-    import change_receipts, memory_capture, provider_canary
+    import change_receipts, evaluate_before_after, memory_capture, provider_canary
     from runtime_receipts import ReceiptContext, emit_change
 
 
@@ -98,11 +98,29 @@ def main() -> int:
             "created_at": "2026-08-22T12:00:00Z",
             "redaction_status": "redacted",
         }
-        captured = memory_capture.capture_verified_candidate(ledger, candidate, final_receipt, repo)
+        captured = memory_capture.capture_verified_candidate(
+            ledger, candidate, final_receipt, repo, receipt_context=context
+        )
         assert captured["candidate_id"] == candidate["candidate_id"]
         assert captured["status"] == "draft"
         memory_record = json.loads(ledger.read_text(encoding="utf-8").splitlines()[0])
         assert memory_record["data"]["source_hash"] == final_receipt["receipt_hash"]
+
+        evaluation = evaluate_before_after.build_not_run(
+            run_id="acceptance-eval",
+            hypothesis_id="acceptance-hypothesis",
+            change_type="initial",
+            supersedes_run_id=None,
+            baseline_commit="a" * 40,
+            treatment_commit="b" * 40,
+            baseline_config="c" * 64,
+            treatment_config="d" * 64,
+        )
+        evaluation_path = root / "evaluation.json"
+        evaluate_before_after.write_result(
+            evaluation_path, evaluation, receipt_context=context
+        )
+        assert evaluate_before_after.load_result(evaluation_path) == evaluation
 
         canary = provider_canary.run_canary(
             str(root / "missing-provider-executable"), ("--version",), "provider", "codex", "model",
@@ -111,7 +129,12 @@ def main() -> int:
         assert canary["status"] == canary["canary"] == "NOT RUN"
         assert canary["reason"] == "missing-executable"
 
-        for path in (state_path, journal, ledger):
+        receipts = change_receipts.validate_journal(journal, repo_root=repo)
+        assert [record["operation"] for record in receipts] == [
+            "state.create", "state.start", "state.verify", "state.finish", "acceptance.verify",
+            "memory.create", "evaluation.write",
+        ]
+        for path in (state_path, journal, ledger, evaluation_path):
             for line in path.read_text(encoding="utf-8").splitlines():
                 _assert_clean(json.loads(line))
         _assert_clean(canary)
