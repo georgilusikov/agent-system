@@ -37,6 +37,7 @@ _agent_shared/standards/
 ├── universal-matrix-standard.md       # method
 ├── rat-framework-standard.md          # method
 ├── competitor-analysis-standard.md    # method
+├── change-receipts-standard.md         # contract
 │
 ├── agent_loops/                       # contract-стандарты для tools/agent_loops/
 │   ├── ralph_loop.md
@@ -53,7 +54,7 @@ _agent_shared/standards/
 
 ## 📋 Канон стандартов (все 20)
 
-### Топ-уровень (micro + method)
+### Топ-уровень (micro + method + contract)
 
 | Стандарт | Класс | Описание | Используется в |
 | :--- | :--- | :--- | :--- |
