@@ -15,7 +15,13 @@ FRONTMATTER = re.compile(r"\A---\s*\n(?P<body>.*?)\n---\s*\n", re.DOTALL)
 
 def check_repo() -> list[str]:
     errors: list[str] = []
-    required = ["AGENTS.md", "README.md", "sources.json", "skills", "scripts"]
+    required = [
+        "AGENTS.md", "README.md", "sources.json", "skills", "scripts",
+        "scripts/agent_run_state.py", "scripts/runtime_receipts.py",
+        "scripts/change_receipts.py", "scripts/memory_candidates.py",
+        "scripts/memory_capture.py", "scripts/provider_canary.py",
+        "scripts/test_runtime_acceptance.py",
+    ]
     for relative in required:
         if not (REPO / relative).exists():
             errors.append(f"missing:{relative}")
