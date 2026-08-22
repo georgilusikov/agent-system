@@ -33,7 +33,7 @@ not make it recordable.
 | LangGraph | [persistence](https://docs.langchain.com/oss/python/langgraph/persistence) | resume/replay identity | pattern only | reject runtime: no measured checkpoint consumer | medium | kill a synthetic three-step run; resume once without repeating effects |
 | LangMem | [concepts](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/) | memory lifecycle | pattern only | reject runtime: promotion governance remains local | medium | false candidate remains quarantined and unretrieved by default |
 | Graphiti | [repository](https://github.com/getzep/graphiti) | temporal fact provenance | no | watch: graph/database cost without temporal-query evidence | high | require flat-receipt query failure before graph evaluation |
-| Letta | [attaching and detaching memory blocks](https://docs.letta.com/tutorials/attaching-detaching-blocks/) | scoped persistent memory | no | watch: stateful platform exceeds current consumer need | medium | synthetic scope grant/revoke before reconsideration |
+| Letta | [memory block API](https://docs.letta.com/api/resources/agents/subresources/blocks) | scoped persistent memory | no | watch: stateful platform exceeds current consumer need | medium | synthetic scope grant/revoke before reconsideration |
 
 [O] `scripts/agent_run_state.py` already validates metadata-only operation
 receipt fingerprints. [I] Its use and the receipt contract are the only present
