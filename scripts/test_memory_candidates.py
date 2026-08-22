@@ -9,11 +9,11 @@ from pathlib import Path
 
 if __package__:
     from . import memory_candidates as memory
-    from .change_receipts import validate_journal
+    from .change_receipts import ReceiptIntegrityError, validate_journal
     from .runtime_receipts import ReceiptContext
 else:
     import memory_candidates as memory
-    from change_receipts import validate_journal
+    from change_receipts import ReceiptIntegrityError, validate_journal
     from runtime_receipts import ReceiptContext
 
 
@@ -116,6 +116,41 @@ def main() -> int:
         assert memory.retrieve_current(ledger, scope="project", project="agent-system", repo_root=repo) == []
         expect(memory.CandidateValidationError,
                lambda: memory.create_candidate(repo / "memory.jsonl", candidate("mem-inside"), receipt(), repo_root=repo))
+
+        invalid_ledger = Path(directory) / "invalid-memory.jsonl"
+        invalid_journal = Path(directory) / "invalid-receipts.jsonl"
+        invalid_journal.write_text("{not-json}\n", encoding="utf-8")
+        invalid_context = ReceiptContext(journal=invalid_journal, repo_root=repo,
+                                         run_id="invalid-run", actor="agent", runtime="codex",
+                                         task_id="task-5")
+        expect(ReceiptIntegrityError,
+               lambda: memory.create_candidate(invalid_ledger, candidate("mem-invalid"), receipt(),
+                                                repo_root=repo, receipt_context=invalid_context))
+        assert not invalid_ledger.exists()
+
+        retry_context = ReceiptContext(journal=Path(directory) / "retry-receipts.jsonl", repo_root=repo,
+                                       run_id="retry-run", actor="agent", runtime="codex", task_id="task-5")
+        original_emit = memory.emit_change
+        failed = True
+        def fail_once(*args: object, **kwargs: object) -> dict[str, object]:
+            nonlocal failed
+            if failed:
+                failed = False
+                raise OSError("one-time receipt failure")
+            return original_emit(*args, **kwargs)  # type: ignore[arg-type]
+        memory.emit_change = fail_once  # type: ignore[assignment]
+        retry_ledger = Path(directory) / "retry-memory.jsonl"
+        try:
+            expect(OSError, lambda: memory.create_candidate(
+                retry_ledger, candidate("mem-retry"), receipt(), repo_root=repo,
+                receipt_context=retry_context))
+            recovered = memory.create_candidate(
+                retry_ledger, candidate("mem-retry"), receipt(), repo_root=repo,
+                receipt_context=retry_context)
+        finally:
+            memory.emit_change = original_emit
+        assert recovered["status"] == "draft"
+        assert len(validate_journal(retry_context.journal, repo_root=repo)) == 1
 
         created_event = memory._read_events(ledger)[0]
         bypass = Path(directory) / "bypass.jsonl"

@@ -14,9 +14,9 @@ from pathlib import Path
 from typing import Any, Iterator, Mapping
 
 if __package__:
-    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 else:
-    from runtime_receipts import ReceiptContext, emit_change, file_hash
+    from runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 
 
 class MemoryCandidateError(ValueError):
@@ -72,12 +72,19 @@ def create_candidate(
     if data["source_hash"] != receipt["receipt_hash"]:
         raise CandidateValidationError("candidate source hash does not match the verified receipt")
     root = _resolved_root(repo_root)
+    event_id = _receipt_event_id(receipt_context, "create", data["candidate_id"])
+    existing_receipt = preflight(receipt_context, event_id) if receipt_context else None
     with _locked(ledger, root) as path:
         events = _read_events(path)
         before_hash = file_hash(path) if path.exists() else None
-        states = _states(events)
         candidate_id = data["candidate_id"]
+        states = _states(events)
         if candidate_id in states:
+            if existing_receipt is not None and _recoverable(events, candidate_id, "created", "system", data):
+                return states[candidate_id]
+            if _recoverable(events, candidate_id, "created", "system", data) and existing_receipt is None:
+                _emit_receipt(receipt_context, "create", candidate_id, None, file_hash(path))
+                return states[candidate_id]
             raise CandidateConflictError("candidate id already exists")
         _check_create_conflict(data, states)
         _append_event(path, events, candidate_id, "created", "system", data["source_receipt"], data)
@@ -102,11 +109,23 @@ def review_candidate(
     if decision not in {"reviewed", "rejected"}:
         raise CandidateValidationError("review decision is invalid")
     root = _resolved_root(repo_root)
+    event_id = _receipt_event_id(receipt_context, "review", candidate_id)
+    existing_receipt = preflight(receipt_context, event_id) if receipt_context else None
     with _locked(ledger, root) as path:
         events = _read_events(path)
         before_hash = file_hash(path)
         state = _require_state(_states(events), candidate_id)
         if state["status"] != "draft":
+            if (existing_receipt is not None and state["status"] in {"reviewed", "rejected"}
+                    and _recoverable(events, candidate_id,
+                                     "reviewed" if decision == "reviewed" else "rejected",
+                                     reviewer_id, evidence_ref)):
+                return state
+            if (state["status"] in {"reviewed", "rejected"} and existing_receipt is None
+                    and _recoverable(events, candidate_id, "reviewed" if decision == "reviewed" else "rejected",
+                                     reviewer_id, evidence_ref)):
+                _emit_receipt(receipt_context, "review", candidate_id, None, file_hash(path))
+                return state
             raise CandidateValidationError("only draft candidates can be reviewed")
         action = "reviewed" if decision == "reviewed" else "rejected"
         _append_event(path, events, candidate_id, action, reviewer_id, evidence_ref)
@@ -128,12 +147,21 @@ def approve_candidate(
     _validate_id(owner_id, ID, "owner_id")
     _validate_ref(evidence_ref)
     root = _resolved_root(repo_root)
+    event_id = _receipt_event_id(receipt_context, "approve", candidate_id)
+    existing_receipt = preflight(receipt_context, event_id) if receipt_context else None
     with _locked(ledger, root) as path:
         events = _read_events(path)
         before_hash = file_hash(path)
         states = _states(events)
         state = _require_state(states, candidate_id)
         if state["status"] != "reviewed":
+            if (existing_receipt is not None and state["status"] == "approved"
+                    and _recoverable(events, candidate_id, "approved", owner_id, evidence_ref)):
+                return state
+            if (state["status"] == "approved" and existing_receipt is None
+                    and _recoverable(events, candidate_id, "approved", owner_id, evidence_ref)):
+                _emit_receipt(receipt_context, "approve", candidate_id, None, file_hash(path))
+                return state
             raise CandidateValidationError("only reviewed candidates can be approved")
         if state["owner"] != owner_id:
             raise CandidateValidationError("only the owner can approve a candidate")
@@ -170,11 +198,20 @@ def rollback_candidate(
     _validate_id(actor_id, ID, "actor_id")
     _validate_ref(evidence_ref)
     root = _resolved_root(repo_root)
+    event_id = _receipt_event_id(receipt_context, "rollback", candidate_id)
+    existing_receipt = preflight(receipt_context, event_id) if receipt_context else None
     with _locked(ledger, root) as path:
         events = _read_events(path)
         before_hash = file_hash(path)
         state = _require_state(_states(events), candidate_id)
         if state["status"] not in {"reviewed", "approved"} or state.get("rolled_back"):
+            if (existing_receipt is not None and state.get("rolled_back")
+                    and _recoverable(events, candidate_id, "rolled_back", actor_id, evidence_ref)):
+                return state
+            if (state.get("rolled_back") and existing_receipt is None
+                    and _recoverable(events, candidate_id, "rolled_back", actor_id, evidence_ref)):
+                _emit_receipt(receipt_context, "rollback", candidate_id, None, file_hash(path))
+                return state
             raise CandidateValidationError("only active reviewed or approved notes can be rolled back")
         _append_event(path, events, candidate_id, "rolled_back", actor_id, evidence_ref)
         _emit_receipt(receipt_context, "rollback", candidate_id, before_hash, file_hash(path))
@@ -185,10 +222,29 @@ def _emit_receipt(context: ReceiptContext | None, action: str, candidate_id: str
                   before_hash: str | None, after_hash: str) -> None:
     if context is None:
         return
-    event_id = "memory-" + hashlib.sha256(
-        f"{context.run_id}:memory.{action}:{candidate_id}".encode()).hexdigest()
+    event_id = _receipt_event_id(context, action, candidate_id)
     emit_change(context, event_id, f"memory.{action}", "class:memory-ledger",
                 before_hash, after_hash, "applied")
+
+
+def _receipt_event_id(context: ReceiptContext | None, action: str, candidate_id: str) -> str:
+    if context is None:
+        return ""
+    return "memory-" + hashlib.sha256(
+        f"{context.run_id}:memory.{action}:{candidate_id}".encode()).hexdigest()
+
+
+def _recoverable(events: list[dict[str, Any]], candidate_id: str, action: str,
+                 actor: str, evidence: Any) -> bool:
+    if not events:
+        return False
+    event = events[-1]
+    if action == "created":
+        return (event["candidate_id"] == candidate_id and event["action"] == action
+                and event["actor"] == actor and event["data"] == evidence
+                and event["evidence_ref"] == evidence["source_receipt"])
+    return (event["candidate_id"] == candidate_id and event["action"] == action
+            and event["actor"] == actor and event["evidence_ref"] == evidence)
 
 
 def retrieve_current(

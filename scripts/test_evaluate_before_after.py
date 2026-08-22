@@ -11,11 +11,11 @@ from pathlib import Path
 
 if __package__:
     from . import evaluate_before_after as evaluation
-    from .change_receipts import validate_journal
+    from .change_receipts import ReceiptIntegrityError, validate_journal
     from .runtime_receipts import ReceiptContext
 else:
     import evaluate_before_after as evaluation
-    from change_receipts import validate_journal
+    from change_receipts import ReceiptIntegrityError, validate_journal
     from runtime_receipts import ReceiptContext
 
 
@@ -183,6 +183,47 @@ def main() -> int:
         assert records[0]["after_hash"]
         evaluation.write_result(path, not_run, receipt_context=context)
         assert len(validate_journal(context.journal, repo_root=context.repo_root)) == 1
+
+        invalid_path = Path(directory) / "invalid-result.json"
+        invalid_journal = Path(directory) / "invalid-evaluation-receipts.jsonl"
+        invalid_journal.write_text("{not-json}\n", encoding="utf-8")
+        invalid_context = ReceiptContext(journal=invalid_journal, repo_root=context.repo_root,
+                                         run_id="invalid-eval-run", actor="agent", runtime="codex",
+                                         task_id="task-5")
+        try:
+            evaluation.write_result(invalid_path, not_run, receipt_context=invalid_context)
+        except ReceiptIntegrityError:
+            pass
+        else:
+            raise AssertionError("invalid journal did not fail closed")
+        assert not invalid_path.exists()
+
+        retry_path = Path(directory) / "retry-result.json"
+        retry_journal = Path(directory) / "retry-evaluation-receipts.jsonl"
+        retry_context = ReceiptContext(journal=retry_journal, repo_root=context.repo_root,
+                                       run_id="retry-eval-run", actor="agent", runtime="codex",
+                                       task_id="task-5")
+        original_emit = evaluation.emit_change
+        failed = True
+        def fail_once(*args: object, **kwargs: object) -> dict[str, object]:
+            nonlocal failed
+            if failed:
+                failed = False
+                raise OSError("one-time receipt failure")
+            return original_emit(*args, **kwargs)  # type: ignore[arg-type]
+        evaluation.emit_change = fail_once  # type: ignore[assignment]
+        try:
+            try:
+                evaluation.write_result(retry_path, not_run, receipt_context=retry_context)
+            except OSError:
+                pass
+            else:
+                raise AssertionError("one-time receipt failure was not exercised")
+            evaluation.write_result(retry_path, not_run, receipt_context=retry_context)
+        finally:
+            evaluation.emit_change = original_emit
+        assert evaluation.load_result(retry_path) == not_run
+        assert len(validate_journal(retry_journal, repo_root=context.repo_root)) == 1
         cli_path = Path(directory) / "cli-result.json"
         cli_journal = Path(directory) / "cli-receipts.jsonl"
         cli = subprocess.run([

@@ -15,10 +15,10 @@ from typing import Any, Mapping
 
 if __package__:
     from .agent_run_state import FORBIDDEN_FIELD_PARTS, _reject_forbidden_fields
-    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 else:
     from agent_run_state import FORBIDDEN_FIELD_PARTS, _reject_forbidden_fields
-    from runtime_receipts import ReceiptContext, emit_change, file_hash
+    from runtime_receipts import ReceiptContext, emit_change, file_hash, preflight
 
 
 TASK_IDS = {
@@ -141,10 +141,18 @@ def write_result(path: Path, result: Mapping[str, Any], *, receipt_context: Rece
     result = validate_envelope(result)
     if path.exists():
         if load_result(path) == result:
+            if receipt_context is not None:
+                event_id = _receipt_event_id(receipt_context, path)
+                if preflight(receipt_context, event_id) is None:
+                    emit_change(receipt_context, event_id, "evaluation.write", "class:evaluation-result",
+                                None, file_hash(path), "applied")
             return
         raise EvaluationError("result exists; use a new run_id for rollback or changed hypothesis")
-    path.parent.mkdir(parents=True, exist_ok=True)
     before_hash = file_hash(path) if path.exists() else None
+    event_id = _receipt_event_id(receipt_context, path) if receipt_context else None
+    if receipt_context is not None:
+        preflight(receipt_context, event_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
     temporary: Path | None = None
     try:
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as stream:
@@ -155,8 +163,7 @@ def write_result(path: Path, result: Mapping[str, Any], *, receipt_context: Rece
             os.fsync(stream.fileno())
         os.replace(temporary, path)
         if receipt_context is not None:
-            event_id = "evaluation-" + hashlib.sha256(
-                f"{receipt_context.run_id}:evaluation.write:{path}".encode()).hexdigest()
+            assert event_id is not None
             emit_change(receipt_context, event_id, "evaluation.write", "class:evaluation-result",
                         before_hash, file_hash(path), "applied")
     finally:
@@ -171,6 +178,11 @@ def load_result(path: Path) -> dict[str, Any]:
         return validate_envelope(json.loads(path.read_text(encoding="utf-8")))
     except (OSError, json.JSONDecodeError) as error:
         raise EvaluationError("result is unreadable") from error
+
+
+def _receipt_event_id(context: ReceiptContext, path: Path) -> str:
+    return "evaluation-" + hashlib.sha256(
+        f"{context.run_id}:evaluation.write:{path}".encode()).hexdigest()
 
 
 def _run_metadata(run_id: str, hypothesis_id: str, change_type: str,

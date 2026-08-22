@@ -27,6 +27,19 @@ class ReceiptContext:
     source_commit: str | None = None
 
 
+def preflight(context: ReceiptContext, event_id: str) -> dict[str, object] | None:
+    """Validate the journal before a mutation and return an existing event.
+
+    Recovery callers may later emit with ``before_hash=None`` when the original
+    pre-state is unavailable; the current artifact hash still binds the receipt
+    to the recovered mutation.
+    """
+    records = change_receipts.validate_journal(context.journal, repo_root=context.repo_root)
+    if change_receipts.is_journal_disabled(context.journal, repo_root=context.repo_root):
+        raise change_receipts.ReceiptDisabledError("journal is disabled; mutation blocked")
+    return next((record for record in records if record["event_id"] == event_id), None)
+
+
 def emit_change(context: ReceiptContext, event_id: str, operation: str, target: str,
                 before_hash: str | None, after_hash: str | None, outcome: str,
                 evidence_refs: Iterable[str] = (), error_class: str | None = None) -> dict[str, object]:
