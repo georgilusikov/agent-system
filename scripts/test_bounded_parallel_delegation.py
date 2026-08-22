@@ -136,6 +136,31 @@ def main() -> int:
                                   "elapsed_seconds": 1, "quota_used": 1, "cost_usd": 0}
     expect_failure(bad_verified, "INVALID_CAPABILITY_PROBE")
 
+    malformed_membership_cases = (
+        ("lane capability_id", lambda candidate, value: candidate["lanes"][0].update(capability_id=value)),
+        ("lane mode", lambda candidate, value: candidate["lanes"][0].update(mode=value)),
+        ("capability status", lambda candidate, value: candidate["capabilities"][0].update(status=value)),
+        ("outcome status", lambda candidate, value: candidate["outcomes"][0].update(status=value)),
+        ("aggregate status", lambda candidate, value: candidate["aggregate"].update(status=value)),
+        ("probe canary", lambda candidate, value: candidate["capabilities"][0]["probe"].update(canary=value)),
+    )
+    for label, mutate in malformed_membership_cases:
+        for value in ([], {}):
+            malformed = document()
+            mutate(malformed, value)
+            result = validate(malformed)
+            assert set(result) == {"status", "reasons", "redaction_status"}, (label, value, result)
+            assert result["status"] == "FAIL", (label, value, result)
+            assert result["reasons"], (label, value, result)
+
+    malformed_cli = copy.deepcopy(document())
+    malformed_cli["aggregate"]["status"] = []  # type: ignore[index]
+    cli_result = subprocess.run([sys.executable, str(CHECKER)], input=json.dumps(malformed_cli), text=True,
+                                capture_output=True, check=False)
+    assert cli_result.returncode == 1, cli_result
+    assert not cli_result.stderr, cli_result
+    assert json.loads(cli_result.stdout)["status"] == "FAIL", cli_result.stdout
+
     invalid_cli = subprocess.run([sys.executable, str(CHECKER)], input="{", text=True,
                                  capture_output=True, check=False)
     assert invalid_cli.returncode != 0, invalid_cli

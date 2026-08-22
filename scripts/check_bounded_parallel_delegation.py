@@ -80,6 +80,7 @@ def validate(document: Any) -> dict[str, Any]:
         capability_map[capability_id] = capability
         if (not _identifier(capability.get("runtime")) or not _identifier(capability.get("channel"))
                 or not _identifier(capability.get("model"))
+                or not isinstance(capability.get("status"), str)
                 or capability.get("status") not in CAPABILITY_STATUSES):
             errors.append("INVALID_CAPABILITY")
         elif not _valid_probe(capability, run_id):
@@ -108,7 +109,9 @@ def validate(document: Any) -> dict[str, Any]:
         if _identifier(capability_id):
             primary_capabilities.add(capability_id)
         normalized_scope = _normalized_scope(lane.get("scope"))
-        if lane.get("mode") not in {"read", "write"} or normalized_scope is None:
+        if (not isinstance(lane.get("mode"), str)
+                or lane.get("mode") not in {"read", "write"}
+                or normalized_scope is None):
             errors.append("INVALID_LANE_SCOPE")
         elif any(_scopes_overlap(normalized_scope, previous) for previous in scopes):
             errors.append("OVERLAPPING_SCOPE")
@@ -116,7 +119,7 @@ def validate(document: Any) -> dict[str, Any]:
             errors.append("DUPLICATE_SCOPE")
         else:
             scopes.append(normalized_scope)
-        if capability_id not in capability_map:
+        if not isinstance(capability_id, str) or capability_id not in capability_map:
             errors.append("CAPABILITY_REFERENCE_MISSING")
 
     if not lanes:
@@ -149,7 +152,8 @@ def validate(document: Any) -> dict[str, Any]:
         lane_id = outcome.get("lane_id")
         if not _identifier(lane_id) or lane_id in outcome_map or lane_id not in lane_ids:
             errors.append("OUTCOME_LANE_MISMATCH")
-        if outcome.get("status") not in OUTCOME_STATUSES:
+        if (not isinstance(outcome.get("status"), str)
+                or outcome.get("status") not in OUTCOME_STATUSES):
             errors.append("INVALID_OUTCOME")
         if isinstance(lane_id, str):
             outcome_map[lane_id] = outcome
@@ -160,7 +164,8 @@ def validate(document: Any) -> dict[str, Any]:
     required_not_run = any(
         lane_by_id[lane_id].get("required") is True
         and (outcome.get("status") == "not_run"
-             or capability_map.get(lane_by_id[lane_id].get("capability_id"), {}).get("status") != "available")
+             or (not isinstance(lane_by_id[lane_id].get("capability_id"), str)
+                 or capability_map.get(lane_by_id[lane_id].get("capability_id"), {}).get("status") != "available"))
         for lane_id, outcome in outcome_map.items() if lane_id in lane_by_id
     )
     required_blocked = any(lane_by_id[lane_id].get("required") is True and outcome.get("status") == "blocked"
@@ -169,11 +174,13 @@ def validate(document: Any) -> dict[str, Any]:
         expected_status = "BLOCKED"
     elif required_not_run:
         expected_status = "NOT RUN"
-    elif any(status in {"failed", "timeout", "quota_exhausted", "blocked"} for status in statuses):
+    elif any(isinstance(status, str) and status in {"failed", "timeout", "quota_exhausted", "blocked"}
+             for status in statuses):
         expected_status = "FAIL"
     else:
         expected_status = "PASS"
-    if aggregate.get("status") not in AGGREGATE_STATUSES:
+    if (not isinstance(aggregate.get("status"), str)
+            or aggregate.get("status") not in AGGREGATE_STATUSES):
         errors.append("INVALID_AGGREGATE_STATUS")
     elif aggregate.get("status") != expected_status:
         errors.append("AGGREGATE_STATUS_MISMATCH")
@@ -194,8 +201,10 @@ def validate(document: Any) -> dict[str, Any]:
     for lane in lanes:
         if not isinstance(lane, Mapping):
             continue
-        capability = capability_map.get(lane.get("capability_id"))
-        outcome = outcome_map.get(lane.get("id"))
+        capability_id = lane.get("capability_id")
+        lane_id = lane.get("id")
+        capability = capability_map.get(capability_id) if isinstance(capability_id, str) else None
+        outcome = outcome_map.get(lane_id) if isinstance(lane_id, str) else None
         if capability and outcome and outcome.get("status") == "verified":
             if capability.get("status") != "available" or not _valid_probe(capability, run_id):
                 errors.append("UNSUPPORTED_VERIFIED_OUTCOME")
@@ -254,7 +263,8 @@ def _valid_probe(capability: Mapping[str, Any], run_id: Any) -> bool:
         return False
     status = capability.get("status")
     if (probe.get("status") != status or probe.get("capability_id") != capability.get("id")
-            or probe.get("run_id") != run_id or probe.get("canary") not in PROBE_CANARIES
+            or probe.get("run_id") != run_id or not isinstance(probe.get("canary"), str)
+            or probe.get("canary") not in PROBE_CANARIES
             or not _nonnegative_number(probe.get("elapsed_seconds"))
             or probe.get("elapsed_seconds") > PROBE_MAX_SECONDS):
         return False
