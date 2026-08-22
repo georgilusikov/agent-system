@@ -121,6 +121,7 @@ def validate_envelope(envelope: Mapping[str, Any]) -> dict[str, Any]:
         if not isinstance(record, Mapping):
             raise EvaluationError("record must be an object")
         _validate_record(record, envelope["run_id"], None, None, None, None)
+    _validate_run_identity(envelope["records"])
     statuses = {record["status"] for record in envelope["records"]}
     if statuses != {envelope["status"]}:
         raise EvaluationError("envelope status must match every record")
@@ -129,6 +130,8 @@ def validate_envelope(envelope: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def write_result(path: Path, result: Mapping[str, Any]) -> None:
+    if not isinstance(path, Path):
+        raise EvaluationError("path must be a pathlib.Path")
     result = validate_envelope(result)
     if path.exists():
         if load_result(path) == result:
@@ -150,6 +153,8 @@ def write_result(path: Path, result: Mapping[str, Any]) -> None:
 
 
 def load_result(path: Path) -> dict[str, Any]:
+    if not isinstance(path, Path):
+        raise EvaluationError("path must be a pathlib.Path")
     try:
         return validate_envelope(json.loads(path.read_text(encoding="utf-8")))
     except (OSError, json.JSONDecodeError) as error:
@@ -244,6 +249,14 @@ def _validate_comparisons(comparisons: list[Mapping[str, Any]], records: list[Ma
                 "comparison verdict")
     if seen != set(TASK_IDS.values()):
         raise EvaluationError("comparisons must cover all five stable task IDs")
+
+
+def _validate_run_identity(records: list[Mapping[str, Any]]) -> None:
+    for variant in ("baseline", "treatment"):
+        identities = {(record["commit_sha"], record["config_sha"])
+                      for record in records if record["variant"] == variant}
+        if len(identities) != 1:
+            raise EvaluationError("all task records must share one run identity per variant")
 
 
 def _validate_record(record: Mapping[str, Any], run_id: str, baseline_commit: str | None,

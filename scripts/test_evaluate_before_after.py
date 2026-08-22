@@ -77,6 +77,24 @@ def main() -> int:
     else:
         raise AssertionError("tampered comparison was accepted")
 
+    mixed_identity = json.loads(json.dumps(not_run))
+    mixed_record = next(record for record in mixed_identity["records"] if record["variant"] == "treatment")
+    mixed_record["commit_sha"] = "e" * 40
+    mixed_record["config_sha"] = "f" * 64
+    mixed_comparison = next(pair for pair in mixed_identity["comparisons"]
+                            if pair["task_id"] == mixed_record["task_id"])
+    mixed_comparison["treatment"] = {
+        "commit_sha": mixed_record["commit_sha"],
+        "config_sha": mixed_record["config_sha"],
+        "verdict": mixed_record["verdict"],
+    }
+    try:
+        evaluation.validate_envelope(mixed_identity)
+    except evaluation.EvaluationError:
+        pass
+    else:
+        raise AssertionError("mixed run identity was accepted")
+
     incomplete = json.loads(json.dumps(observed_records))
     incomplete[0]["dimensions"]["correctness"] = "not_run"
     try:
@@ -146,6 +164,28 @@ def main() -> int:
         evaluation.write_result(path, not_run)
         assert evaluation.load_result(path) == not_run
         assert "prompt" not in path.read_text(encoding="utf-8")
+        mixed_path = Path(directory) / "mixed.json"
+        mixed_path.write_text(json.dumps(mixed_identity), encoding="utf-8")
+        try:
+            evaluation.load_result(mixed_path)
+        except evaluation.EvaluationError:
+            pass
+        else:
+            raise AssertionError("load_result accepted mixed run identity")
+
+    for invalid_path in (None, "result.json"):
+        try:
+            evaluation.write_result(invalid_path, not_run)  # type: ignore[arg-type]
+        except evaluation.EvaluationError:
+            pass
+        else:
+            raise AssertionError(f"write_result accepted invalid path: {invalid_path!r}")
+        try:
+            evaluation.load_result(invalid_path)  # type: ignore[arg-type]
+        except evaluation.EvaluationError:
+            pass
+        else:
+            raise AssertionError(f"load_result accepted invalid path: {invalid_path!r}")
     print("PASS before/after metadata-only evaluation")
     return 0
 

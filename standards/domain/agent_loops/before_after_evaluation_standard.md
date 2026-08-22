@@ -80,6 +80,10 @@ the script rejects a different result at an existing path. To revert, choose
 the prior known-good SHA/config in the new run; to retry a hypothesis, change
 the hypothesis/run identity and record the new evidence.
 
+Persisted results require one uniform commit/config identity for all five
+baseline records and one uniform commit/config identity for all five treatment
+records.
+
 ## Verification
 
 ```text
