@@ -7,11 +7,16 @@ import argparse
 import hashlib
 import json
 import os
+import stat
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Iterable
 
-from runtime_receipts import ReceiptContext, emit_change, file_hash
+if __package__:
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+else:
+    from runtime_receipts import ReceiptContext, emit_change, file_hash
 
 
 REPO = Path(__file__).resolve().parents[1]
@@ -156,6 +161,7 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
     if not operations:
         print("no changes")
         return None
+    before_hash = _deployment_fingerprint(home, (Path(operation["target"]) for operation in operations))
     snapshot.mkdir(parents=True, exist_ok=True)
     manifest = {"version": 1, "home": str(home), "repo": str(REPO), "operations": operations}
     (snapshot / "rollback.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -180,14 +186,15 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
                 current[key] = desired[key]
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    if receipt_context is not None:
+    after_hash = _deployment_fingerprint(home, (Path(operation["target"]) for operation in operations))
+    if receipt_context is not None and before_hash != after_hash:
         emit_change(
             receipt_context,
             _deployment_event_id(receipt_context, "apply"),
             "install.apply",
             "class:installer-deployment",
-            None,
-            file_hash(snapshot / "rollback.json"),
+            before_hash,
+            after_hash,
             "applied",
         )
     print(f"snapshot: {snapshot}")
@@ -197,6 +204,8 @@ def apply(home: Path, backup_root: Path, dry_run: bool,
 def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> None:
     manifest = json.loads((snapshot / "rollback.json").read_text(encoding="utf-8"))
     home = Path(manifest["home"])
+    affected_targets = tuple(Path(operation["target"]) for operation in manifest["operations"])
+    before_hash = _deployment_fingerprint(home, affected_targets)
     for operation in manifest["operations"]:
         target = Path(operation["target"])
         if operation.get("kind", "link" if operation.get("source") else "retire") == "merge":
@@ -233,14 +242,15 @@ def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> N
                 shutil.move(str(target), str(drift))
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.move(str(backup), str(target))
-    if receipt_context is not None:
+    after_hash = _deployment_fingerprint(home, affected_targets)
+    if receipt_context is not None and before_hash != after_hash:
         emit_change(
             receipt_context,
             _deployment_event_id(receipt_context, "rollback"),
             "install.rollback",
             "class:installer-deployment",
-            file_hash(snapshot / "rollback.json"),
-            None,
+            before_hash,
+            after_hash,
             "applied",
         )
     print(f"rolled back: {snapshot}")
@@ -248,6 +258,31 @@ def rollback(snapshot: Path, receipt_context: ReceiptContext | None = None) -> N
 
 def _deployment_event_id(context: ReceiptContext, operation: str) -> str:
     return f"deployment-{hashlib.sha256(f'{context.run_id}:{operation}'.encode()).hexdigest()}"
+
+
+def _deployment_fingerprint(home: Path, targets_to_hash: Iterable[Path]) -> str:
+    states = []
+    for target in sorted((Path(target) for target in targets_to_hash), key=lambda path: str(path)):
+        try:
+            relative = str(target.relative_to(home))
+        except ValueError as error:
+            raise ValueError(f"deployment target is outside --home: {target}") from error
+        try:
+            target_stat = target.lstat()
+        except FileNotFoundError:
+            state = {"type": "absent"}
+        else:
+            if stat.S_ISLNK(target_stat.st_mode):
+                state = {"type": "symlink", "target": os.readlink(target)}
+            elif stat.S_ISREG(target_stat.st_mode):
+                state = {"type": "file", "hash": file_hash(target)}
+            elif stat.S_ISDIR(target_stat.st_mode):
+                state = {"type": "directory"}
+            else:
+                state = {"type": "other"}
+        states.append({"target": relative, "state": state})
+    canonical = json.dumps(states, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode()).hexdigest()
 
 
 def main() -> int:

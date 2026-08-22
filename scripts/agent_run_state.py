@@ -11,7 +11,10 @@ import tempfile
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from runtime_receipts import ReceiptContext, emit_change, file_hash
+if __package__:
+    from .runtime_receipts import ReceiptContext, emit_change, file_hash
+else:
+    from runtime_receipts import ReceiptContext, emit_change, file_hash
 
 
 STATE_FIELDS = frozenset({

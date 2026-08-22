@@ -9,7 +9,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
-import change_receipts
+if __package__:
+    from . import change_receipts
+else:
+    import change_receipts
 
 
 @dataclass(frozen=True)

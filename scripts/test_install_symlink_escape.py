@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import subprocess
 import tempfile
@@ -87,6 +88,43 @@ def main() -> int:
         assert snapshots
         records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
         assert [record["operation"] for record in records] == ["install.apply"]
+        apply_receipt = records[0]
+        rollback_manifest_hash = hashlib.sha256(snapshots[0].read_bytes()).hexdigest()
+        assert apply_receipt["after_hash"] != rollback_manifest_hash
+
+        result = run(
+            "--apply",
+            "--home",
+            str(explicit_home),
+            "--backup-root",
+            str(explicit_backup),
+            "--receipt-journal",
+            str(receipt_journal),
+            "--run-id",
+            "run-install",
+            "--task-id",
+            "task-install",
+        )
+        assert result.returncode == 0
+        assert len(list(explicit_backup.glob("*/rollback.json"))) == 1
+        records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
+        assert [record["operation"] for record in records] == ["install.apply"]
+
+        result = run(
+            "--rollback",
+            str(snapshots[0].parent),
+            "--receipt-journal",
+            str(receipt_journal),
+            "--run-id",
+            "run-install",
+            "--task-id",
+            "task-install",
+        )
+        assert result.returncode == 0
+        records = [json.loads(line) for line in receipt_journal.read_text(encoding="utf-8").splitlines()]
+        assert [record["operation"] for record in records] == ["install.apply", "install.rollback"]
+        rollback_receipt = records[1]
+        assert rollback_receipt["before_hash"] == apply_receipt["after_hash"]
 
         result = run(
             "--rollback",

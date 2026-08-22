@@ -3,10 +3,14 @@
 
 from __future__ import annotations
 
+import importlib
 import json
+import sys
 import tempfile
 from pathlib import Path
 from unittest.mock import patch
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import agent_run_state as state
 import change_receipts
@@ -14,6 +18,7 @@ from runtime_receipts import ReceiptContext
 
 
 def main() -> int:
+    assert importlib.import_module("scripts.agent_run_state").goal_fingerprint(opaque_id="package-import")
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / "run.json"
         created = state.create_run(path, run_id="run-1", bead_id="gl-ejw.16", source_commit="abc", opaque_goal_id="opaque")
