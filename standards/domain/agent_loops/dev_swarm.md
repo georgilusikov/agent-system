@@ -2,7 +2,16 @@
 
 **Название:** Dev Swarm — Hierarchical Multi-Model Orchestration with Cross-Critique
 **Дата создания:** 2026-04-25
-**Контекст ошибки:** `dev_swarm_v4.py` (1085 lines) is the only ACTIVE root agent-loop script and is cited from `CLAUDE.md` line 16 (`python3 dev_swarm_v4.py --mode quality "task"`). It already routes through VibeProxy and supports multi-model orchestration but lacks `--output-dir`, `--max-iterations`, `--dry-run`, structured cost output per stage, and dirty-tree guard. Pattern is the most valuable to preserve.
+**Статус на 2026-08-22:** `optional/stale` — reference-only until a tracked executable consumer and a production-shaped check exist.
+**Исторический контекст ошибки:** `dev_swarm_v4.py` (1085 lines) was documented as an active root agent-loop script cited from `CLAUDE.md`. That source and consumer are not present in the current canon; the historical pattern is retained only for possible future reactivation.
+
+## Статус и граница применения
+
+- [O] Current canon has no tracked `dev_swarm_v4.py`, `tools/agent_loops/`, or `CLAUDE.md`, and no executable invocation or VibeProxy endpoint for this lane.
+- [O] Deployed instruction consumers point to `AGENTS.md` and contain no `dev_swarm` or `cross-critique` reference; `scripts/check.py --deployed` passes.
+- [I] Treat this document as optional/stale. Do not install or add a multi-agent runtime from it; the default remains the direct single-agent autonomy path.
+- [O] The available bounded autonomy policy seam is `scripts/agent_execution_governor.py`: fan-out is denied unless explicitly requested with a current capability fact and a bounded lane limit; `scripts/agent_run_state.py` persists metadata-only run state. No caller for this seam was found in the current canon.
+- Reactivate this lane only after adding a tracked executable consumer and a bounded check covering manager, independent candidates, one critic, synthesis, cost/timeout cap, dry-run, dirty-tree guard, external acceptance, and metadata-only receipt.
 
 ---
 
@@ -71,7 +80,7 @@
 
 ## 📝 Примечания
 
-- Source `dev_swarm_v4.py` is ACTIVE and cited from `CLAUDE.md`. R4b will refactor IN PLACE into `tools/agent_loops/dev_swarm.py` with the safety flags above. No behavior change to the pipeline itself.
+- Historical source `dev_swarm_v4.py` was cited as active during the 2026-04-25 migration wave. No refactor target is live in this canon; no behavior is promised by this reference.
 - Sibling patterns: `parallel_worktree_swarm.md` (multi-task fan-out), `architect_loop.md` (planning, not coding).
 - Higher-level orchestration (chaining `dev_swarm` runs into a project plan) belongs in a future `multi_agent/swarm_orchestration.md` standard if the need arises.
 - Per-stage cost aggregation is a hard requirement for the structured-JSON output — incomplete payloads are tool bugs.
@@ -83,7 +92,7 @@
 - `_agent_shared/standards/agent_loops/extraction_protocol.md` — parent contract + verification matrix.
 - `_agent_shared/standards/multi_agent/model_adapter_contract.md` — executor abstraction; output schema contract.
 - `_agent_shared/standards/multi_agent/swarm_orchestration.md` — planned higher-level orchestration standard (not yet written).
-- Provenance: `dev_swarm_v4.py` (active source); refactor target `tools/agent_loops/dev_swarm.py` (R4b).
+- Historical provenance: `dev_swarm_v4.py`; the `tools/agent_loops/dev_swarm.py` refactor target is not present in this canon.
 
 ---
 
