@@ -161,6 +161,8 @@ Skill сам решает когда подгружать стандарт.
 
 ## Текущий список
 
+| [memory-candidate-flow-standard.md](memory-candidate-flow-standard.md) | contract | Receipt-backed candidate inbox, reviewer/owner gate, scoped retrieval and rollback without automatic canon changes |
+
 (пусто — добавляй стандарты только когда сработал триггер)
 
 | Стандарт | Версия | Создан | Incident-trigger (зачем создан) |
