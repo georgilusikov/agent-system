@@ -56,6 +56,10 @@ class ReceiptDisabledError(ReceiptError):
     """The journal is intentionally disabled for new appends."""
 
 
+class _DuplicateJsonKeyError(ValueError):
+    """A persisted JSON object has ambiguous duplicate keys."""
+
+
 def append_receipt(journal: Path, receipt: Mapping[str, Any], *, repo_root: Path) -> dict[str, Any]:
     """Append one receipt, or return its existing identical event-id retry.
 
@@ -63,6 +67,7 @@ def append_receipt(journal: Path, receipt: Mapping[str, Any], *, repo_root: Path
     closed and the journal is never rewritten.
     """
     root = _resolved_root(repo_root)
+    journal = _external_journal(journal, root)
     metadata = dict(receipt)
     _validate_envelope(metadata, root, allow_hashes=False)
     records = validate_journal(journal, repo_root=root)
@@ -72,7 +77,7 @@ def append_receipt(journal: Path, receipt: Mapping[str, Any], *, repo_root: Path
         if _without_hashes(existing) == metadata:
             return existing
         raise ReceiptConflictError("event id conflicts with existing receipt")
-    if is_journal_disabled(journal):
+    if is_journal_disabled(journal, repo_root=root):
         raise ReceiptDisabledError("journal is disabled; history remains intact")
     expected_parent = records[-1]["event_id"] if records else None
     if metadata["parent_event_id"] != expected_parent:
@@ -89,6 +94,7 @@ def append_receipt(journal: Path, receipt: Mapping[str, Any], *, repo_root: Path
 def validate_journal(journal: Path, *, repo_root: Path) -> list[dict[str, Any]]:
     """Return trusted records, rejecting tampering, gaps, and duplicate ids."""
     root = _resolved_root(repo_root)
+    journal = _external_journal(journal, root)
     if not journal.exists():
         return []
     try:
@@ -102,8 +108,8 @@ def validate_journal(journal: Path, *, repo_root: Path) -> list[dict[str, Any]]:
         if not line:
             raise ReceiptIntegrityError("journal contains an invalid gap")
         try:
-            record = json.loads(line)
-        except json.JSONDecodeError as error:
+            record = json.loads(line, object_pairs_hook=_unique_object)
+        except (json.JSONDecodeError, _DuplicateJsonKeyError) as error:
             raise ReceiptIntegrityError("journal contains invalid JSON") from error
         if not isinstance(record, dict):
             raise ReceiptIntegrityError("journal record is not an object")
@@ -125,19 +131,19 @@ def validate_journal(journal: Path, *, repo_root: Path) -> list[dict[str, Any]]:
     return records
 
 
-def disable_journal(journal: Path) -> None:
+def disable_journal(journal: Path, *, repo_root: Path) -> None:
     """Disable only new appends; this never alters receipt history."""
-    _write_mode(journal, "disabled")
+    _write_mode(_external_journal(journal, _resolved_root(repo_root)), "disabled")
 
 
-def enable_journal(journal: Path) -> None:
+def enable_journal(journal: Path, *, repo_root: Path) -> None:
     """Re-enable new appends without cleaning or changing receipt history."""
-    _write_mode(journal, "enabled")
+    _write_mode(_external_journal(journal, _resolved_root(repo_root)), "enabled")
 
 
-def is_journal_disabled(journal: Path) -> bool:
+def is_journal_disabled(journal: Path, *, repo_root: Path) -> bool:
     """Return whether new appends are blocked by the local mode sidecar."""
-    path = _mode_path(journal)
+    path = _mode_path(_external_journal(journal, _resolved_root(repo_root)))
     if not path.exists():
         return False
     try:
@@ -158,16 +164,22 @@ def _validate_envelope(record: Mapping[str, Any], root: Path, *, allow_hashes: b
         raise ReceiptValidationError("receipt ids are invalid")
     if record["parent_event_id"] is not None and not _valid_id(record["parent_event_id"]):
         raise ReceiptValidationError("parent event id is invalid")
-    if record["actor"] not in {"human", "agent", "hook", "system"}:
+    actor = record["actor"]
+    runtime = record["runtime"]
+    operation = record["operation"]
+    outcome = record["outcome"]
+    if not isinstance(actor, str) or actor not in {"human", "agent", "hook", "system"}:
         raise ReceiptValidationError("actor is invalid")
-    if not _matches(RUNTIME, record["runtime"]) or not _matches(OPERATION, record["operation"]):
+    if (not isinstance(runtime, str) or not isinstance(operation, str)
+            or len(operation) > 64 or not _matches(RUNTIME, runtime)
+            or not _matches(OPERATION, operation)):
         raise ReceiptValidationError("runtime or operation is invalid")
     _validate_target(record["target"], root)
     if record["source_commit"] is not None and not _matches(GIT_SHA, record["source_commit"]):
         raise ReceiptValidationError("source commit is invalid")
     if any(record[field] is not None and not _matches(SHA256, record[field]) for field in ("before_hash", "after_hash")):
         raise ReceiptValidationError("artifact hash is invalid")
-    if record["outcome"] not in OUTCOMES:
+    if not isinstance(outcome, str) or outcome not in OUTCOMES:
         raise ReceiptValidationError("outcome is invalid")
     refs = record["evidence_refs"]
     if not isinstance(refs, list) or len(refs) > 32:
@@ -214,6 +226,19 @@ def _safe_path(value: str, root: Path) -> bool:
     return True
 
 
+def _external_journal(journal: Path, root: Path) -> Path:
+    """Resolve a local journal and reject paths that would enter the repository."""
+    try:
+        path = journal.resolve(strict=False)
+    except (OSError, RuntimeError) as error:
+        raise ReceiptValidationError("journal path is unreadable") from error
+    try:
+        path.relative_to(root)
+    except ValueError:
+        return path
+    raise ReceiptValidationError("journal must be outside the repository")
+
+
 def _reject_private(value: Any) -> None:
     if isinstance(value, Mapping):
         for key, nested in value.items():
@@ -230,6 +255,15 @@ def _reject_private(value: Any) -> None:
 def _is_private(value: str) -> bool:
     lowered = value.lower()
     return any(part in lowered for part in FORBIDDEN_PARTS)
+
+
+def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    record: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in record:
+            raise _DuplicateJsonKeyError("duplicate JSON key")
+        record[key] = value
+    return record
 
 
 def _receipt_hash(record: Mapping[str, Any]) -> str:
@@ -302,10 +336,10 @@ def main() -> int:
     action.add_argument("--validate", action="store_true", help="validate the append-only JSONL chain")
     args = parser.parse_args()
     if args.disable:
-        disable_journal(args.journal)
+        disable_journal(args.journal, repo_root=args.repo_root)
         print("disabled: no new appends; receipt history remains intact")
     elif args.enable:
-        enable_journal(args.journal)
+        enable_journal(args.journal, repo_root=args.repo_root)
         print("enabled: receipt history remains intact")
     else:
         print(f"valid:{len(validate_journal(args.journal, repo_root=args.repo_root))}")
