@@ -14,6 +14,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 DEFAULT_HOME = Path.home()
 INSTRUCTIONS = {
+    ".dsh/AGENTS.md": REPO / "AGENTS.md",
     ".codex/AGENTS.md": REPO / "AGENTS.md",
     ".gemini/GEMINI.md": REPO / "AGENTS.md",
     ".claude/CLAUDE.md": REPO / "AGENTS.md",
@@ -72,11 +73,44 @@ def backup_path(snapshot: Path, home: Path, target: Path) -> Path:
     return snapshot / "files" / target.relative_to(home)
 
 
+def ensure_target_parent(home: Path, target: Path) -> None:
+    try:
+        target.parent.resolve().relative_to(home.resolve())
+    except (OSError, RuntimeError, ValueError) as error:
+        raise ValueError(f"deployment parent escapes --home: {target.parent}") from error
+
+
+def ensure_target(home: Path, target: Path) -> None:
+    ensure_target_parent(home, target)
+    if not target.is_symlink():
+        return
+    try:
+        target.resolve().relative_to(home.resolve())
+    except (OSError, RuntimeError, ValueError) as error:
+        raise ValueError(f"deployment target escapes --home: {target}") from error
+
+
+def ensure_backup_root(home: Path, backup_root: Path, require_inside_home: bool) -> Path:
+    if backup_root.is_symlink():
+        raise ValueError(f"backup root must not be a symlink: {backup_root}")
+    try:
+        resolved = backup_root.resolve()
+    except (OSError, RuntimeError) as error:
+        raise ValueError(f"cannot resolve backup root: {backup_root}") from error
+    if require_inside_home:
+        try:
+            resolved.relative_to(home.resolve())
+        except (OSError, RuntimeError, ValueError) as error:
+            raise ValueError(f"backup root escapes --home: {backup_root}") from error
+    return resolved
+
+
 def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     snapshot = backup_root / timestamp
     operations: list[dict[str, str | None]] = []
     for target, source in targets(home):
+        ensure_target_parent(home, target)
         if source is None and not target.exists() and not target.is_symlink():
             continue
         if source is not None and target.is_symlink() and target.resolve() == source.resolve():
@@ -92,6 +126,7 @@ def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
         })
     for target_name, (adapter, keys) in SETTING_MERGES.items():
         target = home / target_name
+        ensure_target(home, target)
         current = json.loads(target.read_text(encoding="utf-8")) if target.exists() else {}
         desired = json.loads(adapter.read_text(encoding="utf-8"))
         if all(current.get(key) == desired[key] for key in keys):
@@ -122,6 +157,10 @@ def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
     (snapshot / "rollback.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     for operation in operations:
         target = Path(operation["target"])
+        if operation["kind"] == "merge":
+            ensure_target(home, target)
+        else:
+            ensure_target_parent(home, target)
         source = Path(operation["source"]) if operation["source"] else None
         backup = Path(operation["backup"]) if operation["backup"] else None
         if backup is not None:
@@ -144,11 +183,21 @@ def apply(home: Path, backup_root: Path, dry_run: bool) -> Path | None:
 def rollback(snapshot: Path) -> None:
     manifest = json.loads((snapshot / "rollback.json").read_text(encoding="utf-8"))
     home = Path(manifest["home"])
+    for operation in manifest["operations"]:
+        target = Path(operation["target"])
+        if operation.get("kind", "link" if operation.get("source") else "retire") == "merge":
+            ensure_target(home, target)
+        else:
+            ensure_target_parent(home, target)
     for operation in reversed(manifest["operations"]):
         target = Path(operation["target"])
         source = Path(operation["source"]) if operation["source"] else None
         backup = Path(operation["backup"]) if operation["backup"] else None
         kind = operation.get("kind", "link" if source is not None else "retire")
+        if kind == "merge":
+            ensure_target(home, target)
+        else:
+            ensure_target_parent(home, target)
         if kind == "merge":
             current = json.loads(target.read_text(encoding="utf-8")) if target.exists() else {}
             previous = json.loads(backup.read_text(encoding="utf-8")) if backup and backup.exists() else {}
@@ -182,11 +231,19 @@ def main() -> int:
     parser.add_argument("--home", type=Path, default=DEFAULT_HOME)
     parser.add_argument("--backup-root", type=Path)
     args = parser.parse_args()
-    if args.rollback:
-        rollback(args.rollback)
-        return 0
-    backup_root = args.backup_root or args.home / ".agent-system-backups"
-    apply(args.home, backup_root, args.dry_run)
+    try:
+        if args.rollback:
+            rollback(args.rollback)
+            return 0
+        backup_root = args.backup_root or args.home / ".agent-system-backups"
+        backup_root = ensure_backup_root(
+            args.home,
+            backup_root,
+            require_inside_home=args.backup_root is None,
+        )
+        apply(args.home, backup_root, args.dry_run)
+    except ValueError as error:
+        parser.error(str(error))
     return 0
 
 
