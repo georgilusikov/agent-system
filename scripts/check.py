@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -25,6 +27,19 @@ def check_repo() -> list[str]:
     for relative in required:
         if not (REPO / relative).exists():
             errors.append(f"missing:{relative}")
+    acceptance = REPO / "scripts/test_runtime_acceptance.py"
+    if acceptance.exists():
+        try:
+            result = subprocess.run(
+                [sys.executable, str(acceptance)], cwd=REPO,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                timeout=10, check=False,
+            )
+        except subprocess.TimeoutExpired:
+            errors.append("runtime-acceptance-timeout")
+        else:
+            if result.returncode:
+                errors.append(f"runtime-acceptance-failed:{result.returncode}")
     agents = REPO / "AGENTS.md"
     if agents.exists() and len(agents.read_text(encoding="utf-8").splitlines()) > 245:
         errors.append("AGENTS.md exceeds 245 lines")
