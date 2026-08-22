@@ -88,6 +88,7 @@ def main() -> int:
         invalid_states = (
             ("run-id", {"run_id": None}),
             ("goal-fingerprint", {"goal_fingerprint": []}),
+            ("goal-fingerprint-digest", {"goal_fingerprint": "not-a-sha256-digest"}),
             ("bead-id", {"bead_id": 1}),
             ("next-action", {"next_action": None}),
             ("source-commit", {"source_commit": {}}),

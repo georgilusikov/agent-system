@@ -198,9 +198,11 @@ def _validate_state(data: Any) -> None:
     if not isinstance(data, dict) or set(data) != STATE_FIELDS:
         raise MalformedStateError("state fields do not match metadata-only contract")
     _reject_forbidden_fields(data)
-    for field in ("run_id", "goal_fingerprint", "bead_id", "source_commit"):
+    for field in ("run_id", "bead_id", "source_commit"):
         if not _is_nonempty_string(data[field]):
             raise MalformedStateError(f"{field} must be a non-empty string")
+    if not _is_fingerprint(data["goal_fingerprint"]):
+        raise MalformedStateError("goal_fingerprint must be a SHA-256 fingerprint")
     if data["phase"] not in (*PHASES, *OUTCOMES) or data["status"] != data["phase"]:
         raise MalformedStateError("invalid phase or status")
     if data["last_verified_step"] is not None and not _is_nonnegative_int(data["last_verified_step"]):
