@@ -27,8 +27,8 @@ understanding contract.
 
 For architecture/design, costly or irreversible, ambiguous, high-risk, or
 explicit compare/alternatives decisions, load
-`standards/operational/decision-alternatives-standard.md`; skip it for routine
-reversible one-path work with a brief reason. Route diagnosis to `/debug` and
+`standards/operational/decision-alternatives-standard.md`; skip it for routine,
+reversible, well-specified one-path work with a brief reason. Route diagnosis to `/debug` and
 IKR-lite to `/triz` without exposing private chain-of-thought.
 
 ## Core loop
