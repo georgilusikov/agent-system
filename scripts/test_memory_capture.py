@@ -68,21 +68,29 @@ def main() -> int:
         assert created["status"] == "draft"
 
         before = ledger.read_bytes()
-        forbidden = {**candidate("mem-forbidden"), "statement": "save the prompt"}
         expect(capture.MemoryCandidateError,
-               lambda: capture.capture_verified_candidate(ledger, forbidden, receipt(), repo_root=repo))
+               lambda: capture.capture_verified_candidate(
+                   ledger, candidate("mem-failed"), {**receipt(), "outcome": "failed"}, repo_root=repo))
         assert ledger.read_bytes() == before
+
+        for field, value in (("response", "raw response"), ("environment", "local environment")):
+            forbidden = {**candidate(f"mem-forbidden-{field}"), field: value}
+            expect(capture.MemoryCandidateError,
+                   lambda forbidden=forbidden: capture.capture_verified_candidate(
+                       ledger, forbidden, receipt(), repo_root=repo))
+            assert ledger.read_bytes() == before
 
         cli_input = json.dumps({"candidate": candidate("mem-cli"), "receipt": receipt()})
         cli_ledger = root / "cli-memory.jsonl"
-        command = [sys.executable, str(Path(__file__).with_name("memory_capture.py")),
-                   "--ledger", str(cli_ledger)]
-        result = subprocess.run(command, input=cli_input, text=True, capture_output=True, check=False)
+        result = subprocess.run(
+            [sys.executable, "-m", "scripts.memory_capture", "--ledger", str(cli_ledger)],
+            cwd=repo, input=cli_input, text=True, capture_output=True, check=False)
         assert result.returncode == 0, result.stderr
         assert result.stdout.strip() == "candidate_id=mem-cli status=draft"
         assert cli_ledger.exists()
 
-        no_ledger = root / "not-created.jsonl"
+        no_ledger = repo / "memory.jsonl"
+        assert not no_ledger.exists()
         result = subprocess.run([sys.executable, "-m", "scripts.memory_capture"],
                                 cwd=repo, input=cli_input, text=True,
                                 capture_output=True, check=False)
