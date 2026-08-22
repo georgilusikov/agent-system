@@ -6,12 +6,13 @@ without warning, the branch/sha/dirty-file state of the session is gone, and the
 next session reconstructs it by guessing.
 
 Behavior (PreCompact event):
-- Reads stdin JSON payload from Claude Code (`cwd`, `trigger`,
-  `transcript_path`).
+- Reads stdin JSON payload from Claude Code (`cwd`, bounded `trigger`, and
+  transcript-path presence only).
 - Only acts inside a git repo — never litters unrelated directories.
 - Appends a NEW file `.claude/handoffs/HANDOFF_autocompact_<date>_seq<N>.md`
-  holding the deterministic snapshot (branch, short sha, dirty files, last
-  commits, transcript path) plus empty placeholders that /handoff fills in.
+  holding a metadata-only snapshot (branch, short sha, dirty status, last
+  commits, bounded trigger, transcript_available) plus empty placeholders that
+  /handoff fills in. It never writes the transcript path or session text.
 - Never overwrites an existing file: seq is the next free number.
 
 This hook is a writer, not a gate: it never blocks compaction and has no
@@ -33,6 +34,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 GIT_TIMEOUT_S = 10
+BOUNDED_TRIGGERS = {"auto", "manual"}
 
 
 def read_payload() -> dict:
@@ -68,37 +70,38 @@ def next_seq(handoff_dir: Path, stem: str) -> int:
     return len(existing) + 1
 
 
-def snapshot(cwd: Path, repo_root: Path, payload: dict) -> str:
+def snapshot(cwd: Path, payload: dict) -> str:
     now = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
     branch = git(cwd, "rev-parse", "--abbrev-ref", "HEAD") or "unknown"
     sha = git(cwd, "rev-parse", "--short", "HEAD") or "unknown"
     dirty = git(cwd, "status", "--short") or "clean"
     log = git(cwd, "log", "--oneline", "-5") or "no commits"
-    trigger = str(payload.get("trigger", "unknown"))
-    transcript = str(payload.get("transcript_path", "unknown"))
+    raw_trigger = payload.get("trigger")
+    trigger = raw_trigger if isinstance(raw_trigger, str) and raw_trigger in BOUNDED_TRIGGERS else "unknown"
+    transcript_available = isinstance(payload.get("transcript_path"), str) and bool(
+        payload["transcript_path"].strip()
+    )
 
     return f"""# Handoff — autocompact — {now}
 
-**Written by:** `precompact_handoff.py` (compaction trigger: `{trigger}`)
-**Status:** deterministic snapshot only — the narrative sections below are
-placeholders. Run `/handoff` to fill them from the live conversation, or read
-the transcript at the path below.
+**Written by:** `precompact_handoff.py`
+## Hook metadata
+- trigger: {trigger}
+- transcript_available: {str(transcript_available).lower()}
+**Status:** metadata-only snapshot — the narrative sections below are
+placeholders. Run `/handoff` to fill them from the live session.
 
 ## Git state
-- Repo / worktree: {repo_root}
-- Session cwd: {cwd}
-- Branch: {branch} @ {sha}
-- Uncommitted:
+- branch: {branch}
+- sha: {sha}
+- dirty_status:
 ```
 {dirty}
 ```
-- Last commits:
+- last_commits:
 ```
 {log}
 ```
-
-## Transcript
-- {transcript}
 
 ## Goal
 _(placeholder — fill with /handoff)_
@@ -133,7 +136,6 @@ def main() -> int:
     top = git(cwd, "rev-parse", "--show-toplevel")
     if not top:
         return 0
-    repo_root = Path(top)
 
     handoff_dir = cwd / ".claude" / "handoffs"
     handoff_dir.mkdir(parents=True, exist_ok=True)
@@ -143,7 +145,7 @@ def main() -> int:
     if target.exists():  # paranoia: never overwrite
         return 0
 
-    target.write_text(snapshot(cwd, repo_root, payload), encoding="utf-8")
+    target.write_text(snapshot(cwd, payload), encoding="utf-8")
     sys.stderr.write(f"[precompact_handoff] snapshot written: {target}\n")
     return 0
 

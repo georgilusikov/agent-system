@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Stop hook: Incident Parking, mechanical channel.
 #
-# Counts error markers in the tail of the session transcript. Threshold reached
-# -> parks ONE line in ~/.claude/memory/incidents/parking.jsonl via
-# ~/.claude/bin/park-incident.sh with source="hook".
+# Reads only the tail of the session transcript to count error markers. Threshold
+# reached -> parks ONE metadata-only line in ~/.claude/memory/incidents/parking.jsonl
+# via ~/.claude/bin/park-incident.sh with source="hook". No transcript path,
+# content, or line fragment is passed to the helper.
 #
 # The semantic channel (owner corrections, repeated mistakes, empty gates) is the
 # agent's job — see ~/.claude/rules/incident-parking.md.
@@ -28,10 +29,10 @@ THRESHOLD="${INCIDENT_PARKING_THRESHOLD:-3}"
 [ -x "$PARK_HELPER" ] || exit 0
 command -v python3 >/dev/null 2>&1 || exit 0
 
-# Python side prints exactly two lines when something must be parked:
+# Python side prints exactly three metadata-only lines when something must be parked:
 #   line 1: session_id
-#   line 2: signal
-#   line 3: note
+#   line 2: marker count / signal class
+#   line 3: fixed metadata-only note
 # Prints nothing when there is nothing to park (below threshold, no transcript,
 # or this session already has a hook line in the parking file).
 RESULT="$(
@@ -94,56 +95,19 @@ RE_IS_ERROR = re.compile(r'"is_error"\s*:\s*true')
 RE_TRACEBACK = re.compile(r"Traceback")
 RE_EXIT_CODE = re.compile(r"[Ee]xit code [1-9][0-9]*")
 
-# Redaction of anything that smells like a credential before it reaches the file.
-REDACTIONS = (
-    re.compile(r"(?i)\b(sk|pk|ghp|gho|ghs|xox[abps])-[A-Za-z0-9_\-]{8,}"),
-    re.compile(r"(?i)\b(api[_-]?key|token|secret|password|passwd|bearer)\b\s*[:=]\s*\S+"),
-    re.compile(r"\bAKIA[0-9A-Z]{12,}\b"),
-    re.compile(r"\b[A-Za-z0-9_\-]{40,}\b"),
-)
-
-
-def redact(text: str) -> str:
-    for pattern in REDACTIONS:
-        text = pattern.sub("<redacted>", text)
-    return text
-
-
-def clean(text: str) -> str:
-    text = re.sub(r"[\x00-\x1f\x7f]+", " ", text)
-    text = re.sub(r"\s+", " ", text).strip()
-    return redact(text)
-
 
 count = 0
-fragments: list[str] = []
-seen: set[str] = set()
 
 for line in tail.splitlines():
-    hit = None
     for pattern in (RE_IS_ERROR, RE_TRACEBACK, RE_EXIT_CODE):
-        match = pattern.search(line)
-        if match:
+        if pattern.search(line):
             count += 1
-            if hit is None:
-                hit = match.start()
-    if hit is None:
-        continue
-    fragment = clean(line[hit : hit + 400])[:120]
-    if not fragment:
-        continue
-    key = fragment.lower()
-    if key in seen:
-        continue
-    seen.add(key)
-    if len(fragments) < 3:
-        fragments.append(fragment)
 
 if count < THRESHOLD:
     sys.exit(0)
 
 signal = f"mechanical: {count} error markers in session tail"
-note = " | ".join(fragments) if fragments else "no readable fragment"
+note = "metadata-only: transcript content withheld"
 
 print(session_id)
 print(signal)
