@@ -15,8 +15,9 @@ from typing import Any, Iterable, Mapping
 STATE_FIELDS = frozenset({
     "run_id", "goal_fingerprint", "bead_id", "phase", "last_verified_step",
     "attempt", "retry_budget", "next_action", "status", "source_commit",
-    "evidence_refs", "redaction_status",
+    "evidence_refs", "redaction_status", "operation_receipts",
 })
+OPERATION_RECEIPT_FIELDS = frozenset({"key_fingerprint", "operation_fingerprint"})
 FORBIDDEN_FIELD_PARTS = (
     "prompt", "response", "transcript", "payload", "credential", "secret", "token",
     "environment",
@@ -72,6 +73,7 @@ def create_run(path: Path, *, run_id: str, bead_id: str, source_commit: str,
         "source_commit": source_commit,
         "evidence_refs": [],
         "redaction_status": "metadata-only",
+        "operation_receipts": [],
     }
     if path.exists():
         current = load_state(path)
@@ -84,8 +86,9 @@ def create_run(path: Path, *, run_id: str, bead_id: str, source_commit: str,
 
 def start_run(path: Path, *, operation_key: str | None = None) -> dict[str, Any]:
     """Move a planned run to running; repeated starts are no-ops."""
-    del operation_key
     state = load_state(path)
+    if _record_operation(state, operation_key, "start", {}):
+        return state
     if state["phase"] == "running":
         return state
     if state["phase"] != "planned":
@@ -100,10 +103,14 @@ def start_run(path: Path, *, operation_key: str | None = None) -> dict[str, Any]
 def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] = (),
                          operation_key: str | None = None) -> dict[str, Any]:
     """Record the next verified step once; duplicate operations are no-ops."""
-    del operation_key
-    if step < 1:
+    if isinstance(step, bool) or step < 1:
         raise StateError("step must be positive")
     state = load_state(path)
+    refs = list(evidence_refs)
+    if not all(isinstance(ref, str) for ref in refs):
+        raise MalformedStateError("evidence_refs must contain strings")
+    if _record_operation(state, operation_key, "verify", {"step": step, "evidence_refs": refs}):
+        return state
     previous = state["last_verified_step"]
     if previous == step:
         return state
@@ -113,9 +120,6 @@ def record_verified_step(path: Path, step: int, *, evidence_refs: Iterable[str] 
         raise StateConflictError("first verified step must be 1")
     if state["phase"] not in {"running", "verifying"}:
         raise IllegalTransitionError(f"cannot verify from {state['phase']}")
-    refs = list(evidence_refs)
-    if not all(isinstance(ref, str) for ref in refs):
-        raise MalformedStateError("evidence_refs must contain strings")
     if state["phase"] == "running":
         _transition(state, "verifying")
     state.update(last_verified_step=step, evidence_refs=refs, next_action=f"verify step {step + 1}")
@@ -136,18 +140,21 @@ def resume_run(path: Path, *, expected_source_commit: str | None = None) -> dict
     return state
 
 
-def finish_run(path: Path, outcome: str, *, evidence_refs: Iterable[str] = ()) -> dict[str, Any]:
+def finish_run(path: Path, outcome: str, *, evidence_refs: Iterable[str] = (),
+               operation_key: str | None = None) -> dict[str, Any]:
     """Finish only after verification with an allowed outcome."""
     if outcome not in OUTCOMES:
         raise IllegalTransitionError(f"unknown outcome: {outcome}")
     state = load_state(path)
+    refs = list(evidence_refs)
+    if not all(isinstance(ref, str) for ref in refs):
+        raise MalformedStateError("evidence_refs must contain strings")
+    if _record_operation(state, operation_key, "finish", {"outcome": outcome, "evidence_refs": refs}):
+        return state
     if state["phase"] == outcome:
         return state
     if state["phase"] != "verifying":
         raise IllegalTransitionError(f"cannot finish from {state['phase']}")
-    refs = list(evidence_refs)
-    if not all(isinstance(ref, str) for ref in refs):
-        raise MalformedStateError("evidence_refs must contain strings")
     _transition(state, outcome)
     state.update(evidence_refs=refs, next_action=None)
     write_state(path, state)
@@ -187,14 +194,27 @@ def _validate_state(data: Any) -> None:
     _reject_forbidden_fields(data)
     if data["phase"] not in (*PHASES, *OUTCOMES) or data["status"] != data["phase"]:
         raise MalformedStateError("invalid phase or status")
-    if not isinstance(data["last_verified_step"], (int, type(None))):
+    if data["last_verified_step"] is not None and not _is_nonnegative_int(data["last_verified_step"]):
         raise MalformedStateError("last_verified_step must be an integer or null")
-    if not isinstance(data["attempt"], int) or not isinstance(data["retry_budget"], int):
-        raise MalformedStateError("attempt and retry_budget must be integers")
+    if not _is_nonnegative_int(data["attempt"]) or not _is_nonnegative_int(data["retry_budget"]):
+        raise MalformedStateError("attempt and retry_budget must be non-negative integers")
+    if data["attempt"] > data["retry_budget"]:
+        raise MalformedStateError("attempt exceeds retry_budget")
     if not isinstance(data["evidence_refs"], list) or not all(isinstance(ref, str) for ref in data["evidence_refs"]):
         raise MalformedStateError("evidence_refs must be a list of strings")
     if data["redaction_status"] != "metadata-only":
         raise MalformedStateError("redaction_status must be metadata-only")
+    if not isinstance(data["operation_receipts"], list):
+        raise MalformedStateError("operation_receipts must be a list")
+    for receipt in data["operation_receipts"]:
+        if not isinstance(receipt, dict) or set(receipt) != OPERATION_RECEIPT_FIELDS:
+            raise MalformedStateError("invalid operation receipt")
+        if not all(isinstance(value, str) and value for value in receipt.values()):
+            raise MalformedStateError("invalid operation receipt fingerprint")
+    if data["phase"] in {"planned", "ready", "running"} and data["last_verified_step"] is not None:
+        raise MalformedStateError("unverified phase has a verified step")
+    if data["phase"] in {"verifying", *OUTCOMES} and not data["last_verified_step"]:
+        raise MalformedStateError("verified phase needs a verified step")
 
 
 def _transition(state: dict[str, Any], target: str) -> None:
@@ -204,6 +224,36 @@ def _transition(state: dict[str, Any], target: str) -> None:
         raise IllegalTransitionError(f"illegal transition: {current} -> {target}")
     state["phase"] = target
     state["status"] = target
+
+
+def _record_operation(state: dict[str, Any], operation_key: str | None, kind: str,
+                      details: Mapping[str, Any]) -> bool:
+    """Record opaque key fingerprints; return true for an identical retry."""
+    if operation_key is None:
+        return False
+    if not isinstance(operation_key, str) or not operation_key:
+        raise StateError("operation_key must be a non-empty opaque string")
+    key_fingerprint = _fingerprint({"operation_key": operation_key})
+    operation_fingerprint = _fingerprint({"kind": kind, "details": details})
+    for receipt in state["operation_receipts"]:
+        if receipt["key_fingerprint"] != key_fingerprint:
+            continue
+        if receipt["operation_fingerprint"] != operation_fingerprint:
+            raise StateConflictError("operation_key was reused for a different operation")
+        return True
+    state["operation_receipts"].append({
+        "key_fingerprint": key_fingerprint,
+        "operation_fingerprint": operation_fingerprint,
+    })
+    return False
+
+
+def _fingerprint(value: Any) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def _is_nonnegative_int(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
 
 
 def _reject_forbidden_fields(value: Any) -> None:
