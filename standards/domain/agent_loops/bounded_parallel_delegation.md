@@ -85,6 +85,22 @@ The probe may check command presence and a bounded `--version`, `--help`, or
 model-list operation. It must not send a task prompt. Record only the status,
 exit code, elapsed time, and a content-free reason code.
 
+### Metadata-only provider canary
+
+The canonical canary is `scripts/provider_canary.py`. Its
+`run_canary(executable, argv, provider, runtime, model, timeout_seconds, run_id,
+evidence_ref)` result contains exactly `provider`, `runtime`, `model`, `status`,
+`canary`, `exit_code`, `elapsed_ms`, `reason`, and `redaction_status`.
+
+It resolves the executable with `shutil.which`, invokes with `shell=False`,
+discards stdout and stderr, measures with a monotonic clock, and enforces a
+hard timeout. Missing executables and timeouts are `status=NOT RUN` and
+`canary=NOT RUN`; nonzero exit is `FAIL`; zero exit is `PASS`. The canary never
+stores or emits argv, prompts, responses, transcripts, payloads, credentials,
+environment, stdout, or stderr. Its CLI accepts only `--version`/`-v` or
+`--help`/`-h`, and writes metadata JSON to stdout unless an explicit external
+`--output` is supplied.
+
 ## Dispatch and receipts
 
 1. Validate the document and deduplication/scope invariants.
