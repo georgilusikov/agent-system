@@ -112,6 +112,7 @@ def classify_family(words: list[dict[str, Any]], config: dict[str, Any] | None =
         raise ValueError(f"invalid family: {explicit}; expected auto|A|B|C")
 
     metrics = _raw_gap_metrics(words)
+    # Gold-derived conservative gate: B needs repeated air, not one isolated pause.
     is_b = metrics["gaps_over_450"] >= 2 or metrics["gaps_over_300"] >= 4
     family = "B" if is_b else "A"
     metrics.update({
@@ -336,6 +337,7 @@ def render_cleanup(
     if not kept:
         raise ValueError("No segments to keep in cleanup plan")
 
+    # Identity Family-A/C plan should not pay a concat/re-encode penalty.
     if not plan.get("pause_cleanup_enabled", False) and len(kept) == 1:
         cmd = [
             "ffmpeg", "-y", "-i", str(input_video),
