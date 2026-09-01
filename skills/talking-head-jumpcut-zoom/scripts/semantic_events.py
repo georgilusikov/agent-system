@@ -123,6 +123,7 @@ def _performance_adjusted_importance(mark: dict[str, Any], semantic_importance: 
 
     bonus = 0.0
     if semantic_importance >= PERFORMANCE_SEMANTIC_FLOOR:
+        # Only the upper half of performance intensity matters. Max bonus +0.08.
         bonus = min(PERFORMANCE_BONUS_MAX, max(0.0, performance - 0.50) * 0.16)
     effective = min(1.0, semantic_importance + bonus)
     return effective, performance, bonus, evidence
