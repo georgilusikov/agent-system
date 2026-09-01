@@ -85,6 +85,7 @@ def evaluate_frame_quality(
     """
     reasons: list[str] = []
 
+    # 1. EAR Check (Blink / Half-closed eyes)
     left_ear = observation.get("left_ear")
     right_ear = observation.get("right_ear")
     ear = observation.get("ear")
@@ -96,20 +97,24 @@ def evaluate_frame_quality(
     elif observation.get("blink", False) or observation.get("eyes_closed", False):
         reasons.append("blink_flag")
 
+    # 2. MAR Check (Mouth Open / Mid-speech distortion)
     mar = observation.get("mar")
     if mar is not None and float(mar) > mar_threshold:
         reasons.append("mouth_open_mar")
 
+    # 3. Laplacian Blur Check
     laplacian_var = observation.get("laplacian_var")
     if laplacian_var is not None and float(laplacian_var) < blur_threshold:
         reasons.append("motion_blur")
     elif observation.get("blur", False):
         reasons.append("blur_flag")
 
+    # 4. Farneback Optical Flow Motion Velocity
     flow_speed = observation.get("flow_speed_px") or observation.get("motion_speed_px")
     if flow_speed is not None and float(flow_speed) > flow_threshold:
         reasons.append("high_motion_velocity")
 
+    # 5. Pose & Gesture hard blocks
     if observation.get("pose_unsafe", False) or observation.get("strong_head_turn", False):
         reasons.append("pose_unsafe")
     if observation.get("hard_block", False) or observation.get("gesture_hard_block", False):
