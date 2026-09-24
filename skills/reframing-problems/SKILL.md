@@ -23,7 +23,7 @@ Do **not** use for simple factual lookup, exact calculation, direct transformati
 
 ## Boundary: tactical framing, not strategy
 
-This skill chooses **which task to solve now**. If a broader strategic intent or `intent.md` exists, use it as a constraint, not as a document to rewrite. Do not invent a new life/business direction, change the success criterion, or silently overrule an explicit user choice. If a materially better frame changes the user's stated goal, present the trade-off and ask at most one targeted question.
+This skill chooses **which task to solve now**. If a broader strategic intent or `intent.md` exists, use it as a constraint, not as a document to rewrite. Do not invent a new life/business direction, change the success criterion, or silently overrule an explicit user choice. Treat explicit metrics, deadlines, named deliverables, and mandatory methods as binding unless the user says they are flexible. A conjectured higher-level outcome (e.g. faster publishing) is not permission to substitute a different metric (e.g. renderer throughput). If a materially better frame changes the user's stated goal, present the trade-off and ask at most one targeted question.
 
 ## Creative-Situation Scan (selective)
 
@@ -61,7 +61,7 @@ Before solving, perform this once:
 
 For each viable frame, articulate the **task to solve** in one sentence and check: Is it connected to the user's outcome? Does it attack an observed obstruction rather than only a symptom? Does it preserve hard constraints and existing strategic intent? Can the task be tested or acted on now?
 
-Default to the original task if a new frame is only interesting, not materially better. If a key causal assumption is unverified and would change the task choice, propose the cheapest discriminating test; do not claim to have found the root cause. Separate problem selection from the subsequent solution work.
+Default to the original task if a new frame is only interesting, not materially better. If the user gave a measurable outcome or explicitly fixed the task, execute that task first; present a different objective only as an optional alternative, not as the replacement answer. Do not ask the user to reconfirm an already stated goal. If a key causal assumption is unverified and would change the task choice, propose the cheapest discriminating test; do not claim to have found the root cause. Separate problem selection from the subsequent solution work.
 
 ## Choose the Frame
 
