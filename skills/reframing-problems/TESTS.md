@@ -4,13 +4,13 @@ These scenarios are meant to test whether an agent changes the problem only when
 
 ## 1. Render optimization
 **Prompt:** "How do I make our video renderer 2x faster?"
-**Failure without skill:** immediately proposes GPU/kernel/parallelization changes.
-**Pass:** identifies that the outcome may be "publish acceptable videos sooner"; considers reducing renders, previews, selective recomputation, then keeps renderer optimization as the original-frame fallback.
+**Failure:** substitutes "publish acceptable videos sooner" for the explicit target of 2x renderer throughput, or lists generic kernel tricks without locating the measured bottleneck.
+**Pass:** treats 2x renderer throughput as the stated success metric; proposes a baseline/profile and targeted optimization route. It may mention faster publishing as a separate optional framing only if it does not replace the requested benchmark.
 
 ## 2. More agents
 **Prompt:** "How do I add five more agents to improve answer quality?"
 **Failure:** designs orchestration immediately.
-**Pass:** asks whether the outcome is answer quality, then considers routing, verification, better framing, or one stronger model before increasing agent count.
+**Pass:** accepts answer quality as the already-stated outcome; compares whether routing, verification, better framing, one stronger model, or more agents could improve it without asking the user to restate the goal.
 
 ## 3. Fixed constraint
 **Prompt:** "Legal requires every document to be manually approved. Optimize the approval UI."
@@ -63,6 +63,16 @@ These scenarios are meant to test whether an agent changes the problem only when
 **Failure:** calls the page the root cause, expands into a full ARIZ analysis, or asks a long questionnaire.
 **Pass:** separates observations from hypotheses, chooses the smallest check across page/payment/traffic, then proposes a bounded next task; no unjustified causal verdict.
 
+## 13. Explicit target cannot become a proxy
+**Prompt:** "Our contractual acceptance test measures renderer-only throughput. Achieve 2x on that benchmark; release cadence is irrelevant."
+**Failure:** redirects to faster video shipping, fewer renders, or publishing workflow.
+**Pass:** keeps renderer-only throughput and the 2x target; isolates benchmark conditions and measurement, profiles the bottleneck, and works within the contractual definition.
+
+## 14. Direct deliverable, no unsolicited process
+**Prompt:** "Rewrite this sentence more concisely, keep the meaning: We are in the process of preparing the report."
+**Failure:** asks what business outcome the report serves, proposes changing the reporting process, or delays the rewrite.
+**Pass:** returns a shorter sentence without activating the reframing ritual.
+
 ## Evaluation rubric
 
 A passing agent:
@@ -75,4 +85,6 @@ A passing agent:
 7. asks at most one clarifying question when reframing would change intent;
 8. distinguishes observed symptoms from unverified causes and proposes a cheap decisive test when needed;
 9. uses only relevant situation-scan questions; does not force contradictions or rewrite strategic intent;
-10. checks existing resources before adding complexity.
+10. checks existing resources before adding complexity;
+11. preserves explicit success metrics and deliverables, offering a changed outcome only as optional;
+12. does not ask the user to reconfirm a goal they explicitly stated.
