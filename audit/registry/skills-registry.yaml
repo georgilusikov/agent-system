@@ -1,0 +1,1667 @@
+- name: agent-orchestrator-standard
+  path: skills/agent-orchestrator-standard
+  description: 'Стандарт оркестрации работы Codex как control plane: сбор состояния
+    проекта, нарезка работ на worktree-линейки, запуск волн воркеров, верификация
+    и интеграция результатов с компактными чекпоинтами.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: 'Граница: не выбор модели/цены (/cost-aware-delegation), не бриф одному исполнителю
+    (/delegate), не автономное закрытие цели (/goal-king).'
+  verdict: change
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-goalking-vs-aos; субшкалы раздельно): исполнено
+    3/3 ячеек — полный паритет с baseline (T1/T2 FAIL у всех; T3 PASS у всех, cycle
+    0.4 и mechanics 0.2222 равны baseline). Добавленная ценность прогонами не показана.'
+  verdict_model: muse-spark-subagent
+- name: algorithmic-art
+  path: skills/algorithmic-art
+  description: 'Двухшаговая генерация визуального искусства на p5.js: сначала манифест
+    алгоритмической философии (4–6 абзацев), затем её выражение в коде с сидированной
+    случайностью (flow fields, particle systems).'
+  type: creative-ideation
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Креативная методика через философию-манифест; secondary-type: domain-design
+    (визуальный артефакт на выходе). В frontmatter заявлен LICENSE.txt, но файла нет
+    в директории.'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-algorithmic-art; модель muse-spark-subagent): смешанный
+    сигнал (t2 чинен, t1 сломан); нужен ретест. verify-blind PASS.'
+- name: anti-bias
+  path: skills/anti-bias
+  description: 'Протокол борьбы с когнитивными искажениями при выборе между альтернативами:
+    эпистемологические теги (O/I/S/A), чеклист искажений (confirmation, survivorship,
+    anchoring...), dual-check внутренней и внешней валидации вывода.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: 'NOT для ранжирования, дебага и верификации артефактов — только риск искажённого
+    вывода; secondary-type: research-analysis.'
+  verdict: merged
+  verdict_date: 2026-10-01
+  verdict_into: check
+  verdict_basis: 'Раунд 2 (round2-antibias-vs-check): 12 прогонов, программный оракул
+    8/12 PASS (noskill 4/4, v-antibias 3/4, v-check 1/4); все FAIL — налог формата,
+    не рассуждения; положительной дельты к baseline нет. Содержимое влито в check/SKILL.md
+    (§3.6, §0.5); SKILL.md заменён указателем. Слияние по слову Георгия.'
+  verdict_model: gemini-3.6-flash-medium
+- name: attentional-blindness-analyzer
+  path: skills/attentional-blindness-analyzer
+  description: 'Пятишаговый протокол анализа ситуаций и интерфейсов на слепоту невнимания:
+    точки фокусировки → невидимые элементы → оценка рисков → стратегии минимизации
+    → проверка на манипулятивные техники.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Когнитивная диагностика рисков пропуска сигналов; secondary-type: domain-design
+    (применение к UX). Есть REFERENCE.md с методологией.'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-attentional-blindness-analyzer; модель
+    muse-spark-subagent): пол 0/6 — задачи выше потолка модели. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: audit-fanout
+  path: skills/audit-fanout
+  description: 'Мульти-агентный read-only аудит дефектов: fanout N независимых аудиторов
+    по непересекающимся осям (silent-fallbacks, inert-wiring, contract-drift...) с
+    якорями реальности и синтезом в план фиксов.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'NOT для одного артефакта (/bouncer) и одного брифа (/delegate); secondary-type:
+    verification. Имеет references/ с шаблонами промтов по осям.'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-audit-fanout; модель muse-spark-subagent):
+    паритет — 1/3 по оракулу, 2/3 по сути (ручная сверка транскриптов: «разный паттерн»
+    оказался узостью маркеров — обе руки нашли те же ловушки). Положительной дельты
+    нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: blueprinter
+  path: skills/blueprinter
+  description: 'Генерация технических диаграмм в HTML/CSS в стиле Flat Engineering
+    Blueprint: плоская монохромная визуализация архитектуры, систем, flowchart и спеки
+    с высоким data-ink ratio.'
+  type: data-visualization
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Строгий визуальный гайд (без теней/градиентов, 1px границы, моноширинные
+    шрифты); чисто генерация диаграмм.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-blueprinter; модель muse-spark-subagent): слабый
+    −1 (t2 сломан, chartjunk пропущен); n=1 — нужен ретест. verify-blind PASS.'
+- name: bottleneck-identifier
+  path: skills/bottleneck-identifier
+  description: 'Гайд по выявлению узких мест в performance testing (load, stress,
+    benchmarking): пошаговые инструкции, best practices и генерация production-ready
+    конфигураций.'
+  type: research-analysis
+  origin: third-party
+  origin_detail: Jeremy Longshore (jeremy@intentsolutions.io)
+  flags: []
+  verdict: archive
+  verdict_date: 2026-10-01
+  verdict_basis: 'Эвал волны 1 (wave1-bottleneck-identifier): 6 прогонов, программный
+    оракул 6/6 PASS у всех вариантов, паритет полный — нулевой эффект доказан формально;
+    вариант со скиллом только дороже по токенам. Решение об архивации — слово Георгия,
+    2026-10-01. Репозиторий не тронут (только вердикт в реестре).'
+  notes: Шаблонный, крайне обобщённый текст без реальной механики ('Execute bottleneck
+    identifier operations'); качество низкое, фактического содержимого мало.
+  verdict_model: gemini-3.6-flash-medium
+- name: bouncer
+  path: skills/bouncer
+  description: 'Независимый внешний аудит готового артефакта чужой моделью (Gemini/Codex)
+    через скрипты: режимы quick/deep/plan-review/consensus, параллельный запуск нескольких
+    бэкендов.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  - has-scripts
+  notes: Только второй взгляд извне, не самопроверка (/check) и не ревью диффа (/code-review);
+    поглотил бывший /dual-review.
+  verdict: change
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-bouncer): T2 — регресс (noskill PASS, v-bouncer
+    FAIL), T1 — общий FAIL, T3 — паритет. Положительной дельты нет; скилл wired (3
+    вызывающих документа) — переработать протокол аудита.'
+  verdict_model: muse-spark-subagent
+- name: canvas-design
+  path: skills/canvas-design
+  description: 'Создание визуального арта (.png/.pdf) через дизайн-философию: сначала
+    манифест эстетического движения (форма, цвет, композиция, минимум текста), затем
+    его визуальное выражение.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Парный к algorithmic-art (та же структура ''философия → выражение'', но
+    статичный визуал вместо кода); secondary-type: creative-ideation. В frontmatter
+    заявлен LICENSE.txt, файла нет.'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-canvas-design; модель muse-spark-subagent): потолок
+    PPP/PPP даже на усиленных задачах — недискриминативны для модели. verify-blind
+    PASS.'
+- name: caveman
+  path: skills/caveman
+  description: 'Режим ультра-кратких, токен-эффективных ответов: дроп артиклей/воды/плезантри,
+    фрагменты, стрелки причинности, вся техническая суть сохраняется; активен все
+    ответы до отмены.'
+  type: writing-content
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Модификатор стиля всех ответов, а не задача; не для сжатия файлов (caveman:compress)
+    и не справка (caveman:caveman-help).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-caveman; модель muse-spark-subagent): смешанный сигнал
+    +1/−1 (t1,t3 чинены; t2 сломан); нужен ретест. verify-blind PASS.'
+- name: check
+  path: skills/check
+  description: 'Верификация собственного готового результата против предварительно
+    выписанного Expected State: тест-кейсы до проверки, личное открытие каждого артефакта,
+    fraud-table для чужой работы, content-depth gate.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Самопроверка своей работы (начать с /anti-bias); NOT для внешнего аудита
+    (/bouncer), опровержения release-claim (/falsify), ревью диффа (/code-review).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: claude-skills
+  path: skills/claude-skills
+  description: 'Запуск и адаптация существующих Claude Code скиллов (.claude/skills)
+    изнутри Codex: резолвер scripts/resolve_claude_skill.py, трансляция Claude-специфичных
+    инструкций под Codex-ограничения.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  - has-scripts
+  notes: Мост между скилл-системами, не bulk-загрузка; NOT для поиска новых скиллов
+    (/find-skills) и написания новых (/write-a-skill).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-claude-skills; модель muse-spark-subagent): пол FFF/FFF
+    — строгая нейтрализация Claude-специфики выше возможностей модели. verify-blind
+    PASS.'
+- name: code-review
+  path: skills/code-review
+  description: Двухоосевое ревью диффа (Standards — соответствие стандартам репо +
+    smell baseline Фаулера, Spec — соответствие issue/PRD) двумя параллельными субагентами
+    с агрегацией результатов.
+  type: code-review-quality
+  origin: third-party
+  origin_detail: matt-pocock (упоминание /setup-matt-pocock-skills для docs/agents/issue-tracker.md)
+  flags:
+  - has-subagents
+  notes: Ревью изменений против фиксированной точки (коммит/ветка/тег); NOT для самопроверки
+    (/check) и внешнего аудита (/bouncer).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-code-review; модель muse-spark-subagent): потолок
+    PPP/PPP — задачи недискриминативны. verify-blind PASS.'
+- name: codebase-design
+  path: skills/codebase-design
+  description: 'Общий словарь и принципы проектирования глубоких модулей: глоссарий
+    (module/interface/implementation/seam/adapter/depth/leverage/locality), правила
+    уменьшения интерфейсов.'
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Вокабуляр для проектирования интерфейсов, не сканирование всей кодовой базы;
+    есть DEEPENING.md и DESIGN-IT-TWICE.md.
+  verdict: keep
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-codebase-design; модель muse-spark-subagent):
+    программный оракул v 2/3 vs noskill 0/3 — положительная дельта +2 (t1/t2). verify-blind
+    PASS.'
+  verdict_model: muse-spark-subagent
+- name: codex-advisor
+  path: skills/codex-advisor
+  description: 'Цикл делегирования: Antigravity — Manager+Worker, Codex — стратегический
+    Advisor (только план и ревью, не исполняет). Фазы: PLAN (Codex возвращает задачи
+    T1..T5 с GOAL/EVIDENCE) → EXECUTE субагентами → VERIFY.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-scripts
+  notes: Паттерн внешнего ревью планирования/исполнения; verify.sh в scripts/.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Отложен (wave-3-plan §1): требует живого Codex-моста (codex exec)
+    — на стенде субагентов неизмерим; эвал — в волне с инструментальным стендом. Модель:
+    n/a (эвал не проводился).'
+  verdict_model: n/a (no eval)
+- name: corridor-tester
+  path: skills/corridor-tester
+  description: 'Коридорное UX-тестирование: показ статичного макета 7–12 нецелевым
+    людям, 3 вопроса (что видишь/понимаешь/будешь делать), фиксация фактов и поиск
+    паттернов; AI-симуляция респондентов при необходимости.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Быстрый тест понятности дизайна/текстов/навигации; secondary-type: domain-design
+    (UX). Требует визуальный скриншот, не текстовый скрапинг.'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-corridor-tester; модель muse-spark-subagent):
+    слабый +1; n=3 — недостаточно для keep, нужен ретест. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: cost-aware-delegation
+  path: skills/cost-aware-delegation
+  description: 'Предварительная оценка стоимости делегирования перед существенной
+    работой: сначала выбор транспорта (built-in subagent, cmd, Codex, Cursor, AGY...),
+    затем тира модели (T0/T1/T2); делегировать только если экономия превышает overhead.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Экономика выбора канала и тира, не бриф исполнителю (/delegate) и не механика
+    волн (/agent-orchestrator-standard).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-cost-aware-delegation; модель muse-spark-subagent):
+    пол 0/6 — калибровка задач. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: critical-chain-design
+  path: skills/critical-chain-design
+  description: 'Планирование задачи с >2 шагами от конца через одно ограничение (Голдратт,
+    Theory of Constraints): outcome/output, один constraint, цепочка 3–5 наблюдаемых
+    звеньев вместо inventory из подзадач.'
+  type: planning-design
+  origin: third-party
+  origin_detail: 'Красинский / heroes-harness-playbook (прямо указано: ''Адаптация
+    скилла Красинского'')'
+  flags: []
+  notes: NOT для формулировки outcome (/outcome-designer) и ранжирования (/prioritize);
+    формат карточки в references/09-critical-chain-card.md.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-critical-chain-design; модель muse-spark-subagent):
+    паритет по сути (oracle-FAIL — узость маркеров); побед нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: debug
+  path: skills/debug
+  description: 'Root-cause анализ уже случившегося симптома: развилка linear (5 Whys)
+    vs hypotheses (Bayes-таблица при ≥3 конкурирующих причинах), построение детерминированной
+    feedback-петли как ключевой навык, anti-freeze правила.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Сначала первопричина, потом фикс; слияние бывших /why + /triage. NOT для
+    верификации (/check), поиска узкого места без симптома (/leverage), внешнего аудита
+    (/bouncer).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: delegate
+  path: skills/delegate
+  description: 'Брифинг ОДНОГО внешнего исполнителя (Codex, subagent, NLM) с приёмкой
+    результата: три гейта до dispatch (outcome-формулировка, канон, reference output,
+    ограничения исполнителя) и один после.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Не для волн/мониторинга (/agent-orchestrator-standard), выбора модели (/cost-aware-delegation),
+    долгой автономии (/goal-king); задача должна иметь проверяемый артефакт.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-delegate; модель muse-spark-subagent):
+    слабый +1; n=3 — недостаточно для keep, нужен ретест. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: design-communication-analyzer
+  path: skills/design-communication-analyzer
+  description: 'Анализирует дизайн как коммуникационную систему: извлекает и проверяет
+    сообщения, которые дизайн доносит до пользователя (авторское намерение → синтаксис
+    → когнитивная нагрузка → скрытые задачи). Триггеры: проверка лендинга, макета,
+    интерфейса.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Русскоязычный; есть REFERENCE.md; secondary-type: research-analysis'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-design-communication-analyzer; модель muse-spark-subagent):
+    слабый −1 (t2); нужен ретест. verify-blind PASS.'
+- name: dispatching-parallel-agents
+  path: skills/dispatching-parallel-agents
+  description: 'Внутренний workflow параллельного делегирования: разбивает независимые
+    проблемы (разные тесты, подсистемы, баги) по одному субагенту на домен с изолированным
+    контекстом. Загружается только owning router, не для автороутинга.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'user-invocable: false, disable-model-invocation: true; ''router:''-триггеры
+    указывают на роутерную систему, внешний автор не найден'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-dispatching-parallel-agents; модель muse-spark-subagent):
+    паритет PPF/PPF на дискриминативных задачах — добавленной ценности нет. verify-blind
+    PASS.'
+- name: doc-coauthoring
+  path: skills/doc-coauthoring
+  description: 'Структурированный workflow совместного написания документов: сбор
+    контекста → итеративное уточнение структуры → проверка на ''свежем'' читателе
+    (reader testing).'
+  type: writing-content
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Англоязычный гайд; маркеров внешнего авторства в файле не найдено
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-doc-coauthoring; модель muse-spark-subagent):
+    паритет 4/6 (t2 не решена никем); побед нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: domain-modeling
+  path: skills/domain-modeling
+  description: 'Построение и заточка доменной модели проекта: ubiquitous language,
+    глоссарий, ADR. Активное оспаривание терминов и фиксация решений, а не пассивное
+    чтение CONTEXT.md.'
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Есть agents/, ADR-FORMAT.md, CONTEXT-FORMAT.md; явно исключает /codebase-design,
+    /to-spec, /improve-codebase-architecture
+  verdict: keep
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-domain-modeling; модель muse-spark-subagent):
+    программный оракул v 3/3 vs noskill 1/3 — положительная дельта +2 (t2/t3). verify-blind
+    PASS.'
+  verdict_model: muse-spark-subagent
+- name: executing-plans
+  path: skills/executing-plans
+  description: 'Выполнение готового письменного плана реализации в отдельной сессии:
+    критический ревью плана, пошаговое исполнение с верификациями, обязательная передача
+    в finishing-a-development-branch по завершении.'
+  type: implementation
+  origin: third-party
+  origin_detail: obra/superpowers — упоминания 'Superpowers', ссылки superpowers:subagent-driven-development,
+    superpowers:writing-plans
+  flags: []
+  notes: 'Часть Superpowers-фреймворка; secondary-type: agent-orchestration'
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-implement-vs-executing-plans) + перестейдж
+    2026-10-02 (модель muse-spark-subagent, переформулированные промпты — риск сравнимости):
+    3/3 PASS, полный паритет с implement и baseline. Добавленной ценности не показано;
+    слияние в implement — предложение Георгию (в caller-map вызывающих нет).'
+  verdict_model: muse-spark-subagent
+- name: falsify
+  path: skills/falsify
+  description: 'Оркестратор опровержения high-stakes readiness claim: объединяет /check
+    и /debug (оба режима) в единый пайплайн, заканчивающийся вердиктом.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  - has-scripts
+  notes: Есть agents/, scripts/, examples/, tests/, skill.yaml; не для обычной верификации
+    (/check) и не для RCA одного падения (/debug)
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-falsify) + перестейдж 2026-10-02 (модель muse-spark-subagent,
+    переформулированный промпт — риск сравнимости): паритет на T1/T2; T3 — FAIL у
+    обоих (v-falsify — раунд 1, baseline — перестейдж, verdict_partial=false). Положительной
+    дельты нет; скилл wired (13 ссылок) — переработать.'
+  verdict_model: muse-spark-subagent
+- name: feynman
+  path: skills/feynman
+  description: 'Режим объяснения технического простым бытовым языком (''умный подросток'':
+    упрощай язык, не факты); персистит в каждом ответе до отключения.'
+  type: writing-content
+  origin: third-party
+  origin_detail: адаптация идей из cloudflare/cloudflare-docs@eli5 и alchaincyf/feynman-skill
+    (каркас самописный, на русском)
+  flags: []
+  notes: Контраст с /caveman (краткость) и /teach (многосессионный курс)
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-feynman; модель muse-spark-subagent): почти
+    пол (1/6); слабый сигнал +1 неразрешим при n=3 — нужен ретест. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: find-skills
+  path: skills/find-skills
+  description: 'Поиск и установка скиллов из открытой экосистемы (npx skills): подбор
+    по задаче, оценка репутации источника, установка.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Упоминает внешние каталоги (anthropics/skills, vercel-labs) как предметную
+    область — источники установки, не авторство скилла
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: finishing-a-development-branch
+  path: skills/finishing-a-development-branch
+  description: 'Завершение ветки разработки: проверка тестов → определение окружения
+    → структурированные опции (merge/PR/cleanup) → выполнение выбора и очистка.'
+  type: meta-tooling
+  origin: third-party
+  origin_detail: obra/superpowers — 'Superpowers created this worktree — we own cleanup',
+    стиль 'I'm using the ... skill'
+  flags: []
+  notes: 'Git-workflow механика; secondary-type: implementation'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-finishing-a-development-branch; модель muse-spark-subagent):
+    слабый −1 (t2); нужен ретест. verify-blind PASS.'
+- name: frontend-design
+  path: skills/frontend-design
+  description: Создание выразительных production-grade frontend-интерфейсов с сильным
+    арт-дирекшном; осознанный уход от 'AI slop' эстетики.
+  type: domain-design
+  origin: third-party
+  origin_detail: 'anthropic (anthropics/skills) — frontmatter-маркер ''license: Complete
+    terms in LICENSE.txt'', узнаваемое описание'
+  flags: []
+  notes: SKILL.md всего 42 строки — тонкое тело, но это фирменная лаконичность оригинала,
+    не thin
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-frontend-design; модель muse-spark-subagent):
+    потолок 6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: frontend-ui-dark-ts
+  path: skills/frontend-ui-dark-ts
+  description: 'Готовая тёмная React UI-система (Tailwind CSS + Framer Motion) для
+    дашбордов и админок: стек, quick start, структура проекта, glassmorphism.'
+  type: domain-design
+  origin: third-party
+  origin_detail: 'community-реестр — frontmatter: source: community, risk: unknown,
+    date_added 2026-02-27'
+  flags:
+  - possible-dupe
+  notes: 'possible-dupe-of: frontend-design — узкая тёмная дизайн-система против общего
+    арт-дирекшна; пересечение по триггерам вероятно'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Инспекция (волна 3, без эвала): boilerplate UI-кит (React+Tailwind+Framer
+    Motion, дизайн-токены, glassmorphism) — не агентный скилл; вердикт «в templates»
+    принят инспекцией per wave-3-plan §1, эвал избыточен. Модель: n/a (эвал не проводился).'
+  verdict_model: n/a (no eval)
+- name: get-linked-context
+  path: skills/get-linked-context
+  description: Чтение контекста связанных нод nodeterm canvas (транскрипт, саммари,
+    терминал, стикеры) через локальный CLI-шим; pull-модель, ничего не пушится автоматически.
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Хардкод-путь /Users/georgijlusikov/... — привязка к nodeterm; осмыслен только
+    внутри linked-сессии
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-get-linked-context; модель muse-spark-subagent):
+    слабый −1 (t3); нужен ретест. verify-blind PASS.'
+- name: go
+  path: skills/go
+  description: 'Маршрутизатор workflow: определяет intent пользователя (фича, баг,
+    рефактор, QA, TDD, эпик) и направляет к нужному скиллу или workflow-файлу. Роутер,
+    не исполнитель.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Только маршрутизация; secondary-type: agent-orchestration; есть поддиректория
+    workflows/'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-go; модель muse-spark-subagent): слабый +1 (t1 чинен);
+    n=1 на ячейку — шум, нужен ретест. verify-blind PASS.'
+- name: goal-king
+  path: skills/goal-king
+  description: 'Автономный цикл волн до закрытия roadmap/цели: goal-plan → волны delegate
+    → verify → merge → следующая волна; один вызов работает до completion criteria
+    без пауз ''продолжить?'' между волнами.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Дирижёр поверх goal-plan/delegate, ничего из них не дублирует; disable-model-invocation:
+    true; shared canon для Claude Code и Codex'
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-goalking-vs-aos) + перестейдж 2026-10-02 (модель
+    muse-spark-subagent, переформулированный промпт — риск сравнимости; субшкалы cycle/mechanics
+    раздельно, без усреднения): дискриминативная T2 измерена — v-goalking FAIL (all_fields_all_handoffs=false),
+    паритет со всеми вариантами; T1 — общий FAIL; T3 — паритет по cycle (0.4), микро-перевес
+    mechanics (0.3333 против 0.2222) недостаточен. Положительной дельты нет.'
+  verdict_model: muse-spark-subagent
+- name: goal-plan
+  path: skills/goal-plan
+  description: Превращение цели в компактный проверяемый Goal Contract с гейтами (цель,
+    состояние, ограничения, критерии завершения) перед мульти-волновой или делегированной
+    работой.
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Есть agents/ и references/; shared canon для Claude Code и Codex; не для
+    TDD-плана (/writing-plans) и роадмапа (/roadmap-planning)
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-goal-plan; модель muse-spark-subagent):
+    пол 0/6 — калибровка задач, не измерение скилла. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: graphify
+  path: skills/graphify
+  description: 'Превращает папку файлов в навигационный knowledge graph (god nodes,
+    community detection): интерактивный HTML, GraphRAG-JSON и GRAPH_REPORT.md; вопросы
+    про структуру и связи, не про содержимое одного файла.'
+  type: data-visualization
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Три выхода: HTML, JSON, отчёт; secondary-type: research-analysis'
+  verdict: replace
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-graphify-vs-graphifypypi): v-graphify-skill
+    0/3 (провалы провенанса анализа кода и полноты рёбер); вариант с PyPI-инструментом
+    graphify выиграл единственную решённую кем-либо задачу T2. Скилловый workflow
+    уступает инструментальному — заменить обёрткой над CLI. Оговорка: T1/T3 не решил
+    никто (0/9), возможен перегиб сложности усиленных задач.'
+  verdict_model: muse-spark-subagent
+- name: grilling
+  path: skills/grilling
+  description: 'Стресс-тест плана, решения или идеи через настойчивое интервью по
+    одному вопросу за раз: разбор дерева решений ветка за веткой, рекомендация по
+    каждому ответу, без действий до общего понимания.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - thin
+  - has-subagents
+  notes: SKILL.md — 12 строк, один промпт без структуры; семейное сходство с falsify,
+    но механизм другой (сократовское интервью, не evidence-пайплайн)
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: handoff
+  path: skills/handoff
+  description: 'Перенос контекста сессии: запись датированного handoff-документа (режим
+    по умолчанию) или чтение последнего при возобновлении (''resume'').'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Два режима (write/resume); есть agents/ и evals/; явно исключает /delegate,
+    /pizdej, /commit, /goal-plan
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-handoff; модель muse-spark-subagent): потолок
+    6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: how-to-write-skills
+  path: skills/how-to-write-skills
+  description: 'Мета-канон написания Claude-скиллов: Gate A, прогрессивное раскрытие,
+    формат описаний, гибрид AGENTS.md-фреймворка, Красинского и Anthropic.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags:
+  - possible-dupe
+  notes: 'possible-dupe-of: write-a-skill — сверить различия канонов (Claude ~/.claude/skills
+    vs Codex-дельты); NOT for аудит скиллов (/sus) и установку (/find-skills)'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-how-to-write-skills; модель muse-spark-subagent):
+    слабый −1 (t3); нужен ретест. verify-blind PASS.'
+- name: hypothesis-eval-loop
+  path: skills/hypothesis-eval-loop
+  description: 'Замкнутый before/after eval-цикл: гипотеза → baseline-замер → изменение
+    системы → повтор той же задачи → delta → вердикт, реально ли стало лучше.'
+  type: verification
+  origin: third-party
+  origin_detail: адаптация heroes-harness-playbook (Красинский) — каркас самописный,
+    на русском, с карточкой гипотезы в references/
+  flags: []
+  notes: 'Отличие от /falsify: измеряет эффект изменения количественно, а не опровергает
+    claim о готовом артефакте'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: implement
+  path: skills/implement
+  description: 'Реализация задачи по готовому плану: пишет код по спеке или тикетам,
+    использует TDD, гоняет тесты и тайпчек.'
+  type: implementation
+  origin: own
+  origin_detail: ''
+  flags:
+  - thin
+  - has-subagents
+  notes: Ядро цикла разработки; SKILL.md всего 14 строк (thin); agents/ содержит только
+    openai.yaml — интерфейсный дескриптор, не саб-агент.
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-implement-vs-executing-plans) + перестейдж
+    2026-10-02 (модель muse-spark-subagent, 4 ячейки — переформулированные промпты,
+    риск сравнимости): исполнено 9/9, все PASS по программному оракулу — полный паритет
+    со всеми вариантами, различий не выявлено. Гипотеза поглощения executing-plans
+    измерена; слияние — предложение Георгию (caller-map: у executing-plans вызывающих
+    нет).'
+  verdict_model: muse-spark-subagent
+- name: improve-codebase-architecture
+  path: skills/improve-codebase-architecture
+  description: Сканирует кодовую базу на архитектурные точки роста, показывает кандидатов
+    HTML-отчётом и допрашивает выбранный кейс.
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: 'Архитектурный аудит + grilling-допрос; secondary-type: code-review-quality;
+    agents/ — только openai.yaml (интерфейсный дескриптор).'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-improve-codebase-architecture; модель muse-spark-subagent):
+    паритет; реальный счёт 6/6 по фактическим app_new.py (ручная сверка) — ловушки
+    недискриминативны для модели. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: init-project
+  path: skills/init-project
+  description: Создаёт AGENTS.md + CLAUDE.md (+ опционально PROJECT_BRIEF.md) по рамке
+    концептуализации; запускается в корне проекта.
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Генерация агентских конфигов проекта; agents/ содержит только eval-set.json
+    (набор тестов триггеров), не саб-агент.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-init-project; модель muse-spark-subagent):
+    потолок 6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: interior-design-expert
+  path: skills/interior-design-expert
+  description: 'Эксперт по дизайну интерьеров: планировка, освещение (IES), цвет (Munsell/NCS),
+    мебель, визуализация.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Доменный эксперт по интерьерам; metadata в формате внешнего каталога (pairs-with),
+    но автор/URL не указаны — origin own.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-interior-design-expert; модель muse-spark-subagent):
+    слабый −1 (t2); нужен ретест. verify-blind PASS.'
+- name: internal-comms
+  path: skills/internal-comms
+  description: 'Пишет внутренние коммуникации по шаблонам: 3P-апдейты, newsletters,
+    incident reports, leadership updates.'
+  type: writing-content
+  origin: third-party
+  origin_detail: 'По стилю frontmatter (license: Complete terms in LICENSE.txt) —
+    официальный skill из репозитория Anthropic (anthropics/skills)'
+  flags: []
+  notes: Набор гайдлайнов в examples/; уверенность в origin высокая, но явного URL
+    в SKILL.md нет.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-internal-comms; модель muse-spark-subagent):
+    паритет по сути (oracle-FAIL — узость маркера); побед нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: jobs-to-be-done
+  path: skills/jobs-to-be-done
+  description: 'Объясняет и применяет методологию JTBD: почему клиенты ''нанимают''
+    продукты, churn, конкуренты.'
+  type: creative-ideation
+  origin: own
+  origin_detail: ''
+  flags:
+  - possible-dupe
+  notes: 'possible-dupe-of: jtbd-scenarium-create; сам скилл — методология открытия
+    потребностей, а не генерация документа.'
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-jtbd-vs-jtbd-scenarium) + перестейдж 2026-10-02
+    (модель muse-spark-subagent, переформулированный промпт — риск сравнимости): T1
+    — v-jtbd FAIL (precision_no_features=false, утечка F1) при PASS baseline; на усиленной
+    T2 (ловушка чужого черновика) v-jtbd FAIL при PASS baseline; T3 паритет. Отрицательная
+    дельта по прогонам; скилл wired (ссылки в standards) — переработать протокол,
+    не архивировать.'
+  verdict_model: muse-spark-subagent
+- name: jtbd-scenarium-create
+  path: skills/jtbd-scenarium-create
+  description: 'Создаёт JTBD-сценариум с нуля по каноническому 9-частному формату:
+    барьеры, иерархия Big/Medium/Small, B2B-таблицы.'
+  type: writing-content
+  origin: own
+  origin_detail: ''
+  flags:
+  - possible-dupe
+  notes: 'possible-dupe-of: jobs-to-be-done; secondary-type: creative-ideation; генерация
+    документа по фиксированному канону.'
+  verdict: change
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-jtbd-vs-jtbd-scenarium): T1 и T3 — паритет
+    с baseline, на усиленной T2 v-jtbdscen FAIL при PASS baseline — отрицательная
+    дельта по прогонам. Скилл wired — переработать.'
+  verdict_model: muse-spark-subagent
+- name: known-symptom-fixes
+  path: skills/known-symptom-fixes
+  description: 'Известный симптом → известная причина: 4 разобранных кейса (падающий
+    тест при живом соседе, мнимая asyncio-гонка, молчание Antigravity).'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Отладочный справочник по конкретным граблям; загружается только когда симптом
+    совпадает.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-known-symptom-fixes; модель muse-spark-subagent):
+    сравнение недискриминативно по построению — баг GT: формат требует строку S4,
+    planted штрафует любое упоминание S4, PASS структурно недостижим. Нужен фикс GT.
+    verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: landing-page-optimizer
+  path: skills/landing-page-optimizer
+  description: 'Оптимизирует лендинг на конверсию за 6 шагов: JTBD → проверка оффера
+    → квиз → Design from the End → минимизация ''налогов''.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Продуктовый дизайн-аудит лендинга; структурный близнец onboarding-optimizer
+    (тот же JTBD-каркас), но домен другой — не dupe.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-landing-page-optimizer; модель muse-spark-subagent):
+    паритет PPF/PPF; побед нет. verify-blind PASS.'
+- name: leverage
+  path: skills/leverage
+  description: 'Ищет системные рычаги, бутылочные горлышки и слепые зоны: TOC-скан,
+    сжатая лестница Медоуз; не для точечных багов.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags:
+  - possible-dupe
+  notes: 'possible-dupe-of: bottleneck-identifier (чанк вне C); явно отграничен от
+    /debug и /pizdej.'
+  verdict: keep
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-leverage; модель muse-spark-subagent):
+    программный оракул v 2/3 vs noskill 0/3 — чистая положительная дельта +2 на дискриминативных
+    t1/t3 (уровни систем Медоуз). verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: manage-nodeterm-canvas
+  path: skills/manage-nodeterm-canvas
+  description: 'Управляет канвасом nodeterm: ноды, команды агентов, git worktrees,
+    kanban, показ картинок/видео/веба; работает только внутри сессии nodeterm.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Привязка к собственному продукту (путь /Users/georgijlusikov/...); по сути
+    оркестрация агентов через канвас.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-manage-nodeterm-canvas; модель muse-spark-subagent):
+    потолок PPP/PPP — задачи недискриминативны. verify-blind PASS.'
+- name: meta
+  path: skills/meta
+  description: 'Диспетчер слоёв мышления: outcome → Goldratt aim → структура → TRIZ-изменение
+    → честность; не один метод, а выбор линзы.'
+  type: creative-ideation
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Мета-методология выбора способа думать; вторичные пересечения с triz и theory-of-constraints
+    (вне чанка).
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-meta; модель muse-spark-subagent): слабый
+    +1 на одной дискриминативной задаче; n=3 — недостаточно для keep, нужен ретест.
+    verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: moai-domain-uiux
+  path: skills/moai-domain-uiux
+  description: 'Специалист по UI/UX дизайн-системам: доступность (WCAG/ARIA), иконки,
+    теминг, дизайн-токены; не для React-кодинга.'
+  type: domain-design
+  origin: third-party
+  origin_detail: Экосистема MoAI — внешнее семейство скиллов moai-* (moai-foundation-core,
+    moai-library-shadcn, moai-domain-frontend)
+  flags: []
+  notes: Перекрёстные ссылки на другие moai-скиллы и внешние гайдлайны (vercel-labs/web-interface-guidelines);
+    уверенность в origin средняя-высокая.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-moai-domain-uiux; модель muse-spark-subagent):
+    паритет по сути (oracle-FAIL — узость маркеров); побед нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: mood-board-builder
+  path: skills/mood-board-builder
+  description: 'Собирает мудборды для креативных концептов: визуальные референсы,
+    палитры, типографика, аннотации и фидбек-хуки.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Ранний концептинг кампаний/ребрендов; упоминает несуществующий здесь creative-director.
+  verdict: insufficient-data
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-moodboard-vs-themefactory): исполнено 9/9,
+    полный паритет с baseline и theme-factory: T1 не решил никто (пол задач), T2/T3
+    решили все (потолок). Инструменты не дали дискриминации — дельта не измерена,
+    скилл не оправдан и не опровергнут.'
+  verdict_model: muse-spark-subagent
+- name: multimodal-video-retakes-editor
+  path: skills/multimodal-video-retakes-editor
+  description: 'Монтаж сырого видео из множества дублей: пословная ASR-разметка, кластеризация
+    дублей по смыслу, отбор, чистовая сборка через FFmpeg.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-scripts
+  notes: Видеомонтажный пайплайн; скрипт scripts/slice_and_rank.py; вторично пересекается
+    с видео-треком пользователя.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-multimodal-video-retakes-editor; модель muse-spark-subagent):
+    паритет FPF/FPF; побед нет. verify-blind PASS.'
+- name: onboarding-optimizer
+  path: skills/onboarding-optimizer
+  description: 'Аудит и оптимизация онбординга первой сессии на активацию: JTBD-сценарии
+    → сегментация → раскадровка → типовые ошибки.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Продуктовый дизайн-аудит онбординга; структурный близнец landing-page-optimizer,
+    домен другой — не dupe.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-onboarding-optimizer; модель muse-spark-subagent):
+    паритет FPP/FPP; побед нет. verify-blind PASS.'
+- name: pdf
+  path: skills/pdf
+  description: 'Чтение, создание и ревью PDF с учётом вёрстки: рендеринг, проверка
+    качества, команды для macOS/Ubuntu.'
+  type: writing-content
+  origin: third-party
+  origin_detail: По стилю frontmatter (license) + Apache LICENSE.txt — официальный
+    skill из репозитория Anthropic (anthropics/skills)
+  flags:
+  - has-subagents
+  notes: Документный инструмент с зависимостями ОС; agents/ — только openai.yaml (интерфейсный
+    дескриптор), не саб-агент.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Вопрос лицензионный, не эвальный (wave-3-plan §1): локально приложен
+    текст Apache-2.0 (LICENSE.txt), upstream заявляет Proprietary (registry/upstream-check.md).
+    Решение за Георгием; эвал ценности скилла не проводился. Модель: n/a (эвал не
+    проводился).'
+  verdict_model: n/a (no eval)
+- name: performance-profiling
+  path: skills/performance-profiling
+  description: 'Принципы профилирования производительности: измерение, анализ, оптимизация
+    — Web Vitals, bundle-анализ, рантайм-профилирование.'
+  type: verification
+  origin: third-party
+  origin_detail: 'frontmatter: source: community'
+  flags:
+  - has-scripts
+  notes: Веб-фокус (Lighthouse, Core Web Vitals); скрипт scripts/lighthouse_audit.py.
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: pinokio
+  path: skills/pinokio
+  description: 'Поиск, запуск и использование приложений Pinokio через pterm: control
+    plane, запуск, параллельный режим.'
+  type: meta-tooling
+  origin: third-party
+  origin_detail: Skill для стороннего продукта Pinokio (pterm runtime control plane;
+    экосистема pinokio.computer)
+  flags: []
+  notes: Рантайм-интеграция со сторонним лаунчером приложений; явного автора в SKILL.md
+    нет — уверенность в origin средняя.
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-pinokio; модель muse-spark-subagent): паритет PFF/PFF;
+    побед нет. verify-blind PASS.'
+- name: pizdej
+  path: skills/pizdej
+  description: 'Постфактум-самокритика работы: Mode A — целостность клеймов перед
+    отчётом, Mode B — рефлексия процесса после сложной задачи.'
+  type: code-review-quality
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: 'secondary-type: verification; agents/ содержит только eval-set.json (тесты
+    триггеров), не саб-агент; явно отграничен от /grilling.'
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-pizdej) + перестейдж 2026-10-02 (модель muse-spark-subagent,
+    переформулированный промпт — риск сравнимости): полный паритет — T1/T2 PASS у
+    обоих, T3 FAIL у обоих. Дельта не выявлена.'
+  verdict_model: muse-spark-subagent
+- name: playwright
+  path: skills/playwright
+  description: 'Управление реальным браузером из терминала через Playwright CLI: открыть/снапшот/клик/ввод/скриншот.
+    НЕ для написания @playwright/test спеков.'
+  type: meta-tooling
+  origin: third-party
+  origin_detail: Microsoft playwright-cli — https://github.com/microsoft/playwright-cli
+    (см. NOTICE.txt; Apache 2.0 LICENSE)
+  flags:
+  - has-subagents
+  - has-scripts
+  notes: 'Инфраструктура агента: браузерная автоматизация; secondary-type: research-analysis
+    (сбор данных из веба)'
+  verdict: keep
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-playwright-vs-playwrightcli) + перестейдж
+    2026-10-02 (модель muse-spark-subagent, 2 ячейки — переформулированные промпты):
+    v-playwright-skill 3/3 PASS по программному оракулу при полном покрытии остальных
+    ячеек (noskill 2/3 — T3 FAIL; v-playwright-cli 2/3 — T1 FAIL по провенансу). Единственная
+    положительная дельта батча 1, подтверждена.'
+  verdict_model: muse-spark-subagent
+- name: ponytail
+  path: skills/ponytail
+  description: 'Персона «ленивого синьора»: принудительно выбирать простейшее работающее
+    решение (YAGNI, stdlib, минимум кода). Активна каждый ответ, пока не выключена.'
+  type: code-review-quality
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Принципы качества кода в режиме постоянной дисциплины; secondary-type: implementation'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-ponytail; модель muse-spark-subagent):
+    потолок 6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: principles-review
+  path: skills/principles-review
+  description: 'Периодический аудит всей системы правил и скиллов на соответствие
+    META_PRINCIPLES: нарушения принципов, повторяющиеся паттерны, drift, вердикт.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Аудит здоровья системы, не артефакта; не путать с /sus (маршрутизация) и
+    /check (верификация файла)
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-principles-review; модель muse-spark-subagent):
+    v 2/3 vs noskill 3/3 — слабо отрицательная дельта −1: скилл пропустил planted
+    нарушение на t2, которое поймал baseline. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: prioritize
+  path: skills/prioritize
+  description: Приоритизация готового списка задач/гипотез по формуле ISRICE = (Reach
+    × Impact × Confidence) / Effort, 1–3 минуты на гипотезу.
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: 'Быстрая расстановка приоритетов; secondary-type: personal-productivity'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-prioritize; модель muse-spark-subagent):
+    паритет 4/6 (t3 не решена никем — маркер требовал падежную форму); побед нет.
+    verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: prototype
+  path: skills/prototype
+  description: 'Одноразовый прототип для ответа на дизайн-вопрос: либо интерактивная
+    проверка логики/стейт-модели (LOGIC.md), либо несколько UI-вариантов (UI.md).
+    Throwaway, без тестов и полировки.'
+  type: implementation
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Спайк для проверки гипотезы; НЕ боевая реализация (/implement)
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-prototype; модель muse-spark-subagent):
+    5/6 ячеек — prototype-01/noskill не исполнена (отказ защиты, обход запрещён);
+    дельта не измерена. verify-blind PASS (5 graded).'
+  verdict_model: muse-spark-subagent
+- name: receiving-code-review
+  path: skills/receiving-code-review
+  description: 'Приём фидбека код-ревью: верифицировать технически перед внедрением,
+    запрещены согласительные клише («Great point!»), несогласие — с техническими аргументами.'
+  type: code-review-quality
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Ответная сторона ревью (приём), пара к requesting-code-review (запрос)
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-receiving-code-review; модель muse-spark-subagent):
+    смешанный сигнал (t2 чинен, t3 сломан); нужен ретест. verify-blind PASS.'
+- name: reframing-problems
+  path: skills/reframing-problems
+  description: 'Лёгкий проход выбора задачи до решения: проверить, не решается ли
+    симптом вместо проблемы, нет ли дешевле пути или конфликта требований; улучшить
+    проблему, а не решение.'
+  type: creative-ideation
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Тактический рефрейминг задачи, не замена долгосрочной стратегии пользователя
+  verdict: keep
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-reframing-problems; модель muse-spark-subagent):
+    программный оракул v 3/3 vs noskill 1/3 — чистая положительная дельта +2 (t2 конфликт,
+    t3 no-reframe). verify-blind PASS.'
+- name: requesting-code-review
+  path: skills/requesting-code-review
+  description: Запрос код-ревью через сабагента с git SHAs и шаблоном контекста (после
+    каждой задачи, крупной фичи, перед мержем в main).
+  type: code-review-quality
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Инициаторная сторона ревью; шаблон ревьювера в code-reviewer.md
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-requesting-code-review; модель muse-spark-subagent):
+    слабый +1 (t3 чинен); нужен ретест. verify-blind PASS.'
+- name: research
+  path: skills/research
+  description: 'Делегирование исследования фоновому агенту: по первоисточникам (docs,
+    код, спеки) с сохранением находок в Markdown-файл репозитория. НЕ Gemini Deep
+    Research.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Исследовательский цикл Codex-протокола; имеет related-skill deep-research
+    для Gemini-варианта
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-research; модель muse-spark-subagent):
+    потолок 6/6 даже после усиления — задачи недискриминативны для модели. verify-blind
+    PASS.'
+  verdict_model: muse-spark-subagent
+- name: resolving-merge-conflicts
+  path: skills/resolving-merge-conflicts
+  description: 'Разрешение активного git merge/rebase конфликта: понять intent обеих
+    сторон, сохранить оба intent где возможно, прогнать чеки, завершить мерж (не --abort).'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags:
+  - thin
+  - has-subagents
+  notes: Узкий git-протокол; SKILL.md — 14 строк без frontmatter-полей триггеров
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-resolving-merge-conflicts; модель muse-spark-subagent):
+    паритет по сути (единственный oracle-FAIL — узость маркера, ответ семантически
+    верен); побед скилла нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: retro
+  path: skills/retro
+  description: 'Превращение завершённой сессии в переиспользуемые улучшения правил/скиллов:
+    извлечь уроки, дедуплицировать, предложить правила с destinations — запись только
+    после аппрува пользователя.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: 'Скилл о скиллах: улучшение инфраструктуры агента из практики'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-retro; модель muse-spark-subagent): смешанный сигнал
+    (t2 чинен, t3 сломан); нужен ретест. verify-blind PASS.'
+- name: roadmap-planning
+  path: skills/roadmap-planning
+  description: 'Стратегический роадмэп: сбор входов, определение эпиков с гипотезами,
+    приоритизация, раскладка по релизам/кварталам, коммуникация стейкхолдерам (now/next/later).'
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Продуктовое планирование; 505 строк — самый объёмный SKILL.md чанка
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-roadmap-planning; модель muse-spark-subagent): потолок
+    PPP/PPP — задачи недискриминативны. verify-blind PASS.'
+- name: rules-and-hooks-maintenance
+  path: skills/rules-and-hooks-maintenance
+  description: 'Обслуживание инфраструктуры правил и хуков: контракт написания хуков
+    (фикстуры, fail-open, WARN-фаза), приёмка правок от внешних агентов, обновление
+    скиллов DS-курса.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags:
+  - overloaded
+  notes: 'Три разные функции в одном скилле: хуки, приёмка чужих правок, DS-курс'
+  verdict: change
+  verdict_date: 2026-10-02
+  verdict_basis: 'Волна 2 батч 1 (wave2-rules-and-hooks-maintenance) + перестейдж
+    2026-10-02 (модель muse-spark-subagent, переформулированный промпт — риск сравнимости;
+    субшкалы infra/content раздельно): T1 (infra) — v-full FAIL (verdict_violation=false)
+    при PASS baseline: отрицательная дельта; T2 (infra) и content T3/T4 — паритет.'
+  verdict_model: muse-spark-subagent
+- name: security-best-practices
+  path: skills/security-best-practices
+  description: 'Безопасность по языку/фреймворку (Python, JS/TS, Go): писать secure-by-default
+    код, пассивно детектить уязвимости, по запросу — vuln-report с приоритизацией
+    и фиксами.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - overloaded
+  - has-subagents
+  notes: Три режима (писать код / пассивный детект / аудит-отчёт); only-if-asked триггер
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: sensory-writing-coach
+  path: skills/sensory-writing-coach
+  description: '5-шаговый протокол замены абстракций в тексте сенсорными образами
+    (5 чувств, «внутренний фильм»): для рекламы, лендингов, описаний продукта.'
+  type: writing-content
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Коуч по show-don't-tell для маркетинговых текстов
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-sensory-writing-coach; модель muse-spark-subagent):
+    слабый +1 (t2 чинен); нужен ретест. verify-blind PASS.'
+- name: subagent-driven-development
+  path: skills/subagent-driven-development
+  description: 'Исполнение implementation-плана: свежий сабагент-исполнитель на задачу,
+    ревью каждой задачи (spec+quality), широкое ревью ветки в конце — в рамках текущей
+    сессии.'
+  type: agent-orchestration
+  origin: own
+  origin_detail: ''
+  flags:
+  - overloaded
+  - has-scripts
+  notes: 'Оркестрация сабагентов вокруг имплементации; secondary-type: implementation;
+    ссылки на внутренние точки superpowers'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-subagent-driven-development; модель muse-spark-subagent):
+    смешанный сигнал (t3 чинен, t1 сломан); нужен ретест. verify-blind PASS.'
+- name: sus
+  path: skills/sus
+  description: 'Аудит Skill Usage Surface: маршрутизация скиллов, конфликты триггеров,
+    пропуски активации; измерение коллизий триггеров скриптом, не «на глаз».'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Роутинг-аудит; не путать с /principles-review (аудит принципов)
+  verdict: change
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-sus): полный паритет с baseline по всем трём
+    задачам, включая общий FAIL на усиленной дискриминативной T2. Добавленная ценность
+    прогонами не показана.'
+  verdict_model: muse-spark-subagent
+- name: system-value-architect
+  path: skills/system-value-architect
+  description: 'Проверка жизнеспособности продукта через «формулу работоспособной
+    системы»: найти полезное действие, источник энергии (мотивация пользователя),
+    три теста (Because/Energy/Truth).'
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Продуктовая валидация гипотез через мотивацию; secondary-type: creative-ideation'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-system-value-architect; модель muse-spark-subagent):
+    −2 системно — v-skill не выдал вердикт на t1/t2, где noskill PASS (verdict null).
+    Guidance скилла уводит исполнителя от требуемого формата ответа. verify-blind
+    PASS.'
+- name: systematic-debugging
+  path: skills/systematic-debugging
+  description: 'Строгий цикл отладки: железное правило «никаких фиксов без root-cause
+    расследования», фазы диагностики, вспомогательные материалы и find-polluter.sh.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-scripts
+  notes: Дисциплина поиска первопричины; ссылки на внутренние точки superpowers
+  verdict: merged
+  verdict_date: 2026-10-01
+  verdict_into: debug
+  verdict_basis: 'Раунд 2 (round2-debug-vs-systematic): 12 прогонов, программный оракул
+    11/12 PASS (все варианты нашли все 4 корневые причины); положительной дельты к
+    baseline нет. Содержимое влито в debug/SKILL.md (escalation, рационализации, техники);
+    SKILL.md заменён указателем. Слияние по слову Георгия.'
+  verdict_model: gemini-3.6-flash-medium
+- name: teach
+  path: skills/teach
+  description: 'Обучение пользователя новой теме между сессиями (stateful): MISSION.md,
+    уроки-HTML, справочники, learning records, зона ближайшего развития.'
+  type: writing-content
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-subagents
+  notes: Учебный курс с персистентным состоянием в workspace
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-teach; модель muse-spark-subagent): потолок PPP/PPP
+    — задачи недискриминативны. verify-blind PASS.'
+- name: test-driven-development
+  path: skills/test-driven-development
+  description: 'Строгий TDD-цикл Red-Green-Refactor: железное правило «нет production-кода
+    без падающего теста», действует для новых фич, багфиксов и рефакторинга.'
+  type: implementation
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Internal workflow под роутером, user-invocable: false'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: theme-factory
+  path: skills/theme-factory
+  description: 'Библиотека из 10 готовых тем (цветовые палитры + шрифтовые пары) и
+    генератор кастомных тем для оформления артефактов: слайды, документы, отчёты,
+    лендинги.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Только стилизация артефактов, не генерация контента; frontmatter ссылается
+    на LICENSE.txt, файла нет в директории
+  verdict: insufficient-data
+  verdict_date: 2026-10-01
+  verdict_basis: 'Волна 2 батч 1 (wave2-moodboard-vs-themefactory): исполнено 9/9,
+    полный паритет с baseline и mood-board-builder (T1 — общий FAIL, T2/T3 — общий
+    PASS). Дискриминации нет — дельта не измерена.'
+  verdict_model: muse-spark-subagent
+- name: theory-of-constraints
+  path: skills/theory-of-constraints
+  description: Диагностический ранбук поиска и снятия главного узкого места процесса,
+    пайплайна или плагина по 5 шагам фокусирования Голдратта (identify → exploit →
+    subordinate → elevate → repeat).
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Не для уже локализованного хотспота — там сразу фикс; стоп против оптимизации
+    non-bottleneck
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-theory-of-constraints; модель muse-spark-subagent):
+    слабый −1 (t2); нужен ретест. verify-blind PASS.'
+- name: thinking-theory-of-constraints
+  path: skills/thinking-theory-of-constraints
+  description: 'Компактная мыслительная линза ToC: при оптимизации latency/throughput
+    сфокусировать все усилия на одном доминирующем узком месте, остальное не трогать.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags:
+  - possible-dupe
+  notes: 'possible-dupe-of: theory-of-constraints — та же модель в короткой форме;
+    также ссылается на thinking-systems'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-thinking-theory-of-constraints; модель muse-spark-subagent):
+    паритет PPF/PPF; побед нет. verify-blind PASS.'
+- name: to-spec
+  path: skills/to-spec
+  description: Синтез спеки/PRD из уже накопленного контекста разговора без интервью
+    и публикация в issue tracker с лейблом ready-for-agent.
+  type: planning-design
+  origin: third-party
+  origin_detail: Matt Pocock (/setup-matt-pocock-skills)
+  flags:
+  - has-subagents
+  notes: Первое звено цепочки to-spec → to-tickets → triage
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-to-spec; модель muse-spark-subagent): потолок
+    6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: to-tickets
+  path: skills/to-tickets
+  description: Разбивка плана или спеки на вертикальные tracer-bullet тикеты с объявленными
+    blocking edges; после апрува пользователем — публикация в трекер.
+  type: planning-design
+  origin: third-party
+  origin_detail: Matt Pocock (/setup-matt-pocock-skills)
+  flags:
+  - has-subagents
+  notes: Wide refactors идут через expand–contract, не через вертикальные срезы
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-to-tickets; модель muse-spark-subagent):
+    потолок 6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: tool-scout
+  path: skills/tool-scout
+  description: Поиск и сравнение готовых инструментов, библиотек и сервисов под задачу
+    (GitHub, npm, PyPI); только discovery и сравнение, не имплементация и не дебаг.
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Требует конфиг поискового движка (Exa MCP / WebSearch)
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-tool-scout; модель muse-spark-subagent):
+    потолок 6/6 — задачи недискриминативны. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: tremor-design-system
+  path: skills/tremor-design-system
+  description: 'Сборка production-дашбордов и аналитических интерфейсов на Tremor
+    (React + Tailwind + Recharts): KPI-карты, чарты, таблицы данных; поддержка Tremor
+    Raw и @tremor/react.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Только дашборды и data-виз UI, не общий frontend
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-tremor-design-system; модель muse-spark-subagent):
+    потолок 6/6. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: triage
+  path: skills/triage
+  description: 'Прогон issues и внешних PR через state machine триажа: категоризация,
+    верификация claim''а, генерация agent-ready brief; роли bug/enhancement и 5 state-ролей.'
+  type: planning-design
+  origin: third-party
+  origin_detail: Matt Pocock (/setup-matt-pocock-skills)
+  flags:
+  - has-subagents
+  notes: 'secondary-type: agent-orchestration (brief для агентов); PR = issue с прикреплённым
+    кодом'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: triz
+  path: skills/triz
+  description: 'Роутер-вход в ТРИЗ-инструментарий владельца (62 скилла): по симптому
+    выбирает один фреймворк или цепочку и заставляет прочитать её канон-файл перед
+    работой.'
+  type: creative-ideation
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Сам роутер без тел фреймворков; канон в library/legacy-skills/triz/
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: truth-seeker
+  path: skills/truth-seeker
+  description: 'Глубокий фактчекинг утверждения через 7 теорий истины, мульти-агентные
+    дебаты и генеалогию заблуждений; выход: Truth Matrix, вердикт, дебаты, источники.'
+  type: research-analysis
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Не для простых factual lookup, не для дебага кода
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: user-story-mapping
+  path: skills/user-story-mapping
+  description: 'Построение карты пользовательских историй по фреймворку Джеффа Паттона:
+    активности → шаги → задачи по горизонтали, релизные слайсы по вертикали; основа
+    MVP-бэклога.'
+  type: planning-design
+  origin: third-party
+  origin_detail: deanpeters — https://github.com/deanpeters/product-manager-prompts
+    (adapted)
+  flags: []
+  notes: Стратегический артефакт user journey, не feature list и не Gantt
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-user-story-mapping; модель muse-spark-subagent):
+    слабый +1 (t2 недискриминативна); нужен ретест. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: using-git-worktrees
+  path: skills/using-git-worktrees
+  description: 'Протокол изолированной работы: детект существующей изоляции, предпочтение
+    нативных worktree-инструментов платформы, фолбэк на ручной git worktree.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Создание worktree только с согласия пользователя; announce at start
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-using-git-worktrees; модель muse-spark-subagent):
+    потолок 6/6; «цена без дельты» — v делает 8–11 tool calls против 1–5 у baseline
+    при том же результате. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: verification-before-completion
+  path: skills/verification-before-completion
+  description: 'Гейт перед заявлением о готовности: только fresh verification evidence
+    (тесты, линт, билд, построчный чеклист требований) — никаких success-claims без
+    прогона команды.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Evidence before claims; red flags на should/probably/кажется
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-verification-before-completion; модель muse-spark-subagent):
+    паритет PFP/PFP; побед нет. verify-blind PASS.'
+- name: visual-explainer
+  path: skills/visual-explainer
+  description: Генерация offline HTML slide-deck'а или диаграммной страницы magazine-качества
+    как self-contained файла на диске (не Artifact и не чат-виджет).
+  type: data-visualization
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Форк visual-explainer-course-skill (2026-08-01), SKILL.md переписан владельцем;
+    secondary-type: domain-design'
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-visual-explainer; модель muse-spark-subagent):
+    почти пол (1/6) — судить о скилле нельзя. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: wayfinder
+  path: skills/wayfinder
+  description: 'Картографирование туманной работы как shared map из decision tickets
+    на issue tracker: map issue (wayfinder:map) + дочерние вопросы, решаемые по одному.'
+  type: planning-design
+  origin: third-party
+  origin_detail: Matt Pocock (/setup-matt-pocock-skills)
+  flags:
+  - has-subagents
+  notes: Plan don't do по умолчанию; на тикеты ссылаются по имени, не по id
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-wayfinder; модель muse-spark-subagent):
+    паритет 2/3 на дискриминативных задачах; побед скилла нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
+- name: web-artifacts-builder
+  path: skills/web-artifacts-builder
+  description: 'Сборка сложных multi-component claude.ai HTML-артефактов (React 18
+    + TypeScript + Vite + Tailwind + shadcn/ui): init → develop → bundle в один самодостаточный
+    HTML.'
+  type: domain-design
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-scripts
+  notes: Скрипты scripts/init-artifact.sh и scripts/bundle-artifact.sh; не для простых
+    однофайловых артефактов
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-web-artifacts-builder; модель muse-spark-subagent):
+    паритет PFP/PFP; побед нет. verify-blind PASS.'
+- name: webapp-testing
+  path: skills/webapp-testing
+  description: 'Тестирование локальных веб-приложений нативным Python Playwright:
+    верификация UI, дебаг, скриншоты, логи браузера; менеджмент серверов через with_server.py.'
+  type: verification
+  origin: own
+  origin_detail: ''
+  flags:
+  - has-scripts
+  notes: Headless chromium; скрипты — black box, читать исходник только после --help
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: gemini-3.6-flash-medium
+  verdict_basis: 'Волна 1 (модель gemini-3.6-flash-medium): «различий не выявлено»
+    — паритет на 3 задачах; по методологии сводки волны 1 паритет ≠ доказанная эквивалентность,
+    отмечен потолок дискриминации (W2/W5). Измерение на другой модели, прямое сравнение
+    с волнами 2–3 некорректно.'
+- name: write-a-skill
+  path: skills/write-a-skill
+  description: 'Delta-протокол написания или переписывания SKILL.md для Codex: компактные
+    EN-адаптации поверх канона Claude-скилла 0-how-to-write-skills, который читается
+    первым.'
+  type: meta-tooling
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: Только Codex-скиллы, не Claude-канон; новые пары регистрируются в skills-drift-check
+  verdict: insufficient-data
+  verdict_date: '2026-10-02'
+  verdict_model: muse-spark-subagent
+  verdict_basis: 'Волна 3 (wave3-write-a-skill; модель muse-spark-subagent): слабый
+    +1 (t3 чинен); нужен ретест. verify-blind PASS.'
+- name: writing-plans
+  path: skills/writing-plans
+  description: 'Написание детального implementation plan по спеке: bite-sized TDD-задачи
+    с точными файлами, кодом и командами; outcome framing и правильный размер задач.'
+  type: planning-design
+  origin: own
+  origin_detail: ''
+  flags: []
+  notes: 'Не для goal contract (/goal-plan) и не для релизного роадмапа (/roadmap-planning);
+    secondary-type: implementation'
+  verdict: change
+  verdict_date: '2026-10-02'
+  verdict_basis: 'Волна 2 батч 2 (wave2-b2-writing-plans; модель muse-spark-subagent):
+    v 1/3 vs noskill 2/3 — слабо отрицательная дельта −1: скилл втянул lure-маркер
+    compress-creep на t2, baseline — нет. verify-blind PASS.'
+  verdict_model: muse-spark-subagent
