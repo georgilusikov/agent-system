@@ -7,10 +7,10 @@ For edits, first complete the scope lock in
 
 ## Construction
 
-Choose the first sufficient step: no change → existing helper → existing file
-→ new module only if needed. Prefer stdlib and native features over a dependency
-for a few clear lines. Add abstractions only for at least two consumers or a
-measurable complexity drop.
+Apply the **Shorter route** rule in `AGENTS.md`; keep changes in existing files
+unless a new module is needed. Avoid bulky dependencies for a few clear lines;
+use the root delivery-time/total-effort comparison when ready open source fits.
+Add abstractions only for at least two consumers or a measurable complexity drop.
 Separate I/O from logic; keep entrypoints thin and errors explicit.
 Type public Python; use `Path`, UTF-8, numeric types, and `None` for absence.
 Repair canonical files; never create `_fixed`, `_final`, or `_FINAL` copies.

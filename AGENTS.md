@@ -1,5 +1,17 @@
 # Shared Global Agent Rules
 
+## Shorter route
+
+Before each task, check the requested outcome and fixed constraints; preserve
+explicit deliverables, success metrics, mandatory methods, and safety.
+Check if the outcome already holds or can happen without new work; otherwise compare
+existing resources/helpers, native features, stdlib, installed tools, and ready open source/CLI/services
+by end-to-end delivery time (including setup/adoption/integration) and total adoption + integration + maintenance effort.
+Do a bounded primary-source search only when plausible reuse can improve the choice;
+verify capability/runtime/license fit. Prefer ready reuse when materially faster or less effort, with acceptable trade-offs.
+Stop at the first sufficient short route; exact trivial transformations/calculations go straight to the result.
+Explain material method changes in one line; a different goal stays optional until the owner approves it.
+
 ## Authorization and safety
 
 Reversible non-deletion work inside the requested workspace is pre-authorized:
@@ -42,11 +54,16 @@ in an isolated checkout, use that checkout's source file and sibling documents.
   high risk, or explicit alternatives, read
   `standards/operational/decision-alternatives-standard.md`. For routine,
   reversible, well-specified one-path work, skip with a brief reason.
+- **Reframe:** for assumed expensive means, hidden obstruction, or a cheaper route,
+  read `skills/reframing-problems/SKILL.md` when its canon is available.
+- **Simplify / IKR-lite:** for a useful function without added stages/components,
+  simplification, or contradiction, read `skills/triz/SKILL.md` when available.
+  For either route, report absent canon; never invent it. The shortcut check still applies.
 - **Explain:** for a concrete plain-language problem or proposal, use the `explain`
   skill only when available in the current harness; otherwise explain directly.
   Broad lessons use ordinary explanation.
 - **Diagnose:** use `/debug` only when enabled; otherwise use available diagnostic
-  tools. **IKR-lite:** use `/triz` when available; report an unavailable route.
+  tools.
 
 ## Owner response
 

@@ -13,6 +13,8 @@ REQUIRED = {
     "CODING_STANDARDS.md",
     "rules/operational/shared-task-protocol.md",
     "standards/operational/decision-alternatives-standard.md",
+    "skills/reframing-problems/SKILL.md",
+    "skills/triz/SKILL.md",
 }
 
 
@@ -44,7 +46,23 @@ def main() -> None:
                     "before read-only investigation, batch/long work",
                     "external, financial, or irreversible actions", "**Inspect and scale**"]:
         assert trigger in flat, trigger
-    assert len(text.splitlines()) <= 75
+    # Owner-added always-on shortcut policy raises this candidate budget, not repo gates.
+    assert len(text.splitlines()) <= 90
+    assert text.index("## Shorter route") < text.index("## Load when needed")
+    for rule in ["Before each task", "requested outcome and fixed constraints",
+                 "explicit deliverables, success metrics, mandatory methods, and safety",
+                 "outcome already holds or can happen without new work", "installed tools",
+                 "bounded primary-source search only when plausible reuse can improve the choice",
+                 "otherwise compare existing resources/helpers, native features, stdlib, installed tools",
+                 "end-to-end delivery time (including setup/adoption/integration)",
+                 "total adoption + integration + maintenance effort", "verify capability/runtime/license fit",
+                 "Prefer ready reuse when materially faster or less effort, with acceptable trade-offs",
+                 "Stop at the first sufficient short route", "exact trivial transformations/calculations",
+                 "material method changes in one line", "goal stays optional until the owner approves",
+                 "assumed expensive means, hidden obstruction, or a cheaper route",
+                 "useful function without added stages/components", "simplification, or contradiction",
+                 "canon is available", "report absent canon; never invent it"]:
+        assert rule in flat, rule
     assert "explicit owner instruction in the current task" in flat
     assert "Never weaken security, release, or quality gates" in flat
     assert "Keep private reasoning private" in flat
