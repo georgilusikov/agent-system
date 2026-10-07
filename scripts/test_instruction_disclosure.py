@@ -50,22 +50,21 @@ def main() -> None:
     assert len(text.splitlines()) <= 100
     assert text.index("## Shorter route") < text.index("## Load when needed")
     policy = text.split("## Shorter route", 1)[1].split("## Authorization", 1)[0]
-    assert policy.index("Point B first") < policy.index("Route second") < policy.index("Function when needed")
-    for rule in ["requested purpose and final observable state B", "separate that end from assumed means",
+    assert policy.index("**B:**") < policy.index("**Route:**") < policy.index("**Analogues:**")
+    assert "`B: <observable end state + hard constraints> · Route: avoid | reuse | adopt | build — <why>`" in policy
+    for rule in ["first plan or progress update", "not in the final answer",
+                 "purpose behind the request, separate from assumed means",
                  "explicit deliverables, success metrics, mandatory methods, and safety",
-                 "never optimize a proxy instead of B", "Infer from context",
+                 "never optimize a proxy", "Infer from context",
                  "ask only if unresolved uncertainty changes the chosen route",
-                 "seek the fastest viable path to the same B", "avoid new work", "ready open source/CLI/services",
-                 "end-to-end delivery time (setup/adoption/integration included)", "total maintenance burden",
-                 "Bound primary-source search to plausible reuse", "verify capability/runtime/license fit",
-                 "first sufficient short route", "B may be expressed as IKR when useful",
-                 "not a mandatory framework pass",
-                 "during route comparison, only when identifying reusable mechanisms requires it",
-                 "action → object → measurable effect", "functional analogues, including other domains",
-                 "smallest test in local conditions", "Exact trivial transformations/calculations",
-                 "material method changes in one line", "goal stays optional until the owner approves",
+                 "cheapest path that fully reaches B", "avoid the work", "ready open source/CLI/services",
+                 "Count adoption, integration, and maintenance", "verify capability/runtime/license fit",
+                 "stop at the first sufficient route", "when no route is obvious",
+                 "action → object → measurable effect", "analogues including other domains",
+                 "smallest local test", "Exact trivial tasks go straight to the result",
+                 "A different goal needs owner approval",
                  "assumed expensive means, the wrong task", "point-B ideality without extra intervention",
-                 "conditional function clarification / functional analogue search",
+                 "functional analogue search use chain C11", "benchmarking → fos → oas_transfer",
                  "canon is available", "report absent canon; never invent it"]:
         assert rule in flat, rule
     assert "explicit owner instruction in the current task" in flat
@@ -100,6 +99,10 @@ def main() -> None:
                           "three different failures", "ACCEPTED:", "REOPEN ONLY IF:",
                           "persist it only with owner approval", "offline/dry-run"]:
                 assert guard in protocol, guard
+            reframing = " ".join(documents["skills/reframing-problems/SKILL.md"].split())
+            for step in ["## Choose the Route", "**avoid** the work → **reuse**",
+                         "benchmarking → fos → oas_transfer"]:
+                assert step in reframing, step
             dangling = home / "dangling.md"
             dangling.symlink_to(home / "absent.md")
             must_fail(lambda: read_documents(dangling))

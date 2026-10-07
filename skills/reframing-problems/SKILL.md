@@ -80,6 +80,15 @@ Prefer a frame only when it is **materially better**, not merely more novel.
 
 If the best frame changes the user's intent or violates a hard constraint, ask **one targeted question** before proceeding.
 
+## Choose the Route
+
+For the chosen frame, take the cheapest route that fully reaches the outcome:
+**avoid** the work → **reuse** existing resources → **adopt** a ready solution → **build**.
+Count adoption, integration, and maintenance, not only build time.
+If no route is obvious, name the function (action → object → measurable effect) and
+search analogues via `triz` chain C11 (`benchmarking → fos → oas_transfer`);
+verify transfer with the smallest local test.
+
 ## Solve
 
 After selecting the frame:
@@ -134,6 +143,7 @@ C. Leap:
 Selected task:
 Best frame / why:
 Cheapest decisive test (if needed):
+Route (avoid/reuse/adopt/build):
 Solve / one clarifying question:
 ```
 
