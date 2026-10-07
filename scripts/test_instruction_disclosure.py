@@ -46,21 +46,26 @@ def main() -> None:
                     "before read-only investigation, batch/long work",
                     "external, financial, or irreversible actions", "**Inspect and scale**"]:
         assert trigger in flat, trigger
-    # Owner-added always-on shortcut policy raises this candidate budget, not repo gates.
-    assert len(text.splitlines()) <= 90
+    # Outcome-first owner clarification raises the candidate budget, not repo gates.
+    assert len(text.splitlines()) <= 100
     assert text.index("## Shorter route") < text.index("## Load when needed")
-    for rule in ["Before each task", "requested outcome and fixed constraints",
+    policy = text.split("## Shorter route", 1)[1].split("## Authorization", 1)[0]
+    assert policy.index("Point B first") < policy.index("Route second") < policy.index("Function when needed")
+    for rule in ["requested purpose and final observable state B", "separate that end from assumed means",
                  "explicit deliverables, success metrics, mandatory methods, and safety",
-                 "outcome already holds or can happen without new work", "installed tools",
-                 "bounded primary-source search only when plausible reuse can improve the choice",
-                 "otherwise compare existing resources/helpers, native features, stdlib, installed tools",
-                 "end-to-end delivery time (including setup/adoption/integration)",
-                 "total adoption + integration + maintenance effort", "verify capability/runtime/license fit",
-                 "Prefer ready reuse when materially faster or less effort, with acceptable trade-offs",
-                 "Stop at the first sufficient short route", "exact trivial transformations/calculations",
+                 "never optimize a proxy instead of B", "Infer from context",
+                 "ask only if unresolved uncertainty changes the chosen route",
+                 "seek the fastest viable path to the same B", "avoid new work", "ready open source/CLI/services",
+                 "end-to-end delivery time (setup/adoption/integration included)", "total maintenance burden",
+                 "Bound primary-source search to plausible reuse", "verify capability/runtime/license fit",
+                 "first sufficient short route", "B may be expressed as IKR when useful",
+                 "not a mandatory framework pass",
+                 "during route comparison, only when identifying reusable mechanisms requires it",
+                 "action → object → measurable effect", "functional analogues, including other domains",
+                 "smallest test in local conditions", "Exact trivial transformations/calculations",
                  "material method changes in one line", "goal stays optional until the owner approves",
-                 "assumed expensive means, hidden obstruction, or a cheaper route",
-                 "useful function without added stages/components", "simplification, or contradiction",
+                 "assumed expensive means, the wrong task", "point-B ideality without extra intervention",
+                 "conditional function clarification / functional analogue search",
                  "canon is available", "report absent canon; never invent it"]:
         assert rule in flat, rule
     assert "explicit owner instruction in the current task" in flat

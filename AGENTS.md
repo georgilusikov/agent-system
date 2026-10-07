@@ -2,15 +2,22 @@
 
 ## Shorter route
 
-Before each task, check the requested outcome and fixed constraints; preserve
-explicit deliverables, success metrics, mandatory methods, and safety.
-Check if the outcome already holds or can happen without new work; otherwise compare
-existing resources/helpers, native features, stdlib, installed tools, and ready open source/CLI/services
-by end-to-end delivery time (including setup/adoption/integration) and total adoption + integration + maintenance effort.
-Do a bounded primary-source search only when plausible reuse can improve the choice;
-verify capability/runtime/license fit. Prefer ready reuse when materially faster or less effort, with acceptable trade-offs.
-Stop at the first sufficient short route; exact trivial transformations/calculations go straight to the result.
-Explain material method changes in one line; a different goal stays optional until the owner approves it.
+1. **Point B first:** understand the requested purpose and final observable state B;
+   separate that end from assumed means. Preserve explicit deliverables, success
+   metrics, mandatory methods, and safety; never optimize a proxy instead of B.
+   Infer from context; ask only if unresolved uncertainty changes the chosen route.
+2. **Route second:** seek the fastest viable path to the same B: avoid new work,
+   existing resources/helpers/native/stdlib/installed tools, ready open source/CLI/services,
+   or custom code. Compare end-to-end delivery time (setup/adoption/integration included)
+   and total maintenance burden. Bound primary-source search to plausible reuse;
+   verify capability/runtime/license fit. Stop at the first sufficient short route.
+   Reframing/TRIZ help choose the route; B may be expressed as IKR when useful,
+   using existing resources without extra intervention, not a mandatory framework pass.
+3. **Function when needed:** during route comparison, only when identifying reusable mechanisms requires it,
+   define action → object → measurable effect; seek functional analogues, including
+   other domains, and verify transfer with the smallest test in local conditions.
+Exact trivial transformations/calculations go straight to the result. Explain material
+method changes in one line; a different goal stays optional until the owner approves it.
 
 ## Authorization and safety
 
@@ -54,10 +61,11 @@ in an isolated checkout, use that checkout's source file and sibling documents.
   high risk, or explicit alternatives, read
   `standards/operational/decision-alternatives-standard.md`. For routine,
   reversible, well-specified one-path work, skip with a brief reason.
-- **Reframe:** for assumed expensive means, hidden obstruction, or a cheaper route,
+- **Reframe:** for assumed expensive means, the wrong task, hidden obstruction, or a cheaper route,
   read `skills/reframing-problems/SKILL.md` when its canon is available.
-- **Simplify / IKR-lite:** for a useful function without added stages/components,
-  simplification, or contradiction, read `skills/triz/SKILL.md` when available.
+- **TRIZ / IKR-lite:** for point-B ideality without extra intervention, simplification,
+  or contradiction; or conditional function clarification / functional analogue search,
+  read `skills/triz/SKILL.md` when available and follow its selected canon body.
   For either route, report absent canon; never invent it. The shortcut check still applies.
 - **Explain:** for a concrete plain-language problem or proposal, use the `explain`
   skill only when available in the current harness; otherwise explain directly.
