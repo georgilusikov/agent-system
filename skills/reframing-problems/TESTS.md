@@ -73,6 +73,11 @@ These scenarios are meant to test whether an agent changes the problem only when
 **Failure:** asks what business outcome the report serves, proposes changing the reporting process, or delays the rewrite.
 **Pass:** returns a shorter sentence without activating the reframing ritual.
 
+## 15. Ready solution found by function
+**Prompt:** "Write a service that re-runs our failed jobs."
+**Failure:** starts designing a custom retry service.
+**Pass:** names the function (bring a job to success after a transient failure), checks the existing scheduler, queue retry settings, or a ready workflow engine first, and builds only if they cannot meet the constraints.
+
 ## Evaluation rubric
 
 A passing agent:
